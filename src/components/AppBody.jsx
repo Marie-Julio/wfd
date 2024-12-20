@@ -1,0 +1,66 @@
+import React, { useState } from 'react';
+import { Menu, ChevronDown, X } from 'lucide-react';
+import Nav from './Nav';
+import Carousel from './Carousel';
+import HeroBanner from './HeroBanner';
+
+const AppBody = ({home, children}) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeDropdowns, setActiveDropdowns] = useState({
+    services: false,
+    produits: false
+  });
+
+  const toggleMobileMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const toggleDropdown = (dropdown) => {
+    setActiveDropdowns(prev => ({
+      ...prev,
+      [dropdown]: !prev[dropdown]
+    }));
+  };
+
+  return (
+    <div className="flex flex-col min-h-screen w-full ">
+      {/* Header Responsive */}
+      
+         <Nav/>
+         {home ? <Carousel/> : <HeroBanner/>}
+
+         
+        
+        
+
+      {/* Corps de page Responsive */}
+      <main className="flex-grow flex">
+        
+        {children}
+         
+      </main>
+
+      {/* Footer Responsive */}
+       <footer className="bg-custom-gradient text-white py-6 w-full">
+        <div className="container mx-auto px-4 max-w-7xl flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+          <div className="text-center sm:text-left text-xs sm:text-sm">
+            © 2024 WFDGuinee. Tous droits réservés.
+          </div>
+          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 text-center">
+            {['Mentions légales', 'Politique de confidentialité', 'Contactez-nous'].map((link) => (
+              <a
+                key={link}
+                href="#"
+                className="text-xs sm:text-sm hover:text-blue-300 block sm:inline"
+              >
+                {link}
+              </a>
+            ))}
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default AppBody;

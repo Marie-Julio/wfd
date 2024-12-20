@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.theme-1 {
+  --color-primary: #006900; /* Dark Green */
+  --color-secondary: #203F5E; /* Dark Blue */
+  --color-tertiary: #ECFCCB; /* Light Green */
+}
+
+.theme-2 {
+  --color-primary: #2A9D8F; /* Turquoise */
+  --color-secondary: #264653; /* Dark Slate Blue */
+  --color-tertiary: #E9C46A; /* Gold */
+}
+
+.theme-3 {
+  --color-primary: #3A6351; /* Dark Green */
+  --color-secondary: #A0937D; /* Beige */
+  --color-tertiary: #E2C044; /* Golden Yellow */
+}
+
+.theme-4 {
+  --color-primary: #1D3557; /* Dark Blue */
+  --color-secondary: #457B9D; /* Steel Blue */
+  --color-tertiary: #A8DADC; /* Light Blue */
+}
+
+.theme-5 {
+  --color-primary: #0D3B66; /* Dark Blue */
+  --color-secondary: #FAA916; /* Mustard */
+  --color-tertiary: #F4D35E; /* Light Yellow */
+}
+
+.theme-6 {
+  --color-primary: #8D99AE; /* Cool Grey */
+  --color-secondary: #2B2D42; /* Gunmetal */
+  --color-tertiary: #EDF2F4; /* Light Grey */
+}
+
+.theme-7 {
+  --color-primary: #F4A261; /* Light Orange */
+  --color-secondary: #264653; /* Dark Slate Blue */
+  --color-tertiary: #E76F51; /* Coral */
+}
+
+.theme-8 {
+  --color-primary: #4A4E69; /* Slate Grey */
+  --color-secondary: #9A8C98; /* Mauve */
+  --color-tertiary: #F2E9E4; /* Light Pink */
+}
+
+.theme-9 {
+  --color-primary: #22223B; /* Dark Indigo */
+  --color-secondary: #4A4E69; /* Slate Grey */
+  --color-tertiary: #9A8C98; /* Mauve */
+}
+
+.theme-10 {
+  --color-primary: #6C4F54; /* Muted Rose */
+  --color-secondary: #D9BF77; /* Warm Beige */
+  --color-tertiary: #F5F5F5; /* Light Grey */
+}
+
+@keyframes loading-animation {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@layer base {
+  body {
+    @apply font-merriweather; /* Utilise IBM Plex Mono globalement */
+  }
+}
+
+
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+

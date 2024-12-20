@@ -1,0 +1,49 @@
+/* MenuItem.css */
+.menu-item {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  }
+  
+  .menu-item:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background-color: #f0f0f0;
+  }
+  
+  .menu-item img {
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+  
+  .menu-item:hover img {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+  
+  .menu-item p {
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+  
+.menu-item:hover p {
+    background-color: var(--color-secondary); /* Golden color */
+    color: white; /* Black text */
+}  
+
+/* Custom CSS for hover animations and transitions for home statistique*/
+.home-transition-container {
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.home-transition-container:hover {
+    transform: scale(1.05);
+    background-color: var(--color-secondary); /* Golden color */
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.transition-icon {
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.transition-icon:hover {
+    transform: scale(1.1);
+    background-color: #FFA500; /* Orange color */
+}  
