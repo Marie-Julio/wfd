@@ -8,7 +8,7 @@ const Cour = ({courses = []}) => {
         {courses.map((course) => (
           <div
             key={course.id}
-            className="bg-white w-130  rounded-lg shadow-lg overflow-hidden transition-all duration-300"
+            className="bg-white w-130  rounded-lg shadow-lg overflow-hidden transition-transform duration-800 hover:transform hover:scale-105 hover:scale-105 hover:shadow-2xl hover:shadow-orange-300/100"
           >
             <div className="p-6">
               <div className="flex justify-between items-start">

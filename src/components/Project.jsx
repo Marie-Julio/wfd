@@ -6,7 +6,7 @@ const Project = ({projects = []}) => {
         {projects.map((project) => (
         <div
                 key={project.id}
-                className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-500 hover:scale-105 hover:shadow-xl"
+                className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-800 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/100"
               >
                 <img
                   src={project.image}
@@ -27,7 +27,10 @@ const Project = ({projects = []}) => {
                     </span>
                   </div>
                   <p className="text-gray-600">{project.description}</p>
-                  <button className="mt-4 flex items-center rounded-lg bg-custom-gradient text-white px-4 py-3 hover:text-orange-500 transition-colors duration-300">
+                  <button className="mt-4 flex items-center rounded-lg bg-custom-gradient text-white px-4 py-3 hover:text-black transition-all duration-300
+          bg-blue-600 hover:bg-blue-700
+          transform hover:scale-105
+          group">
                     En savoir plus
                     <ChevronRight className="w-4 h-4 ml-2" />
                   </button>

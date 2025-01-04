@@ -18,7 +18,11 @@ const Home = () => {
                 </div>
                  {/* En-tête animé */}
                 <div className="max-w-7xl my-20 mx-auto text-center mb-12 transform transition-all duration-500 hover:scale-105">
-                    <h1 className="text-4xl font-bold text-tertiaire mb-4">
+                    <h1 className="text-4xl font-bold text-tertiaire mb-4 inline-block animate-bounce" style={{
+              animationDelay: `0.1s`,
+              animationDuration: '1s',
+              animationIterationCount: 1
+            }}>
                     Nos Projets & Opportunités
                     </h1>
                     <p className="text-xl text-gray-600">

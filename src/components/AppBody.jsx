@@ -4,7 +4,7 @@ import Nav from './Nav';
 import Carousel from './Carousel';
 import HeroBanner from './HeroBanner';
 
-const AppBody = ({home, children}) => {
+const AppBody = ({home, titleBanner, imageBanner, descriptionBanner, children}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdowns, setActiveDropdowns] = useState({
     services: false,
@@ -27,7 +27,7 @@ const AppBody = ({home, children}) => {
       {/* Header Responsive */}
       
          <Nav/>
-         {home ? <Carousel/> : <HeroBanner/>}
+         {home  ? <Carousel/> : <HeroBanner title={titleBanner} image={imageBanner} description={descriptionBanner}/>}
 
          
         

@@ -4,7 +4,10 @@ import { courses } from "../../Data/data";
 
 const CoursScreen = () => {
     return ( 
-        <AppBody>
+        <AppBody 
+        titleBanner="Formez-vous aux Métiers du Numérique"
+        descriptionBanner="Découvrez nos formations et opportunités professionnelles"
+        >
           <section className="items-center justify-center min-h-screen w-full">
 
                  {/* Header */}
@@ -19,9 +22,9 @@ const CoursScreen = () => {
 
             {/* Courses Section */}
             <div className="max-w-7xl mx-auto mb-12">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-6 items-start ">
+                {/* <h2 className="text-2xl font-semibold text-gray-900 mb-6 items-start ">
                 Cours disponibles
-                </h2>
+                </h2> */}
                 <Cour courses={courses}/>
             </div>
 

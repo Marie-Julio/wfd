@@ -11,7 +11,7 @@ const Nav = () => {
     // { label: "Inscription", href: "/inscriptions" },
     { label: "Informations", href: "/pages-infos" },
     { label: "Forum", href: "/pages-forum" },
-    { label: "Profil des membres", href: "/pages-profil-members" },
+    { label: "Profil des membres", href: "/page-profil-member" },
   ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -84,7 +84,9 @@ const Nav = () => {
               <li key={item.label} className="md:ml-8">
                 <Link
                   to={item.href}
-                  className="block py-2 px-4 text-center md:inline-block hover:bg-blue-700 md:hover:bg-transparent md:hover:underline"
+                  className="block py-2 px-4 text-center md:inline-block hover:bg-blue-700 md:hover:bg-transparent transition-all duration-1000 ease-out
+                  transform translate-x-0 opacity-100"
+                  style={{ transitionDelay: `${2 * 200}ms` }}
                 >
                   {item.label}
                 </Link>
@@ -101,7 +103,7 @@ const Nav = () => {
               Connexion
             </Link>
             <Link
-              to="/signup"
+              to="/register"
               className="py-2 px-4 text-sm bg-blue-700 text-white rounded hover:bg-blue-800"
             >
               Inscription

@@ -100,14 +100,37 @@ export  const courses = [
 export  const information = [
     {
       title: "Modalités d'inscription",
+      image: "https://pied-ong.org/assets/images/projet/projet_5.jpg",
       content: "L'inscription aux cours est ouverte toute l'année. Un système de paiement flexible est disponible."
     },
     {
       title: "Certification",
+      image: "https://thumbs.dreamstime.com/b/busy-theme-park-families-can-track-their-childrens-whereabouts-genabled-locator-app-providing-peace-mind-342651469.jpg?w=992",
       content: "Chaque cours donne droit à une certification reconnue après validation des acquis."
     },
     {
       title: "Support pédagogique",
+      image: "https://pied-ong.org/assets/images/projet/projet_5.jpg",
+      content: "Une équipe de tuteurs est disponible 7j/7 pour répondre à vos questions."
+    },
+    {
+      title: "Support pédagogique",
+      image: "https://thumbs.dreamstime.com/b/busy-theme-park-families-can-track-their-childrens-whereabouts-genabled-locator-app-providing-peace-mind-342651469.jpg?w=992",
+      content: "Une équipe de tuteurs est disponible 7j/7 pour répondre à vos questions."
+    },
+    {
+      title: "Support pédagogique",
+      image: "https://thumbs.dreamstime.com/b/cherry-blossom-flower-spring-horizontal-saakura-theme-poster-greeting-cards-headers-website-app-275762979.jpg?w=768",
+      content: "Une équipe de tuteurs est disponible 7j/7 pour répondre à vos questions."
+    },
+    {
+      title: "Support pédagogique",
+      image: "https://pied-ong.org/assets/images/projet/projet_5.jpg",
+      content: "Une équipe de tuteurs est disponible 7j/7 pour répondre à vos questions."
+    },
+    {
+      title: "Support pédagogique",
+      image: "https://thumbs.dreamstime.com/b/cherry-blossom-flower-spring-horizontal-saakura-theme-poster-greeting-cards-headers-website-app-275762979.jpg?w=768",
       content: "Une équipe de tuteurs est disponible 7j/7 pour répondre à vos questions."
     }
   ];
