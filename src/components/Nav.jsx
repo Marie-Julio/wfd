@@ -6,7 +6,7 @@ import { Mail, MapPin, Phone, Menu, X } from "lucide-react";
 const Nav = () => {
   const menuItems = [
     { label: "Accueil", href: "/" },
-    { label: "Opportunités", href: "/pages-opportunites" },
+    { label: "Promotions", href: "/page-promotion" },
     { label: "Cours", href: "/page-cours" },
     // { label: "Inscription", href: "/inscriptions" },
     { label: "Informations", href: "/pages-infos" },

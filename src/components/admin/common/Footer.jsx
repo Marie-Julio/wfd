@@ -1,7 +1,7 @@
 export default function Footer() {
     return (
       <div className="footer flex flex-col ">
-        <div className="footer-top bg-secondary text-white text-center font-bold p-2">
+        <div className="footer-top bg-[#E9522C] text-white text-center font-bold p-2">
           &copy; WFDGuinee
         </div>
         {/* <div className="footer-bottom flex justify-between h-[10px]">

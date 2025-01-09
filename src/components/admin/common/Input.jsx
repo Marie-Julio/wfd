@@ -2,11 +2,11 @@ import React, { useState } from "react"
 import Icon from "./Icon";
 
 
-export const Input  = ({ label, type, name, value, placeholder, onChange, error, className, disabled, full }) => {
+export const Input  = ({ label, type, name, value, placeholder, onChange, error, className, disabled, full, darkMode }) => {
     const [show, setShow] = useState(false)
     return ( 
-        <div className={`w-full mb-4 flex flex-col  ${className}`}>
-        <label className='mb-2'>{label}</label>
+        <div className={`w-full mb-2 flex flex-col  ${className}`}>
+        <label className={`mb-2 ${darkMode ? "text-white" : " text-black"}`}>{label}</label>
         <div className="relative text-black">
             <input
                 name={name}
@@ -14,7 +14,7 @@ export const Input  = ({ label, type, name, value, placeholder, onChange, error,
                 placeholder={placeholder}
                 onChange={onChange}
                 value={value !== undefined ? value : ''}
-                className={`w-full ${full ? "rounded-full" : "rounded-lg" } border border-gray px-4 py-2 bg-white focus:outline-none focus:border-secondary ${error && "border-danger"}`}
+                className={`w-full ${full ? "rounded-full" : "rounded-lg" } border border-gray px-4 py-2 ${darkMode ? "bg-[#302E30] text-white placeholder-slate-300" : "bg-white text-black placeholder-gray-500"} focus:outline-none focus:border-secondary ${error && "border-danger"}`}
                 disabled={disabled ? true : false}
             />
             {

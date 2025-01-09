@@ -6,7 +6,7 @@ const FormBody = ({children, title}) => {
     return(
         <section className="mx-auto w-10/12 p-10 bg-white shadow-md rounded-md mt-10">
             <div className='flex items-center mb-5'>
-                <span onClick={() => navigate(-1)} className="mr-4 flex items-center justify-center w-[45px] h-[45px] rounded-full bg-[#0ba603] text-white hover:cursor-pointer">
+                <span onClick={() => navigate(-1)} className="mr-4 flex items-center justify-center w-[45px] h-[45px] rounded-full bg-[#E9522C] text-white hover:cursor-pointer">
                     <svg
                         className="fill-current"
                         width="20"

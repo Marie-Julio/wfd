@@ -7,11 +7,24 @@ import '@fontsource/merriweather'; // Import par défaut
 import '@fontsource/merriweather/400.css'; // Regular
 import '@fontsource/merriweather/400-italic.css'; // Italique
 import '@fontsource/merriweather/700.css'; // Bold
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
+import { AuthProvider } from './context/AuthProvider.jsx'
+import { persistor, store } from './store/store.js'
+import { EditorProvider } from 'react-simple-wysiwyg'
 
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+         <AuthProvider>
+         <EditorProvider>
+          <App />
+          </EditorProvider>
+        </AuthProvider>
+      </PersistGate>
+    </Provider>
   </StrictMode>,
 )

@@ -15,6 +15,9 @@ import MemberProfile from './screens/front/MemberProfile'
 import Information from './screens/front/Information'
 import Register from './screens/Register'
 import ForumScreen from './screens/front/Forum'
+import InformationAdmin from './screens/admin/infos'
+import FormInfo from './screens/admin/infos/form'
+import Promotion from './screens/front/Promotion'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,7 +30,8 @@ function App() {
       <Route path="/register" element={  <Register/>  } />  
       <Route path="/page-cours" element={  <CoursScreen/>  } />  
       <Route path="/page-detail" element={  <CoursDetail />  } />  
-      <Route path="/page-quizz" element={  <QuizInterface />  } />  
+      <Route path="/page-promotion" element={  <QuizInterface />  } />  
+      <Route path="/page-quizz" element={  <Promotion />  } />  
       <Route path="/page-profil-member" element={ <MemberProfile />  } />  
       <Route path="/pages-infos" element={ <Information />  } />  
       <Route path="/pages-forum" element={ <ForumScreen />  } />  
@@ -36,6 +40,8 @@ function App() {
        {/* Screen admin  */}
        <Route path="/admin/dashboard" element={     <AdminHome/>  } /> 
       <Route path="/admin/cours" element={     <Cours/>  } /> 
+      <Route path="/admin/informations" element={     <InformationAdmin />  } /> 
+      <Route path="/admin/informations-create" element={     <FormInfo />  } /> 
     </Routes>
     </Router>
 

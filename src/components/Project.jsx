@@ -6,7 +6,7 @@ const Project = ({projects = []}) => {
         {projects.map((project) => (
         <div
                 key={project.id}
-                className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-800 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/100"
+                className="bg-white rounded-lg shadow-lg overflow-hidden animate-flip-up animate-delay-500 animate-ease-in-out transform transition-all duration-800 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/100"
               >
                 <img
                   src={project.image}

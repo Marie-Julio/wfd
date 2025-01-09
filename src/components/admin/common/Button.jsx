@@ -1,10 +1,10 @@
-import ReloadIcon from "./icons/ReloadIcon";
+import ReloadIcon from "../icons/ReloadIcon";
 
 
-export const Button = ({onClick, className, isLoading = false, disabled, children}) => {
+export const Button = ({onClick, className, isLoading = false, disabled = false, children}) => {
     return(
         <button 
-            className={`bg-[#27bf32] text-white py-2 px-3 rounded-md flex flex-row items-center justify-center ${className} ${disabled && "cursor-not-allowed"}`} 
+            className={`bg-[#E9522C] text-white py-2 px-3 rounded-md flex flex-row items-center justify-center ${className} ${disabled && "cursor-not-allowed"}`} 
             onClick={onClick} 
             type='submit'
             disabled={disabled ? true : false}

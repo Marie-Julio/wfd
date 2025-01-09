@@ -1,8 +1,70 @@
 import React, { useState } from "react";
 import { Link } from "react-router";
 import background from "../assets/slide-2.jpg";
+import { Input } from "../components/admin/common/Input";
+import { useFormik } from "formik";
+import * as Yup from 'yup';
+import { countries } from "../Data/data";
+import { postResource } from "../services/api";
+import Select from "../components/admin/common/Select";
+import Button from "../components/admin/common/Button";
+import useAuth from "../hooks/useAuth";
+import { errorMessage } from "../services/Helper";
+
+
 const Register = () => {
-  const [darkMode, setDarkMode] = useState(true);
+  // const [darkMode, setDarkMode] = useState(true);
+  const [isLoading, setIsLoading] = useState(false)
+
+  const auth = useAuth()
+  const saveData = (data) => {
+    console.log(data)
+    postResource("register", data).then((res) => {
+      console.log(res)
+        onServerSuccess(res.data.message)
+        auth.login(res.data.token)
+        formik.resetForm();
+        setIsLoading(false)
+        // setTimeout(() => navigate("/"), 1500)
+    }).catch(e => {
+      setIsLoading(false)
+        errorMessage(e)
+        // console.log(e)
+      })
+}
+
+const formik = useFormik({
+    initialValues: {
+        nom: '',
+        prenom: '',
+        email: '',
+        telephone: '',
+        password : '',
+        password_confirmation: '',
+        nationalite: '',
+        date_naissance: ''
+    },
+    validationSchema: Yup.object({
+      nationalite: Yup.string().required('Champ requis'),
+      nom: Yup.string().required('Champ requis'),
+      prenom: Yup.string().required('Champ requis'),
+      email: Yup.string().required('Champ requis'),
+      telephone: Yup.string().required('Champ requis'),
+      password_confirmation: Yup.string().required('Champ requis'),
+      password: Yup.string().required('Champ requis'),
+      date_naissance: Yup.string().required('Champ requis'),
+    }),
+    onSubmit: async (values) => {
+      setIsLoading(true)
+        saveData(values)
+        formik.resetForm(); 
+        setIsLoading(false)
+
+    },
+});
+
+
+
   return (
     <div className="flex flex-col justify-center items-center w-full h-[100vh] bg-no-repeat bg-cover bg-center " style={{ backgroundImage: `url(${background})` }}>
       <div className=" flex flex-col items-end justify-start  overflow-hidden mb-2 xl:max-w-3xl w-full">
@@ -25,81 +87,99 @@ const Register = () => {
         </div> */}
       </div>
       <div
-        className={`xl:max-w-3xl ${
-          darkMode ? "bg-black" : "bg-white"
-        }  w-full p-5 sm:p-10 rounded-md`}
+        className={`xl:max-w-3xl bg-black
+       w-full p-5 sm:p-10 rounded-md`}
       >
         <h1
-          className={`text-center text-xl sm:text-3xl font-semibold ${
-            darkMode ? "text-white" : "text-black"
-          }`}
+          className={`text-center text-xl sm:text-3xl font-semibold text-white`}
         >
           Inscrivez-vous pour un compte gratuit
         </h1>
+        
         <div className="w-full mt-8">
           <div className="mx-auto max-w-xs sm:max-w-md md:max-w-lg flex flex-col gap-4">
+          <form className="flex flex-col w-full items-center" onSubmit={formik.handleSubmit}>
             <div className="flex flex-col sm:flex-row gap-3">
-              <input
-                className={`w-full px-5 py-3 rounded-lg font-medium border-2 border-transparent placeholder-gray-500 text-sm focus:outline-none  focus:border-2  focus:outline ${
-                  darkMode
-                    ? "bg-[#302E30] text-white focus:border-white"
-                    : "bg-gray-100 text-black focus:border-black"
-                }`}
+            
+            <Input
+                label="Nom"
+                name="nom"
+                placeholder="Entrez votre Nom"
                 type="text"
-                placeholder="Votre nom de famille"
-              />
-              <input
-                className={`w-full px-5 py-3 rounded-lg  font-medium border-2 border-transparent placeholder-gray-500 text-sm focus:outline-none focus:border-2  focus:outline ${
-                  darkMode
-                    ? "bg-[#302E30] text-white focus:border-white"
-                    : "bg-gray-100 text-black focus:border-black"
-                }`}
+                darkMode
+                value={formik.values.nom}
+                onChange={formik.handleChange}
+                error={formik.errors.nom}
+            />
+              <Input
+                label="Prenom"
+                name="prenom"
+                placeholder="Entrez votre prenom"
                 type="text"
-                placeholder="Votre prénom"
-              />
+                darkMode
+                value={formik.values.prenom}
+                onChange={formik.handleChange}
+                error={formik.errors.prenom}
+            />
             </div>
-            <input
-              className={`w-full px-5 py-3 rounded-lg  font-medium border-2 border-transparent placeholder-gray-500 text-sm focus:outline-none focus:border-2  focus:outline ${
+            <Input
+                label="Email"
+                name="email"
+                placeholder="Entrez votre email"
+                type="email"
                 darkMode
-                  ? "bg-[#302E30] text-white focus:border-white"
-                  : "bg-gray-100 text-black focus:border-black"
-              }`}
-              type="email"
-              placeholder="Entrez votre email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                error={formik.errors.email}
             />
-            <input
-              className={`w-full px-5 py-3 rounded-lg  font-medium border-2 border-transparent placeholder-gray-500 text-sm focus:outline-none focus:border-2  focus:outline ${
+             <Input
+                label="Telephone"
+                name="telephone"
+                placeholder="Entrez votre contact"
+                type="text"
                 darkMode
-                  ? "bg-[#302E30] text-white focus:border-white"
-                  : "bg-gray-100 text-black focus:border-black"
-              }`}
-              type="tel"
-              placeholder="Entrez votre téléphone"
+                value={formik.values.telephone}
+                onChange={formik.handleChange}
+                error={formik.errors.telephone}
             />
-            <input
-              className={`w-full px-5 py-3 rounded-lg  font-medium border-2 border-transparent placeholder-gray-500 text-sm focus:outline-none focus:border-2  focus:outline ${
+            <Input
+                label="Date de naissance"
+                name="date_naissance"
+                placeholder="Entrez votre date de naissance"
+                type="date"
                 darkMode
-                  ? "bg-[#302E30] text-white focus:border-white"
-                  : "bg-gray-100 text-black focus:border-black"
-              }`}
-              type="password"
-              placeholder="Mot de passe"
+                value={formik.values.date_naissance}
+                onChange={formik.handleChange}
+                error={formik.errors.date_naissance}
             />
-            <button className="mt-5 tracking-wide font-semibold bg-[#E9522C] text-gray-100 w-full py-4 rounded-lg hover:bg-[#E9522C]/90 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-              <svg
-                className="w-6 h-6 -ml-2"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                <circle cx="8.5" cy="7" r="4" />
-                <path d="M20 8v6M23 11h-6" />
-              </svg>
-              <span className="ml-3">S'inscrire</span>
-            </button>
+             <Select name="nationalite" label="La nationalité" value={formik.values.nationalite} onChange={formik.handleChange} disabled={false}>
+                <option>Choisir la nationalité</option>
+                {
+                        countries.map((x) => (
+                        <option value={x.libelle}>{x.libelle}- {x.code}</option>
+                    ))
+                }
+            </Select>
+            <Input
+                label="Mot de passe"
+                name="password"
+                type="password"
+                darkMode
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                error={formik.errors.password}
+            />
+            <Input
+                label="Confirmation de mot de passe"
+                name="password_confirmation"
+                type="password"
+                darkMode
+                value={formik.values.password_confirmation}
+                onChange={formik.handleChange}
+                error={formik.errors.password_confirmation}
+            />
+            <Button isLoading={isLoading} className="w-full bg-[#E9522C]">S'inscrire</Button>
+            </form>
             <p className="mt-6 text-xs text-gray-600 text-center">
             Vous avez déjà un compte ?{" "}
               <Link to="/login">
@@ -108,6 +188,7 @@ const Register = () => {
             </p>
           </div>
         </div>
+       
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { Input } from './Input';
 
 
 
-const Table  = ({ data, columns = [],open, actions = true, title, children, label, editFunction, deleteUrl, setOpenSidebar, filter, setFilter}) => {
+const Table  = ({ data, columns = [],open, actions = true, title, children, label, editFunction, addFunction,  deleteUrl, setOpenSidebar, filter, setFilter}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
   const [pageSize, setPageSize] = useState(5);
@@ -134,7 +134,7 @@ const Table  = ({ data, columns = [],open, actions = true, title, children, labe
           </button>
           <button
             className="bg-[#0ba603] text-white p-2 rounded cursor-pointer flex h-2/3 mt-2"
-            // onChange={handleImport}
+            onClick={addFunction}
           >
             <Icon name="bx-plus" />
              Ajouter
@@ -163,12 +163,12 @@ const Table  = ({ data, columns = [],open, actions = true, title, children, labe
             }
           </tr>
         </thead>
-        <tbody>
+        <tbody className='text-black font-medium'>
           {paginatedData.length > 0 ? paginatedData.map((row) => (
             <tr key={row.id} className="hover:bg-primary-100 text-black">
               
               {columns.map((column) => (
-                <td key={column.accessor} className="border border-neutral-200 p-2">
+                <td key={column.accessor} className="border border-neutral-200 ">
                   {row[column.accessor]}
                 </td>
               ))}
