@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import logo  from "../../../assets/wfdguinee.png";
 import Icon from "./Icon";
 import { Input } from "./Input";
+import { jwtDecode } from "jwt-decode";
 
 function Nav () {
+    const access_token = localStorage.getItem('token');
+          const tokenNew = jwtDecode(access_token);
     return (
         <nav className="bg-[#f4f5fa] shadow-md border-gray-600 font-montserrat-light">
             <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-4xl px-4 py-0">
@@ -19,8 +22,8 @@ function Nav () {
                 <div className="flex text-end justify-between items-center">
                     <Icon name="bxs-user-circle" size="36px" style={{ margin: "2px" }}/>
                     <a className="flex-wrap items-center">
-                        <p className="text-start text-gray font-montserrat-bold">Admin</p>
-                        <span className="text-gray-500">admin@gmail.com</span>
+                        <p className="text-start text-gray font-montserrat-bold">{`${tokenNew.nom} ${tokenNew.prenom}`}</p>
+                        <span className="text-gray-500">{tokenNew.email}</span>
                     </a>
                 </div>
 

@@ -2,31 +2,31 @@ import { useEffect, useState } from "react";
 // import { getResource } from "../../services/Api";
 import { Body } from "../../../components/admin/common/Body";
 import Table from "../../../components/admin/common/Table";
-// import { Informationes } from "../../../Data/data";
+import { courses } from "../../../Data/data";
 import ViewMore from "../../../components/admin/common/ViewMore";
 import Searchable from "../../../components/admin/common/Searchable";
 import { getResource } from "../../../services/api";
-import { useNavigate } from "react-router";
 
-const InformationAdmin = () => {
+const Utilisateur = () => {
     const [filter, setFilter] = useState(false); 
     const [isOpen, setIsOpen] = useState(false);
 
-    const [informations, setInformations] = useState([]);
-    const [data, setData] = useState([]);
-    const navigate = useNavigate()
+    const [cours, setCours] = useState([]);
+    const [data, setData] = useState();
 
     const columns = [
-        { accessor: 'title', Header: 'Code' },
-        { accessor: 'visibility', Header: 'Visibilite' },
-        { accessor: 'user.nom', Header: 'Utilisateur' },
+        { accessor: 'nom', Header: "Nom " },
+        { accessor: 'prenom', Header: "Prenom" },
+        { accessor: 'email', Header: "Email" },
+        { accessor: 'date_naissance', Header: "Date de naissance" },
+        { accessor: 'nationalite', Header: "Nationalite" },
+        { accessor: 'role', Header: "Role" },
       ];
 
       const _init_ = () => {
-        getResource('/announcements').then((res) => {
+        getResource('/afficher_liste_utilisateur').then((res) => {
             console.log(res.data)
-            
-            setInformations(res.data)
+            setCours(res.data.utilisateurs)
         })
       }
 
@@ -35,36 +35,36 @@ const InformationAdmin = () => {
       }, [])
 
       const updateData = (new_data) => {
-        setData(new_data)
+        setCours(new_data)
     }
 
-    const create = () => {
-            navigate("/admin/informations-create");
-    }
+      const create = () => {
+        navigate("/admin/users-create");
+      }
 
-    const updateFunction = (item) => {
-      console.log(item)
-      navigate(`/admin/informations-update/${item.id}`);
-    }
-    
+      const updateFunction = (item) => {
+        console.log(item)
+        navigate(`/admin/users-update/${item.id}`);
+      } 
+
     return ( 
         <Body isOpen={isOpen} setIsOpen={setIsOpen}>
             <Table
-            title="Liste des Informations"
-            data={informations}
+            title="Liste des utilisateurs"
+            data={cours}
             columns={columns}
             filter={filter}
             setFilter={setFilter}
             setOpenSidebar={setIsOpen}
+            open={isOpen}
             addFunction={create}
             editFunction={updateFunction}
-            open={isOpen}
             label="Filtrage"
             actions={true} 
             // editFunction={} 
             // deleteUrl={}    
             >
-                <ViewMore title="Code">
+                <ViewMore title="Nom">
                 {/* <Searchable
                     data={data}
                     label="Rechercher par Libelle"
@@ -78,4 +78,4 @@ const InformationAdmin = () => {
      );
 }
  
-export default InformationAdmin;
+export default Utilisateur;

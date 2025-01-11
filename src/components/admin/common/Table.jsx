@@ -9,7 +9,7 @@ import { Input } from './Input';
 const Table  = ({ data, columns = [],open, actions = true, title, children, label, editFunction, addFunction,  deleteUrl, setOpenSidebar, filter, setFilter}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(10);
   const [selectedRows, setSelectedRows] = useState([]);
   // const [filter , setFilter] = useState(false)
 
@@ -112,26 +112,26 @@ const Table  = ({ data, columns = [],open, actions = true, title, children, labe
             <Icon name="bx-cloud-upload" />
             Filtrer
           </button>
-          <button
+          {/* <button
             onClick={handleExport}
             className="bg-blue-800 text-white p-2 rounded flex h-2/3 mt-2"
           >            
           <Icon name="bx-cloud-download" />
             Export
-          </button>
+          </button> */}
           {/* <Input
             type="file"
             onChange={handleImport}
             className="hidden"
             // id="fileInput"
           /> */}
-          <button
+          {/* <button
             className="bg-tertiaire text-white p-2 rounded cursor-pointer flex h-2/3 mt-2"
             // onChange={handleImport}
           >
             <Icon name="bx-cloud-upload" />
             Import
-          </button>
+          </button> */}
           <button
             className="bg-[#0ba603] text-white p-2 rounded cursor-pointer flex h-2/3 mt-2"
             onClick={addFunction}
@@ -169,18 +169,18 @@ const Table  = ({ data, columns = [],open, actions = true, title, children, labe
               
               {columns.map((column) => (
                 <td key={column.accessor} className="border border-neutral-200 ">
-                  {row[column.accessor]}
+                  {getNestedValue(row, column.accessor)}
                 </td>
               ))}
               { actions &&
                 <td className="border border-neutral-200 p-0 w-full h-full flex flex-wrap items-center justify-around">
                    
-                        <span onClick={editFunction} className="bg-warning text-white py-2 px-3 rounded-md flex flex-row items-center justify-center z-999">
+                        <span onClick={() => editFunction(row)} className="bg-warning text-white py-2 px-3 rounded-md flex flex-row items-center justify-center z-999">
                             <Icon name="bx-edit-alt" />
                         </span>
                    
                        
-                        <span onClick={deleteUrl}  className="bg-danger text-white py-2 px-3 rounded-md flex flex-row items-center justify-center z-999">
+                        <span onClick={() => deleteUrl()}  className="bg-danger text-white py-2 px-3 rounded-md flex flex-row items-center justify-center z-999">
                             <Icon name="bx-trash" />
                         </span>
                  
@@ -200,18 +200,18 @@ const Table  = ({ data, columns = [],open, actions = true, title, children, labe
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
             disabled={currentPage === 0}
-            className="p-2 border rounded"
+            className="p-2 border rounded bg-blue-400 text-white"
           >
-            Previous
+            Precedent
           </button>
           <button
             onClick={() =>
               setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
             }
             disabled={currentPage === totalPages - 1}
-            className="p-2 border rounded"
+            className="p-2 border rounded bg-orange-400 text-white"
           >
-            Next
+            Suivant
           </button>
         </div>
         <div>

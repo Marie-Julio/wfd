@@ -3,8 +3,9 @@ import { Menu, ChevronDown, X } from 'lucide-react';
 import Nav from './Nav';
 import Carousel from './Carousel';
 import HeroBanner from './HeroBanner';
+import BannerCour from './BannerCour';
 
-const AppBody = ({home, titleBanner, imageBanner, descriptionBanner, children}) => {
+const AppBody = ({home, bannerCour, banner, titleBanner, imageBanner, descriptionBanner, children}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdowns, setActiveDropdowns] = useState({
     services: false,
@@ -27,7 +28,9 @@ const AppBody = ({home, titleBanner, imageBanner, descriptionBanner, children}) 
       {/* Header Responsive */}
       
          <Nav/>
-         {home  ? <Carousel/> : <HeroBanner title={titleBanner} image={imageBanner} description={descriptionBanner}/>}
+         {home  && <Carousel/>}
+         {banner && <HeroBanner title={titleBanner} image={imageBanner} description={descriptionBanner}/>}
+         {bannerCour && <BannerCour />}
 
          
         

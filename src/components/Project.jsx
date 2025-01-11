@@ -1,6 +1,7 @@
 import { ChevronRight } from "lucide-react";
 
 const Project = ({projects = []}) => {
+  const apiUrl = import.meta.env.VITE_API_URI_BASE
     return ( 
         <>
         {projects.map((project) => (
@@ -9,7 +10,7 @@ const Project = ({projects = []}) => {
                 className="bg-white rounded-lg shadow-lg overflow-hidden animate-flip-up animate-delay-500 animate-ease-in-out transform transition-all duration-800 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/100"
               >
                 <img
-                  src={project.image}
+                  src={`${apiUrl}/storage/${project.media}`}
                   alt={project.title}
                   className="w-full h-48 object-cover"
                 />
@@ -23,7 +24,7 @@ const Project = ({projects = []}) => {
                       project.status === 'Planifié' ? 'bg-yellow-100 text-yellow-800' :
                       'bg-blue-100 text-blue-800'
                     }`}>
-                      {project.status}
+                      {project.inscription.statut}
                     </span>
                   </div>
                   <p className="text-gray-600">{project.description}</p>

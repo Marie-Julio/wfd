@@ -21,6 +21,15 @@ export default {
       // => @media (min-width: 1536px) { ... }
     },
     extend: {
+      animation: {
+        'jump-in': 'jump-in 500s ease-out forwards',
+      },
+      keyframes: {
+        'jump-in': {
+          '0%': { transform: 'translateY(50px)', opacity: 0 },
+          '100%': { transform: 'translateY(0)', opacity: 1 },
+        },
+      },
       colors: {
         success: '#27bf32',
         danger: '#D34053',

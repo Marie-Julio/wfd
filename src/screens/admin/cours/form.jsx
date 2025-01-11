@@ -5,52 +5,40 @@ import { Body } from "../../../components/admin/common/Body";
 import FormBody from "../../../components/admin/common/FormBody";
 import { Input } from "../../../components/admin/common/Input";
 import Button from "../../../components/admin/common/Button";
-import { getResource, patchResource, postResource } from "../../../services/api";
+import { getResource, postResource } from "../../../services/api";
 import { errorMessage, onServerSuccess } from "../../../services/Helper";
 import TextArea from "../../../components/admin/common/TextArea";
-import { useNavigate, useParams } from "react-router";
+import Select from "../../../components/admin/common/Select";
 
-const FormInfo = () => {
+const FormCours = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [filter, setFilter] = useState(false); 
+    const [filter, setFilter] = useState(false);
+    const [promos, setPromos]  = useState([])
+    const [qcms, setQcms]  = useState([])
     const [loading, setLoading] = useState(false)
     const [datas, setDatas] = useState({
         content: ""
     })
-    const navigate = useNavigate()
-    const {id} = useParams()
+    const statuts = [{id: 1, libelle: "video"}, {id: 2, libelle: "pdf"}, {id: 3, libelle: "video"}];
 
-    useEffect(() => {
-        getResource(`/announcements/${id}`).then((res) => {
-            console.log(res.data)
-            setDatas({content: ""})
-
-            formik.setValues({
-                title : res.data.title,
-                visibility : 'public',
+    const _init_ = () => {
+            getResource('/promotions').then((res) => {
+                console.log(res.data)
+                setPromos(res.data)
             })
-            setDatas({content: res.data.content})
-        }).catch((e) => errorMessage(e))
-          }, [id])
-
+          }
+    
+          useEffect(() => {
+            _init_()
+          }, [])
 
     const updateData = (values) => {
-        const newData = { ...values, content: datas.content };
-        console.log(newData)
-        patchResource("/announcements", id, newData).then((res) => {
-            // console.log(res)
-            onServerSuccess(res.data.message)
-            formik.resetForm()
-            setDatas({content: ""})
-            setTimeout(() => navigate(`/admin/informations`), 50)
-        }).catch(e => {
-            errorMessage(e)
-        })
+
     }
 
     const saveData = (data) => {
        
-        const newData = { ...data, content: datas.content };
+        const newData = { ...data, description: datas.content };
         console.log(newData)
         postResource("/announcements", newData).then((res) => {
             onServerSuccess(res.data.message)
@@ -60,9 +48,11 @@ const FormInfo = () => {
     const formik = useFormik({
         initialValues: {
             title : '',
-            visibility : 'public',
-            content : '',
-            // user_id : '',
+            type : '',
+            min_score : '',
+            promotion_id : '',
+            required_qcm_id : '',
+            file_path : '',
         },
         validationSchema: Yup.object({
             title: Yup.string().required('Champ requis'),
@@ -71,19 +61,28 @@ const FormInfo = () => {
         }),
         onSubmit: async (values) => {
             setLoading(true) 
-            if(id) updateData(values)
-            else saveData(values) 
+            saveData(values) 
             setLoading(false)
         },
     });
 
     return ( 
         <Body isOpen={isOpen} setIsOpen={setIsOpen}>
-            <FormBody title={id ? "Mise a jour Actualite" : "Creation de Actualite"}>
+            <FormBody title="Creation de Cours">
             <form className="flex flex-col w-full items-center" onSubmit={formik.handleSubmit}>
                 <Input type="text" name="title" value={formik.values.title} label="Entrez le title" onChange={formik.handleChange}/>
-                <Input type="text" name="visibility" value={formik.values.visibility} disabled={true} label="La visibilite" onChange={formik.handleChange}/>
-                <TextArea label="Details" 
+                <Input type="text" name="min_score" value={formik.values.min_score} disabled={true} label="La moyenne" onChange={formik.handleChange}/>
+                <Input type="text" name="duree" value={formik.values.duree} label="La duree" onChange={formik.handleChange}/>
+                <Input type="file" name="file_path" value={formik.values.file_path} label="Le fichier" onChange={formik.handleChange}/>
+                <Select name="type" label="Le type" value={formik.values.type} onChange={formik.handleChange} disabled={false}>
+                    <option>Choisir le statut</option>
+                    {
+                        statuts.map((x) => (
+                            <option value={x.libelle}>{x.libelle}</option>
+                        ))
+                    }
+                </Select>
+                <TextArea label="Description" 
                 val={datas.content}
                 handleChange={(e) => setDatas({...datas, content : e})}
                 />
@@ -94,4 +93,4 @@ const FormInfo = () => {
      );
 }
  
-export default FormInfo;
+export default FormCours;

@@ -1,27 +1,34 @@
 import React from 'react';
 import img from "../assets/imgCard.jpeg";
-import { Info } from 'lucide-react';
+import { Info, Plus } from 'lucide-react';
+import { useNavigate } from 'react-router';
 
 const CourseCard = ({ course }) => {
+    const navigate = useNavigate()
+    const handleDetail = () => {
+        navigate("/page-cours-detail")
+    }
   return (
-    <div className="bg-white shadow rounded-lg p-1">
+    <div className="bg-white shadow rounded-xl border p-1">
       <img
         src={img}
         alt="Course Thumbnail"
         className="w-full h-40 object-cover rounded"
       />
-      <span className="bg-orange-500 text-white font-semibold p-1 rounded-sm float-right flex justify-between">
-      <Info size={20} color="#fff" className='mr-1 -mb-2'/>Certifié</span>
-      <div className='rounded-md border px-5'>
+      <span className="bg-orange-500 text-white font-semibold p-1 rounded-lg float-right flex justify-between">
+      
+      <Info strokeWidth={3} size={20} color="#fff" className='mr-1 -mb-2'/>Certifié</span>
+      <div className='rounded-md px-1 h-auto'>
       <div className="mt-4">
         <h3 className="text-lg font-bold">{course.title}</h3>
-        {/* <p className="text-gray-600">{course.location}</p> */}
-        <p className="text-gray-600">{course.duration}</p>
+        <p className="text-gray-600 font-semibold">Type de cours: {course.type}</p>
+        <p className="text-gray-600">Credit: {course.min_score}</p>
         {/* {course.isCertified && ( */}
           
         {/* )} */}
       </div>
-      <button className="mt-4 bg-orange-500 text-white py-2 px-4 rounded">
+      <button className="flex w-full mt-4 mb-1 -mr-1 bg-orange-500 text-white py-2 px-4 rounded-xl" onClick={handleDetail}>
+        <Plus size={24}/>
         Plus d'informations
       </button>
       </div>

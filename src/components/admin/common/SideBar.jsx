@@ -8,6 +8,7 @@ import { Link, useLocation } from "react-router-dom";
 const SideBar = ({ open: propOpen, setOpen }) => {
 
   const [open, setLocalOpen] = useState(true);
+  
 
   useEffect(() => {
     setLocalOpen(propOpen); // Synchronise l'état local avec la prop `open`
@@ -19,14 +20,17 @@ const location = useLocation();
       { title: "Accueil", src: "/admin/dashboard", icon: "bx-home" },
 
       { title: "Gestion des Cours ", src: "", gap: true },
-      { title: "Gestion des Cours", src: "/COURS", icon: "bx-book-bookmark"},
-      { title: "Opportunites ", src: "/produits", icon: "bx-braille"  },
+      { title: "Gestion des Cours", src: "/admin/cours", icon: "bx-book-bookmark"},
+      { title: "Promotions ", src: "/admin/promotion", icon: "bx-braille"  },
       { title: "Informations", src: "/admin/informations", icon: "bx-info-circle"  },
+      { title: "Notifications", src: "/admin/notification", icon: "bx-bell"  },
+      { title: "Inscriptions", src: "/admin/inscription", icon: "bx-label"  },
+      { title: "Projets", src: "/admin/projets", icon: "bxs-offer"  },
 
 
-      { title: "Gestion des utilisateurs ", src: "Notifications", gap: true },
-      { title: "Utitlisateur", src: "/users", icon: "bx-group"  },
-      { title: "Role", src: "/roles", icon: "bx-key"  },
+      { title: "Gestion des utilisateurs ", src: "#", gap: true },
+      { title: "Utitlisateur", src: "/admin/users", icon: "bx-group"  },
+      { title: "Role", src: "/admin/roles", icon: "bx-key"  },
 
       { title: "Parametrages", src: "Notifications", gap: true },
       { title: "Parametres", src: "Settings", icon: "bx-cog"  }

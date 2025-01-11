@@ -7,8 +7,19 @@ import { postResource } from "./api";
 import { jwtDecode } from "jwt-decode";
 import CryptoJS, { AES } from 'crypto-js';
 import { Navigate } from 'react-router-dom';
-
+import he from 'he';
 moment.locale('fr');
+
+
+
+
+export function truncateStringAdvanced(str, maxLength, suffix = '...') {
+  if (str.length <= maxLength) {
+      return str;
+  }
+  return str.slice(0, maxLength) + suffix;
+}
+
 
 // Convertir une date au format YYYY-MM-DD en DD/MM/YYYY
 export function formatDateForDisplay(dateString) {
@@ -44,7 +55,7 @@ export const errorMessage = (e) => {
   }else if(e.response.status === 400) {
     onServerError(e.response.data.message)
   }else if(e.response.status === 401) {
-    redirect("/")
+    // redirect("/")
     onServerError("Vous n'etes pas connecte. Veuillez-vous reconnecter!")
     
   }else if(e.response.status === 403) {

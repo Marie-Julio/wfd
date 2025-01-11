@@ -5,22 +5,29 @@ import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { Input } from "../components/admin/common/Input";
 import useAuth from "../hooks/useAuth";
-import { errorMessage } from "../services/Helper";
+import { errorMessage, onServerSuccess } from "../services/Helper";
+import Button from "../components/admin/common/Button";
+import { useState } from "react";
+import { Link } from "react-router";
 
-const Login = () => {
+const LoginScreen = () => {
+    const [loading, setLoading] = useState(false)
     const auth = useAuth()
 
     const saveData = (data) => {
-        // console.log(data)
+        setLoading(true)
+        console.log(data)
         postResource("login", data).then((res) => {
+            console.log(res)
             onServerSuccess("Connexion reussie!!!")
-            auth.login(res.data.token)
+            auth.login(res.data.access_token)
             formik.resetForm();
             setLoading(false)
             setTimeout(() => navigate("/"), 1500)
         }).catch(e => {
             setLoading(false)
             errorMessage(e)
+            console.log(e)
             // console.log(e)
           })
     }
@@ -28,34 +35,36 @@ const Login = () => {
     const formik = useFormik({
         initialValues: {
             password : '',
-            identifiant: ''
+            email: ''
         },
         validationSchema: Yup.object({
-            identifiant: Yup.string().required('Champ requis'),
+            email: Yup.string().required('Champ requis'),
             password: Yup.string().required('Champ requis')
         }),
         onSubmit: async (values) => {
             setLoading(true)
             saveData(values) 
+            setLoading(false)
         },
     });
 
 
     return ( 
-        <section class="bg-gray-50 dark:bg-gray-900 bg-no-repeat bg-cover bg-center " style={{ backgroundImage: `url(${background})` }}>
+        <section className="bg-gray-50 dark:bg-gray-900 bg-no-repeat bg-cover bg-center " style={{ backgroundImage: `url(${background})` }}>
              {/* Superposition avec opacité */}
-        <div className="absolute inset-0 bg-white bg-opacity-20"></div>
-        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                <img class="w-50 h-20 mr-2" src={logo} alt="logo"/>
+        <div className="absolute inset-0 bg-white bg-opacity-20 pointer-events-none"></div>
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+            <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+                <img className="w-50 h-20 mr-2" src={logo} alt="logo"/>
                 WFDGuinee    
             </a>
-            <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+            <form className="space-y-4 md:space-y-6" onSubmit={formik.handleSubmit}>
+            <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Connectez-vous à votre compte
                     </h1>
-                    <form class="space-y-4 md:space-y-6" action="#">
+                    
                     <Input
                             label="Email"
                             name="email"
@@ -72,27 +81,28 @@ const Login = () => {
                             onChange={formik.handleChange}
                             error={formik.errors.password}
                         />
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-start">
-                                <div class="flex items-center h-5">
-                                    <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="" />
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-start">
+                                <div className="flex items-center h-5">
+                                    <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"  />
                                 </div>
-                                <div class="ml-3 text-sm">
-                                    <label for="remember" class="text-gray-500 dark:text-gray-300">Se rappeler de moi</label>
+                                <div className="ml-3 text-sm">
+                                    <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Se rappeler de moi</label>
                                 </div>
                             </div>
-                            <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Mot de passe oublié ?</a>
+                            <a href="#" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Mot de passe oublié ?</a>
                         </div>
-                        <button type="submit" class="w-full text-white bg-custom-gradient hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Connexion</button>
-                        <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                        Vous n’avez pas encore de compte ? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+                        <Button isLoading={loading} className="w-full">Connexion</Button>
+                        <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                        Vous n’avez pas encore de compte ? <Link to="/register" className="font-medium text-orange-500 hover:underline dark:text-primary-500">Sign up</Link>
                         </p>
-                    </form>
+                    
                 </div>
             </div>
+            </form>
         </div>
         </section>
      );
 }
  
-export default Login;
+export default LoginScreen;

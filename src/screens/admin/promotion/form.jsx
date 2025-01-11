@@ -9,11 +9,13 @@ import { getResource, patchResource, postResource } from "../../../services/api"
 import { errorMessage, onServerSuccess } from "../../../services/Helper";
 import TextArea from "../../../components/admin/common/TextArea";
 import { useNavigate, useParams } from "react-router";
+import Select from "../../../components/admin/common/Select";
 
-const FormInfo = () => {
+const FormPromotion = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [filter, setFilter] = useState(false); 
     const [loading, setLoading] = useState(false)
+    const [statuts, setStatuts] = useState([{id: 1, libelle: "active"}, {id: 2, libelle: "desactive"}]);
     const [datas, setDatas] = useState({
         content: ""
     })
@@ -21,28 +23,30 @@ const FormInfo = () => {
     const {id} = useParams()
 
     useEffect(() => {
-        getResource(`/announcements/${id}`).then((res) => {
+        getResource(`/promotions/${id}`).then((res) => {
             console.log(res.data)
-            setDatas({content: ""})
+            setDatas({content: res.data.description})
 
             formik.setValues({
-                title : res.data.title,
-                visibility : 'public',
+                nom : res.data.nom,
+                date_debut : res.data.date_debut,
+                date_fin : res.data.date_fin,
+                statut : res.data.statut,
+                duree : res.data.duree,
             })
-            setDatas({content: res.data.content})
-        }).catch((e) => errorMessage(e))
+        })
           }, [id])
 
 
     const updateData = (values) => {
-        const newData = { ...values, content: datas.content };
+        const newData = { ...values, description: datas.content };
         console.log(newData)
-        patchResource("/announcements", id, newData).then((res) => {
+        patchResource("/promotions", id, newData).then((res) => {
             // console.log(res)
             onServerSuccess(res.data.message)
             formik.resetForm()
             setDatas({content: ""})
-            setTimeout(() => navigate(`/admin/informations`), 50)
+            setTimeout(() => navigate(`/admin/promotion`), 50)
         }).catch(e => {
             errorMessage(e)
         })
@@ -50,23 +54,27 @@ const FormInfo = () => {
 
     const saveData = (data) => {
        
-        const newData = { ...data, content: datas.content };
+        const newData = { ...data, description: datas.content };
         console.log(newData)
-        postResource("/announcements", newData).then((res) => {
+        postResource("/promotions", newData).then((res) => {
             onServerSuccess(res.data.message)
             setDatas({content: ""})
         }).catch((e) => errorMessage(e))
     }
     const formik = useFormik({
         initialValues: {
-            title : '',
-            visibility : 'public',
-            content : '',
-            // user_id : '',
+            nom : '',
+            date_debut : '',
+            date_fin : '',
+            statut : '',
+            duree : '',
         },
         validationSchema: Yup.object({
-            title: Yup.string().required('Champ requis'),
-            // content: Yup.string().required('Champ requis'),
+            nom: Yup.string().required('Champ requis'),
+            date_debut: Yup.string().required('Champ requis'),
+            date_fin: Yup.string().required('Champ requis'),
+            statut: Yup.string().required('Champ requis'),
+            duree: Yup.string().required('Champ requis'),
 
         }),
         onSubmit: async (values) => {
@@ -77,12 +85,24 @@ const FormInfo = () => {
         },
     });
 
+
+
     return ( 
         <Body isOpen={isOpen} setIsOpen={setIsOpen}>
-            <FormBody title={id ? "Mise a jour Actualite" : "Creation de Actualite"}>
+            <FormBody title={id ? "Mise a jour Promotion" : "Creation de Promotion"}>
             <form className="flex flex-col w-full items-center" onSubmit={formik.handleSubmit}>
-                <Input type="text" name="title" value={formik.values.title} label="Entrez le title" onChange={formik.handleChange}/>
-                <Input type="text" name="visibility" value={formik.values.visibility} disabled={true} label="La visibilite" onChange={formik.handleChange}/>
+                <Input type="text" name="nom" value={formik.values.nom} label="Entrez le nom" onChange={formik.handleChange}/>
+                <Input type="date" name="date_debut" value={formik.values.date_debut} label="La date de debut" onChange={formik.handleChange}/>
+                <Input type="date" name="date_fin" value={formik.values.date_fin} label="La date de fin" onChange={formik.handleChange}/>
+                <Input type="text" name="duree" value={formik.values.duree} label="La duree" onChange={formik.handleChange}/>
+                <Select name="statut" label="Le statut" value={formik.values.statut} onChange={formik.handleChange} disabled={false}>
+                    <option>Choisir le statut</option>
+                    {
+                        statuts.map((x) => (
+                            <option value={x.libelle}>{x.libelle}</option>
+                        ))
+                    }
+                </Select>
                 <TextArea label="Details" 
                 val={datas.content}
                 handleChange={(e) => setDatas({...datas, content : e})}
@@ -94,4 +114,4 @@ const FormInfo = () => {
      );
 }
  
-export default FormInfo;
+export default FormPromotion;

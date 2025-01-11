@@ -20,9 +20,9 @@ const useAuth = () => {
         dispatch({ type: 'LOGOUT' });
         redirect('/login'); // Redirection en cas d'expiration du token
       } else {
-        const modele = tokenNew.modele[0] || []; // Assure-toi que les rôles sont dans le token
+        
         const roles = tokenNew.roles || []; // Assure-toi que les rôles sont dans le token
-        dispatch({ type: 'LOGIN', payload: { token: access_token, modele, roles } });
+        dispatch({ type: 'LOGIN', payload: { token: access_token } });
         redirect('/'); // Rediriger vers la page d'accueil
       }
     } else {

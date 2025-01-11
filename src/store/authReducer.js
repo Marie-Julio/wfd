@@ -11,16 +11,16 @@ export const initialState = {
         return {
           ...state,
           token: action.payload.token,
-          modele: action.payload.modele,
-          roles: action.payload.roles,
+          // modele: action.payload.modele,
+          // roles: action.payload.roles,
           isAuthenticated: true,
         };
       case 'LOGOUT':
         return {
           ...state,
           token: null,
-          modele: [],
-          roles: [],
+          // modele: [],
+          // roles: [],
           isAuthenticated: false,
         };
       default:

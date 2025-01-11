@@ -1,8 +1,29 @@
 import { Book, ChevronDown, ChevronUp, Clock, Star, User } from "lucide-react";
 import { useState } from "react";
+import { dateToFr, errorMessage, onServerSuccess, truncateStringAdvanced } from "../services/Helper";
+import { Button } from "./Button";
+import Modal from "./admin/common/Modal";
+import { postResource } from "../services/api";
+import { jwtDecode } from "jwt-decode";
 
 const Cour = ({courses = []}) => {
     const [expandedCourse, setExpandedCourse] = useState(null);
+    const [delModal, setDelModal] = useState(false);
+    const access_token = localStorage.getItem('token');
+    const tokenNew = jwtDecode(access_token);
+    const saveData = (data) => {
+           console.log(data)
+            postResource("/inscriptions", {
+              user_id: tokenNew.id,
+              promotion_id: data,
+              annee: 2025,
+              statut: "en_attente"
+            }).then((res) => {
+                onServerSuccess("Votre inscription a ete bien recue!!!")
+                // formik.resetForm();
+                setDelModal(false)
+            }).catch((e) => errorMessage(e))
+        }
     return ( 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8  w-full">
         {courses.map((course) => (
@@ -14,26 +35,46 @@ const Cour = ({courses = []}) => {
               <div className="flex justify-between items-start">
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    {course.title}
+                    {course.nom}
                   </h3>
                   
-                  <p className="text-gray-600">{course.description}</p>
+                  <p className="text-gray-600"><article className="prose max-w-none">
+                                  <div
+                                    dangerouslySetInnerHTML={{
+                                      __html: truncateStringAdvanced(course.description, 200),
+                                    }}
+                                    className="article-content"
+                                  />
+                                </article></p>
                   <div className="flex flex-nowrap items-center space-x-8 my-6 text-sm text-gray-500 mb-4 px-2">
                     <div className="flex items-center">
                       <User className="mr-1" />
-                      {course.instructor}
+                      {course.nombre_inscrits}
                     </div>
                     <div className="flex flex-nowrap items-center">
                       <Clock className="mr-1" />
-                      {course.duration}
+                      {course.duree}
                     </div>
                     <div className="flex flex-nowrap items-center">
                       <Star className="mr-1 text-yellow-400" />
-                      {course.rating} ({course.students} étudiants)
+                      {course.rating} ({course.course_modules} Cours)
                     </div>
                   </div>
+                  
+                  <p className="text-gray-600 font-semibold">Du: {dateToFr(course.date_debut)} au {dateToFr(course.date_fin)}</p>
+                  <Button onClick={() => setDelModal(true)} className="mb-2 mt-10">Inscription</Button>
                 </div>
-                <button
+                <Modal isOpen={delModal} onClose={() => setDelModal(false)}>
+                <div className="flex flex-col items-center">
+                    {/* <img src={danger} className="w-12 h-12 mb-3"/> */}
+                    <p className="text-black text-xl font-bold">Êtes-vous sûr de vouloir vous inscrire dans cette promotion ?</p>
+                    <div className="flex mt-5">
+                        <Button className="bg-danger mr-3" onClick={() => saveData(course.id)}>OUI</Button>
+                        <Button className="bg-gray-700" onClick={() => setDelModal(false)}>NON</Button>
+                    </div>
+                </div>
+              </Modal>
+                {/* <button
                   onClick={() => setExpandedCourse(expandedCourse === course.id ? null : course.id)}
                   className="ml-4 text-gray-400 hover:text-gray-600"
                 >
@@ -42,7 +83,7 @@ const Cour = ({courses = []}) => {
                   ) : (
                     <ChevronDown className="w-6 h-6" />
                   )}
-                </button>
+                </button> */}
               </div>
               {expandedCourse === course.id && (
                 <div className="mt-4 pt-4 border-t border-gray-200">
@@ -60,6 +101,8 @@ const Cour = ({courses = []}) => {
             </div>
           </div>
         ))}
+
+      
       </div>
      );
 }

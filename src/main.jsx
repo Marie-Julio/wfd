@@ -11,7 +11,6 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { AuthProvider } from './context/AuthProvider.jsx'
 import { persistor, store } from './store/store.js'
-import { EditorProvider } from 'react-simple-wysiwyg'
 
 
 
@@ -20,9 +19,7 @@ createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
          <AuthProvider>
-         <EditorProvider>
           <App />
-          </EditorProvider>
         </AuthProvider>
       </PersistGate>
     </Provider>

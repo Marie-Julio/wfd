@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import Cour from "../../components/Cour";
 import { getResource } from "../../services/api";
 import { errorMessage } from "../../services/Helper";
+import InfoComponent from "../../components/Info";
+import CourseCard from "../../components/CourseCard";
 
 const Home = () => {
   const [projects, setProjects] = useState([]);
@@ -24,6 +26,13 @@ const Home = () => {
           getResource("/announcements").then((res) => {
             console.log(res.data);
             setInfos(res.data);
+        }).catch(e => {
+            errorMessage(e)
+          })
+
+          getResource("/course-modules").then((res) => {
+            console.log(res.data)
+            setCourses(res.data)
         }).catch(e => {
             errorMessage(e)
           })
@@ -73,31 +82,21 @@ const Home = () => {
                 <h2 className="text-2xl font-semibold text-gray-900 mb-6 items-start ">
                   Cours disponibles
                 </h2>
-                <Cour courses={courses}/>
+                <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-5">
+                {courses.map((course) => (
+                    <CourseCard key={course.id} course={cours} />
+                ))}
+                </div>
               </div>
 
-      {/* Information Section */}
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-6">
-          Informations pratiques
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-10">
-          {infos .map((info, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-lg shadow-lg p-6 transition-transform duration-300 hover:transform hover:scale-105"
-            >
-              <div className="flex items-center mb-4">
-                <Info className="w-6 h-6 text-blue-600 mr-2" />
-                <h3 className="text-lg font-medium text-gray-900">
-                  {info.title}
-                </h3>
-              </div>
-              <p className="text-gray-600">{info.content}</p>
+            {/* Information Section */}
+
+            <div className="max-w-7xl mx-auto items-center mb-12 md:m-10">
+            <h1 className="text-4xl font-bold text-tertiaire text-center mb-4">
+                  Nos Actualites
+                </h1>
+                <InfoComponent informations={infos}/>
             </div>
-          ))}
-        </div>
-      </div>
             </section>
 
 
