@@ -21,6 +21,14 @@ const Nav = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const auth = useAuth()
+ 
+  
+      const accessToken = localStorage.getItem("token");
+      const decodedToken = accessToken ? jwtDecode(accessToken) : null;
+    
+      // if (!accessToken) {
+      //   navigate("/login");
+      // }
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const toggleProfileMenu = () => setIsProfileMenuOpen((prev) => !prev);

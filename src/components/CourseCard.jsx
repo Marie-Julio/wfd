@@ -9,7 +9,7 @@ const CourseCard = ({ course }) => {
         navigate(`/page-cours-detail/${course.id}`)
     }
   return (
-    <div className="bg-white shadow-lg rounded-lg border p-1 hover:shadow-orange-500/90 w-80 transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+    <div className="bg-white shadow-lg rounded-lg border p-1 hover:shadow-orange-500/90 w-70 transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
       <img
         src={img}
         alt="Course Thumbnail"

@@ -3,27 +3,27 @@ import boxes from '../assets/Icons/boxes.svg';
 const CardComponent = ({image, title, values}) => {
     return ( 
                     
-        <div className="bg-white flex flex-col shadow-xl shadow-blue-300/50 items-center justify-center animate-fade-down animate-once animate-duration-[5000ms] animate-delay-500 transform transition-all duration-500  w-full max-w-56 mx-auto hover:shadow-2xl">
-    <div className="w-full h-64 bg-white bg-center flex items-center justify-center bg-cover rounded-lg shadow-md">
-        <img
+        <div className="flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-lg transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl">
+        <div className="relative w-full h-40 overflow-hidden rounded-t-xl">
+          <img
             src={image}
-            alt="Logo"
-            width="100"
-            height="100"
-            className="flex justify-center items-center"
-        />
-    </div>
-
-    <div className="w-56 -mt-10 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 dark:bg-gray-800">
-        <h3 className="py-2 font-bold tracking-wide text-center text-3xl text-gray-800 uppercase dark:text-white">
-            {title}
-        </h3>
-
-        <div className="flex items-center justify-center px-3 py-2 bg-custom-gradient dark:bg-gray-700">
-            <span className="flex font-bold text-white dark:text-gray-200 justify-center items-center text-center text-4xl">{values}</span>
+            alt="Illustration"
+            className="object-cover w-full h-full"
+          />
+          {/* {image} */}
         </div>
-    </div>
-</div>
+        <div className="w-full bg-white -mt-3 ">
+          <h3 className="py-4 text-xl font-semibold text-center text-gray-800 capitalize dark:text-gray-200">
+            {title}
+          </h3>
+          <div className="flex items-center justify-center py-4  rounded-b-xl dark:bg-gray-700">
+            <span className="text-3xl font-bold text-gray-800 dark:text-gray-200">
+              {values}
+            </span>
+          </div>
+        </div>
+      </div>
+      
 
         
          );

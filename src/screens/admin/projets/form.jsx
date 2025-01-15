@@ -22,7 +22,16 @@ const FormProjet = () => {
     const [datas, setDatas] = useState({
         content: ""
     })
-    const navigate = useNavigate()
+    const navigate = useNavigate() 
+    
+        const accessToken = localStorage.getItem("token");
+        const decodedToken = accessToken ? jwtDecode(accessToken) : null;
+      
+        if (!accessToken) {
+          navigate("/login");
+        }
+
+        
     const {id} = useParams()
 
     useEffect(() => {

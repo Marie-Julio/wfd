@@ -12,6 +12,7 @@ import CourseCard from "../../components/CourseCard";
 import teacher from "../../assets/images/teacher.png";
 import knowledge from "../../assets/images/knowledge.png";
 import knowledge1 from "../../assets/images/knowledge (1).png";
+import CourIcon from "../../assets/images/cours.svg"
 
 const Home = () => {
   const [projects, setProjects] = useState([]);
@@ -34,7 +35,7 @@ const Home = () => {
 
           getResource("/course-modules").then((res) => {
             console.log(res.data)
-            setCours(res.data.slice(0, 6))
+            setCours(res.data.slice(0, 8))
         })
 
         getResource("/inscriptions").then((res) => {
@@ -83,7 +84,7 @@ const Home = () => {
                 {/* <h2 className="text-2xl font-semibold text-gray-900 mb-6 items-start ">
                   Cours disponibles
                 </h2> */}
-                <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-5">
+                <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 mx-5">
                 {cours.map((course) => (
                     <CourseCard key={course.id} course={course} />
                 ))}

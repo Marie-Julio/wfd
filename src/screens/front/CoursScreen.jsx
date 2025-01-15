@@ -4,11 +4,22 @@ import CourseCard from "../../components/CourseCard";
 import { getResource } from "../../services/api";
 import { errorMessage } from "../../services/Helper";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 const CoursScreen = () => {
   const [courses, setCourses] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // Page actuelle
   const coursesPerPage = 9; // Nombre de cours par page
+  const navigate = useNavigate()
+
+   const accessToken = localStorage.getItem("token");
+    const decodedToken = accessToken ? jwtDecode(accessToken) : null;
+  
+    if (!accessToken) {
+      navigate("/login");
+    }
+
+
 
   const _init_ = () => {
     getResource("/course-modules")
@@ -80,7 +91,7 @@ const CoursScreen = () => {
           </div>
 
           {/* Section des cours */}
-          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-5">
             {currentCourses.map((course) => (
               <CourseCard key={course.id} course={course} />
             ))}

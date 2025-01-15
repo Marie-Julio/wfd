@@ -10,7 +10,7 @@ const Cour = ({courses = []}) => {
     const [expandedCourse, setExpandedCourse] = useState(null);
     const [delModal, setDelModal] = useState(false);
     const access_token = localStorage.getItem('token');
-    const tokenNew = jwtDecode(access_token);
+    const tokenNew = access_token ? jwtDecode(access_token) : null;
     const saveData = (data) => {
            console.log(data)
             postResource("/inscriptions", {

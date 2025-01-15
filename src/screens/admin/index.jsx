@@ -7,11 +7,20 @@ import SideBar from "../../components/admin/common/SideBar";
 import { getResource } from "../../services/api";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { PieChart, Pie, Cell } from 'recharts';
+import { useNavigate } from "react-router";
 
 
 export const AdminHome = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [filter, setFilter] = useState(false); 
+    const [filter, setFilter] = useState(false);
+    const navigate = useNavigate() 
+
+    const accessToken = localStorage.getItem("token");
+    const decodedToken = accessToken ? jwtDecode(accessToken) : null;
+  
+    if (!accessToken) {
+      navigate("/login");
+    }
 
     // Données fictives pour la démonstration
   const [data] = useState([
