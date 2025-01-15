@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/wfdguinee.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import AppBody from './components/AppBody'
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { redirect, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Home from './screens/front/Home'
 import LoginScreen from './screens/Login'
 import CoursScreen from './screens/front/CoursScreen'
@@ -11,7 +11,6 @@ import { AdminHome } from './screens/admin'
 import Cours from './screens/admin/cours'
 import CoursDetail from './screens/front/CoursDetail'
 import QuizInterface from './screens/front/Quizz'
-import MemberProfile from './screens/front/MemberProfile'
 import Information from './screens/front/Information'
 import Register from './screens/Register'
 import ForumScreen from './screens/front/Forum'
@@ -30,9 +29,36 @@ import { Flip, ToastContainer } from 'react-toastify'
 import FormNotification from './screens/admin/notifications/form'
 import FormPromotion from './screens/admin/promotion/form'
 import FormCours from './screens/admin/cours/form'
+import Profile from './screens/front/Profile'
+import { jwtDecode } from 'jwt-decode'
+import FormProjet from './screens/admin/projets/form'
 
 function App() {
   const [count, setCount] = useState(0)
+
+  const access_token = localStorage.getItem('token');
+
+  useEffect(() => {
+
+    // Définir un intervalle de 10 minutes
+    const intervalId = setInterval(() => {
+      if (access_token) {
+        const tokenNew = jwtDecode(access_token);
+        const now = Math.floor(Date.now() / 1000);
+  
+        if (tokenNew.exp < now) {
+          dispatch({ type: 'LOGOUT' });
+          redirect('/login'); // Redirection en cas d'expiration du token
+        }
+      }
+      console.log("Exécution après 10 minutes");
+      // Placez ici la logique que vous voulez exécuter
+    }, 10 * 60 * 1000); // 10 minutes en millisecondes
+
+    // Nettoyer l'intervalle lorsqu'on quitte le composant
+    return () => clearInterval(intervalId);
+    
+  }, [])
 
   return (
     <>
@@ -43,10 +69,10 @@ function App() {
       <Route path="/login" element={  <LoginScreen/>  } />  
       <Route path="/register" element={  <Register/>  } />  
       <Route path="/page-cours" element={  <CoursScreen/>  } />  
-      <Route path="/page-cours-detail" element={  <CoursDetail />  } />  
-      <Route path="/page-quizz" element={  <QuizInterface />  } />  
+      <Route path="/page-cours-detail/:id" element={  <CoursDetail />  } />  
+      <Route path="/page-quizz/:id" element={  <QuizInterface />  } />  
       <Route path="/page-promotion" element={  <Promotion />  } />  
-      <Route path="/page-profil-member" element={ <MemberProfile />  } />  
+      <Route path="/page-profil" element={ <Profile />  } />  
       <Route path="/pages-infos" element={ <Information />  } />  
       <Route path="/pages-infos-single/:id" element={ <InfoSingle />  } />  
       <Route path="/pages-forum" element={ <ForumScreen />  } />  
@@ -68,6 +94,8 @@ function App() {
       <Route path="/admin/inscription-create" element={     <FormInscription />  } /> 
       <Route path="/admin/inscription-update/:id" element={     <FormInscription />  } /> 
       <Route path="/admin/projets" element={     <ProjetAdmin />  } /> 
+      <Route path="/admin/projets-create" element={     <FormProjet />  } /> 
+      <Route path="/admin/projets-update/:id" element={     <FormProjet />  } /> 
       <Route path="/admin/notification" element={     <NotificationAdmin />  } /> 
       <Route path="/admin/notification-create" element={     <FormNotification />  } /> 
       <Route path="/admin/notification-update/:id" element={     <FormNotification />  } /> 

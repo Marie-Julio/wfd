@@ -18,6 +18,8 @@ const CoursScreen = () => {
       .catch((e) => {
         errorMessage(e);
       });
+
+      
   };
 
   useEffect(() => {

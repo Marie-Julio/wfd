@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/wfdguinee.png";
 import { Mail, MapPin, Phone, Menu, X, User } from "lucide-react";
+import { useDispatch } from "react-redux";
+import useAuth from "../hooks/useAuth";
 
 const Nav = () => {
   const menuItems = [
@@ -17,19 +19,22 @@ const Nav = () => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const token = localStorage.getItem("token"); // Vérification du token
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const auth = useAuth()
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const toggleProfileMenu = () => setIsProfileMenuOpen((prev) => !prev);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    auth.logout()
     navigate("/login");
   };
 
   return (
     <>
       {/* Header Section */}
-      <div className="flex flex-wrap justify-center items-center pt-2 px-4">
+      <div className="flex flex-wrap md:flex justify-center items-center pt-2 px-4">
         <a href="/" className="flex items-center mb-4 md:mb-0">
           <img src={logo} className="h-12" alt="Logo" />
         </a>
@@ -119,7 +124,7 @@ const Nav = () => {
                 {isProfileMenuOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded shadow-md z-10">
                     <Link
-                      to="/profile"
+                      to="/page-profil"
                       className="block px-4 py-2 hover:bg-gray-100"
                     >
                       Mon Profil

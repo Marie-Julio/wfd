@@ -202,5 +202,6 @@ export default {
     require('tailwind-scrollbar')({ nocompatible: true }),
     require('flowbite/plugin'),
     flowbite.plugin(),
+    require('tailwindcss-animated')
   ],
 }

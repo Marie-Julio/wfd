@@ -10,6 +10,7 @@ import Select from "../components/admin/common/Select";
 import Button from "../components/admin/common/Button";
 import useAuth from "../hooks/useAuth";
 import { errorMessage } from "../services/Helper";
+import logo from "../assets/wfdguinee.png"
 
 
 const Register = () => {
@@ -96,8 +97,12 @@ const formik = useFormik({
           Inscrivez-vous pour un compte gratuit
         </h1>
         
-        <div className="w-full mt-8">
+        <div className="w-full mt-30">
           <div className="mx-auto max-w-xs sm:max-w-md md:max-w-lg flex flex-col gap-4">
+            <a href="/" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+              <img className="w-50 h-20 mr-2" src={logo} alt="logo"/>
+              WFDGuinee    
+          </a>
           <form className="flex flex-col w-full items-center" onSubmit={formik.handleSubmit}>
             <div className="flex flex-col sm:flex-row gap-3">
             

@@ -56,7 +56,8 @@ export const errorMessage = (e) => {
     onServerError(e.response.data.message)
   }else if(e.response.status === 401) {
     // redirect("/")
-    onServerError("Vous n'etes pas connecte. Veuillez-vous reconnecter!")
+    console.log("Vous n'etes pas connecte. Veuillez-vous reconnecter!")
+    // onServerWarning("Vous n'etes pas connecte. Veuillez-vous reconnecter!")
     
   }else if(e.response.status === 403) {
     onServerError(e.response.data.message)

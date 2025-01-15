@@ -39,9 +39,9 @@ const useAuth = () => {
   const login = (token) => {
     localStorage.setItem('token', token);
     const tokenDecoded = jwtDecode(token);
-    const modele = tokenDecoded.modele[0] || [];
-    const roles = tokenDecoded.roles || [];
-    dispatch({ type: 'LOGIN', payload: { token, modele, roles } });
+    // const modele = tokenDecoded.modele[0] || [];
+    // const roles = tokenDecoded.roles || [];
+    dispatch({ type: 'LOGIN', payload: { token } });
   };
 
   const logout = () => {

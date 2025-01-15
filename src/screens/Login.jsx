@@ -8,22 +8,28 @@ import useAuth from "../hooks/useAuth";
 import { errorMessage, onServerSuccess } from "../services/Helper";
 import Button from "../components/admin/common/Button";
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { jwtDecode } from "jwt-decode";
 
 const LoginScreen = () => {
+    const accessToken = localStorage.getItem("token");
+      const decodedToken = accessToken ? jwtDecode(accessToken) : null;
     const [loading, setLoading] = useState(false)
     const auth = useAuth()
+    const navigate = useNavigate()
 
     const saveData = (data) => {
         setLoading(true)
         console.log(data)
         postResource("login", data).then((res) => {
-            console.log(res)
+            console.log(res.data)
             onServerSuccess("Connexion reussie!!!")
             auth.login(res.data.access_token)
             formik.resetForm();
             setLoading(false)
-            setTimeout(() => navigate("/"), 1500)
+            if (decodedToken.role === "participant")
+                setTimeout(() => navigate("/"), 300)
+            else setTimeout(() => navigate("/admin/dashboard"), 300)
         }).catch(e => {
             setLoading(false)
             errorMessage(e)
@@ -54,7 +60,7 @@ const LoginScreen = () => {
              {/* Superposition avec opacité */}
         <div className="absolute inset-0 bg-white bg-opacity-20 pointer-events-none"></div>
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+            <a href="/" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                 <img className="w-50 h-20 mr-2" src={logo} alt="logo"/>
                 WFDGuinee    
             </a>

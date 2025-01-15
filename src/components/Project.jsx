@@ -1,4 +1,6 @@
 import { ChevronRight } from "lucide-react";
+import img from "../assets/slide-2.jpg"
+
 
 const Project = ({projects = []}) => {
   const apiUrl = import.meta.env.VITE_API_URI_BASE
@@ -10,14 +12,15 @@ const Project = ({projects = []}) => {
                 className="bg-white rounded-lg shadow-lg overflow-hidden animate-flip-up animate-delay-500 animate-ease-in-out transform transition-all duration-800 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/100"
               >
                 <img
-                  src={`${apiUrl}/storage/${project.media}`}
+                  // src={`${apiUrl}/storage/${project.media}`}
+                  src={img}
                   alt={project.title}
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-xl font-semibold text-gray-900">
-                      {project.title}
+                      {project.titre}
                     </h3>
                     <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                       project.status === 'En cours' ? 'bg-green-100 text-green-800' :

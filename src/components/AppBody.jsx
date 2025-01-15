@@ -5,7 +5,7 @@ import Carousel from './Carousel';
 import HeroBanner from './HeroBanner';
 import BannerCour from './BannerCour';
 
-const AppBody = ({home, bannerCour, banner, titleBanner, imageBanner, descriptionBanner, children}) => {
+const AppBody = ({home, bannerCour, banner, course, titleBanner, imageBanner, descriptionBanner, children}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdowns, setActiveDropdowns] = useState({
     services: false,
@@ -30,7 +30,7 @@ const AppBody = ({home, bannerCour, banner, titleBanner, imageBanner, descriptio
          <Nav/>
          {home  && <Carousel/>}
          {banner && <HeroBanner title={titleBanner} image={imageBanner} description={descriptionBanner}/>}
-         {bannerCour && <BannerCour />}
+         {bannerCour && <BannerCour course={course} />}
 
          
         

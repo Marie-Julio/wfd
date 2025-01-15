@@ -3,7 +3,7 @@ import { Clock3, Info, Landmark, Languages, Plus } from "lucide-react";
 import React from "react";
 import img from "../assets/imgCard.jpeg";
 
-const BannerCour = () => {
+const BannerCour = ({course}) => {
   return (
     <div className="bg-custom-gradient  h-160 flex items-center justify-center">
       <div className="max-w-10xl   overflow-hidden grid grid-cols-1 md:grid-cols-2">
@@ -15,11 +15,9 @@ const BannerCour = () => {
             <span className="bg-orange-500 text-white py-1 px-3 rounded-full text-sm">Gestion de projet</span>
           </div>
 
-          <h1 className="mt-6 text-xl font-bold">PLANIFICATION ET GESTION DE PROJETS</h1>
+          <h1 className="mt-6 text-xl font-bold">{course.title}</h1>
           <p className="mt-4 text-gray-300">
-            Dans ce cours vous allez apprendre comment gérer et assurer la concrétisation d’un projet du début
-            jusqu’à la fin. Pour finir vous aurez à passer un examen pour nous montrer l’étendue des informations
-            que vous avez pu apprendre.
+            {course.description}
           </p>
 
           <div className="flex mt-8 space-x-16 justify-center items-start ml-80">
@@ -27,7 +25,7 @@ const BannerCour = () => {
             <div className="flex flex-col items-center space-y-2">
                 <Landmark color="#ffffff" strokeWidth={3} size={24} />
                 <span className="whitespace-nowrap text-white text-center">
-                Partenaire: ENAM BENIN
+                Promotion: {course.promotion && course.promotion.nom}
                 </span>
             </div>
 
@@ -35,7 +33,7 @@ const BannerCour = () => {
             <div className="flex flex-col items-center space-y-2">
                 <Clock3 color="#ffffff" strokeWidth={3} size={24} />
                 <span className="whitespace-nowrap text-white text-center">
-                Durée du cours: 48h
+                Moyenne minimum: {course.min_score}
                 </span>
             </div>
 
@@ -43,7 +41,7 @@ const BannerCour = () => {
             <div className="flex flex-col items-center space-y-2">
                 <Languages color="#ffffff" strokeWidth={3} size={24} />
                 <span className="whitespace-nowrap text-white text-center">
-                Examen: 1h30
+                Duree: {course.promotion.duree}
                 </span>
             </div>
 
@@ -51,7 +49,7 @@ const BannerCour = () => {
             <div className="flex flex-col items-center space-y-2">
                 <Languages color="#ffffff" strokeWidth={3} size={24} />
                 <span className="whitespace-nowrap text-white text-center">
-                Langue: Français / Anglais
+                Langue: Français
                 </span>
             </div>
         </div>
