@@ -8,22 +8,21 @@ import Searchable from "../../../components/admin/common/Searchable";
 import { getResource } from "../../../services/api";
 import { useNavigate } from "react-router";
 
-const InscriptionAdmin = () => {
+const Question = () => {
     const [filter, setFilter] = useState(false); 
     const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const [cours, setCours] = useState([]);
     const [data, setData] = useState();
 
     const columns = [
-        { accessor: 'user.nom', Header: 'Nom participant' },
-        { accessor: 'promotion.nom', Header: 'Nom de promotion' },
-        { accessor: 'annee', Header: 'Annee' },
-        { accessor: 'statut', Header: 'Statut' },
+        { accessor: 'question_text', Header: 'Question' },
+        { accessor: 'correct_answer', Header: 'Reponse correct' },
+        { accessor: 'qcm.title', Header: 'Qcm' },
       ];
 
       const _init_ = () => {
-        getResource('/inscriptions').then((res) => {
+        getResource('/qcm-questions').then((res) => {
             console.log(res.data)
             setCours(res.data)
         })
@@ -38,45 +37,36 @@ const InscriptionAdmin = () => {
     }
 
     const create = () => {
-      navigate("/admin/inscription-create");
+          navigate("/admin/qcms-questions-create");
     }
 
     const updateFunction = (item) => {
-      navigate(`/admin/inscription-update/${item.id}`);
-    }
-
-
+      console.log(item)
+      navigate(`/admin/qcms-questions-update/${item.id}`);
+    } 
     return ( 
         <Body isOpen={isOpen} setIsOpen={setIsOpen}>
             <Table
-            title="Liste des inscriptions"
+            title="Liste des QCm Question"
             data={cours}
             columns={columns}
             filter={filter}
-            reloadFonction={_init_}
             setFilter={setFilter}
             setOpenSidebar={setIsOpen}
+            open={isOpen}
+            reloadFonction={_init_}
             addFunction={create}
             editFunction={updateFunction}
-            deleteUrl="/inscriptions"
-            open={isOpen}
+            deleteUrl="/qcms"
             label="Filtrage"
             actions={true} 
             // editFunction={} 
             // deleteUrl={}    
             >
-                <ViewMore title="Code">
-                {/* <Searchable
-                    data={data}
-                    label="Rechercher par Libelle"
-                    searchColumns={["code"]}
-                    bodyColumns={["code", "libelle"]}
-                    headColumns={["code", "libelle"]}
-                    showData={updateData}/> */}
-                </ViewMore>
+                
             </Table>
         </Body>
      );
 }
  
-export default InscriptionAdmin;
+export default Question;

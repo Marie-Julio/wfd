@@ -53,10 +53,12 @@ const NotificationAdmin = () => {
             data={cours}
             columns={columns}
             filter={filter}
+            reloadFonction={_init_}
             setFilter={setFilter}
             setOpenSidebar={setIsOpen}
             addFunction={create}
             editFunction={updateFunction}
+            deleteUrl="/notifications"
             open={isOpen}
             label="Filtrage"
             actions={true} 

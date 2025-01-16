@@ -25,9 +25,10 @@ const LoginScreen = () => {
             console.log(res.data)
             onServerSuccess("Connexion reussie!!!")
             auth.login(res.data.access_token)
+            const token = res.data.access_token ? jwtDecode(res.data.access_token) : null;
             formik.resetForm();
             setLoading(false)
-            if (decodedToken.role === "participant")
+            if (token.role === "participant")
                 setTimeout(() => navigate("/"), 300)
             else setTimeout(() => navigate("/admin/dashboard"), 300)
         }).catch(e => {
@@ -96,7 +97,7 @@ const LoginScreen = () => {
                                     <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Se rappeler de moi</label>
                                 </div>
                             </div>
-                            <a href="#" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Mot de passe oublié ?</a>
+                            <Link to="/reset-password" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Mot de passe oublié ?</Link>
                         </div>
                         <Button isLoading={loading} className="w-full">Connexion</Button>
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">

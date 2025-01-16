@@ -1,9 +1,14 @@
 import { ChevronRight } from "lucide-react";
 import img from "../assets/slide-2.jpg"
+import { useNavigate } from "react-router";
 
 
 const Project = ({projects = []}) => {
   const apiUrl = import.meta.env.VITE_API_URI_BASE
+  const navigate = useNavigate();
+  const redirectPage = (item) => {
+    navigate(`/projet/${item}`)
+  }
     return ( 
         <>
         {projects.map((project) => (
@@ -31,7 +36,7 @@ const Project = ({projects = []}) => {
                     </span>
                   </div>
                   <p className="text-gray-600">{project.description}</p>
-                  <button className="mt-4 flex items-center rounded-lg bg-custom-gradient text-white px-4 py-3 hover:text-black transition-all duration-300
+                  <button onClick={() => redirectPage(project.id)} className="mt-4 flex items-center rounded-lg bg-custom-gradient text-white px-4 py-3 hover:text-black transition-all duration-300
           bg-blue-600 hover:bg-blue-700
           transform hover:scale-105
           group">

@@ -13,6 +13,7 @@ const Nav = () => {
     { label: "Informations", href: "/pages-infos" },
     { label: "Forum", href: "/pages-forum" },
     { label: "Nos Projets", href: "/pages-projet" },
+    
   ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,8 +24,8 @@ const Nav = () => {
   const auth = useAuth()
  
   
-      const accessToken = localStorage.getItem("token");
-      const decodedToken = accessToken ? jwtDecode(accessToken) : null;
+      // const accessToken = localStorage.getItem("token");
+      // const decodedToken = accessToken ? jwtDecode(accessToken) : null;
     
       // if (!accessToken) {
       //   navigate("/login");
@@ -42,34 +43,44 @@ const Nav = () => {
   return (
     <>
       {/* Header Section */}
-      <div className="flex flex-wrap md:flex justify-center items-center pt-2 px-4">
-        <a href="/" className="flex items-center mb-4 md:mb-0">
-          <img src={logo} className="h-12" alt="Logo" />
-        </a>
-        <div className="w-full md:w-auto flex flex-col md:ml-8 md:items-center md:justify-center md:flex-row md:ml-auto md:items-center space-y-4 md:space-y-0 md:space-x-3">
-          <div className="flex items-center">
-            <Phone className="w-6 h-6 text-gray-700 mr-2" />
-            <div>
-              <h1 className="font-bold text-sm text-gray-800">Contact</h1>
-              <p className="text-xs text-gray-500">+229 55002123</p>
-            </div>
-          </div>
-          <div className="flex items-center">
-            <Mail className="w-6 h-6 text-gray-700 mr-2" />
-            <div>
-              <h1 className="font-bold text-sm text-gray-800">Mail</h1>
-              <p className="text-xs text-gray-500">notrelogo@gmail.com</p>
-            </div>
-          </div>
-          <div className="flex items-center">
-            <MapPin className="w-6 h-6 text-gray-700 mr-2" />
-            <div>
-              <h1 className="font-bold text-sm text-gray-800">Adresse</h1>
-              <p className="text-xs text-gray-500">Guinée - Tohin, rue 234</p>
-            </div>
-          </div>
-        </div>
+      <div className="flex flex-wrap items-center justify-between pt-4 px-6 bg-gray-50">
+  {/* Logo */}
+  <a href="/" className="flex items-center mb-4 md:mb-0">
+    <img src={logo} className="h-12" alt="Logo" />
+  </a>
+
+  {/* Contact Information */}
+  <div className="w-full md:w-auto flex flex-col md:flex-row md:items-center md:justify-center space-y-4 md:space-y-0 md:space-x-8">
+    {/* Visible on all screen sizes */}
+    <div className="flex items-center space-x-2">
+      <Phone className="w-6 h-6 text-gray-700" />
+      <div>
+        <h1 className="font-bold text-sm text-gray-800">Contact</h1>
+        <p className="text-xs text-gray-500">+229 55002123</p>
       </div>
+    </div>
+
+    {/* Email */}
+    <div className="flex items-center space-x-2">
+      <Mail className="w-6 h-6 text-gray-700" />
+      <div>
+        <h1 className="font-bold text-sm text-gray-800">Mail</h1>
+        <p className="text-xs text-gray-500">notrelogo@gmail.com</p>
+      </div>
+    </div>
+
+    {/* Address (hidden on small screens) */}
+    <div className="hidden md:flex items-center space-x-2">
+      <MapPin className="w-6 h-6 text-gray-700" />
+      <div>
+        <h1 className="font-bold text-sm text-gray-800">Adresse</h1>
+        <p className="text-xs text-gray-500">Guinée - Tohin, rue 234</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
       {/* Navbar Section */}
       <nav className="bg-custom-gradient text-white">

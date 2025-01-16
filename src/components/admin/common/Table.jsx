@@ -1,16 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Icon from './Icon';
 import Select from './Select';
 import { Input } from './Input';
+import { removeResource } from '../../../services/api';
+import { errorMessage, onServerSuccess } from '../../../services/Helper';
+import Modal from './Modal';
+import Button from './Button';
+import danger from '../../../assets/icons/danger.svg'
 
 
 
-const Table  = ({ data, columns = [],open, actions = true, title, children, label, editFunction, addFunction,  deleteUrl, setOpenSidebar, filter, setFilter}) => {
+const Table  = ({ data, reloadFonction, columns = [],open, actions = true, primaryKey = "id",  title, children, label, editFunction, addFunction,  deleteUrl, setOpenSidebar, filter, setFilter}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentData, setCurrentData] = useState(data)
+  const [items, setItems] = useState(currentData);
   const [pageSize, setPageSize] = useState(10);
   const [selectedRows, setSelectedRows] = useState([]);
+  const [itemsSelected, setItemsSelected] = useState([]);
+  const [delModal, setDelModal] = useState(false);
+  const [page, setPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
   // const [filter , setFilter] = useState(false)
 
   const getNestedValue = (obj, accessor) => {
@@ -31,16 +43,44 @@ const Table  = ({ data, columns = [],open, actions = true, title, children, labe
     setOpenSidebar(!open); // Fermez le Sidebar
 };
 
-  // // Effectuer un effet lors du changement de l'état filter
-  // React.useEffect(() => {
-  //   if (filter) {
-  //     setOpenSidebar(false); // Ferme le sidebar lorsque filter est true
-  //   }
-  // }, [filter, setOpenSidebar]);
+const updateItemsSelected = (item) => {
+  // if(itemsSelected.includes(item)){
+      if (itemsSelected.some(selectedItem => selectedItem[primaryKey] === item[primaryKey])) {
+      setItemsSelected(() => itemsSelected.filter(id => id[primaryKey] != item[primaryKey]))
+  }else{
+      setItemsSelected([...itemsSelected, item])
+  }
+}
 
-  
 
-  const totalPages = Math.ceil(filteredData.length / pageSize);
+  const deleteItems = (array = itemsSelected) => {
+    const arrayId = array.map(item => item[primaryKey])
+    console.log(arrayId)
+    removeResource(deleteUrl , arrayId).then((res) => {
+        onServerSuccess(res.data.message)
+        reloadFonction()
+    }).catch(e => {
+        errorMessage(e)
+    }).finally(() => reloadFonction())
+
+    setDelModal(false)
+}
+
+useEffect(() => {
+  setCurrentData(data)
+  setPage(1)
+}, [data])
+
+useEffect(() => {
+setTotalPages(Math.ceil(currentData.length / itemsPerPage));
+}, [currentData, itemsPerPage]);
+
+useEffect(() => {
+const offset = (page - 1) * itemsPerPage;
+setItems(currentData.slice(offset, offset + itemsPerPage));
+}, [itemsPerPage, page, currentData]);
+
+  // const totalPages = Math.ceil(filteredData.length / pageSize);
 
   const paginatedData = filteredData.slice(
     currentPage * pageSize,
@@ -97,7 +137,7 @@ const Table  = ({ data, columns = [],open, actions = true, title, children, labe
         />
         <div className="flex space-x-2">
         <div  className="w-32 mx-3">
-            <Select>
+            <Select onChange={(e) => {setItemsPerPage(() => parseInt(e.target.value)); setPage(1)}}>
                 {
                     [5,10,20,30,50,100].map((item, index) => (
                         <option value={item} key={index}>{item}</option>
@@ -140,8 +180,8 @@ const Table  = ({ data, columns = [],open, actions = true, title, children, labe
              Ajouter
           </button>
           <button
-            onClick={handleDelete}
-            disabled={selectedRows.length === 0}
+            onClick={() => setDelModal(true)}
+            // disabled={selectedRows.length === 0}
             className="bg-danger text-white p-2 rounded flex h-2/3 mt-2"
           >
             <Icon name="bx-trash" />
@@ -165,7 +205,9 @@ const Table  = ({ data, columns = [],open, actions = true, title, children, labe
         </thead>
         <tbody className='text-black font-medium'>
           {paginatedData.length > 0 ? paginatedData.map((row) => (
-            <tr key={row.id} className="hover:bg-primary-100 text-black">
+            <tr key={row.id}
+            onClick={() => updateItemsSelected(row)}
+            className={`hover:cursor-pointer ${itemsSelected.includes(row) ? "bg-orange-500 text-white" : ""}`} >
               
               {columns.map((column) => (
                 <td key={column.accessor} className="border border-neutral-200 ">
@@ -180,9 +222,13 @@ const Table  = ({ data, columns = [],open, actions = true, title, children, labe
                         </span>
                    
                        
-                        <span onClick={() => deleteUrl()}  className="bg-danger text-white py-2 px-3 rounded-md flex flex-row items-center justify-center z-999">
+                        {deleteUrl && ( <span onClick={() => {
+                                setItemsSelected([]);
+                                updateItemsSelected(row);
+                                setDelModal(true);
+                            }}  className="bg-danger text-white py-2 px-3 rounded-md flex flex-row items-center justify-center z-999">
                             <Icon name="bx-trash" />
-                        </span>
+                        </span> )}
                  
                 </td>
             }
@@ -219,6 +265,16 @@ const Table  = ({ data, columns = [],open, actions = true, title, children, labe
         </div>
       </div>
       </div>
+      <Modal isOpen={delModal} onClose={() => setDelModal(false)}>
+                <div className="flex flex-col items-center">
+                    <img src={danger} className="w-12 h-12 mb-3"/>
+                    <p className="text-black text-xl font-bold">Êtes-vous sûr de vouloir supprimer ?</p>
+                    <div className="flex mt-5">
+                        <Button className="bg-danger mr-3" onClick={() => deleteItems()}>OUI</Button>
+                        <Button className="bg-gray-700" onClick={() => setDelModal(false)}>NON</Button>
+                    </div>
+                </div>
+            </Modal>
     </div>
   );
 };

@@ -1,0 +1,76 @@
+import React, { useState } from "react";
+import AppBody from "../components/AppBody";
+
+const ResetPassword = () => {
+  const [email, setEmail] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Simulation de la soumission
+    setSuccess(true);
+  };
+
+  return (
+    <AppBody>
+        <div className="flex items-center justify-center bg-white">
+      <section className=" w-full max-w-md items-center justify-center bg-white shadow-lg rounded-lg p-6 md:p-8 lg:p-10">
+        <h1 className="text-2xl font-bold text-gray-700 text-center">
+          Réinitialisation de mot de passe
+        </h1>
+        <p className="mt-2 text-gray-600 text-center">
+          Entrez votre adresse email pour recevoir un lien de réinitialisation.
+        </p>
+        {success ? (
+          <div className="mt-6 text-center">
+            <p className="text-green-600">
+              Un email a été envoyé à <strong>{email}</strong> avec des
+              instructions pour réinitialiser votre mot de passe.
+            </p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="mt-6 space-y-6">
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Adresse email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                placeholder="example@domain.com"
+                required
+              />
+            </div>
+            <div>
+              <button
+                type="submit"
+                className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              >
+                Envoyer le lien de réinitialisation
+              </button>
+            </div>
+          </form>
+        )}
+
+        <div className="mt-6 text-center">
+          <a
+            href="/login"
+            className="text-sm text-blue-600 hover:text-blue-500"
+          >
+            Retour à la connexion
+          </a>
+        </div>
+      </section>
+      </div>
+    </AppBody>
+  );
+};
+
+export default ResetPassword;

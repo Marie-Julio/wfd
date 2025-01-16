@@ -59,6 +59,8 @@ const Utilisateur = () => {
             open={isOpen}
             addFunction={create}
             editFunction={updateFunction}
+            reloadFonction={_init_}
+            deleteUrl="/utilisateurs"
             label="Filtrage"
             actions={true} 
             // editFunction={} 

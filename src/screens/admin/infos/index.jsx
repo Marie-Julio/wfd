@@ -52,8 +52,10 @@ const InformationAdmin = () => {
             <Table
             title="Liste des Informations"
             data={informations}
+            primaryKey="id"
             columns={columns}
             filter={filter}
+            reloadFonction={_init_}
             setFilter={setFilter}
             setOpenSidebar={setIsOpen}
             addFunction={create}
@@ -61,8 +63,7 @@ const InformationAdmin = () => {
             open={isOpen}
             label="Filtrage"
             actions={true} 
-            // editFunction={} 
-            // deleteUrl={}    
+            deleteUrl="/announcements"   
             >
                 <ViewMore title="Code">
                 {/* <Searchable

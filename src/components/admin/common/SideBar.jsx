@@ -26,6 +26,8 @@ const location = useLocation();
       { title: "Notifications", src: "/admin/notification", icon: "bx-bell"  },
       { title: "Inscriptions", src: "/admin/inscription", icon: "bx-label"  },
       { title: "Projets", src: "/admin/projets", icon: "bxs-offer"  },
+      { title: "QCMs", src: "/admin/qcms", icon: "bxs-palette"  },
+      { title: "QCMs questions", src: "/admin/qcms-questions", icon: "bx-conversation"  },
 
 
       { title: "Gestion des utilisateurs ", src: "#", gap: true },

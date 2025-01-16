@@ -8,6 +8,7 @@ import { getResource } from "../../services/api";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { PieChart, Pie, Cell } from 'recharts';
 import { useNavigate } from "react-router";
+import { jwtDecode } from "jwt-decode";
 
 
 export const AdminHome = () => {

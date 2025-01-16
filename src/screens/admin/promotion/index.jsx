@@ -55,6 +55,8 @@ const PromotionAdmin = () => {
             open={isOpen}
             addFunction={create}
             editFunction={updateFunction}
+            reloadFonction={_init_}
+            deleteUrl="/promotions"
             label="Filtrage"
             actions={true} 
             // editFunction={} 

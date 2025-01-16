@@ -52,9 +52,11 @@ const Cours = () => {
             filter={filter}
             setFilter={setFilter}
             setOpenSidebar={setIsOpen}
+            reloadFonction={_init_}
             open={isOpen}
             addFunction={create}
             editFunction={updateFunction}
+            deleteUrl="/course-modules"
             label="Filtrage"
             actions={true}    
             >

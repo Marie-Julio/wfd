@@ -56,8 +56,10 @@ const ProjetAdmin = () => {
             setFilter={setFilter}
             setOpenSidebar={setIsOpen}
             open={isOpen}
+            reloadFonction={_init_}
             addFunction={create}
             editFunction={updateFunction}
+            deleteUrl="/projets"
             label="Filtrage"
             actions={true} 
             // editFunction={} 

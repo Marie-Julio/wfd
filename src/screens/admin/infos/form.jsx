@@ -11,6 +11,7 @@ import TextArea from "../../../components/admin/common/TextArea";
 import { useNavigate, useParams } from "react-router";
 
 const FormInfo = () => {
+    const {id} = useParams()
     const [isOpen, setIsOpen] = useState(false);
     const [filter, setFilter] = useState(false); 
     const [loading, setLoading] = useState(false)
@@ -18,20 +19,26 @@ const FormInfo = () => {
         content: ""
     })
     const navigate = useNavigate()
-    const {id} = useParams()
+    
 
     useEffect(() => {
-        getResource(`/announcements/${id}`).then((res) => {
-            console.log(res.data)
-            setDatas({content: ""})
-
-            formik.setValues({
-                title : res.data.title,
-                visibility : 'public',
-            })
-            setDatas({content: res.data.content})
-        }).catch((e) => errorMessage(e))
-          }, [id])
+        const fetchData = async() => {
+            try {
+                const res = await getResource(`/announcements/${id}`);
+                console.log(res.data);
+                setDatas({ content: res.data.content });
+                formik.setValues({
+                    title: res.data.title || '',
+                    visibility: res.data.visibility || 'public',
+                });
+            } catch (error) {
+                console.error('Erreur lors de la récupération de l\'annonce:', error);
+            } finally {
+                setLoading(false); // Arrête le spinner après la récupération
+            }
+        }
+        fetchData()
+    }, [id])
 
 
     const updateData = (values) => {

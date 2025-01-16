@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../components/CardC
 import { Button } from '../../components/Button';
 import { errorMessage } from '../../services/Helper';
 import AppBody from '../../components/AppBody';
+import { useNavigate } from 'react-router';
 
 const Forum = () => {
   const [forums, setForums] = useState([]);
@@ -15,10 +16,11 @@ const Forum = () => {
   const [newDiscussion, setNewDiscussion] = useState({ content: '' });
   const [newComment, setNewComment] = useState('');
   const [comments, setComments] = useState([]);
+  const navigate = useNavigate()
 
 
   const [currentPageForum, setCurrentPageForum] = useState(1); // Page actuelle
-  const forumPerPage = 6; // Nombre de cours par page
+  const forumPerPage = 3; // Nombre de cours par page
 
   const [currentPageDiscussion, setCurrentPageDiscussion] = useState(1); // Page actuelle
   const discussionPerPage = 9; // Nombre de cours par page
@@ -68,7 +70,8 @@ const Forum = () => {
 
    // Lorsqu'un forum est sélectionné
    const handleSelectForum = (forum) => {
-    setSelectedForum(forum);
+    navigate(`/discussions/${forum.id}`)
+    // setSelectedForum(forum);
     getDiscussion(forum.id); // Charger les discussions de ce forum
   };
 
@@ -106,18 +109,34 @@ const Forum = () => {
   const paginate = (pageNumber) => setCurrentPageForum(pageNumber);
 
 
+    // Fonction pour générer les numéros de pages visibles
+    const getVisiblePages = () => {
+      const pages = [];
+      for (let i = 1; i <= totalPages; i++) {
+        if (i <= 3) {
+          pages.push(i);
+        }
+      }
+      return pages;
+    };
+  
+    const visiblePages = getVisiblePages();
+  
+
   return (
-    <AppBody>
-    <div className="max-w-7xl mx-auto p-4">
+    <AppBody className="bg-gray-200 ">
+    <section className="max-w-7xl mx-auto p-4 bg-gray-200">
       {/* Liste des forums */}
       {!selectedForum && (
-        <div>
-          <h1 className="text-3xl font-bold mb-6">Forums</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="flex flex-row w-full gap-6">
+      {/* Section Forums */}
+      <div className="flex-1 relative">
+        <h1 className="text-3xl font-bold mb-6">Forums</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-30">
             {currentForum.map((forum) => (
               <Card
                 key={forum.id}
-                className="cursor-pointer transform transition-all hover:scale-105"
+                className="cursor-pointer transform transition-all hover:scale-105 bg-white"
                 onClick={() => handleSelectForum(forum)}
               >
                 <CardHeader>
@@ -131,63 +150,72 @@ const Forum = () => {
                 </CardContent>
               </Card>
             ))}
+       </div>
             
                 {/* Pagination */}
-                <div className="flex justify-center mt-8 w-full px-4">
-                <nav className="inline-flex">
-                    <button
-                    onClick={() => paginate(currentPage - 1)}
-                    disabled={currentPageForum === 1}
-                    className={`px-4 py-2 mx-1 border rounded ${
-                        currentPageForum === 1 ? "bg-gray-200 text-gray-500" : "bg-white"
-                    }`}
-                    >
-                    Précédent
-                    </button>
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-                    <button
-                        key={number}
-                        onClick={() => paginate(number)}
-                        className={`px-4 py-2 mx-1 border rounded ${
-                            currentPageForum === number
-                            ? "bg-blue-500 text-white"
-                            : "bg-white"
-                        }`}
-                    >
-                        {number}
-                    </button>
-                    ))}
-                    <button
-                    onClick={() => paginate(currentPageForum + 1)}
-                    disabled={currentPageForum === totalPages}
-                    className={`px-4 py-2 mx-1 border rounded ${
-                        currentPageForum === totalPages
-                        ? "bg-gray-200 text-gray-500"
-                        : "bg-white"
-                    }`}
-                    >
-                    Suivant
-                    </button>
-                </nav>
-                </div>
-          </div>
-          <div className="mt-6">
+      <div className="absolute bottom-0 mt-20  left-0 w-full flex justify-center bg-white py-4 shadow-md">
+        <nav className="inline-flex">
+          <button
+            onClick={() => paginate(currentPageForum - 1)}
+            disabled={currentPageForum === 1}
+            className={`px-4 py-2 mx-1 border rounded ${
+              currentPageForum === 1 ? "bg-gray-200 text-gray-500" : "bg-white"
+            }`}
+          >
+            Précédent
+          </button>
+          {visiblePages.map((number) => (
+            <button
+              key={number}
+              onClick={() => paginate(number)}
+              className={`px-4 py-2 mx-1 border rounded ${
+                currentPageForum === number
+                  ? "bg-blue-500 text-white"
+                  : "bg-white"
+              }`}
+            >
+              {number}
+            </button>
+          ))}
+
+        {totalPages > 3 && (
+                <span className="px-2 text-gray-600">...</span>
+              )}
+          <button
+            onClick={() => paginate(currentPageForum + 1)}
+            disabled={currentPageForum === totalPages}
+            className={`px-4 py-2 mx-1 border rounded ${
+              currentPageForum === totalPages
+                ? "bg-gray-200 text-gray-500"
+                : "bg-white"
+            }`}
+          >
+            Suivant
+          </button>
+        </nav>
+      </div>
+    </div>
+          {/* Trait vertical */}
+      <div className="w-[2px] bg-gray-300 mx-4"></div>
+
+        {/* Section Créer un forum */}
+        <div className="flex-1">
             <h2 className="text-xl font-bold mb-4">Créer un forum</h2>
             <input
               type="text"
               placeholder="Titre du forum"
               value={newForum.title}
               onChange={(e) => setNewForum({ ...newForum, title: e.target.value })}
-              className="w-full mb-2 p-2 border rounded"
+              className="w-full mb-2 p-2 border rounded bg-gray-200"
             />
             <textarea
               placeholder="Description du forum"
               value={newForum.description}
               onChange={(e) => setNewForum({ ...newForum, description: e.target.value })}
-              className="w-full mb-4 p-2 border rounded"
+              className="w-full mb-4 p-2 border rounded bg-gray-200"
             />
             <Button onClick={createForum}>Créer</Button>
-          </div>
+            </div>
         </div>
       )}
 
@@ -257,7 +285,7 @@ const Forum = () => {
           </div>
         </div>
       )}
-    </div>
+    </section>
     </AppBody>
   );
 };

@@ -5,7 +5,7 @@ import Carousel from './Carousel';
 import HeroBanner from './HeroBanner';
 import BannerCour from './BannerCour';
 
-const AppBody = ({home, bannerCour, banner, course, titleBanner, imageBanner, descriptionBanner, children}) => {
+const AppBody = ({home, bannerCour, banner, course, titleBanner,className, imageBanner, descriptionBanner, children}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdowns, setActiveDropdowns] = useState({
     services: false,
@@ -37,7 +37,7 @@ const AppBody = ({home, bannerCour, banner, course, titleBanner, imageBanner, de
         
 
       {/* Corps de page Responsive */}
-      <main className="flex-grow flex">
+      <main className={`flex-grow flex ${className}`}>
         
         {children}
          

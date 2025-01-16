@@ -11,6 +11,7 @@ import TextArea from "../../../components/admin/common/TextArea";
 import { useNavigate, useParams } from "react-router";
 import Select from "../../../components/admin/common/Select";
 import InputComplet from "../../../components/admin/common/InputComplet";
+import { jwtDecode } from "jwt-decode";
 
 const FormProjet = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +32,7 @@ const FormProjet = () => {
           navigate("/login");
         }
 
-        
+
     const {id} = useParams()
 
     useEffect(() => {
@@ -107,10 +108,6 @@ const fetchSuggestions = async (searchQuery) => {
     // Retourne le code et le libellé pour l'affichage
     return filtered.map(item => `${item.id} - ${item.nom}`);
 };
-
-
-
-
 
 const handleSelect = (selectedValue) => {
     // Extrait le code de la valeur sélectionnée (format: "code - libellé")
@@ -216,7 +213,7 @@ const handleSelect = (selectedValue) => {
                  <InputComplet
                     label="L'organisateur"
                     name="user_id"
-                    type="number"
+                    type="text"
                     datas={users}
                     value={formik.values.user_id}
                     onChange={formik.handleChange}

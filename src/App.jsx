@@ -32,6 +32,14 @@ import FormCours from './screens/admin/cours/form'
 import Profile from './screens/front/Profile'
 import { jwtDecode } from 'jwt-decode'
 import FormProjet from './screens/admin/projets/form'
+import Discussion from './screens/front/Discussion'
+import Comment from './screens/front/Comment'
+import ProjetDetail from './screens/front/ProjetDetail'
+import QcmAdmin from './screens/admin/qcms'
+import FormQcm from './screens/admin/qcms/form'
+import Question from './screens/admin/questions'
+import FormQuestion from './screens/admin/questions/form'
+import ResetPassword from './screens/Forget'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -77,10 +85,20 @@ function App() {
       <Route path="/pages-infos-single/:id" element={ <InfoSingle />  } />  
       <Route path="/pages-forum" element={ <ForumScreen />  } />  
       <Route path="/pages-projet" element={ <ProjetScreen />  } />  
+      <Route path="/projet/:id" element={ <ProjetDetail />  } />  
+      <Route path="/discussions/:id" element={ <Discussion />  } />  
+      <Route path="/comments/:id" element={ <Comment />  } />  
+      <Route path="/reset-password" element={ <ResetPassword />  } />  
      
 
        {/* Screen admin  */}
        <Route path="/admin/dashboard" element={     <AdminHome/>  } /> 
+      <Route path="/admin/qcms-questions" element={     <Question/>  } /> 
+      <Route path="/admin/qcms-questions-create" element={     <FormQuestion/>  } /> 
+      <Route path="/admin/qcms-questions-update/:id" element={     <FormQuestion/>  } /> 
+      <Route path="/admin/qcms" element={     <QcmAdmin/>  } /> 
+      <Route path="/admin/qcms-create" element={     <FormQcm/>  } /> 
+      <Route path="/admin/qcms-update/:id" element={     <FormQcm/>  } /> 
       <Route path="/admin/cours" element={     <Cours/>  } /> 
       <Route path="/admin/cours-create" element={     <FormCours/>  } /> 
       <Route path="/admin/cours-update/:id" element={     <FormCours/>  } /> 
