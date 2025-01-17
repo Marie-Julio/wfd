@@ -14,6 +14,7 @@ const Nav = () => {
     { label: "Informations", href: "/pages-infos" },
     { label: "Forum", href: "/pages-forum" },
     { label: "Nos Projets", href: "/pages-projet" },
+    { label: "Enseignants", href: "/page-members" },
   ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);

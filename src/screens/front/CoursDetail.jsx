@@ -7,6 +7,7 @@ import AppBody from '../../components/AppBody';
 import { getResource, postResource } from '../../services/api';
 import { useNavigate, useParams } from 'react-router';
 import moment from 'moment';
+import { jwtDecode } from 'jwt-decode';
 
 const CoursDetail = () => {
   const [course, setCourse] = useState(null);
@@ -14,6 +15,14 @@ const CoursDetail = () => {
   const [readStatus, setReadStatus] = useState(false);
   const {id} = useParams()
   const navigate = useNavigate()
+
+   const accessToken = localStorage.getItem("token");
+      const decodedToken = accessToken ? jwtDecode(accessToken) : null;
+    
+      if (!accessToken) {
+        navigate("/login");
+      }
+  
 
   const fetchCourseData = async () => {
     try {
