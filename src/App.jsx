@@ -40,6 +40,8 @@ import FormQcm from './screens/admin/qcms/form'
 import Question from './screens/admin/questions'
 import FormQuestion from './screens/admin/questions/form'
 import ResetPassword from './screens/Forget'
+import PrivacyPolicy from './screens/front/Politique'
+import LegalNotice from './screens/front/Mention'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -61,7 +63,7 @@ function App() {
       }
       console.log("Exécution après 10 minutes");
       // Placez ici la logique que vous voulez exécuter
-    }, 10 * 60 * 1000); // 10 minutes en millisecondes
+    }, 2 * 60 * 1000); // 2 minutes en millisecondes
 
     // Nettoyer l'intervalle lorsqu'on quitte le composant
     return () => clearInterval(intervalId);
@@ -89,6 +91,8 @@ function App() {
       <Route path="/discussions/:id" element={ <Discussion />  } />  
       <Route path="/comments/:id" element={ <Comment />  } />  
       <Route path="/reset-password" element={ <ResetPassword />  } />  
+      <Route path="/page-politique" element={ <PrivacyPolicy />  } />  
+      <Route path="/page-mention" element={ <LegalNotice />  } />  
      
 
        {/* Screen admin  */}

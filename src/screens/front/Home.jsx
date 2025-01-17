@@ -51,7 +51,7 @@ const Home = () => {
     return ( 
         <AppBody home={true}>
           <section className="items-center justify-center min-h-screen w-full">
-                <div className="flex flex-wrap justify-center items-center gap-6 w-full my-30">
+                <div className="flex flex-wrap justify-center items-center gap-50 w-full my-30">
                     <CardComponent image={teacher} title="Cours" values={cours.length}/>
                     <CardComponent image={knowledge1} title="Projets" values={projects.length}/>
                     <CardComponent image={knowledge} title="Inscription" values={inscris.length}/>

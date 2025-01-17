@@ -12,12 +12,12 @@ const CoursScreen = () => {
   const coursesPerPage = 9; // Nombre de cours par page
   const navigate = useNavigate()
 
-   const accessToken = localStorage.getItem("token");
-    const decodedToken = accessToken ? jwtDecode(accessToken) : null;
+  //  const accessToken = localStorage.getItem("token");
+  //   const decodedToken = accessToken ? jwtDecode(accessToken) : null;
   
-    if (!accessToken) {
-      navigate("/login");
-    }
+  //   if (!accessToken) {
+  //     navigate("/login");
+  //   }
 
 
 

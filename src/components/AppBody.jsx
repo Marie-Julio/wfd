@@ -4,6 +4,7 @@ import Nav from './Nav';
 import Carousel from './Carousel';
 import HeroBanner from './HeroBanner';
 import BannerCour from './BannerCour';
+import { Link } from 'react-router';
 
 const AppBody = ({home, bannerCour, banner, course, titleBanner,className, imageBanner, descriptionBanner, children}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,6 +12,8 @@ const AppBody = ({home, bannerCour, banner, course, titleBanner,className, image
     services: false,
     produits: false
   });
+
+  const menusItems = [{label: 'Mentions légales', href : "/page-mention"}, {label: 'Politique de confidentialité', href : "/page-politique"}, {label : 'Contactez-nous', href : '#'}]
 
   const toggleMobileMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -50,14 +53,14 @@ const AppBody = ({home, bannerCour, banner, course, titleBanner,className, image
             © 2024 WFDGuinee. Tous droits réservés.
           </div>
           <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 text-center">
-            {['Mentions légales', 'Politique de confidentialité', 'Contactez-nous'].map((link) => (
-              <a
+            {menusItems.map((link) => (
+              <Link
                 key={link}
-                href="#"
-                className="text-xs sm:text-sm hover:text-blue-300 block sm:inline"
+                to={link.href}
+                className="text-2xl sm:text-sm hover:text-blue-300 block sm:inline"
               >
-                {link}
-              </a>
+                {link.label}
+              </Link>
             ))}
           </div>
         </div>
