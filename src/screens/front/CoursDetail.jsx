@@ -70,7 +70,7 @@ const unixTimestamp = Math.floor(now / 1000);
               variant="outline"
               size="sm"
               onClick={() => window.open(course.file_path, '_blank')}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 text-white"
             >
               <FileText className="w-4 h-4" />
               Afficher le PDF
@@ -79,7 +79,7 @@ const unixTimestamp = Math.floor(now / 1000);
               variant="outline"
               size="sm"
               onClick={() => window.open(course.file_path, '_blank')}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2  text-white"
             >
               <Download className="w-4 h-4" />
               Télécharger le PDF

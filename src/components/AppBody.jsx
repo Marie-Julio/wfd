@@ -37,7 +37,7 @@ const AppBody = ({home, bannerCour, banner, course, titleBanner,className, image
         
 
       {/* Corps de page Responsive */}
-      <main className={`flex-grow flex ${className}`}>
+      <main className={`${className}`}>
         
         {children}
          
@@ -50,15 +50,18 @@ const AppBody = ({home, bannerCour, banner, course, titleBanner,className, image
             © 2024 WFDGuinee. Tous droits réservés.
           </div>
           <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 text-center">
-            {['Mentions légales', 'Politique de confidentialité', 'Contactez-nous'].map((link) => (
               <a
-                key={link}
-                href="#"
-                className="text-xs sm:text-sm hover:text-blue-300 block sm:inline"
-              >
-                {link}
+                href="#" className="text-xs sm:text-sm hover:text-blue-300 block sm:inline"
+              >Mentions légales
               </a>
-            ))}
+              <a href="#" className="text-xs sm:text-sm hover:text-blue-300 block sm:inline"
+              >Politique de confidentialité
+              </a>
+              <a 
+                href="https://wfdguinee.org/contact/"
+                className="text-xs sm:text-sm hover:text-blue-300 block sm:inline"
+              >Contactez-nous
+              </a>
           </div>
         </div>
       </footer>

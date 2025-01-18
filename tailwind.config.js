@@ -194,7 +194,7 @@ export default {
       },
 
       fontFamily: {
-        merriweather: ['Merriweather', 'serif'], // Ajoutez la famille de police
+        merriweather: ['Montserrat', 'Merriweather', 'serif'], // Ajoutez la famille de police
       },
     },
   },

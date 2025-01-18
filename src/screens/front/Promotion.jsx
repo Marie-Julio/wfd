@@ -40,9 +40,6 @@ const Promotion = () => {
 
             {/* Courses Section */}
             <div className="max-w-7xl mx-auto mb-12 md:m-10">
-                {/* <h2 className="text-2xl font-semibold text-gray-900 mb-6 items-start ">
-                Informations
-                </h2> */}
                 <Cour courses={infos}/>
             </div>
 

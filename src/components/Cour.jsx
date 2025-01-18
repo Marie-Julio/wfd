@@ -29,7 +29,7 @@ const Cour = ({courses = []}) => {
         {courses.map((course) => (
           <div
             key={course.id}
-            className="bg-white w-130  rounded-lg shadow-lg overflow-hidden transition-transform duration-800 hover:transform hover:scale-105 hover:scale-105 hover:shadow-2xl hover:shadow-orange-300/100"
+            className="bg-white w-130 h-fit rounded-lg shadow-lg overflow-hidden transition-transform duration-800 hover:transform hover:scale-105 hover:scale-105 hover:shadow-2xl hover:shadow-orange-300/100"
           >
             <div className="p-6">
               <div className="flex justify-between items-start">
@@ -39,23 +39,22 @@ const Cour = ({courses = []}) => {
                   </h3>
                   
                   <p className="text-gray-600"><article className="prose max-w-none">
-                                  <div
-                                    dangerouslySetInnerHTML={{
-                                      __html: truncateStringAdvanced(course.description, 200),
-                                    }}
-                                    className="article-content"
-                                  />
-                                </article></p>
-                  <div className="flex flex-nowrap items-center space-x-8 my-6 text-sm text-gray-500 mb-4 px-2">
+                  <div dangerouslySetInnerHTML={{
+                      __html: truncateStringAdvanced(course.description, 200),
+                    }}
+                    className="article-content"
+                  />
+                </article></p>
+                  <div className=" whitespace-nowrap flex items-center space-x-8 my-6 text-sm text-gray-500 mb-4 ">
                     <div className="flex items-center">
                       <User className="mr-1" />
                       {course.nombre_inscrits}
                     </div>
-                    <div className="flex flex-nowrap items-center">
+                    <div className=" whitespace-nowrap flex items-center">
                       <Clock className="mr-1" />
                       {course.duree}
                     </div>
-                    <div className="flex flex-nowrap items-center">
+                    <div className=" whitespace-nowrap flex items-center">
                       <Star className="mr-1 text-yellow-400" />
                       {course.rating} ({course.course_modules} Cours)
                     </div>

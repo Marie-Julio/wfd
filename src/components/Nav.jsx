@@ -45,18 +45,18 @@ const Nav = () => {
       {/* Header Section */}
       <div className="flex flex-wrap items-center justify-between pt-4 px-6 bg-gray-50">
   {/* Logo */}
-  <a href="/" className="flex items-center mb-4 md:mb-0">
+  <a href="/" className="flex items-center mb-4 md:mb-2">
     <img src={logo} className="h-12" alt="Logo" />
   </a>
 
   {/* Contact Information */}
-  <div className="w-full md:w-auto flex flex-col md:flex-row md:items-center md:justify-center space-y-4 md:space-y-0 md:space-x-8">
+  <div className="hidden md:flex w-full md:w-auto flex-col md:flex-row md:items-center md:justify-center space-y-4 md:space-y-0 md:space-x-8">
     {/* Visible on all screen sizes */}
     <div className="flex items-center space-x-2">
       <Phone className="w-6 h-6 text-gray-700" />
       <div>
         <h1 className="font-bold text-sm text-gray-800">Contact</h1>
-        <p className="text-xs text-gray-500">+229 55002123</p>
+        <p className="text-xs text-gray-500">+224 612 77 77 56</p>
       </div>
     </div>
 
@@ -65,7 +65,7 @@ const Nav = () => {
       <Mail className="w-6 h-6 text-gray-700" />
       <div>
         <h1 className="font-bold text-sm text-gray-800">Mail</h1>
-        <p className="text-xs text-gray-500">notrelogo@gmail.com</p>
+        <p className="text-xs text-gray-500">contact@wfdguinee.org</p>
       </div>
     </div>
 
@@ -74,7 +74,7 @@ const Nav = () => {
       <MapPin className="w-6 h-6 text-gray-700" />
       <div>
         <h1 className="font-bold text-sm text-gray-800">Adresse</h1>
-        <p className="text-xs text-gray-500">Guinée - Tohin, rue 234</p>
+        <p className="text-xs text-gray-500">Conkary, Ratoma, Nongo </p>
       </div>
     </div>
   </div>
@@ -86,8 +86,8 @@ const Nav = () => {
       <nav className="bg-custom-gradient text-white">
         <div className="container mx-auto flex justify-between items-center px-4 py-3">
           {/* Hamburger Icon */}
-          <button className="md:hidden focus:outline-none" onClick={toggleMenu}>
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          <button className="md:hidden focus:outline-none left" onClick={toggleMenu}>
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} color="black" />}
           </button>
 
           {/* Menu Items */}
@@ -100,7 +100,7 @@ const Nav = () => {
               <li key={item.label} className="md:ml-8">
                 <Link
                   to={item.href}
-                  className="block py-2 px-4 text-center md:inline-block hover:bg-blue-700 md:hover:bg-transparent transition-all duration-300 ease-in-out"
+                  className=" whitespace-nowrap block py-2 px-4 text-center md:inline-block hover:bg-blue-700 md:hover:bg-transparent transition-all duration-300 ease-in-out"
                 >
                   {item.label}
                 </Link>
@@ -161,15 +161,9 @@ const Nav = () => {
               <>
                 <Link
                   to="/login"
-                  className="py-2 px-4 text-sm bg-white text-blue-900 rounded hover:bg-gray-200"
+                  class=" font-semibold px-5 py-3 rounded-xl text-sm border-2 text-gray-50 bg-transparent hover:text-gray-200 focus:outline-none transition-all"
                 >
                   Connexion
-                </Link>
-                <Link
-                  to="/register"
-                  className="py-2 px-4 text-sm bg-blue-700 text-white rounded hover:bg-blue-800"
-                >
-                  Inscription
                 </Link>
               </>
             )}

@@ -6,7 +6,7 @@ export const Input  = ({ label, type, name, value, placeholder, onChange, error,
     const [show, setShow] = useState(false)
     return ( 
         <div className={`w-full mb-2 flex flex-col  ${className}`}>
-        <label className={`mb-2 ${darkMode ? "text-white" : " text-black"}`}>{label}</label>
+        <label className={`mb-2 ${darkMode ? "text-white" : " text-gray-600"}`}>{label}</label>
         <div className="relative text-black">
             <input
                 name={name}

@@ -57,58 +57,42 @@ const LoginScreen = () => {
 
 
     return ( 
-        <section className="bg-gray-50 dark:bg-gray-900 bg-no-repeat bg-cover bg-center " style={{ backgroundImage: `url(${background})` }}>
-             {/* Superposition avec opacité */}
-        <div className="absolute inset-0 bg-white bg-opacity-20 pointer-events-none"></div>
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <a href="/" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                <img className="w-50 h-20 mr-2" src={logo} alt="logo"/>
-                WFDGuinee    
-            </a>
-            <form className="space-y-4 md:space-y-6" onSubmit={formik.handleSubmit}>
-            <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                    Connectez-vous à votre compte
-                    </h1>
-                    
-                    <Input
-                            label="Email"
-                            name="email"
-                            type="email"
-                            value={formik.values.email}
-                            onChange={formik.handleChange}
-                            error={formik.errors.email}
-                        />
-                        <Input
-                            label="Mot de passe"
-                            name="password"
-                            type="password"
-                            value={formik.values.password}
-                            onChange={formik.handleChange}
-                            error={formik.errors.password}
-                        />
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-start">
-                                <div className="flex items-center h-5">
-                                    <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"  />
-                                </div>
-                                <div className="ml-3 text-sm">
-                                    <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Se rappeler de moi</label>
-                                </div>
-                            </div>
-                            <Link to="/reset-password" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Mot de passe oublié ?</Link>
-                        </div>
-                        <Button isLoading={loading} className="w-full">Connexion</Button>
-                        <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                        Vous n’avez pas encore de compte ? <Link to="/register" className="font-medium text-orange-500 hover:underline dark:text-primary-500">Sign up</Link>
-                        </p>
-                    
-                </div>
+    <div class="h-screen md:flex">
+	<div class="relative overflow-hidden md:flex w-2/5 justify-around items-center hidden bg-no-repeat bg-cover bg-center " style={{ backgroundImage: `url(${background})` }}>
+        <div className="pl-10">
+			<h1 class="text-white font-bold text-4xl font-sans">WELT FRIEDENS DIENST e.V</h1>
+			<p class="text-white mt-1">Service mondiale pour la paix</p>
+		</div>
+	</div>
+	<div class="flex md:w-3/5 justify-center py-10 items-center bg-white">
+        <form className="space-y-4 md:space-y-4" onSubmit={formik.handleSubmit}>
+			<h1 class="text-gray-800 font-bold text-2xl mb-1">Se connecter</h1>
+			<p class="text-sm font-normal text-gray-600 mb-7">Connectez-vous à votre compte</p>
+            <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                </svg>
+                <input required class="pl-2 outline-none border-none w-full" name="email" type="email" value={formik.values.email}
+                    onChange={formik.handleChange} placeholder="E-mail" />
             </div>
-            </form>
-        </div>
-        </section>
+            <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
+                    fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                        clip-rule="evenodd" />
+                </svg>
+                <input required class="pl-2 outline-none border-none w-full" name="password" type="password" value={formik.values.password} onChange={formik.handleChange} placeholder="Mot de passe" />
+            </div>
+            <div class="pt-0 hover:text-blue-500"><Link to="/reset-password">Mot de passe oublié ?</Link></div>
+            <Button isLoading={loading} className="block w-full bg-orange-500 mt-4 py-2 rounded-2xl text-white font-semibold mb-2 hover:text-gray-200 hover:bg-orange-700 focus:outline-none transition-all">Se connecter</Button>
+            
+            <div className="text-center pt-5">Vous n’avez pas encore de compte ? <Link to="/register" className=" text-indigo-600 ">S'inscrire</Link></div>
+		</form>
+	</div>
+</div>
      );
 }
  
