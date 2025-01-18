@@ -5,45 +5,30 @@ import { useNavigate } from "react-router";
 const InfoComponent = ({informations = []}) => {
   const navigate = useNavigate()
     return ( 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-10 mx-4 sm:mx-7">
+      <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mt-8 gap-[30px]">
         {informations.map((info, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-lg shadow-lg p-6 transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50"
-          >
-            {/* Image */}
-            <div className="mb-4">
-              <img
-                src={info.image}
-                alt={info.title}
-                className="w-full h-48 object-cover rounded-t-lg mb-2"
-              />
-              <h3 className="text-lg text-gray-900 font-extrabold">
-                {info.title}
-              </h3>
+          
+          <div key={index} className="blog relative rounded-md shadow dark:shadow-gray-800 overflow-hidden">
+            <div className="h-[200px] relative overflow-hidden flex items-center justify-center">
+              <img src={info.image} alt={info.title} className="w-full h-auto object-contain" />
             </div>
-      
-            {/* Content */}
-            <p className="text-gray-600">
-              <article className="prose max-w-none">
+
+          <div className="content p-6">
+              <a href="blog-detail.html" className="font-semibold title h5 text-lg hover:text-[#eb6b11] duration-500 ease-in-out">{info.title}</a>
+              <p className="text-slate-400 mt-3">
                 <div
                   dangerouslySetInnerHTML={{
                     __html: truncateStringAdvanced(info.content, 200),
                   }}
                   className="article-content"
-                />
-              </article>
-            </p>
-      
-            {/* Button */}
-            <button
-            onClick={() => navigate(`/pages-infos-single/${info.id}`)}
-              className="mt-4 flex items-center rounded-lg bg-blue-600 text-white px-4 py-2 hover:bg-blue-700 hover:text-black transition-all duration-300 transform hover:scale-105 group"
-            >
-              En savoir plus
-              <ChevronRight className="w-4 h-4 ml-2" />
-            </button>
+                /></p>
+              
+              <div className="mt-4">
+              <button
+            onClick={() => navigate(`/pages-infos-single/${info.id}`)} className=" font-semibold relative bg-white inline-block tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 hover:text-[#eb6b11] after:bg-[#eb6b11] duration-500 ease-in-out">En savoir plus <i className="uil uil-arrow-right"></i></button>
+              </div>
           </div>
+      </div>
         ))}
       </div>
     

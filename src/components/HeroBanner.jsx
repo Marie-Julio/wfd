@@ -1,5 +1,4 @@
-import image1 from "../assets/slide-1.jpg"
-import "../assets/css/header.css";
+import image1 from "../assets/slide-1.jpg";
 
 const HeroBanner = ({image, title,  description}) => {
     return ( 

@@ -43,10 +43,11 @@ const Nav = () => {
   </a>
 
   {/* Contact Information */}
-  <div className="hidden md:flex w-full md:w-auto flex-col md:flex-row md:items-center md:justify-center space-y-4 md:space-y-0 md:space-x-8">
+  <div className="flex space-x-4">
     {/* Visible on all screen sizes */}
     <div className="flex items-center space-x-2">
-      <Phone className="w-6 h-6 text-gray-700" />
+      <span className="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-[#eb6b11] hover:bg-[#db5b01] border border-[#eb6b11] hover:border-[#db5b01] text-white">
+        <Phone className="w-6 h-6 text-gray-100" /></span>
       <div>
         <h1 className="font-bold text-sm text-gray-800">Contact</h1>
         <p className="text-xs text-gray-500">+224 612 77 77 56</p>
@@ -55,7 +56,8 @@ const Nav = () => {
 
     {/* Email */}
     <div className="flex items-center space-x-2">
-      <Mail className="w-6 h-6 text-gray-700" />
+      <span className="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-[#eb6b11] hover:bg-[#db5b01] border border-[#eb6b11] hover:border-[#db5b01] text-white">
+        <Mail className="w-6 h-6 text-gray-100" /></span>
       <div>
         <h1 className="font-bold text-sm text-gray-800">Mail</h1>
         <p className="text-xs text-gray-500">contact@wfdguinee.org</p>
@@ -64,7 +66,8 @@ const Nav = () => {
 
     {/* Address (hidden on small screens) */}
     <div className="hidden md:flex items-center space-x-2">
-      <MapPin className="w-6 h-6 text-gray-700" />
+      <span className="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-[#eb6b11] hover:bg-[#db5b01] border border-[#eb6b11] hover:border-[#db5b01] text-white">
+        <MapPin className="w-6 h-6 text-gray-100" /></span>
       <div>
         <h1 className="font-bold text-sm text-gray-800">Adresse</h1>
         <p className="text-xs text-gray-500">Conkary, Ratoma, Nongo </p>
@@ -104,7 +107,7 @@ const Nav = () => {
                   <Link
                     to={item.href}
                     onClick={toggleMenu}
-                    className="block py-2 px-4 hover:bg-blue-700 rounded"
+                    className=" whitespace-nowrap block py-2 px-4 hover:bg-blue-700 rounded"
                   >
                     {item.label}
                   </Link>
@@ -116,7 +119,7 @@ const Nav = () => {
                 <li className="py-2 px-4">
                   <Link
                     to="/login"
-                    className="block py-2 px-4 text-sm bg-white text-blue-900 rounded hover:bg-gray-200 text-center"
+                    className=" whitespace-nowrap block py-2 px-4 text-sm bg-white text-blue-900 rounded hover:bg-gray-200 text-center"
                   >
                     Connexion
                   </Link>
@@ -124,7 +127,7 @@ const Nav = () => {
                 <li className="py-2 px-4">
                   <Link
                     to="/register"
-                    className="block py-2 px-4 text-sm bg-blue-700 text-white rounded hover:bg-blue-800 text-center"
+                    className=" whitespace-nowrap block py-2 px-4 text-sm bg-blue-700 text-white rounded hover:bg-blue-800 text-center"
                   >
                     Inscription
                   </Link>
@@ -155,12 +158,12 @@ const Nav = () => {
           </div>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex md:space-x-8">
+          <ul className="hidden md:flex md:space-x-2">
             {menuItems.map((item) => (
               <li key={item.label}>
                 <Link
                   to={item.href}
-                  className={`py-2 px-4 rounded ${
+                  className={` whitespace-nowrap py-2 px-4 rounded ${
                     location.pathname === item.href
                       ? "bg-orange-500 text-white"
                       : "hover:bg-blue-700 hover:text-white"

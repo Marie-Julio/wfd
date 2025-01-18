@@ -13,7 +13,7 @@ const AppBody = ({home, bannerCour, banner, course, titleBanner,className, image
     produits: false
   });
 
-  const menusItems = [{label: 'Mentions légales', href : "/page-mention"}, {label: 'Politique de confidentialité', href : "/page-politique"}, {label : 'Contactez-nous', href : '#'}]
+  const menusItems = [{label: 'Mentions légales', href : "/page-mention"}, {label: 'Politique de confidentialité', href : "/page-politique"}, {label : 'Contactez-nous', href : 'https://wfdguinee.org/contact/'}]
 
   const toggleMobileMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -46,37 +46,44 @@ const AppBody = ({home, bannerCour, banner, course, titleBanner,className, image
          
       </main>
 
-      {/* Footer Responsive */}
-       <footer className="bg-custom-gradient text-white py-6 w-full">
-        <div className="container mx-auto px-4 max-w-7xl flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-          <div className="text-center sm:text-left text-xs sm:text-sm">
-            © 2024 WFDGuinee. Tous droits réservés.
-          </div>
-          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 text-center">
-              <a
-                href="#" className="text-xs sm:text-sm hover:text-blue-300 block sm:inline"
-              >Mentions légales
-              </a>
-              <a href="#" className="text-xs sm:text-sm hover:text-blue-300 block sm:inline"
-              >Politique de confidentialité
-              </a>
-              <a 
-                href="https://wfdguinee.org/contact/"
-                className="text-xs sm:text-sm hover:text-blue-300 block sm:inline"
-              >Contactez-nous
-              </a>
-            {menusItems.map((link) => (
-              <Link
-                key={link}
-                to={link.href}
-                className="text-2xl sm:text-sm hover:text-blue-300 block sm:inline"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </footer>
+      <div className="bg-[#1a5fa9]">
+        <footer className="footer relative text-gray-100 dark:text-gray-400 bg-no-repeat bg-right" style={{ backgroundImage: "url('assets/images/footer.jpg')", backgroundPosition: "top left"}}>
+            <div className="absolute inset-0 bg-gradient-to-r to-transparent via-[#1a5fa9] dark:via-slate-900 from-[#1a5fa9] dark:from-slate-900"></div>
+            <div className="container relative">
+                <div className="grid grid-cols-12">
+                    <div className="col-span-12">
+                        <div className="py-[60px] px-0">
+                            <div className="grid grid-cols-1">
+                                <div>
+                                    <a href="mailto:contact@example.com" className="relative inline-block font-semibold tracking-wide align-middle text-center border-none after:content-['']
+                                     after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 text-2xl text-white dark:text-white
+                                     dark:hover:text-white hover:text-[#eb6b11] after:bg-[#eb6b11] dark:after:bg-white duration-500 ease-in-out">WELT FRIEDENS DIENST e.V</a>
+                                </div>
+                                <p className="mt-6 max-w-2xl">Formation des Jeunes pour la Paix, Production de capsules vidéos, Promotion et Renforcement des initiatives économiques de Paix Renforcement des capacités</p>
+                                <ul className="list-none mt-6 space-x-5">
+                                    <li className="inline"><a href="" target="_blank" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center text-gray-400 hover:text-white border border-gray-100 dark:border-gray-800 rounded-md hover:border-[#eb6b11] dark:hover:border-[#eb6b11] hover:bg-[#eb6b11] dark:hover:bg-[#eb6b11]"><i className="uil uil-linkedin" title="Linkedin"></i></a></li>
+                                    <li className="inline"><a href="" target="_blank" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center text-gray-400 hover:text-white border border-gray-100 dark:border-gray-800 rounded-md hover:border-[#eb6b11] dark:hover:border-[#eb6b11] hover:bg-[#eb6b11] dark:hover:bg-[#eb6b11]"><i className="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
+                                    <li className="inline"><a href="" target="_blank" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center text-gray-400 hover:text-white border border-gray-100 dark:border-gray-800 rounded-md hover:border-[#eb6b11] dark:hover:border-[#eb6b11] hover:bg-[#eb6b11] dark:hover:bg-[#eb6b11]"><i className="uil uil-instagram align-middle" title="instagram"></i></a></li>
+                                    <li className="inline"><a href="" target="_blank" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center text-gray-400 hover:text-white border border-gray-100 dark:border-gray-800 rounded-md hover:border-[#eb6b11] dark:hover:border-[#eb6b11] hover:bg-[#eb6b11] dark:hover:bg-[#eb6b11]"><i className="uil uil-twitter align-middle" title="twitter"></i></a></li>
+                                    <li className="inline"><a href="" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center text-gray-400 hover:text-white border border-gray-100 dark:border-gray-800 rounded-md hover:border-[#eb6b11] dark:hover:border-[#eb6b11] hover:bg-[#eb6b11] dark:hover:bg-[#eb6b11]"><i className="uil uil-envelope align-middle" title="email"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="py-[30px] px-0 border-t border-slate-800">
+                <div className="container relative text-center">
+                    <div className="grid md:grid-cols-2 items-center">
+                        <div className="md:text-start text-center">
+                            <p className="mb-0">© <script>document.write(new Date().getFullYear())</script> WFD Guinée. Tous droits réservés.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+      </div>
     </div>
   );
 };

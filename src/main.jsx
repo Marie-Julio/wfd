@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+
 import 'flowbite'
 import App from './App.jsx'
 import '@fontsource/montserrat'; // Import par défaut
@@ -11,8 +12,7 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { AuthProvider } from './context/AuthProvider.jsx'
 import { persistor, store } from './store/store.js'
-
-
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
