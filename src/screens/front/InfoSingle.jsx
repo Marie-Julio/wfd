@@ -147,7 +147,7 @@ const InfoSingle = () => {
                         <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
                         <h2 className="text-xl font-bold mb-4">Articles Récents</h2>
                         <div className="space-y-4">
-                            {infos.map((i) => (
+                            {infos.slice(0, 6).map((i) => (
                             <a key={i} href="#" className="flex gap-4 group">
                                 <img 
                                 src="https://new.societechimiquedefrance.fr/wp-content/uploads/2024/11/AC11-12-2024_couv.jpg" 

@@ -4,6 +4,7 @@ import Nav from './Nav';
 import Carousel from './Carousel';
 import HeroBanner from './HeroBanner';
 import BannerCour from './BannerCour';
+import { Link } from 'react-router';
 
 const AppBody = ({home, bannerCour, banner, course, titleBanner,className, imageBanner, descriptionBanner, children}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,6 +12,8 @@ const AppBody = ({home, bannerCour, banner, course, titleBanner,className, image
     services: false,
     produits: false
   });
+
+  const menusItems = [{label: 'Mentions légales', href : "/page-mention"}, {label: 'Politique de confidentialité', href : "/page-politique"}, {label : 'Contactez-nous', href : '#'}]
 
   const toggleMobileMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -62,6 +65,15 @@ const AppBody = ({home, bannerCour, banner, course, titleBanner,className, image
                 className="text-xs sm:text-sm hover:text-blue-300 block sm:inline"
               >Contactez-nous
               </a>
+            {menusItems.map((link) => (
+              <Link
+                key={link}
+                to={link.href}
+                className="text-2xl sm:text-sm hover:text-blue-300 block sm:inline"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </footer>

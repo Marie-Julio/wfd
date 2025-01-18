@@ -1,7 +1,9 @@
 import { ChevronRight } from "lucide-react";
 import { truncateStringAdvanced } from "../services/Helper";
+import { useNavigate } from "react-router";
 
 const InfoComponent = ({informations = []}) => {
+  const navigate = useNavigate()
     return ( 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-10 mx-4 sm:mx-7">
         {informations.map((info, index) => (
@@ -35,6 +37,7 @@ const InfoComponent = ({informations = []}) => {
       
             {/* Button */}
             <button
+            onClick={() => navigate(`/pages-infos-single/${info.id}`)}
               className="mt-4 flex items-center rounded-lg bg-blue-600 text-white px-4 py-2 hover:bg-blue-700 hover:text-black transition-all duration-300 transform hover:scale-105 group"
             >
               En savoir plus

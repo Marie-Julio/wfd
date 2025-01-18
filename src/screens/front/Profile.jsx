@@ -12,8 +12,10 @@ import AppBody from "../../components/AppBody";
 const Profile = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [info, setInfo] = useState({});
-  const [editIndex, setEditIndex] = useState(null); // Index de l'élément édité
+  const [editIndex, setEditIndex] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [testResults, setTestResults] = useState([]);
+  const [testSummary, setTestSummary] = useState({});
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -84,8 +86,20 @@ const Profile = () => {
     onSubmit: () => handleSave(),
   });
 
+  const fetchTestResults = async () => {
+    try {
+      const resultsResponse = await getResource(`/qcm-results?user_id=${decodedToken.id}`);
+      const summaryResponse = await getResource(`/qcm-results-score?user_id=${decodedToken.id}`);
+      setTestResults(resultsResponse.data);
+      setTestSummary(summaryResponse.data[0]);
+    } catch (error) {
+      errorMessage(error);
+    }
+  };
+
   useEffect(() => {
     fetchData();
+    fetchTestResults();
   }, []);
 
   if (loading) {
@@ -97,7 +111,7 @@ const Profile = () => {
       <section className="items-center justify-center min-h-screen w-full md:m-5">
       <div className="max-w-4xl mx-auto">
         {/* Card Profil */}
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="bg-white shadow-xl overflow-hidden">
           {/* Section Header */}
           <div className="relative bg-gradient-to-r from-blue-600 to-purple-600 p-8">
             <div className="absolute inset-0 bg-black opacity-10"></div>
@@ -177,6 +191,30 @@ const Profile = () => {
             </div>
           </div>
         </div>
+
+         {/* Votre section de profil */}
+         <div className="mt-10">
+            <h2 className="text-2xl font-bold mb-4">Résultats des Tests</h2>
+            <div className="bg-white shadow rounded-lg p-6">
+              <p className="mb-4">
+                <strong>Nombre de tests :</strong> {testSummary.Nombre} <br />
+                <strong>Score total :</strong> {testSummary.Total}
+              </p>
+              <div className="space-y-4">
+                {testResults.map((result, index) => (
+                  <div key={index} className="p-4 bg-gray-50 rounded-lg shadow hover:bg-gray-100">
+                    <h3 className="text-lg font-medium text-blue-600">{result.qcm.title}</h3>
+                    <p className="text-sm text-gray-500">{result.qcm.description}</p>
+                    <p className="mt-2">
+                      <strong>Score :</strong> {result.score} <br />
+                      <strong>Status :</strong> {result.status} <br />
+                      <strong>Date :</strong> {new Date(result.created_at).toLocaleDateString()}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
       </div>
     </section>
     </AppBody>
