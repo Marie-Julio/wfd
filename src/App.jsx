@@ -48,6 +48,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   const access_token = localStorage.getItem('token');
+      const decodedToken = access_token ? jwtDecode(access_token) : null;
 
   useEffect(() => {
 

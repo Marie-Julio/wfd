@@ -137,7 +137,7 @@ const Nav = () => {
               <>
               <li className="py-2 px-4">
                 <button
-                  onClick={() => navigate('/profile')}
+                  onClick={() => navigate('/page-profil')}
                   className="block w-full py-2 px-4 text-left text-sm bg-blue-500 text-white rounded hover:bg-blue-800"
                 >
                   Profile
