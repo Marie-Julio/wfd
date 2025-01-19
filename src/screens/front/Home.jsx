@@ -98,71 +98,15 @@ const Home = () => {
                         <div className="lg:ms-5">
                             <div className="flex mb-4">
                                 <span className="text-[#eb6b11] text-2xl font-bold mb-0"><span className="counter-value text-6xl font-bold" data-target="15">10</span>+</span>
-                                <span className="self-end font-semibold ms-2">Years <br /> Experience</span>
+                                <span className="self-end font-semibold ms-2">Années <br /> d'Expérience</span>
                             </div>
 
-                            <h3 className="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">Business and technology <br /> consulting for growth</h3>
+                            <h3 className="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold"> Formation et de sensibilisation</h3>
 
-                            <p className="text-slate-400 max-w-xl">Start working with Tailwind CSS that can provide everything you need to generate awareness, drive traffic, connect. Dummy text is text that is used in the publishing industry or by web designers to occupy the space which will later be filled with 'real' content.</p>
+                            <p className="text-slate-600 max-w-xl">Découvrez des formations inspirantes et des outils pratiques pour devenir un <strong> acteur clé </strong> de la paix et du développement durable.</p>
                         
                             <div className="mt-6">
-                                <a href="contact-one.html" className="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-[#eb6b11] hover:bg-indigo-700 border-[#eb6b11] hover:border-indigo-700 text-white rounded-md mt-2"><i className="uil uil-airplay"></i> Get Started</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="container relative mt-16">
-                <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
-                    <div className="group px-6 py-8 hover:bg-white dark:hover:bg-slate-900 hover:shadow dark:hover:shadow-gray-800 duration-500 ease-in-out border-b-[3px] border-transparent hover:border-[#eb6b11]">
-                        <i data-feather="codesandbox" className="size-10 stroke-1 text-[#eb6b11]"></i>
-
-                        <div className="content mt-6">
-                            <a href="page-services.html" className="title h5 text-xl font-semibold hover:text-[#eb6b11]">User Friendly</a>
-                            <p className="text-slate-400 mt-4">The phrasal sequence of the is now so that many campaign and benefit</p>
-                            
-                            <div className="mt-5">
-                                <a href="page-services.html" className="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 text-[#eb6b11] hover:text-[#eb6b11] after:bg-[#eb6b11] duration-500 ease-in-out">Learn More <i className="uil uil-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="group px-6 py-8 hover:bg-white dark:hover:bg-slate-900 hover:shadow dark:hover:shadow-gray-800 duration-500 ease-in-out border-b-[3px] border-transparent hover:border-[#eb6b11]">
-                        <i data-feather="send" className="size-10 stroke-1 text-[#eb6b11]"></i>
-
-                        <div className="content mt-6">
-                            <a href="page-services.html" className="title h5 text-xl font-semibold hover:text-[#eb6b11]">Super Fast</a>
-                            <p className="text-slate-400 mt-4">The phrasal sequence of the is now so that many campaign and benefit</p>
-                            
-                            <div className="mt-5">
-                                <a href="page-services.html" className="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 text-[#eb6b11] hover:text-[#eb6b11] after:bg-[#eb6b11] duration-500 ease-in-out">Learn More <i className="uil uil-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="group px-6 py-8 hover:bg-white dark:hover:bg-slate-900 hover:shadow dark:hover:shadow-gray-800 duration-500 ease-in-out border-b-[3px] border-transparent hover:border-[#eb6b11]">
-                        <i data-feather="star" className="size-10 stroke-1 text-[#eb6b11]"></i>
-
-                        <div className="content mt-6">
-                            <a href="page-services.html" className="title h5 text-xl font-semibold hover:text-[#eb6b11]">Insightful Analytics</a>
-                            <p className="text-slate-400 mt-4">The phrasal sequence of the is now so that many campaign and benefit</p>
-                            
-                            <div className="mt-5">
-                                <a href="page-services.html" className="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 text-[#eb6b11] hover:text-[#eb6b11] after:bg-[#eb6b11] duration-500 ease-in-out">Learn More <i className="uil uil-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="group px-6 py-8 hover:bg-white dark:hover:bg-slate-900 hover:shadow dark:hover:shadow-gray-800 duration-500 ease-in-out border-b-[3px] border-transparent hover:border-[#eb6b11]">
-                        <i data-feather="bookmark" className="size-10 stroke-1 text-[#eb6b11]"></i>
-
-                        <div className="content mt-6">
-                            <a href="page-services.html" className="title h5 text-xl font-semibold hover:text-[#eb6b11]">Highly Rated</a>
-                            <p className="text-slate-400 mt-4">The phrasal sequence of the is now so that many campaign and benefit</p>
-                            
-                            <div className="mt-5">
-                                <a href="page-services.html" className="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 text-[#eb6b11] hover:text-[#eb6b11] after:bg-[#eb6b11] duration-500 ease-in-out">Learn More <i className="uil uil-arrow-right"></i></a>
+                                <a href="/register" className="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-[#eb6b11] hover:bg-indigo-700 border-[#eb6b11] hover:border-indigo-700 text-white rounded-md mt-2"><i className="uil uil-airplay"></i> Commencer</a>
                             </div>
                         </div>
                     </div>
@@ -170,132 +114,68 @@ const Home = () => {
             </div>
         </section>
         
-
-        
         <section className="relative md:py-24 py-16">
-            <div className="container relative">
-                <div className="grid md:grid-cols-12 grid-cols-1 pb-8 items-end">
-                    <div className="lg:col-span-8 md:col-span-6 md:text-start text-center">
-                        <h3 className="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold">Projets</h3>
-                        <p className="text-slate-400 max-w-xl">Start working with Techwind that can provide everything you need to generate awareness, drive traffic, connect.</p>
+
+            <div class="container relative">
+                <div class="grid md:grid-cols-12 grid-cols-1 pb-8 items-end">
+                    <div class="lg:col-span-8 md:col-span-6 md:text-start text-center">
+                        <h3 class="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold">Projets</h3>
+                        <p class="text-slate-400 max-w-xl">Prenez le temps de découvrir ces réalisations, qui sont autant de témoignages de notre capacité à créer de la valeur et à transformer des idées en solutions concrètes et inspirantes.</p>
                     </div>
 
-                    <div className="lg:col-span-4 md:col-span-6 md:text-end hidden md:block">
-                        <a href="/pages-projet" className="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 text-[#eb6b11] hover:text-[#eb6b11] after:bg-[#eb6b11] duration-500 ease-in-out">Voir plus <i className="uil uil-arrow-right align-middle"></i></a>
+                    <div class="lg:col-span-4 md:col-span-6 md:text-end hidden md:block">
+                        <a href="/pages-projet" class="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 text-[#1a5fa9] hover:text-[#1a5fa9] after:bg-[#1a5fa9] duration-500 ease-in-out">
+                            Voir plus <i class="uil uil-arrow-right align-middle"></i></a>
                     </div>
                 </div>
 
-                <div className="sm:flex mt-4" id="grid">
-                    <div className="lg:w-1/3 sm:w-1/2 picture-item p-4 rounded-md">
-                        <div className="">
-                            <div className="relative">
-                                <div className="shadow dark:shadow-gray-800 p-5 pb-0 rounded-md bg-[#eb6b11]/5 dark:bg-[#eb6b11]/30">
-                                    <img src="assets/images/portfolio/pro1.jpg" className="rounded-t-md shadow" alt="" />
+                <div class="sm:flex mt-4">
+                    <div class="sm:w-1/2 picture-item p-4 rounded-md">
+                        <div class="">
+                            <div class="relative">
+                                <div class="shadow dark:shadow-gray-800 p-5 pb-0 rounded-md bg-[#d5ddf2] dark:bg-[#1a5fa9]/30">
+                                    <img src="assets/images/portfolio/01.jpg" class="rounded-t-md shadow" alt="" />
                                 </div>
                             </div>
 
-                            <div className="pt-4 px-3">
-                                <h5 className="mb-1 font-semibold text-lg"><a href="https://1.envato.market/techwind" target="_blank" className="hover:text-[#eb6b11] duration-500">Techwind Personal Portfolio</a></h5>
-                                <span className="text-slate-400">Creative</span>
+                            <div class="pt-4 px-3">
+                                <h5 class="mb-1 font-semibold text-xl"><a href="https://1.envato.market/techwind" target="_blank" class="hover:text-[#1a5fa9] duration-500">Techwind Personal Portfolio</a></h5>
+                                <span class="text-slate-400">Creative</span>
                             </div>                            
                         </div>
                     </div>
 
-                    <div className="lg:w-1/3 sm:w-1/2 picture-item p-4 rounded-md">
-                        <div className="">
-                            <div className="relative">
-                                <div className="shadow dark:shadow-gray-800 p-5 pb-0 rounded-md bg-emerald-600/5 dark:bg-emerald-600/30">
-                                    <img src="assets/images/portfolio/pro2.jpg" className="rounded-t-md shadow" alt="" />
+                    <div class="sm:w-1/2 picture-item p-4 rounded-md">
+                        <div class="">
+                            <div class="relative">
+                                <div class="shadow dark:shadow-gray-800 p-5 pb-0 rounded-md bg-[#d5ddf2] dark:bg-emerald-600/30">
+                                    <img src="assets/images/portfolio/02.jpg" class="rounded-t-md shadow" alt="" />
                                 </div>
                             </div>
 
-                            <div className="pt-4 px-3">
-                                <h5 className="mb-1 font-semibold text-lg"><a href="https://1.envato.market/techwind" target="_blank" className="hover:text-emerald-600 duration-500">Techwind Minimal Portfolio</a></h5>
-                                <span className="text-slate-400">Minimal</span>
+                            <div class="pt-4 px-3">
+                                <h5 class="mb-1 font-semibold text-xl"><a href="https://1.envato.market/techwind" target="_blank" class="hover:text-emerald-600 duration-500">Techwind Minimal Portfolio</a></h5>
+                                <span class="text-slate-400">Minimal</span>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="lg:w-1/3 sm:w-1/2 picture-item p-4 rounded-md">
-                        <div className="">
-                            <div className="relative">
-                                <div className="shadow dark:shadow-gray-800 p-5 pb-0 rounded-md bg-red-600/5 dark:bg-red-600/30">
-                                    <img src="assets/images/portfolio/pro3.jpg" className="rounded-t-md shadow" alt="" />
-                                </div>
-                            </div>
-
-                            <div className="pt-4 px-3">
-                                <h5 className="mb-1 font-semibold text-lg"><a href="https://1.envato.market/techwind" target="_blank" className="hover:text-red-600 duration-500">Techwind NFT Market</a></h5>
-                                <span className="text-slate-400">Crypto</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="lg:w-1/3 sm:w-1/2 picture-item p-4 rounded-md">
-                        <div className="">
-                            <div className="relative">
-                                <div className="shadow dark:shadow-gray-800 p-5 pb-0 rounded-md bg-sky-600/5 dark:bg-sky-600/30">
-                                    <img src="assets/images/portfolio/pro4.jpg" className="rounded-t-md shadow" alt="" />
-                                </div>
-                            </div>
-
-                            <div className="pt-4 px-3">
-                                <h5 className="mb-1 font-semibold text-lg"><a href="https://1.envato.market/techwind" target="_blank" className="hover:text-sky-600 duration-500">Techwind Portfolio</a></h5>
-                                <span className="text-slate-400">Portfolio</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="lg:w-1/3 sm:w-1/2 picture-item p-4 rounded-md">
-                        <div className="">
-                            <div className="relative">
-                                <div className="shadow dark:shadow-gray-800 p-5 pb-0 rounded-md bg-amber-600/5 dark:bg-amber-600/30">
-                                    <img src="assets/images/portfolio/pro5.jpg" className="rounded-t-md shadow" alt="" />
-                                </div>
-                            </div>
-
-                            <div className="pt-4 px-3">
-                                <h5 className="mb-1 font-semibold text-lg"><a href="https://1.envato.market/techwind" target="_blank" className="hover:text-amber-600 duration-500">Techwind Constuction</a></h5>
-                                <span className="text-slate-400">Corporate</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="lg:w-1/3 sm:w-1/2 picture-item p-4 rounded-md">
-                        <div className="">
-                            <div className="relative">
-                                <div className="shadow dark:shadow-gray-800 p-5 pb-0 rounded-md bg-[#eb6b11]/5 dark:bg-[#eb6b11]/30">
-                                    <img src="assets/images/portfolio/pro6.jpg" className="rounded-t-md shadow" alt="" />
-                                </div>
-                            </div>
-
-                            <div className="pt-4 px-3">
-                                <h5 className="mb-1 font-semibold text-lg"><a href="https://1.envato.market/techwind" target="_blank" className="hover:text-[#eb6b11] duration-500">Techwind SEO</a></h5>
-                                <span className="text-slate-400">SEO</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="grid md:grid-cols-12 grid-cols-1 md:hidden mt-8">
-                    <div className="md:col-span-12 text-center">
-                        <a href="#" className="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 text-[#eb6b11] hover:text-[#eb6b11] after:bg-[#eb6b11] duration-500 ease-in-out">Voir plus <i className="uil uil-arrow-right align-middle"></i></a>
                     </div>
                 </div>
             </div>
 
-            <div className="container relative md:mt-24 mt-16 lg:pt-24 pt-16">
+
+            <section class="py-20 md:mt-24 mt-16 w-full table relative bg-center bg-no-repeat bg-cover">
+            <div class="absolute inset-0 bg-[#fbe2ce]"></div>
                 <div className="absolute inset-0 opacity-25 dark:opacity-50 bg-[url('../../assets/images/map.html')] bg-no-repeat bg-center bg-cover"></div>
                 <div className="relative grid grid-cols-1 pb-8 text-center z-1">
                     <h3 className="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold text-black dark:text-white">Approuvé par plus de 1K utilisateurs</h3>
 
-                    <p className="text-slate-400 max-w-xl mx-auto">Start working with Tailwind CSS that can provide everything you need to generate awareness, drive traffic, connect.</p>
+                    <p className="text-slate-600 max-w-xl mx-auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmo</p>
                 </div>
 
                 <div className="relative grid md:grid-cols-3 grid-cols-1 items-center mt-8 gap-[30px] z-1">
                     <div className="counter-box  justify-center items-center space-x-4 flex">
                       <div className="pr-5">
-                        <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-400 dark:text-white"><span className="counter-value" data-target={cours.length}>{cours.length}</span>+</h1>
+                        <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-600 dark:text-white"><span className="counter-value" data-target={cours.length}>{cours.length}</span>+</h1>
                         <h5 className="counter-head text-lg font-medium">Cours</h5>
                       </div>
                       <img src={h3} height={70} width={70} alt="Illustration"/>
@@ -303,7 +183,7 @@ const Home = () => {
                     
                     <div className="counter-box  justify-center items-center space-x-4 flex">
                       <div className="pr-5">
-                        <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-400 dark:text-white"><span className="counter-value" data-target={projects.length}>{projects.length}</span>+</h1>
+                        <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-600 dark:text-white"><span className="counter-value" data-target={projects.length}>{projects.length}</span>+</h1>
                         <h5 className="counter-head text-lg font-medium">Projets</h5>
                       </div>
                       <img src={h2} height={70} width={70} alt="Illustration"/>
@@ -311,14 +191,14 @@ const Home = () => {
                     
                     <div className="counter-box  justify-center items-center space-x-4 flex">
                       <div className="pr-5">
-                        <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-400 dark:text-white"><span className="counter-value" data-target={inscris.length}>{inscris.length}</span>+</h1>
+                        <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-600 dark:text-white"><span className="counter-value" data-target={inscris.length}>{inscris.length}</span>+</h1>
                         <h5 className="counter-head text-lg font-medium">Inscrits</h5>
                       </div>
                       <img src={h1} height={70} width={70} alt="Illustration"/>
                     </div>
                 </div>
-            </div>
-
+            </section>
+            
             <div className="container relative md:mt-24 mt-16">
                 <div className="grid grid-cols-1 pb-8 text-center">
                     <h3 className="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold text-black dark:text-white">Témoignages</h3>
@@ -424,7 +304,7 @@ const Home = () => {
                             </div>
 
                             <div className="content mt-3">
-                                <a href="#" className="text-lg font-semibold hover:text-[#eb6b11] duration-500">Jack John</a>
+                                <a href="#" className="text-lg font-semibold hover:text-[#eb6b11] duration-500">Jack John WICK</a>
                                 <p className="text-slate-400">Directeur</p>
                             </div>
                         </div>
@@ -444,7 +324,7 @@ const Home = () => {
                             </div>
 
                             <div className="content mt-3">
-                                <a href="#" className="text-lg font-semibold hover:text-[#eb6b11] duration-500">Krista John</a>
+                                <a href="#" className="text-lg font-semibold hover:text-[#eb6b11] duration-500">Kristelle BELLO</a>
                                 <p className="text-slate-400">Directeur Adjoint</p>
                             </div>
                         </div>
@@ -464,7 +344,7 @@ const Home = () => {
                             </div>
 
                             <div className="content mt-3">
-                                <a href="#" className="text-lg font-semibold hover:text-[#eb6b11] duration-500">Roger Jackson</a>
+                                <a href="#" className="text-lg font-semibold hover:text-[#eb6b11] duration-500">Kévin DOSSOUGA</a>
                                 <p className="text-slate-400">Secrétaire général</p>
                             </div>
                         </div>
@@ -484,8 +364,8 @@ const Home = () => {
                             </div>
 
                             <div className="content mt-3">
-                                <a href="#" className="text-lg font-semibold hover:text-[#eb6b11] duration-500">Johnny English</a>
-                                <p className="text-slate-400">Responsable des admissions</p>
+                                <a href="#" className="text-lg font-semibold hover:text-[#eb6b11] duration-500">Rodrigue SEDEGAN</a>
+                                <p className="text-slate-400">Chef services</p>
                             </div>
                         </div>
                     </div>

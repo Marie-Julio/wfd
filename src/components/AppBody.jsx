@@ -5,6 +5,7 @@ import Carousel from './Carousel';
 import HeroBanner from './HeroBanner';
 import BannerCour from './BannerCour';
 import { Link } from 'react-router';
+import bgfooter from "../assets/images/footer.jpg";
 
 const AppBody = ({home, bannerCour, banner, course, titleBanner,className, imageBanner, descriptionBanner, children}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,7 +48,7 @@ const AppBody = ({home, bannerCour, banner, course, titleBanner,className, image
       </main>
 
       <div className="bg-[#1a5fa9]">
-        <footer className="footer relative text-gray-100 dark:text-gray-400 bg-no-repeat bg-right" style={{ backgroundImage: "url('assets/images/footer.jpg')", backgroundPosition: "top left"}}>
+        <footer className="footer relative text-gray-100 dark:text-gray-400 bg-no-repeat bg-right" style={{ backgroundImage: `url(${bgfooter})`, backgroundPosition: "top left"}}>
             <div className="absolute inset-0 bg-gradient-to-r to-transparent via-[#1a5fa9] dark:via-slate-900 from-[#1a5fa9] dark:from-slate-900"></div>
             <div className="container relative">
                 <div className="grid grid-cols-12">

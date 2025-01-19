@@ -1,5 +1,5 @@
 import logo from "../assets/wfdguinee.png"
-import background from "../assets/slide-2.jpg";
+import background from "../assets/slide-5.jpg";
 import { postResource } from "../services/api";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
@@ -89,7 +89,7 @@ const LoginScreen = () => {
             <div class="pt-0 hover:text-blue-500"><Link to="/reset-password">Mot de passe oublié ?</Link></div>
             <Button isLoading={loading} className="block w-full bg-orange-500 mt-4 py-2 rounded-2xl text-white font-semibold mb-2 hover:text-gray-200 hover:bg-orange-700 focus:outline-none transition-all">Se connecter</Button>
             
-            <div className="text-center pt-5">Vous n’avez pas encore de compte ? <Link to="/register" className=" text-indigo-600 ">S'inscrire</Link></div>
+            <div className="text-center pt-5">Vous n’avez pas encore de compte ? <Link to="/register" className=" text-orange-500 ">S'inscrire</Link></div>
 		</form>
 	</div>
 </div>

@@ -38,11 +38,16 @@ const CoursScreen = () => {
     _init_();
   }, []);
 
+  useEffect(() => {
+    feather.replace();
+  }, []);
+
   // Options de types de cours
   const filterOptions = [
+    { label: "ALL", value: "" },
     { label: "PDF", value: "pdf" },
-    { label: "VIDEO", value: "video" },
-    { label: "TEXT", value: "text" },
+    { label: "PDF & Vidéo ", value: "video & pdf" },
+    { label: "Vidéo", value: "video" },
   ];
 
   // Gestion de la recherche
@@ -89,39 +94,45 @@ const CoursScreen = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <AppBody
-      titleBanner="Formez-vous aux Métiers du Numérique"
-      descriptionBanner="Découvrez nos formations et opportunités professionnelles"
-    >
-      <section className="flex flex-col items-center justify-center min-h-screen w-full">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row lg:space-x-8">
-          {/* Sidebar (Filtres) */}
-          <div className="lg:w-1/4 w-full bg-custom-gradient text-white mb-8 lg:mb-0 p-4 rounded shadow">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Recherche"
-                value={searchTerm}
-                onChange={handleSearch}
-                className="w-full p-2 pl-10 border rounded text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <Search className="absolute left-3 top-2.5 text-gray-400 w-5 h-5" />
-            </div>
-            <div className="mt-8 bg-custom-gradient text-white">
-              <h2 className="text-lg font-semibold flex items-center ml-5">
-                <span className="mr-2 text-2xl">≡</span> Filtres
-              </h2>
-              <div className="mt-4 p-4 rounded-2xl shadow bg-white text-black mx-5">
-                <h3 className="font-bold mb-4">Type de cours</h3>
-                {/* Boutons de filtres */}
+    
+    <AppBody banner={true} titleBanner="Cours" >
+    <section className="flex flex-col items-center justify-center min-h-screen w-full px-4 md:px-8 py-8">
+      {/* Header */}
+      <div className="max-w-7xl mx-auto text-center">
+          <p className="text-base md:text-xl text-gray-600">
+          Veuillez consulter nos derniers cours de formation
+          </p>
+      </div><br /><br />
+      
+      <div class="">
+        <div class="grid md:grid-cols-12 grid-cols-1">
+          <div class="lg:col-span-3 md:col-span-4">
+            
+            <div class="shadow dark:shadow-gray-800 p-6 rounded-md bg-[#eb6b11] dark:bg-slate-900 sticky top-20">
+              
+                  <div class="grid grid-cols-1 gap-3">
+                      <div>
+                          <label for="searchname" class="hidden font-semibold"></label>
+                          <div class="relative">
+                              <i data-feather="search" class="size-4  absolute top-3 start-3"></i>
+                          
+                              <input value={searchTerm} onChange={handleSearch} type="text" class="form-input w-full py-2 px-3 h-10 ps-9 bg-white
+                               dark:bg-slate-50 dark:text-slate-50 rounded outline-none border border-gray-50 focus:border-gray-50 dark:border-gray-50 dark:focus:border-gray-50 
+                               focus:ring-0" placeholder="Rechercher" />
+                          </div>
+                      </div>
+            <div className="mt-8 text-white">
+                <h2 className="text-lg font-semibold">
+                   Filtres type de cours
+                </h2>
                 {filterOptions.map((filter) => (
-                  <div key={filter.value} className="mt-4 mx-3">
+                  <div key={filter.value} className="mt-4">
                     <button
                       onClick={() => handleFilter(filter.value)}
-                      className={`w-full flex justify-between items-center p-2 ${
+                      className={`bg-transparent border-2 w-full flex justify-between items-center p-2 ${
                         selectedFilter === filter.value
                           ? "bg-blue-500 text-white"
-                          : "hover:bg-gray-100 hover:text-blue-600"
+                          : "hover:bg-transparent hover:bg-gray-600"
                       } rounded`}
                     >
                       <span>{filter.label}</span>
@@ -131,15 +142,19 @@ const CoursScreen = () => {
                 ))}
               </div>
             </div>
-          </div>
 
-          {/* Section des cours */}
+          </div>
+          </div>
+          
+          <div class="lg:col-span-9 md:col-span-8">
           <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-5">
             {currentCourses.map((course) => (
               <CourseCard key={course.id} course={course} />
             ))}
           </div>
+          </div>
         </div>
+      </div>
 
         {/* Pagination */}
         <div className="flex justify-center mt-8 w-full px-4">

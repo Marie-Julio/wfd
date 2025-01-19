@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router";
-import background from "../assets/slide-2.jpg";
+import background from "../assets/slide-5.jpg";
 import { Input } from "../components/admin/common/Input";
 import { useFormik } from "formik";
 import * as Yup from "yup";
