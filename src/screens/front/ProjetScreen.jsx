@@ -28,9 +28,9 @@ const ProjetScreen = () => {
             <div className="bg-gray-100 py-10">
             <div className="container mx-auto px-4">
                 <p className="text-center text-gray-600 mb-10">
-                Découvrez nos encadreurs qualifiés et dévoués à votre succès.
+                Ces projets, conçus avec passion et précision, représentent notre réponse à des besoins réels, en combinant savoir-faire, créativité et collaboration
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8">
                 <Project projects={projects}/>
                 </div>
             </div>
