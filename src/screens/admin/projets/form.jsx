@@ -12,6 +12,7 @@ import { useNavigate, useParams } from "react-router";
 import Select from "../../../components/admin/common/Select";
 import InputComplet from "../../../components/admin/common/InputComplet";
 import { jwtDecode } from "jwt-decode";
+import InputCompletNew from "../../../components/admin/common/InputCompletNew";
 
 const FormProjet = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -210,32 +211,30 @@ const handleSelect = (selectedValue) => {
                         ))
                     }
                 </Select>
-                 <InputComplet
+                <InputCompletNew
                     label="L'organisateur"
+                    suggestions={users}
                     name="user_id"
-                    type="text"
-                    datas={users}
-                    value={formik.values.user_id}
-                    onChange={formik.handleChange}
-                    fetchSuggestions={fetchSuggestions}
-                    onSelect={handleSelect}
-                    minChars={2} // Important : permet d'afficher les suggestions dès le début
-                    placeholder="Commencez à taper..."
-                    disabled={loading}
-                />
-                <InputComplet
+                    labelKey="nom"
+                    subLabelKey="prenom"
+                    valueKey="id"
+                    onSelect={(value) => formik.setValues({
+                        user_id: value
+                    })}
+                    defaultValue={formik.values.user_id}
+                    />
+                    <InputCompletNew
                     label="L'inscription"
+                    suggestions={inscriptions}
                     name="inscription_id"
-                    type="number"
-                    datas={inscriptions}
-                    value={formik.values.inscription_id}
-                    onChange={formik.handleChange}
-                    fetchSuggestions={fetchSuggestionsIns}
-                    onSelect={handleSelectIns}
-                    minChars={2} // Important : permet d'afficher les suggestions dès le début
-                    placeholder="Commencez à taper..."
-                    disabled={loading}
-                />
+                    labelKey="annee"
+                    subLabelKey="statut"
+                    valueKey="id"
+                    onSelect={(value) => formik.setValues({
+                        inscription_id: value
+                    })}
+                    defaultValue={formik.values.inscription_id}
+                    />
                 <TextArea label="Details" 
                 val={datas.content}
                 handleChange={(e) => setDatas({...datas, content : e})}

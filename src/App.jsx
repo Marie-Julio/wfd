@@ -43,6 +43,7 @@ import ResetPassword from './screens/Forget'
 import PrivacyPolicy from './screens/front/Politique'
 import LegalNotice from './screens/front/Mention'
 import TeacherProfiles from './screens/front/Member'
+import Gallery from './screens/front/Gallery'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -96,6 +97,7 @@ function App() {
       <Route path="/page-politique" element={ <PrivacyPolicy />  } />  
       <Route path="/page-mention" element={ <LegalNotice />  } />  
       <Route path="/page-members" element={ <TeacherProfiles />  } />  
+      <Route path="/page-galeries" element={ <Gallery />  } />  
      
 
        {/* Screen admin  */}

@@ -6,6 +6,7 @@ import { Button } from '../../components/Button';
 import { errorMessage } from '../../services/Helper';
 import AppBody from '../../components/AppBody';
 import { useNavigate } from 'react-router';
+import { jwtDecode } from 'jwt-decode';
 
 const Forum = () => {
   const [forums, setForums] = useState([]);
@@ -18,6 +19,13 @@ const Forum = () => {
   const [comments, setComments] = useState([]);
   const navigate = useNavigate()
 
+
+  const accessToken = localStorage.getItem("token");
+  const decodedToken = accessToken ? jwtDecode(accessToken) : null;
+
+  if (!accessToken) {
+    navigate("/login");
+  }
 
   const [currentPageForum, setCurrentPageForum] = useState(1); // Page actuelle
   const forumPerPage = 3; // Nombre de cours par page

@@ -4,17 +4,22 @@ import logo from "../assets/wfdguinee.png";
 import { Mail, MapPin, Phone, Menu, X, User } from "lucide-react";
 import { useDispatch } from "react-redux";
 import useAuth from "../hooks/useAuth";
+import { jwtDecode } from "jwt-decode";
 
 const Nav = () => {
   const location = useLocation();
+
+  
+  
   const menuItems = [
     { label: "Accueil", href: "/" },
     { label: "Promotions", href: "/page-promotion" },
-    { label: "Cours", href: "/page-cours" },
+    { label: "Cours", href: "/page-cours", requiresAuth: true  },
     { label: "Informations", href: "/pages-infos" },
-    { label: "Forum", href: "/pages-forum" },
+    { label: "Forum", href: "/pages-forum", requiresAuth: true  },
     { label: "Nos Projets", href: "/pages-projet" },
     { label: "Enseignants", href: "/page-members" },
+    { label: "Galerie", href: "/page-galeries" },
   ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -102,7 +107,7 @@ const Nav = () => {
               </button>
             </div>
             <ul className="flex flex-col space-y-2 p-4">
-              {menuItems.map((item) => (
+              {menuItems.filter((item) => !item.requiresAuth || token).map((item) => (
                 <li key={item.label}>
                   <Link
                     to={item.href}
@@ -159,7 +164,7 @@ const Nav = () => {
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex md:space-x-2">
-            {menuItems.map((item) => (
+            {menuItems.filter((item) => !item.requiresAuth || token).map((item) => (
               <li key={item.label}>
                 <Link
                   to={item.href}
