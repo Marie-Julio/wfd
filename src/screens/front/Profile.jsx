@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { UserCircle, Mail, Phone, MapPin, Building, Calendar, Edit2, Save, User, Download, ChevronDown, ChevronUp } from "lucide-react";
 import {jwtDecode} from "jwt-decode";
-import { getResource, patchResource, postResource } from "../../services/api";
+import { getResource, patchResource, postFile, postResource } from "../../services/api";
 import { useNavigate, useParams } from "react-router";
 import { errorMessage, onServerSuccess } from "../../services/Helper";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Input } from "../../components/admin/common/Input";
 import AppBody from "../../components/AppBody";
+import InputCompletNew from "../../components/admin/common/InputCompletNew";
 
 const Profile = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -18,9 +19,20 @@ const Profile = () => {
   const [testSummary, setTestSummary] = useState({});
   const [isTestCollapseOpen, setIsTestCollapseOpen] = useState(false);
   const [isFormCollapseOpen, setIsFormCollapseOpen] = useState(true);
+  const [galerieCollapse, setGalerieCollapse] = useState(true);
   const [isFormCollapseOpenPassword, setIsFormCollapseOpenPassword] = useState(true);
   const navigate = useNavigate();
   const { id } = useParams();
+
+  const [defaultPromotion , setDefaultPromotion] = useState({})
+const [promotions, setPromotions] = useState([])
+
+ useEffect(() => {
+        getResource(`/promotions`).then((res) => {
+            console.log(res.data)
+            setPromotions(res.data)
+        }).catch((e) => errorMessage(e))
+      }, [])
 
   const accessToken = localStorage.getItem("token");
   const decodedToken = accessToken ? jwtDecode(accessToken) : null;
@@ -59,6 +71,21 @@ const Profile = () => {
       onServerSuccess("Mise à jour réussie !");
       setEditIndex(null); // Désactiver le mode édition
       fetchData(); // Actualiser les données
+    } catch (error) {
+      errorMessage(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Gestion de galerie
+  const handleGalerie = async () => {
+    try {
+      setLoading(true);
+      console.log(formik.values)
+      await postFile(`/galleries`, formik.values);
+      onServerSuccess("Image sauvegarder !");
+      formikGalerie.resetForm();
     } catch (error) {
       errorMessage(error);
     } finally {
@@ -114,6 +141,19 @@ const Profile = () => {
     validationSchema: Yup.object({
     }),
     onSubmit: async (values) => handleReset(values),
+  });
+
+
+  const formikGalerie = useFormik({
+    initialValues: {
+      title: "",
+      description: "",
+      promotion_id: "",
+      image: "",
+    },
+    validationSchema: Yup.object({
+    }),
+    onSubmit: async (values) => handleGalerie(values),
   });
 
   const fetchTestResults = async () => {
@@ -192,13 +232,7 @@ const Profile = () => {
                     {info.nom} {info.prenom}
                   </h1>
                   <p className="text-xl opacity-90">{info.role}</p>
-                  <button
-                    onClick={downloadFiche2}
-                    className="mt-4 px-4 py-2 bg-green-600 hover:bg-green-800 text-white rounded-lg flex items-center gap-2"
-                  >
-                    <Download className="w-5 h-5" />
-                    Télécharger Attestation
-                  </button>
+                  
                 </div>
               </div>
             </div>
@@ -242,43 +276,68 @@ const Profile = () => {
               )}
             </div>
 
-            {/* Test Results Collapse */}
-            <div className="mt-6">
+             {/* Form Collapse Insertion gallerie */}
+             <div className="p-6 sm:p-8">
               <div
-                onClick={() => setIsTestCollapseOpen(!isTestCollapseOpen)}
+                onClick={() => setGalerieCollapse(!galerieCollapse)}
                 className="flex justify-between items-center cursor-pointer bg-gray-100 p-4 rounded-lg shadow hover:bg-gray-200"
               >
-                <h2 className="text-lg font-bold">Résultats des Tests</h2>
-                {isTestCollapseOpen ? <ChevronUp /> : <ChevronDown />}
+                <h2 className="text-lg font-bold">Ajou d'image de galerie</h2>
+                {galerieCollapse ? <ChevronUp /> : <ChevronDown />}
               </div>
-              {isTestCollapseOpen && (
-                <div className="mt-4 bg-white shadow rounded-lg p-6">
-                  <p className="mb-4">
-                    <strong>Nombre de tests :</strong> {testSummary.Nombre} <br />
-                    <strong>Score total :</strong> {testSummary.Total}
-                  </p>
-                  <div className="space-y-4">
-                    {testResults.map((result, index) => (
-                      <div
-                        key={index}
-                        className="p-4 bg-gray-50 rounded-lg shadow hover:bg-gray-100"
-                      >
-                        <h3 className="text-lg font-medium text-blue-600">{result.qcm.title}</h3>
-                        <p className="text-sm text-gray-500">{result.qcm.description}</p>
-                        <p className="mt-2">
-                          <strong>Score :</strong> {result.score} <br />
-                          <strong>Status :</strong> {result.status} <br />
-                          <strong>Date :</strong>{" "}
-                          {new Date(result.created_at).toLocaleDateString()}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              {galerieCollapse && (
+                <form className="mt-4 space-y-4" onSubmit={formikGalerie.handleSubmit}>
+                 
+                     <Input
+                      label="Titre"
+                      name="title"
+                      type="text"
+                      placeholder="Galerie d'exemple"
+                      value={formikGalerie.values.title }
+                      onChange={formikGalerie.handleChange}
+                      error={formikGalerie.errors.title}
+                    />
+                     <Input
+                      label="Description"
+                      name="description"
+                      type="text" 
+                      placeholder="Description"
+                      value={formikGalerie.values.description }
+                      onChange={formikGalerie.handleChange}
+                      error={formikGalerie.errors.description }
+                    />
+                    <Input
+                      label="Image"
+                      name="image"
+                      type="file" 
+                      onChange={(event) => {
+                        formikGalerie.setFieldValue("image", event.target.files[0]); // Enregistre le fichier dans Formik
+                      }}
+                      error={formikGalerie.errors.image }
+                    />
+                    <InputCompletNew
+                label="La promotion"
+                    suggestions={promotions}
+                    name="promotion_id"
+                    labelKey="nom"
+                    subLabelKey="niveau"
+                    valueKey="id"
+                    onSelect={(promotion) => formikGalerie.setFieldValue(
+                        "promotion_id", promotion
+                    )}
+                    defaultValue={formikGalerie.values.promotion_id}
+                    />
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-800 text-white rounded-lg"
+                  >
+                    Sauvegarder
+                  </button>
+                </form>
               )}
             </div>
-             {/* Form Collapse */}
-             <div className="p-6 sm:p-8">
+            {/* Form Collapse */}
+            <div className="p-6 sm:p-8">
               <div
                 onClick={() => setIsFormCollapseOpenPassword(!isFormCollapseOpenPassword)}
                 className="flex justify-between items-center cursor-pointer bg-gray-100 p-4 rounded-lg shadow hover:bg-gray-200"

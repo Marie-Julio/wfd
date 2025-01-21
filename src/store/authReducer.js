@@ -1,7 +1,5 @@
 export const initialState = {
     token: null,
-    modele: [],
-    roles: [],
     isAuthenticated: false,
   };
   

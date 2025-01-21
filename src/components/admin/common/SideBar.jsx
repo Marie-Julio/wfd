@@ -28,11 +28,12 @@ const location = useLocation();
       { title: "Projets", src: "/admin/projets", icon: "bxs-offer"  },
       { title: "QCMs", src: "/admin/qcms", icon: "bxs-palette"  },
       { title: "QCMs questions", src: "/admin/qcms-questions", icon: "bx-conversation"  },
+      { title: "QCMs Choix", src: "/admin/qcms-choix", icon: "bx-conversation"  },
 
 
       { title: "Gestion des utilisateurs ", src: "#", gap: true },
       { title: "Utitlisateur", src: "/admin/users", icon: "bx-group"  },
-      { title: "Role", src: "/admin/roles", icon: "bx-key"  },
+      { title: "Galerie", src: "/admin/gallerie", icon: "bx-key"  },
 
       { title: "Parametrages", src: "Notifications", gap: true },
       { title: "Parametres", src: "Settings", icon: "bx-cog"  }

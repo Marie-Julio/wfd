@@ -18,7 +18,9 @@ const FormProjet = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [filter, setFilter] = useState(false); 
     const [users, setUsers] = useState([])
+    const [defaultUser, setDefaultUser] = useState({})
     const [inscriptions, setInscriptions] = useState([])
+    const [defaultInscris, setDefaultInscris] = useState({})
     const [loading, setLoading] = useState(false)
     const [statuts, setStatuts] = useState([{id: 1, libelle: "oui"}, {id: 2, libelle: "non"}]);
     const [datas, setDatas] = useState({
@@ -69,7 +71,7 @@ const FormProjet = () => {
 
 
     const updateData = (values) => {
-        const newData = { ...values, description: datas.content };
+        const newData = { ...values, description: datas.content, inscription_id: values.inscription_id.id, user_id: values.user_id.id  };
         console.log(newData)
         patchResource("/projets", id, newData).then((res) => {
             // console.log(res)
@@ -84,7 +86,7 @@ const FormProjet = () => {
 
     const saveData = (data) => {
        
-        const newData = { ...data, description: datas.content, inscription_id: parseInt(data.inscription_id), user_id: parseInt(data.user_id) };
+        const newData = { ...data, description: datas.content, inscription_id: data.inscription_id.id, user_id: data.user_id.id };
         console.log(newData)
         postFile("/projets", newData).then((res) => {
             onServerSuccess(res.data.message)
@@ -92,68 +94,6 @@ const FormProjet = () => {
         }).catch((e) => errorMessage(e))
     }
 
-            // Fonction de filtrage basée sur le code
-const fetchSuggestions = async (searchQuery) => {
-    // Si la recherche est vide, retourne toutes les données
-    if (!searchQuery.trim()) {
-        return users.map(item => `${item.nom} - ${item.prenom}`);
-    }
-
-    // Filtre les données localement par code
-    const filtered = users.filter(item => {
-        const code = item.nom.toLowerCase();
-        const query = searchQuery.toLowerCase();
-        return code.includes(query);
-    });
-
-    // Retourne le code et le libellé pour l'affichage
-    return filtered.map(item => `${item.id} - ${item.nom}`);
-};
-
-const handleSelect = (selectedValue) => {
-    // Extrait le code de la valeur sélectionnée (format: "code - libellé")
-    const code = selectedValue.split(' - ')[0];
-    
-    
-    // Trouve l'item complet correspondant au code
-    const selectedItem = users.find(item => item.code === code);
-    // console.log(selectedItem)
-    // specialites.push(selectedItem.nom)
-    // console.log('Item sélectionné:', selectedItem);
-    
-};
-
-
-           // Fonction de filtrage basée sur le nom Inscription
-           const fetchSuggestionsIns = async (searchQuery) => {
-            // Si la recherche est vide, retourne toutes les données
-            if (!searchQuery.trim()) {
-                return inscriptions.map(item => `${item.annee} - ${item.prenom}`);
-            }
-        
-            // Filtre les données localement par code
-            const filtered = inscriptions.filter(item => {
-                const code = item.annee.toLowerCase();
-                const query = searchQuery.toLowerCase();
-                return code.includes(query);
-            });
-        
-            // Retourne le code et le libellé pour l'affichage
-            return filtered.map(item => `${item.id} - ${item.annee}`);
-        };
-        
-        const handleSelectIns = (selectedValue) => {
-            // Extrait le code de la valeur sélectionnée (format: "code - libellé")
-            const code = selectedValue.split(' - ')[0];
-            
-            
-            // Trouve l'item complet correspondant au code
-            const selectedItem = inscriptions.find(item => item.code === code);
-            // console.log(selectedItem)
-            // specialites.push(selectedItem.nom)
-            // console.log('Item sélectionné:', selectedItem);
-            
-        };
 
 
     const formik = useFormik({
@@ -167,21 +107,22 @@ const handleSelect = (selectedValue) => {
             activite_en_cours: "",
             date_demarrage: "",
             cout: 0,
-            file: ""
+            file: "",
+            media: ""
         },
         validationSchema: Yup.object({
-            inscription_id: Yup.string().required('Champ requis'),
-            user_id: Yup.string().required('Champ requis'),
+            // inscription_id: Yup.string().required('Champ requis'),
+            // user_id: Yup.string().required('Champ requis'),
             titre: Yup.string().required('Champ requis'),
             structure: Yup.string().required('Champ requis'),
             secteur: Yup.string().required('Champ requis'),
             activite_en_cours: Yup.string().required('Champ requis'),
             date_demarrage: Yup.string().required('Champ requis'),
             cout: Yup.string().required('Champ requis'),
-            media: Yup.string().required('Champ requis'),
 
         }),
         onSubmit: async (values) => {
+            // console.log(values)
             setLoading(true) 
             if(id) updateData(values)
             else saveData(values) 
@@ -203,7 +144,7 @@ const handleSelect = (selectedValue) => {
                 <Input type="file" name="media" label="L'image" onChange={(event) => {
             formik.setFieldValue("media", event.target.files[0]); // Enregistre le fichier dans Formik
           }}/>
-                <Select name="activite_en_cours" label="L'activite en cours" value={formik.values.activite_en_cours} onChange={formik.handleChange} disabled={false}>
+                <Select name="activite_en_cours" label="Projet en cours" value={formik.values.activite_en_cours} onChange={formik.handleChange} disabled={false}>
                     <option>Choisir l'activite en cours</option>
                     {
                         statuts.map((x) => (
@@ -218,9 +159,9 @@ const handleSelect = (selectedValue) => {
                     labelKey="nom"
                     subLabelKey="prenom"
                     valueKey="id"
-                    onSelect={(value) => formik.setValues({
-                        user_id: value
-                    })}
+                    onSelect={(value) => formik.setFieldValue(
+                        "user_id", value
+                    )}
                     defaultValue={formik.values.user_id}
                     />
                     <InputCompletNew
@@ -230,9 +171,9 @@ const handleSelect = (selectedValue) => {
                     labelKey="annee"
                     subLabelKey="statut"
                     valueKey="id"
-                    onSelect={(value) => formik.setValues({
-                        inscription_id: value
-                    })}
+                    onSelect={(value) => formik.setFieldValue(
+                        "inscription_id", value
+                    )}
                     defaultValue={formik.values.inscription_id}
                     />
                 <TextArea label="Details" 

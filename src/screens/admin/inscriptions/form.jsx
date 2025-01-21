@@ -11,6 +11,7 @@ import TextArea from "../../../components/admin/common/TextArea";
 import Select from "../../../components/admin/common/Select";
 import InputComplet from "../../../components/admin/common/InputComplet";
 import { useNavigate, useParams } from "react-router";
+import InputCompletNew from "../../../components/admin/common/InputCompletNew";
 
 const FormInscription = () => {
     const currentYear = new Date().getFullYear();
@@ -33,12 +34,11 @@ const FormInscription = () => {
             setDatas({content: ""})
 
             formik.setValues({
-                user_id : res.data.user.nom,
-                promotion_id: res.data.promotion.nom,
+                user_id : res.data.user,
+                promotion_id: res.data.promotion,
                 statut : res.data.statut,
             })
-            setDatas({content: res.data.content})
-        }).catch((e) => errorMessage(e))
+        })
     }, [id])
 
 
@@ -62,13 +62,8 @@ const FormInscription = () => {
 
             getResource('/promotions').then((res) => {
                 
-                let newData = res.data.map(({ id, nom, ...rest }) => ({
-                    code: id, 
-                    libelle: nom, 
-                    ...rest    
-                }));
-                console.log(newData)
-                setPromos(newData)
+                console.log(res.data)
+                setPromos(res.data)
             })
 
           }
@@ -78,111 +73,13 @@ const FormInscription = () => {
           }, [])
 
     const saveData = (data) => {
-       console.log(data)
-        postResource("/inscriptions", data).then((res) => {
-            onServerSuccess(res.data.message)
+        const newData = {...data, user_id: data.user_id.id, promotion_id: data.promotion_id.id}
+       console.log(newData)
+        postResource("/inscriptions", newData).then((res) => {
+            onServerSuccess("Cree avec succes")
             formik.resetForm();
         }).catch((e) => errorMessage(e))
     }
-
-    // Fonction de filtrage basée sur le code
-const fetchSuggestionsUsers = async (searchQuery) => {
-    // Si la recherche est vide, retourne toutes les données
-    if (!searchQuery.trim()) {
-        return users.map(item => `${item.nom} - ${item.prenom}`);
-    }
-
-    // Filtre les données localement par code
-    const filtered = users.filter(item => {
-        const code = item.nom.toLowerCase();
-        const query = searchQuery.toLowerCase();
-        return code.includes(query);
-    });
-
-    // Retourne le code et le libellé pour l'affichage
-    return filtered.map(item => `${item.id} - ${item.nom}`);
-};
-
-const handleChangeUsers = (e) => {
-    const { name, value } = e.target;
-    setqueriesColumns(prev => ({
-        ...prev,
-        [name]: value
-    }));
-};
-
-const handleSelectUsers = (selectedValue) => {
-    // Extrait le code de la valeur sélectionnée (format: "code - libellé")
-    const code = selectedValue.split(' - ')[0];
-    
-    
-    // Trouve l'item complet correspondant au code
-    const selectedItem = users.find(item => item.id === id);
-    // console.log(selectedItem)
-    // specialites.push(selectedItem.nom)
-    // console.log('Item sélectionné:', selectedItem);
-    
-    // Mise à jour du formulaire avec le code
-    // setqueriesColumns(prev => ({
-    //     ...prev,
-    //     search: selectedItem.code
-    // }));
-};
-
-const [queriesColumns, setqueriesColumns] = useState({
-    code : '',
-    libelle : '',
-
-})
-
-// Fonction de filtrage basée sur le code
-const fetchSuggestions = async (searchQuery) => {
-    // Si la recherche est vide, retourne toutes les données
-    if (!searchQuery.trim()) {
-        return promos.map(item => `${item.code} - ${item.libelle}`);
-    }
-
-    // Filtre les données localement par code
-    const filtered = promos.filter(item => {
-        console.log(searchQuery)
-        const code = item.libelle.toString();
-        const query = searchQuery.toString();
-        return code.includes(query);
-    });
-
-    // Retourne le code et le libellé pour l'affichage
-    return filtered.map(item => `${item.code} - ${item.libelle}`);
-};
-
-const handleChange = (e) => {
-    const { name, value } = e.target;
-    setqueriesColumns(prev => ({
-        ...prev,
-        [name]: value
-    }));
-};
-
-const handleSelect = (selectedValue) => {
-    // Extrait le code de la valeur sélectionnée (format: "code - libellé")
-    const code = selectedValue.split(' - ')[0];
-    console.log(code)
-    
-    
-    // Trouve l'item complet correspondant au code
-    const selectedItem = promos.find(item => item.code === code);
-    // console.log(selectedItem)
-    // specialites.push(selectedItem.specialite)
-    // console.log('Item sélectionné:', selectedItem);
-    
-    // Mise à jour du formulaire avec le code
-    // setqueriesColumns(prev => ({
-    //     ...prev,
-    //     search: selectedItem.code
-    // }));
-    return selectedItem;
-};
-
-
 
     const formik = useFormik({
         initialValues: {
@@ -192,7 +89,7 @@ const handleSelect = (selectedValue) => {
             annee : currentYear,
         },
         validationSchema: Yup.object({
-            user_id: Yup.string().required('Champ requis'),
+            statut: Yup.string().required('Champ requis'),
             // content: Yup.string().required('Champ requis'),
 
         }),
@@ -209,34 +106,31 @@ const handleSelect = (selectedValue) => {
         <Body isOpen={isOpen} setIsOpen={setIsOpen}>
             <FormBody title={id ? "Mise a jour d'une inscription" : "Creation d'une inscription"}>
             <form className="flex flex-col w-full items-center" onSubmit={formik.handleSubmit}>
-                <InputComplet
+                
+                <InputCompletNew
                     label="L'utilisateur"
+                    suggestions={users}
                     name="user_id"
-                    type="text"
-                    datas={users}
-                    value={formik.values.user_id}
-                    onChange={formik.handleChange}
-                    fetchSuggestions={fetchSuggestionsUsers}
-                    onSelect={handleSelectUsers}
-                    minChars={2} // Important : permet d'afficher les suggestions dès le début
-                    placeholder="Commencez à taper..."
-                    disabled={loading}
+                    labelKey="nom"
+                    subLabelKey="prenom"
+                    valueKey="id"
+                    onSelect={(promotion) => formik.setFieldValue(
+                        "user_id", promotion
+                    )}
+                    defaultValue={formik.values.user_id}
                 />
-                <InputComplet
-                    label="La Promotion"
-                    name="promotion_id"
-                    type="text"
-                    datas={promos}
-                    value={formik.values.promotion_id}
-                    onChange={formik.handleChange}
-                    fetchSuggestions={fetchSuggestions}
-                    onSelect={handleSelect}
-                    minChars={2} // Important : permet d'afficher les suggestions dès le début
-                    placeholder="Commencez à taper..."
-                    displayKey="nom" // Clé pour l'affichage
-                    valueKey="id" // Clé pour la valeur
-                    disabled={loading}
-                />
+                    <InputCompletNew
+                        label="La Promotion"
+                        suggestions={promos}
+                        name="promotion_id"
+                        labelKey="nom"
+                        subLabelKey="niveau"
+                        valueKey="id"
+                        onSelect={(promotion) => formik.setFieldValue(
+                            "promotion_id", promotion
+                        )}
+                        defaultValue={formik.values.promotion_id}
+                    />
                  <Select name="statut" label="Le statut" value={formik.values.statut} onChange={formik.handleChange} disabled={false}>
                                     <option>Choisir le statut</option>
                                     {

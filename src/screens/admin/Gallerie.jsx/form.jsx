@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useFormik } from "formik";
+import { useFormik, useFormikContext } from "formik";
 import  * as Yup  from "yup";
 import { Body } from "../../../components/admin/common/Body";
 import FormBody from "../../../components/admin/common/FormBody";
 import { Input } from "../../../components/admin/common/Input";
 import Button from "../../../components/admin/common/Button";
-import { getResource, patchResource, postResource } from "../../../services/api";
+import { getResource, patchResource, postFile, postResource } from "../../../services/api";
 import { errorMessage, onServerSuccess } from "../../../services/Helper";
 import TextArea from "../../../components/admin/common/TextArea";
 import { useNavigate, useParams } from "react-router";
 import InputComplet from "../../../components/admin/common/InputComplet";
 import InputCompletNew from "../../../components/admin/common/InputCompletNew";
 
-const FormQcm = () => {
+const FormGalerie = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [filter, setFilter] = useState(false); 
     const [loading, setLoading] = useState(false)
@@ -28,44 +28,16 @@ const FormQcm = () => {
         getResource(`/promotions`).then((res) => {
             console.log(res.data)
             setPromotions(res.data)
-        }).catch((e) => errorMessage(e))
+        })
       }, [])
 
-    useEffect(() => {
-        getResource(`/qcms/${id}`).then((res) => {
-            console.log(res.data)
 
-            formik.setValues({
-                title : res.data.title,
-                promotion_id: res.data.promotion
-            })
-            setDefaultPromotion(res.data.promotion)
-            setDatas({content: res.data.description})
-        }).catch((e) => errorMessage(e))
-          }, [id])
-
-         
-
-
-    const updateData = (values) => {
-        const newData = { ...values, description: datas.content, promotion_id: values.promotion_id.id};
-        console.log(newData)
-        patchResource("/qcms", id, newData).then((res) => {
-            // console.log(res)
-            onServerSuccess("Modifie avec succes")
-            formik.resetForm()
-            setDatas({content: ""})
-            setTimeout(() => navigate(`/admin/qcms`), 50)
-        }).catch(e => {
-            errorMessage(e)
-        })
-    }
+      
 
     const saveData = (data) => {
-       
-        const newData = { ...data, description: datas.content, promotion_id: data.promotion_id.id };
+       const newData = {...data, promotion_id: data.promotion_id.id}
         console.log(newData)
-        postResource("/qcms", newData).then((res) => {
+        postFile("/galleries", data).then((res) => {
             onServerSuccess("Cree avec Succes")
             setDatas({content: ""})
             formik.resetForm()
@@ -79,8 +51,10 @@ const FormQcm = () => {
 
     const formik = useFormik({
         initialValues: {
-            title : '',
-            promotion_id : defaultPromotion ,
+            title: "",
+            description: "",
+            promotion_id: "",
+            image: "",
         },
         validationSchema: Yup.object({
             title: Yup.string().required('Champ requis'),
@@ -97,10 +71,37 @@ const FormQcm = () => {
 
     return ( 
         <Body isOpen={isOpen} setIsOpen={setIsOpen}>
-            <FormBody title={id ? "Mise a jour Qcm" : "Creation de Qcm"}>
-            <form className="flex flex-col w-full items-center" onSubmit={formik.handleSubmit}>
-                <Input type="text" name="title" value={formik.values.title} label="Entrez le titre" onChange={formik.handleChange}/>
-                <InputCompletNew
+            <FormBody title={id ? "Mise a jour Qcm Choix" : "Creation de galerie"}>
+            <form className="mt-4 space-y-4" onSubmit={formik.handleSubmit}>
+                 
+                     <Input
+                      label="Titre"
+                      name="title"
+                      type="text"
+                      placeholder="Galerie d'exemple"
+                      value={formik.values.title}
+                      onChange={formik.handleChange}
+                      error={formik.errors.title}
+                    />
+                     <Input
+                      label="Description"
+                      name="description"
+                      type="text" 
+                      placeholder="Description"
+                      value={formik.values.description }
+                      onChange={formik.handleChange}
+                      error={formik.errors.description }
+                    />
+                    <Input
+                      label="Image"
+                      name="image"
+                      type="file" 
+                      onChange={(event) => {
+                        formik.setFieldValue("image", event.target.files[0]); // Enregistre le fichier dans Formik
+                      }}
+                      error={formik.errors.image }
+                    />
+                    <InputCompletNew
                 label="La promotion"
                     suggestions={promotions}
                     name="promotion_id"
@@ -112,15 +113,16 @@ const FormQcm = () => {
                     )}
                     defaultValue={formik.values.promotion_id}
                     />
-                <TextArea label="Details" 
-                val={datas.content}
-                handleChange={(e) => setDatas({...datas, content : e})}
-                />
-                <Button isLoading={loading} className="w-full mt-5" >Enregistrer</Button>
-            </form>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-800 text-white rounded-lg"
+                  >
+                    Sauvegarder
+                  </button>
+                </form>
             </FormBody>
         </Body>
      );
 }
  
-export default FormQcm;
+export default FormGalerie;

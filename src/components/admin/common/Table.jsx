@@ -22,7 +22,7 @@ const Table  = ({ data, reloadFonction, columns = [],open, actions = true, prima
   const [itemsSelected, setItemsSelected] = useState([]);
   const [delModal, setDelModal] = useState(false);
   const [page, setPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [itemsPerPage, setItemsPerPage] = useState(5);
   // const [filter , setFilter] = useState(false)
 
   const getNestedValue = (obj, accessor) => {
@@ -137,7 +137,8 @@ setItems(currentData.slice(offset, offset + itemsPerPage));
         />
         <div className="flex space-x-2">
         <div  className="w-32 mx-3">
-            <Select onChange={(e) => {setItemsPerPage(() => parseInt(e.target.value)); setPage(1)}}>
+            <Select onChange={(e) => {setItemsPerPage(parseInt(e.target.value)), 
+            setPage(1)}}>
                 {
                     [5,10,20,30,50,100].map((item, index) => (
                         <option value={item} key={index}>{item}</option>

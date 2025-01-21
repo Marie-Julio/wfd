@@ -37,13 +37,6 @@ const Forum = () => {
   const commentPerPage = 9; // Nombre de cours par page
 
 
- 
-
-
-
-  
-
-
   // Exemple de récupération des données
   useEffect(() => {
     

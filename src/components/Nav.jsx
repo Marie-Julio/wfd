@@ -150,6 +150,14 @@ const Nav = () => {
               </li>
               <li className="py-2 px-4">
                 <button
+                  onClick={() => navigate('/page-attestations')}
+                  className="block w-full py-2 px-4 text-left text-sm bg-orange-500 text-white rounded hover:bg-blue-800"
+                >
+                  Mes Attestations & Certificats
+                </button>
+              </li>
+              <li className="py-2 px-4">
+                <button
                   onClick={handleLogout}
                   className="block w-full py-2 px-4 text-left text-sm bg-red-600 text-white rounded hover:bg-red-800"
                 >
@@ -190,8 +198,9 @@ const Nav = () => {
                   onClick={toggleProfileMenu}
                 >
                   <User size={20} />
-                  <span>Profil</span>
+                  <span>Mon Profil</span>
                 </button>
+                
                 {isProfileMenuOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded shadow-md z-10">
                     <Link
@@ -199,6 +208,12 @@ const Nav = () => {
                       className="block px-4 py-2 hover:bg-gray-100"
                     >
                       Mon Profil
+                    </Link>
+                    <Link
+                      to="/page-attestations"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Mes Attestations & Certificats
                     </Link>
                     <button
                       onClick={handleLogout}
