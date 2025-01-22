@@ -25,29 +25,18 @@ const Promotion = () => {
                 setTimeout(() => setLoading(false), 1500)
             }, [])
     return ( 
-        <AppBody titleBanner="Informez-vous sur nos actualites">
-          <section className="items-center justify-center min-h-screen w-full md:m-5">
-
-                 {/* Header */}
-            <div className="max-w-7xl mx-auto text-center mb-12 my-20">
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                    Actualités
-                </h1>
-                <p className="text-xl text-gray-600">
-                    Soyez toujours informer de nos actualites.
-                </p>
-            </div>
-
-            {/* Courses Section */}
+        <AppBody banner={true} titleBanner="Promotions">
+        <div className="bg-gray-100 py-10">
+          <div className="container mx-auto px-4">
+            <p className="text-center text-gray-600 mb-10">
+              Découvrez nos encadreurs qualifiés et dévoués à votre succès.
+            </p>
             <div className="max-w-7xl mx-auto mb-12 md:m-10">
                 <Cour courses={infos}/>
             </div>
-
-            </section>
-
-            
-
-        </AppBody>
+        </div>
+      </div>
+    </AppBody>
      );
 }
  

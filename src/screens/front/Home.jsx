@@ -77,7 +77,7 @@ const Home = () => {
         <section className="relative bg-gray-50 dark:bg-slate-800 md:py-24 py-16">
             <div className="container relative">
                 <div className="grid md:grid-cols-12 grid-cols-1 items-center gap-[30px]">
-                    <div className="lg:col-span-5 md:col-span-6">
+                    <div className="lg:col-span-6 md:col-span-6">
                         <div className="grid grid-cols-12 gap-6 items-center">
                             <div className="col-span-6">
                                 <div className="grid grid-cols-1 gap-6">
@@ -94,7 +94,7 @@ const Home = () => {
                         </div>
                     </div>
 
-                    <div className="lg:col-span-7 md:col-span-6">
+                    <div className="lg:col-span-6 md:col-span-6">
                         <div className="lg:ms-5">
                             <div className="flex mb-4">
                                 <span className="text-[#eb6b11] text-2xl font-bold mb-0"><span className="counter-value text-6xl font-bold" data-target="15">10</span>+</span>
@@ -254,97 +254,6 @@ const Home = () => {
             </div>
 
             
-            <div className="container relative md:mt-24 mt-16">
-                <div className="grid grid-cols-1 pb-8 text-center">
-                    <h3 className="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">Personnels administratifs</h3>
-
-                    <p className="text-slate-400 max-w-xl mx-auto">Les membres de l'administrations dédiés au bon fonctionnement de notre institut et à la réussite de nos missions éducatives.</p>
-                </div>
-
-                <div className="grid md:grid-cols-12 grid-cols-1 mt-8 gap-[30px]">
-                    <div className="lg:col-span-3 md:col-span-6">
-                        <div className="group text-center">
-                            <div className="relative inline-block mx-auto size-52 rounded-full overflow-hidden">
-                                <img src="assets/images/client/04.jpg" className="" alt="" />
-                                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black size-52 rounded-full opacity-0 group-hover:opacity-100 duration-500"></div>
-
-                                <ul className="list-none absolute start-0 end-0 -bottom-20 group-hover:bottom-5 duration-500">
-                                    <li className="inline"><a href="#" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full border border-[#eb6b11] bg-[#eb6b11] hover:border-[#eb6b11] hover:bg-[#eb6b11] text-white"><i data-feather="facebook" className="size-4"></i></a></li>
-                                    <li className="inline"><a href="#" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full border border-[#eb6b11] bg-[#eb6b11] hover:border-[#eb6b11] hover:bg-[#eb6b11] text-white"><i data-feather="instagram" className="size-4"></i></a></li>
-                                    <li className="inline"><a href="#" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full border border-[#eb6b11] bg-[#eb6b11] hover:border-[#eb6b11] hover:bg-[#eb6b11] text-white"><i data-feather="linkedin" className="size-4"></i></a></li>
-                                </ul>
-                            </div>
-
-                            <div className="content mt-3">
-                                <a href="#" className="text-lg font-semibold hover:text-[#eb6b11] duration-500">Jack John WICK</a>
-                                <p className="text-slate-400">Directeur</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div className="lg:col-span-3 md:col-span-6">
-                        <div className="group text-center">
-                            <div className="relative inline-block mx-auto size-52 rounded-full overflow-hidden">
-                                <img src="assets/images/client/05.jpg" className="" alt="" />
-                                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black size-52 rounded-full opacity-0 group-hover:opacity-100 duration-500"></div>
-
-                                <ul className="list-none absolute start-0 end-0 -bottom-20 group-hover:bottom-5 duration-500">
-                                    <li className="inline"><a href="#" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full border border-[#eb6b11] bg-[#eb6b11] hover:border-[#eb6b11] hover:bg-[#eb6b11] text-white"><i data-feather="facebook" className="size-4"></i></a></li>
-                                    <li className="inline"><a href="#" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full border border-[#eb6b11] bg-[#eb6b11] hover:border-[#eb6b11] hover:bg-[#eb6b11] text-white"><i data-feather="instagram" className="size-4"></i></a></li>
-                                    <li className="inline"><a href="#" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full border border-[#eb6b11] bg-[#eb6b11] hover:border-[#eb6b11] hover:bg-[#eb6b11] text-white"><i data-feather="linkedin" className="size-4"></i></a></li>
-                                </ul>
-                            </div>
-
-                            <div className="content mt-3">
-                                <a href="#" className="text-lg font-semibold hover:text-[#eb6b11] duration-500">Kristelle BELLO</a>
-                                <p className="text-slate-400">Directeur Adjoint</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div className="lg:col-span-3 md:col-span-6">
-                        <div className="group text-center">
-                            <div className="relative inline-block mx-auto size-52 rounded-full overflow-hidden">
-                                <img src="assets/images/client/06.jpg" className="" alt="" />
-                                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black size-52 rounded-full opacity-0 group-hover:opacity-100 duration-500"></div>
-
-                                <ul className="list-none absolute start-0 end-0 -bottom-20 group-hover:bottom-5 duration-500">
-                                    <li className="inline"><a href="#" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full border border-[#eb6b11] bg-[#eb6b11] hover:border-[#eb6b11] hover:bg-[#eb6b11] text-white"><i data-feather="facebook" className="size-4"></i></a></li>
-                                    <li className="inline"><a href="#" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full border border-[#eb6b11] bg-[#eb6b11] hover:border-[#eb6b11] hover:bg-[#eb6b11] text-white"><i data-feather="instagram" className="size-4"></i></a></li>
-                                    <li className="inline"><a href="#" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full border border-[#eb6b11] bg-[#eb6b11] hover:border-[#eb6b11] hover:bg-[#eb6b11] text-white"><i data-feather="linkedin" className="size-4"></i></a></li>
-                                </ul>
-                            </div>
-
-                            <div className="content mt-3">
-                                <a href="#" className="text-lg font-semibold hover:text-[#eb6b11] duration-500">Kévin DOSSOUGA</a>
-                                <p className="text-slate-400">Secrétaire général</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div className="lg:col-span-3 md:col-span-6">
-                        <div className="group text-center">
-                            <div className="relative inline-block mx-auto size-52 rounded-full overflow-hidden">
-                                <img src="assets/images/client/07.jpg" className="" alt="" />
-                                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black size-52 rounded-full opacity-0 group-hover:opacity-100 duration-500"></div>
-
-                                <ul className="list-none absolute start-0 end-0 -bottom-20 group-hover:bottom-5 duration-500">
-                                    <li className="inline"><a href="#" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full border border-[#eb6b11] bg-[#eb6b11] hover:border-[#eb6b11] hover:bg-[#eb6b11] text-white"><i data-feather="facebook" className="size-4"></i></a></li>
-                                    <li className="inline"><a href="#" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full border border-[#eb6b11] bg-[#eb6b11] hover:border-[#eb6b11] hover:bg-[#eb6b11] text-white"><i data-feather="instagram" className="size-4"></i></a></li>
-                                    <li className="inline"><a href="#" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full border border-[#eb6b11] bg-[#eb6b11] hover:border-[#eb6b11] hover:bg-[#eb6b11] text-white"><i data-feather="linkedin" className="size-4"></i></a></li>
-                                </ul>
-                            </div>
-
-                            <div className="content mt-3">
-                                <a href="#" className="text-lg font-semibold hover:text-[#eb6b11] duration-500">Rodrigue SEDEGAN</a>
-                                <p className="text-slate-400">Chef services</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-
             <div className="container relative md:mt-24 mt-16">
                 <div className="grid grid-cols-1 pb-8 text-center">
                     <h3 className="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">Découvrez nos dernières actualités !</h3>

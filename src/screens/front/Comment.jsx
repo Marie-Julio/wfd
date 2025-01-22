@@ -151,28 +151,31 @@ const Comment = () => {
 
         <div className="mt-6">
           <h2 className="text-2xl font-bold mb-4">Commentaires</h2>
-          {currentComments.map((comment) => (
-            <div
-              key={comment.id}
-              className="border rounded-md p-4 mb-4 bg-blue-100 flex flex-col gap-2"
-            >
-              <div className="flex items-center gap-2">
-                <User className="w-4 h-4 text-gray-700" />
-                <span className="text-sm font-bold">{`${comment.user.prenom} ${comment.user.nom}`}</span>
+          
+          <div class="rounded shadow dark:shadow-slate-800">
+              <div class="p-6 bg-[#eb6b11] text-white dark:bg-slate-50 flex items-center justify-between">
+                  <span class="text-lg font-semibold">Auteur</span>
+                  <span class="text-lg font-semibold">Date</span>
               </div>
-              <p className="text-gray-800">{comment.content}</p>
-              <div className="flex items-center gap-4 text-sm text-gray-600">
-                <div className="flex items-center gap-1">
-                  <Eye className="w-4 h-4" />
-                  <span>{comment.views} vues</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <ThumbsUp className="w-4 h-4" />
-                  <span>{comment.likes} likes</span>
-                </div>
-              </div>
-            </div>
-          ))}
+
+              {currentComments.map((comment) => (
+                <div key={comment.id} class=" bg-white p-6 border-b border-gray-100 dark:border-gray-800">
+                  <div class="sm:flex items-center justify-between">
+                      <div class="flex items-center">
+                          <img src={comment.user.file_path} class="h-10 rounded-full shadow dark:shadow-slate-800" alt="" />
+
+                          <div class="ms-3">
+                              <a href="#" class="hover:text-indigo-600 font-semibold">{`${comment.user.prenom} ${comment.user.nom}`}</a>
+                              <p class="text-slate-400 text-sm font-normal"><i class="uil uil-user"></i> Auteur</p>
+                          </div>
+                      </div>
+                      <p class="text-slate-400 text-sm font-normal mt-3 sm:mt-0"><i class="uil uil-clock"></i> {comment.created_at}</p>
+                  </div>
+
+                  <p class="text-slate-400 mt-4">{comment.content}</p>
+              </div>))}
+
+          </div>
         </div>
 
         <div className="flex justify-center items-center mt-4 space-x-2">

@@ -28,14 +28,6 @@ const Forum = () => {
   const [currentPageComment, setCurrentPageComment] = useState(1); // Page actuelle
   const commentPerPage = 9; // Nombre de cours par page
 
-
- 
-
-
-
-  
-
-
   // Exemple de récupération des données
   useEffect(() => {
     
@@ -122,16 +114,18 @@ const Forum = () => {
   
     const visiblePages = getVisiblePages();
   
+    useEffect(() => {
+      feather.replace();
+    }, []);
+  
 
   return (
-    <AppBody className="bg-gray-200 ">
+    <AppBody banner={true} titleBanner="Forum">
     <section className="max-w-7xl mx-auto p-4 bg-gray-200">
-      {/* Liste des forums */}
       {!selectedForum && (
-      <div className="flex flex-row w-full gap-6">
-      {/* Section Forums */}
-      <div className="flex-1 relative">
-        <h1 className="text-3xl font-bold mb-6">Forums</h1>
+      <div className="w-full gap-6">
+      <div className="relative">
+          <h1 className="text-3xl font-bold mb-6">Forums</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-30">
             {currentForum.map((forum) => (
               <Card

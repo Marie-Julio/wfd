@@ -67,9 +67,9 @@ const Cour = ({courses = []}) => {
                 <div className="flex flex-col items-center">
                     {/* <img src={danger} className="w-12 h-12 mb-3"/> */}
                     <p className="text-black text-xl font-bold">Êtes-vous sûr de vouloir vous inscrire dans cette promotion ?</p>
-                    <div className="flex mt-5">
-                        <Button className="bg-danger mr-3" onClick={() => saveData(course.id)}>OUI</Button>
-                        <Button className="bg-gray-700" onClick={() => setDelModal(false)}>NON</Button>
+                    <div className="flex mt-5 space-x-10">
+                        <button className="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md" onClick={() => saveData(course.id)}>Oui</button>
+                        <button className="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white rounded-md" onClick={() => setDelModal(false)}>Non</button>
                     </div>
                 </div>
               </Modal>
