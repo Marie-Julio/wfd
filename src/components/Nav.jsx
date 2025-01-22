@@ -4,17 +4,22 @@ import logo from "../assets/wfdguinee.png";
 import { Mail, MapPin, Phone, Menu, X, User } from "lucide-react";
 import { useDispatch } from "react-redux";
 import useAuth from "../hooks/useAuth";
+import { jwtDecode } from "jwt-decode";
 
 const Nav = () => {
   const location = useLocation();
+
+  
+  
   const menuItems = [
     { label: "Accueil", href: "/" },
     { label: "Promotions", href: "/page-promotion" },
-    { label: "Cours", href: "/page-cours" },
+    { label: "Cours", href: "/page-cours", requiresAuth: true  },
     { label: "Informations", href: "/pages-infos" },
-    { label: "Forum", href: "/pages-forum" },
+    { label: "Forum", href: "/pages-forum", requiresAuth: true  },
     { label: "Nos Projets", href: "/pages-projet" },
     { label: "Enseignants", href: "/page-members" },
+    { label: "Galerie", href: "/page-galeries" },
   ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -102,7 +107,7 @@ const Nav = () => {
               </button>
             </div>
             <ul className="flex flex-col space-y-2 p-4">
-              {menuItems.map((item) => (
+              {menuItems.filter((item) => !item.requiresAuth || token).map((item) => (
                 <li key={item.label}>
                   <Link
                     to={item.href}
@@ -145,6 +150,14 @@ const Nav = () => {
               </li>
               <li className="py-2 px-4">
                 <button
+                  onClick={() => navigate('/page-attestations')}
+                  className="block w-full py-2 px-4 text-left text-sm bg-orange-500 text-white rounded hover:bg-blue-800"
+                >
+                  Mes Attestations & Certificats
+                </button>
+              </li>
+              <li className="py-2 px-4">
+                <button
                   onClick={handleLogout}
                   className="block w-full py-2 px-4 text-left text-sm bg-red-600 text-white rounded hover:bg-red-800"
                 >
@@ -159,7 +172,7 @@ const Nav = () => {
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex md:space-x-2">
-            {menuItems.map((item) => (
+            {menuItems.filter((item) => !item.requiresAuth || token).map((item) => (
               <li key={item.label}>
                 <Link
                   to={item.href}
@@ -185,8 +198,9 @@ const Nav = () => {
                   onClick={toggleProfileMenu}
                 >
                   <User size={20} />
-                  <span>Profil</span>
+                  <span>Mon Profil</span>
                 </button>
+                
                 {isProfileMenuOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded shadow-md z-10">
                     <Link
@@ -194,6 +208,12 @@ const Nav = () => {
                       className="block px-4 py-2 hover:bg-gray-100"
                     >
                       Mon Profil
+                    </Link>
+                    <Link
+                      to="/page-attestations"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Mes Attestations & Certificats
                     </Link>
                     <button
                       onClick={handleLogout}

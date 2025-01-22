@@ -43,6 +43,12 @@ import ResetPassword from './screens/Forget'
 import PrivacyPolicy from './screens/front/Politique'
 import LegalNotice from './screens/front/Mention'
 import TeacherProfiles from './screens/front/Member'
+import Gallery from './screens/front/Gallery'
+import ChoixAdmin from './screens/admin/choix'
+import FormChoix from './screens/admin/choix/form'
+import Attestation from './screens/front/Attestation'
+import GalerieAdmin from './screens/admin/Gallerie.jsx'
+import FormGalerie from './screens/admin/Gallerie.jsx/form'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -96,13 +102,18 @@ function App() {
       <Route path="/page-politique" element={ <PrivacyPolicy />  } />  
       <Route path="/page-mention" element={ <LegalNotice />  } />  
       <Route path="/page-members" element={ <TeacherProfiles />  } />  
+      <Route path="/page-galeries" element={ <Gallery />  } />  
+      <Route path="/page-attestations" element={ <Attestation />  } />  
      
 
        {/* Screen admin  */}
        <Route path="/admin/dashboard" element={     <AdminHome/>  } /> 
       <Route path="/admin/qcms-questions" element={     <Question/>  } /> 
       <Route path="/admin/qcms-questions-create" element={     <FormQuestion/>  } /> 
-      <Route path="/admin/qcms-questions-update/:id" element={     <FormQuestion/>  } /> 
+      <Route path="/admin/qcms-questions-update/:id" element={     <FormQuestion/>  } />
+      <Route path="/admin/qcms-choix" element={     <ChoixAdmin />  } /> 
+      <Route path="/admin/qcms-choix-create" element={     <FormChoix/>  } />  
+      <Route path="/admin/qcms-choix-update/:id" element={     <FormChoix/>  } />  
       <Route path="/admin/qcms" element={     <QcmAdmin/>  } /> 
       <Route path="/admin/qcms-create" element={     <FormQcm/>  } /> 
       <Route path="/admin/qcms-update/:id" element={     <FormQcm/>  } /> 
@@ -125,6 +136,8 @@ function App() {
       <Route path="/admin/notification-create" element={     <FormNotification />  } /> 
       <Route path="/admin/notification-update/:id" element={     <FormNotification />  } /> 
       <Route path="/admin/users" element={     <Utilisateur />  } /> 
+      <Route path="/admin/gallerie" element={     <GalerieAdmin />  } /> 
+      <Route path="/admin/gallerie-create" element={     <FormGalerie />  } /> 
     </Routes>
     </Router>
     <ToastContainer autoClose={8000} icon={true} transition={Flip}/>

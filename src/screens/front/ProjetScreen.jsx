@@ -3,10 +3,12 @@ import AppBody from "../../components/AppBody";
 import { getResource } from "../../services/api";
 import { errorMessage } from "../../services/Helper";
 import Project from "../../components/Project";
+import { Loader } from "lucide-react";
 
 const ProjetScreen = () => {
 
     const [projects, setProjects] = useState([]);
+    const [loading, setLoading] = useState(true); // État pour le chargement
       
           const _init_ = () => {
             getResource("/projets").then((res) => {
@@ -14,13 +16,21 @@ const ProjetScreen = () => {
                 setProjects(res.data)
             }).catch(e => {
                 errorMessage(e)
-              })
+              }).finally(() => setLoading(false))
     
         }
     
         useEffect(() => {
             _init_()
         }, [])
+
+        if (loading) {
+            return (
+              <div className="flex items-center justify-center h-screen">
+                <Loader className="w-16 h-16 text-orange-500 animate-spin" /> {/* Spinner orange */}
+              </div>
+            );
+          }
 
 
     return ( 

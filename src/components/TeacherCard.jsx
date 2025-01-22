@@ -5,15 +5,17 @@ const TeacherProfileCard = ({ teacher }) => {
     <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
       {/* Photo de l'enseignant */}
       <img
-        src={teacher.photo}
+        src={teacher.file_path}
         alt={`${teacher.name}'s profile`}
         className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-500"
       />
       {/* Nom de l'enseignant */}
-      <h3 className="text-lg font-semibold text-gray-800">{teacher.name}</h3>
+      <h3 className="text-lg font-semibold text-gray-800">{teacher.nom}- {teacher.prenom}</h3>
       {/* Matière enseignée */}
-      <p className="text-sm text-blue-600 font-medium">{teacher.subject}</p>
+      <p className="text-sm text-blue-600 font-medium">{teacher.role}</p>
       {/* Brève description */}
+      <p className="text-gray-600 text-center mt-3 text-sm">{teacher.telephone}</p>
+      <p className="text-gray-600 text-center mt-3 text-sm">{teacher.email}</p>
       <p className="text-gray-600 text-center mt-3 text-sm">{teacher.description}</p>
       {/* Boutons d'action */}
       <div className="mt-4 flex space-x-4">

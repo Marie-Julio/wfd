@@ -12,7 +12,7 @@ import { useNavigate, useParams } from "react-router";
 import InputComplet from "../../../components/admin/common/InputComplet";
 import InputCompletNew from "../../../components/admin/common/InputCompletNew";
 
-const FormQcm = () => {
+const FormChoix = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [filter, setFilter] = useState(false); 
     const [loading, setLoading] = useState(false)
@@ -25,22 +25,21 @@ const FormQcm = () => {
     const {id} = useParams()
 
     useEffect(() => {
-        getResource(`/promotions`).then((res) => {
+        getResource(`/qcm-questions`).then((res) => {
             console.log(res.data)
             setPromotions(res.data)
         }).catch((e) => errorMessage(e))
       }, [])
 
     useEffect(() => {
-        getResource(`/qcms/${id}`).then((res) => {
+        getResource(`/qcm-choices/${id}`).then((res) => {
             console.log(res.data)
 
             formik.setValues({
-                title : res.data.title,
-                promotion_id: res.data.promotion
+                choice_text : res.data.choice_text,
+                question_id: res.data.question
             })
-            setDefaultPromotion(res.data.promotion)
-            setDatas({content: res.data.description})
+            setDefaultPromotion(res.data.question)
         }).catch((e) => errorMessage(e))
           }, [id])
 
@@ -48,14 +47,13 @@ const FormQcm = () => {
 
 
     const updateData = (values) => {
-        const newData = { ...values, description: datas.content, promotion_id: values.promotion_id.id};
+        const newData = { ...values, question_id: values.question_id.id};
         console.log(newData)
-        patchResource("/qcms", id, newData).then((res) => {
+        patchResource("/qcm-choices", id, newData).then((res) => {
             // console.log(res)
             onServerSuccess("Modifie avec succes")
             formik.resetForm()
-            setDatas({content: ""})
-            setTimeout(() => navigate(`/admin/qcms`), 50)
+            setTimeout(() => navigate(`/admin/qcms-choix`), 50)
         }).catch(e => {
             errorMessage(e)
         })
@@ -63,9 +61,9 @@ const FormQcm = () => {
 
     const saveData = (data) => {
        
-        const newData = { ...data, description: datas.content, promotion_id: data.promotion_id.id };
+        const newData = { ...data, question_id: data.question_id.id };
         console.log(newData)
-        postResource("/qcms", newData).then((res) => {
+        postResource("/qcm-choices", newData).then((res) => {
             onServerSuccess("Cree avec Succes")
             setDatas({content: ""})
             formik.resetForm()
@@ -79,11 +77,11 @@ const FormQcm = () => {
 
     const formik = useFormik({
         initialValues: {
-            title : '',
-            promotion_id : defaultPromotion ,
+            choice_text : '',
+            question_id : defaultPromotion ,
         },
         validationSchema: Yup.object({
-            title: Yup.string().required('Champ requis'),
+            choice_text: Yup.string().required('Champ requis'),
 
         }),
         onSubmit: async (values) => {
@@ -97,25 +95,21 @@ const FormQcm = () => {
 
     return ( 
         <Body isOpen={isOpen} setIsOpen={setIsOpen}>
-            <FormBody title={id ? "Mise a jour Qcm" : "Creation de Qcm"}>
+            <FormBody title={id ? "Mise a jour Qcm Choix" : "Creation de Qcm Choix"}>
             <form className="flex flex-col w-full items-center" onSubmit={formik.handleSubmit}>
-                <Input type="text" name="title" value={formik.values.title} label="Entrez le titre" onChange={formik.handleChange}/>
+                <Input type="text" name="choice_text" value={formik.values.choice_text} label="Entrez le choix" onChange={formik.handleChange}/>
                 <InputCompletNew
-                label="La promotion"
+                label="La question"
                     suggestions={promotions}
-                    name="promotion_id"
-                    labelKey="nom"
-                    subLabelKey="niveau"
+                    name="question_id"
+                    labelKey="question_text"
+                    subLabelKey="correct_answer"
                     valueKey="id"
                     onSelect={(promotion) => formik.setFieldValue(
-                        "promotion_id", promotion
+                        "question_id", promotion
                     )}
-                    defaultValue={formik.values.promotion_id}
+                    defaultValue={formik.values.question_id}
                     />
-                <TextArea label="Details" 
-                val={datas.content}
-                handleChange={(e) => setDatas({...datas, content : e})}
-                />
                 <Button isLoading={loading} className="w-full mt-5" >Enregistrer</Button>
             </form>
             </FormBody>
@@ -123,4 +117,4 @@ const FormQcm = () => {
      );
 }
  
-export default FormQcm;
+export default FormChoix;
