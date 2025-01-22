@@ -36,10 +36,6 @@ const Forum = () => {
   const [currentPageComment, setCurrentPageComment] = useState(1); // Page actuelle
   const commentPerPage = 9; // Nombre de cours par page
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 54556b74fb1dc59ae3c5b36427e332e009caabbe
   // Exemple de récupération des données
   useEffect(() => {
     

@@ -64,6 +64,7 @@ const FormProjet = () => {
                 activite_en_cours: res.data.activite_en_cours,
                 date_demarrage: res.data.date_demarrage,
                 cout: res.data.cout,
+                auteur: res.data.auteur,
                 media: res.data.media
             })
         })
@@ -108,7 +109,8 @@ const FormProjet = () => {
             date_demarrage: "",
             cout: 0,
             file: "",
-            media: ""
+            media: "",
+            auteur: ""
         },
         validationSchema: Yup.object({
             // inscription_id: Yup.string().required('Champ requis'),
@@ -138,6 +140,7 @@ const FormProjet = () => {
             <form className="flex flex-col w-full items-center" onSubmit={formik.handleSubmit}>
                 <Input type="text" name="titre" value={formik.values.titre} label="Entrez le titre" onChange={formik.handleChange}/>
                 <Input type="text" name="structure" value={formik.values.structure} label="La date de debut" onChange={formik.handleChange}/>
+                <Input type="text" name="auteur" value={formik.values.auteur} label="Le nom de l'auteur" onChange={formik.handleChange}/>
                 <Input type="text" name="secteur" value={formik.values.secteur} label="Le secteur" onChange={formik.handleChange}/>
                 <Input type="date" name="date_demarrage" value={formik.values.date_demarrage} label="La date de demarrage" onChange={formik.handleChange}/>
                 <Input type="number" name="cout" value={formik.values.cout} label="Le cout" onChange={formik.handleChange}/>
