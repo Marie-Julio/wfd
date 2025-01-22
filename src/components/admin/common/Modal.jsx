@@ -14,7 +14,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
 
   return (
     <div className={`fixed inset-0 flex items-center justify-center z-50 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-300 ease-out`}>
-      <div className="fixed inset-0 bg-black bg-opacity-50"></div>
+      {/* <div className="fixed inset-0 bg-white bg-opacity-60 opacity-100"></div> */}
       <div
         className={`bg-white py-5 px-10 rounded shadow-lg z-10 transform ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'} transition-all duration-300 ease-out`}
       >

@@ -57,7 +57,7 @@ const Attestation = () => {
   };
 
   const downloadAttestationQCM = (qcmId) => {
-    const url = `/attestation?id=${qcmId}`;
+    const url = `/attestation?id=${2}`;
     getResource(url, { responseType: "blob" })
       .then((response) => {
         const url = window.URL.createObjectURL(new Blob([response.data], { type: "application/pdf" }));
@@ -112,6 +112,7 @@ const Attestation = () => {
                 </p>
                 <div className="space-y-4">
                   {testResults.map((result, index) => (
+                    
                     <div
                       key={index}
                       className="p-4 bg-gray-50 rounded-lg shadow hover:bg-gray-100"

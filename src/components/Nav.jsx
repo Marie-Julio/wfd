@@ -13,7 +13,7 @@ const Nav = () => {
   
   const menuItems = [
     { label: "Accueil", href: "/" },
-    { label: "Promotions", href: "/page-promotion" },
+    { label: "Promotions", href: "/page-promotion", requiresAuth: true  },
     { label: "Cours", href: "/page-cours", requiresAuth: true  },
     { label: "Informations", href: "/pages-infos" },
     { label: "Forum", href: "/pages-forum", requiresAuth: true  },

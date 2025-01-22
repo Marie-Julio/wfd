@@ -1,6 +1,6 @@
 import { Book, ChevronDown, ChevronUp, Clock, Star, User } from "lucide-react";
 import { useState } from "react";
-import { dateToFr, errorMessage, onServerSuccess, truncateStringAdvanced } from "../services/Helper";
+import { dateToFR, dateToFr, dateToInput, errorMessage, onServerSuccess, truncateStringAdvanced } from "../services/Helper";
 import { Button } from "./Button";
 import Modal from "./admin/common/Modal";
 import { postResource } from "../services/api";
@@ -11,6 +11,9 @@ const Cour = ({courses = []}) => {
     const [delModal, setDelModal] = useState(false);
     const access_token = localStorage.getItem('token');
     const tokenNew = access_token ? jwtDecode(access_token) : null;
+    const today = new Date();
+const formattedDate = today.toISOString().split("T")[0]; // Exemple : "2025-01-20"
+// console.log(formattedDate);
     const saveData = (data) => {
            console.log(data)
             postResource("/inscriptions", {
@@ -26,7 +29,14 @@ const Cour = ({courses = []}) => {
         }
     return ( 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8  w-full">
-        {courses.map((course) => (
+        {courses.map((course) => {
+            // Récupération de la date d'aujourd'hui
+            const today = new Date();
+            const formattedToday = today.toISOString().split("T")[0]; // "YYYY-MM-DD"
+
+            // Vérification si la date de fin (result.qcm.date_fin) est inférieure à aujourd'hui
+            const isExpired = course.date_fin > formattedToday;
+          return (
           <div
             key={course.id}
             className="bg-white w-130 h-fit rounded-lg shadow-lg overflow-hidden transition-transform duration-800 hover:transform hover:scale-105 hover:scale-105 hover:shadow-2xl hover:shadow-orange-300/100"
@@ -61,7 +71,7 @@ const Cour = ({courses = []}) => {
                   </div>
                   
                   <p className="text-gray-600 font-semibold">Du: {dateToFr(course.date_debut)} au {dateToFr(course.date_fin)}</p>
-                  <Button onClick={() => setDelModal(true)} className="mb-2 mt-10">Inscription</Button>
+                  {course.statut == "active" &&  isExpired && <Button onClick={() => setDelModal(true)} className="mb-2 mt-10">Inscription</Button>}
                 </div>
                 <Modal isOpen={delModal} onClose={() => setDelModal(false)}>
                 <div className="flex flex-col items-center">
@@ -99,7 +109,7 @@ const Cour = ({courses = []}) => {
               )}
             </div>
           </div>
-        ))}
+        )})}
 
       
       </div>
