@@ -7,7 +7,7 @@ import {  decryptToken, getData } from "./Helper";
 
 const apiUrl = import.meta.env.VITE_API_URI_BASE;
 axios.defaults.baseURL = apiUrl + "/api";
-
+console.log(apiUrl)
 axios.interceptors.request.use(
   async function (config) {
     /** Intercepter du token utilisateur et l'utiliser tant que disponible */

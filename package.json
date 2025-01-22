@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port 5174 --mode env",
-    "build": "vite build",
+    "dev": "vite --port 5174 --mode prod",
+    "build": "vite build --mode prod",
     "lint": "eslint .",
     "preview": "vite preview"
   },
