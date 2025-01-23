@@ -20,11 +20,12 @@ const Register = () => {
     console.log(data);
     postResource("register", data)
       .then((res) => {
-        console.log(res);
-        onServerSuccess("Inscription réussie !");
+        // console.log(res);
+        
         auth.login(res.data.token);
         formik.resetForm();
         setIsLoading(false);
+        onServerSuccess("Inscription réussie ! Bienvenue sur notre plateforme.");
         setTimeout(() => navigate("/"), 100);
       })
       .catch((e) => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { UserCircle, Mail, Phone, MapPin, Building, Calendar, Edit2, Save, User, Download, ChevronDown, ChevronUp } from "lucide-react";
+import { UserCircle, Mail, Phone, MapPin, Building, Calendar, Edit2, Save, User, Download, ChevronDown, ChevronUp, Loader } from "lucide-react";
 import {jwtDecode} from "jwt-decode";
 import { getResource, patchResource, postFile, postResource } from "../../services/api";
 import { useNavigate, useParams } from "react-router";
@@ -9,6 +9,8 @@ import * as Yup from "yup";
 import { Input } from "../../components/admin/common/Input";
 import AppBody from "../../components/AppBody";
 import InputCompletNew from "../../components/admin/common/InputCompletNew";
+import Button from "../../components/admin/common/Button";
+import useAuth from "../../hooks/useAuth";
 
 const Profile = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -23,6 +25,7 @@ const Profile = () => {
   const [isFormCollapseOpenPassword, setIsFormCollapseOpenPassword] = useState(true);
   const navigate = useNavigate();
   const { id } = useParams();
+  const auth = useAuth();
 
   const [defaultPromotion , setDefaultPromotion] = useState({})
 const [promotions, setPromotions] = useState([])
@@ -40,6 +43,13 @@ const [promotions, setPromotions] = useState([])
   if (!accessToken) {
     navigate("/login");
   }
+
+  
+ const handleLogout = () => {
+    localStorage.removeItem("token");
+    auth.logout();
+    navigate("/login");
+  };
 
   // Fonction d'initialisation
   const fetchData = async () => {
@@ -97,12 +107,12 @@ const [promotions, setPromotions] = useState([])
    const handleReset = async (data) => {
     try {
       setLoading(true);
-      console.log(formik.values)
       const newData = {...data, email : formik.values.email, id: decodedToken.id}
-      await postResource(`/reset`, decodedToken.id, newData),
+      console.log(newData)
+      await postResource(`/reset`, newData),
       onServerSuccess("Mise à jour réussie !");
       setEditIndex(null); // Désactiver le mode édition
-      fetchData(); // Actualiser les données
+      handleLogout()
     } catch (error) {
       errorMessage(error);
     } finally {
@@ -198,7 +208,9 @@ const [promotions, setPromotions] = useState([])
   }, []);
 
   if (loading) {
-    return <p>Chargement...</p>;
+    return  <div className="flex items-center justify-center h-screen">
+    <Loader className="w-16 h-16 text-orange-500 animate-spin" /> {/* Spinner orange */}
+  </div>;
   }
 
   return (
@@ -366,12 +378,12 @@ const [promotions, setPromotions] = useState([])
                       onChange={formikPassowrd.handleChange}
                       error={formikPassowrd.errors.password_confirmation }
                     />
-                  <button
+                  <Button
                     type="submit"
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-800 text-white rounded-lg"
+                    className="w-full"
                   >
                     Sauvegarder
-                  </button>
+                  </Button>
                 </form>
               )}
             </div>

@@ -47,19 +47,21 @@ export const hasRole = (roles, allowedRoles) => {
 
 export const errorMessage = (e) => {
   if (e.response.status === 500) {
-    onServerError("Erreur")
+    onServerError(e.response.data.message)
   }else if(e.response.status === 404) {
-    onServerError("Erreur .")
+    onServerError(e.response.data.message)
   }else if(e.response.status === 403) {
     onServerError("Accès non autorisé.")
   }else if(e.response.status === 400) {
-    onServerError("Erreur.")
+    onServerError(e.response.data.message)
   }else if(e.response.status === 401) {
     // redirect("/")
     console.log("Vous n'etes pas connecte. Veuillez-vous reconnecter!")
     // onServerWarning("Vous n'etes pas connecte. Veuillez-vous reconnecter!")
     
   }else if(e.response.status === 403) {
+    onServerError(e.response.data.message)
+  }else if(e.response.status === 422) {
     onServerError(e.response.data.message)
   }
 }
