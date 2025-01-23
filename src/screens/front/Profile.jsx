@@ -9,12 +9,9 @@ import * as Yup from "yup";
 import { Input } from "../../components/admin/common/Input";
 import AppBody from "../../components/AppBody";
 import InputCompletNew from "../../components/admin/common/InputCompletNew";
-<<<<<<< HEAD
-import imgprofil from "../../assets/images/profil.png";
-=======
 import Button from "../../components/admin/common/Button";
 import useAuth from "../../hooks/useAuth";
->>>>>>> aaf51f146484705c6a11d4b7cdf543ba4ffb6c77
+import imgprofil from "../../assets/images/profil.png";
 
 const Profile = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -298,7 +295,7 @@ const [promotions, setPromotions] = useState([])
                 onClick={() => setGalerieCollapse(!galerieCollapse)}
                 className="flex justify-between items-center cursor-pointer bg-gray-100 p-4 rounded-lg shadow hover:bg-gray-200"
               >
-                <h2 className="text-lg font-bold">Ajou d'image de galerie</h2>
+                <h2 className="text-lg font-bold">Ajouter une image à la galerie</h2>
                 {galerieCollapse ? <ChevronUp /> : <ChevronDown />}
               </div>
               {galerieCollapse && (
