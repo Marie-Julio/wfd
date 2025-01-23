@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import background from "../assets/slide-5.jpg";
 import { Input } from "../components/admin/common/Input";
 import { useFormik } from "formik";
@@ -14,6 +14,7 @@ import logo from "../assets/wfdguinee.png";
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate()
   const auth = useAuth();
 
   const saveData = (data) => {

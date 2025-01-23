@@ -9,15 +9,13 @@ import * as Yup from "yup";
 import { Input } from "../../components/admin/common/Input";
 import AppBody from "../../components/AppBody";
 import InputCompletNew from "../../components/admin/common/InputCompletNew";
-<<<<<<< HEAD
 import imgprofil from "../../assets/images/profil.png";
-=======
 import Button from "../../components/admin/common/Button";
 import useAuth from "../../hooks/useAuth";
->>>>>>> aaf51f146484705c6a11d4b7cdf543ba4ffb6c77
 
 const Profile = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
   const [info, setInfo] = useState({});
   const [editIndex, setEditIndex] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -55,11 +53,32 @@ const [promotions, setPromotions] = useState([])
     navigate("/login");
   };
 
+  const handleImageChange = async(event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedImage(URL.createObjectURL(file));
+      // Envoyer l'image au backend
+      onImageUpload(file);
+
+      try {
+        setLoading(true);
+        await postFile(`/profil-user`, {file: file});
+        onServerSuccess("Image sauvegarder !");
+      } catch (error) {
+        errorMessage(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
   // Fonction d'initialisation
   const fetchData = async () => {
+    console.log(decodedToken)
     try {
       const response = await getResource(`/me?id=${decodedToken.id}`);
       const userData = response.data;
+      console.log(userData)
       setInfo(userData);
       formik.setValues({
         email: userData.email,
@@ -93,11 +112,13 @@ const [promotions, setPromotions] = useState([])
   };
 
   // Gestion de galerie
-  const handleGalerie = async () => {
+  const handleGalerie = async (values) => {
     try {
       setLoading(true);
-      console.log(formik.values)
-      await postFile(`/galleries`, formik.values);
+      
+      const newData = {...values, promotion_id: values.promotion_id.id}
+      console.log(newData)
+      await postFile(`/galleries`, newData);
       onServerSuccess("Image sauvegarder !");
       formikGalerie.resetForm();
     } catch (error) {
@@ -232,16 +253,28 @@ const [promotions, setPromotions] = useState([])
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                 >
-                  <img
-                    src={info.file_path || imgprofil}
-                    alt=""
+                 <img
+                    src={selectedImage || info.file_path || imgprofil}
+                    alt="Profile"
                     className="w-32 h-32 rounded-full border-4 border-white shadow-lg"
                   />
-                  {isHovered && (
-                    <div className="absolute inset-0 bg-black bg-opacity-40 rounded-full flex items-center justify-center">
-                      <span className="text-white text-sm">Modifier Photo</span>
-                    </div>
-                  )}
+                   {isHovered && (
+                        <div className="absolute inset-0 bg-black bg-opacity-40 rounded-full flex items-center justify-center">
+                          <label
+                            htmlFor="profile-upload"
+                            className="text-white text-sm cursor-pointer"
+                          >
+                            Modifier Photo
+                          </label>
+                          <input
+                            id="profile-upload"
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={handleImageChange}
+                          />
+                        </div>
+                      )}
                 </div>
                 <div className="text-center md:text-left text-white">
                   <h1 className="text-3xl font-bold">
@@ -343,12 +376,12 @@ const [promotions, setPromotions] = useState([])
                     )}
                     defaultValue={formikGalerie.values.promotion_id}
                     />
-                  <button
+                  <Button
                     type="submit"
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-800 text-white rounded-lg"
+                    className="w-full"
                   >
                     Sauvegarder
-                  </button>
+                  </Button>
                 </form>
               )}
             </div>

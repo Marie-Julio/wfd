@@ -19,14 +19,19 @@ import CourIcon from "../../assets/images/cours.svg";
 
 const Home = () => {
   const [projects, setProjects] = useState([]);
+  const [projectsTotal, setProjectsTotal] = useState([]);
   const [cours, setCours] = useState([]);
+  const [coursTotal, setCoursTotal] = useState([]);
   const [infos, setInfos] = useState([]);
+  const [infosTotal, setInfosTotal] = useState([]);
   const [inscris, setInscris] = useState([]);
+  const [inscrisTotal, setInscrisTotal] = useState([]);
   
       const _init_ = () => {
         getResource("/projets").then((res) => {
             console.log(res.data)
             setProjects(res.data.slice(0, 3))
+            setProjectsTotal(res.data)
         }).catch(e => {
             errorMessage(e)
           })
@@ -34,16 +39,19 @@ const Home = () => {
           getResource("/announcements").then((res) => {
             console.log(res.data);
             setInfos(res.data.slice(0, 3));
+            setInfosTotal(res.data);
         })
 
           getResource("/course-modules").then((res) => {
             console.log(res.data)
             setCours(res.data.slice(0, 8))
+            setCoursTotal(res.data)
         })
 
         getResource("/inscriptions").then((res) => {
           console.log(res.data)
           setInscris(res.data.slice(0, 6))
+          setInscrisTotal(res.data)
       })
     }
 
@@ -147,7 +155,7 @@ const Home = () => {
                 <div className="relative grid md:grid-cols-3 grid-cols-1 items-center mt-8 gap-[30px] z-1">
                     <div className="counter-box  justify-center items-center space-x-4 flex">
                       <div className="pr-5">
-                        <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-600 dark:text-white"><span className="counter-value" data-target={cours.length}>{cours.length}</span>+</h1>
+                        <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-600 dark:text-white"><span className="counter-value" data-target={cours.length}>{coursTotal.length}</span>+</h1>
                         <h5 className="counter-head text-lg font-medium">Cours</h5>
                       </div>
                       <img src={h3} height={70} width={70} alt="Illustration"/>
@@ -155,7 +163,7 @@ const Home = () => {
                     
                     <div className="counter-box  justify-center items-center space-x-4 flex">
                       <div className="pr-5">
-                        <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-600 dark:text-white"><span className="counter-value" data-target={projects.length}>{projects.length}</span>+</h1>
+                        <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-600 dark:text-white"><span className="counter-value" data-target={projects.length}>{projectsTotal.length}</span>+</h1>
                         <h5 className="counter-head text-lg font-medium">Projets</h5>
                       </div>
                       <img src={h2} height={70} width={70} alt="Illustration"/>
@@ -163,7 +171,7 @@ const Home = () => {
                     
                     <div className="counter-box  justify-center items-center space-x-4 flex">
                       <div className="pr-5">
-                        <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-600 dark:text-white"><span className="counter-value" data-target={inscris.length}>{inscris.length}</span>+</h1>
+                        <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-600 dark:text-white"><span className="counter-value" data-target={inscris.length}>{inscrisTotal.length}</span>+</h1>
                         <h5 className="counter-head text-lg font-medium">Inscrits</h5>
                       </div>
                       <img src={h1} height={70} width={70} alt="Illustration"/>

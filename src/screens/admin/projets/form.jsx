@@ -139,7 +139,7 @@ const FormProjet = () => {
             <FormBody title={id ? "Mise a jour Projet" : "Creation de Projet"}>
             <form className="flex flex-col w-full items-center" onSubmit={formik.handleSubmit}>
                 <Input type="text" name="titre" value={formik.values.titre} label="Entrez le titre" onChange={formik.handleChange}/>
-                <Input type="text" name="structure" value={formik.values.structure} label="La date de debut" onChange={formik.handleChange}/>
+                <Input type="text" name="structure" value={formik.values.structure} label="La structure" onChange={formik.handleChange}/>
                 <Input type="text" name="auteur" value={formik.values.auteur} label="Le nom de l'auteur" onChange={formik.handleChange}/>
                 <Input type="text" name="secteur" value={formik.values.secteur} label="Le secteur" onChange={formik.handleChange}/>
                 <Input type="date" name="date_demarrage" value={formik.values.date_demarrage} label="La date de demarrage" onChange={formik.handleChange}/>
