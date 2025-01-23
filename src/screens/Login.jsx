@@ -22,15 +22,15 @@ const LoginScreen = () => {
         setLoading(true)
         console.log(data)
         postResource("login", data).then((res) => {
-            console.log(res.data)
-            onServerSuccess("Connexion reussie!!!")
+            // console.log(res.data)
             auth.login(res.data.access_token)
             const token = res.data.access_token ? jwtDecode(res.data.access_token) : null;
             formik.resetForm();
             setLoading(false)
+            onServerSuccess("Connexion reussie!!!")
             if (token.role === "participant")
-                setTimeout(() => navigate("/"), 300)
-            else setTimeout(() => navigate("/admin/dashboard"), 300)
+                setTimeout(() => navigate("/"), 100)
+            else setTimeout(() => navigate("/admin/dashboard"), 100)
         }).catch(e => {
             setLoading(false)
             errorMessage(e)
