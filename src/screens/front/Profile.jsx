@@ -9,6 +9,7 @@ import * as Yup from "yup";
 import { Input } from "../../components/admin/common/Input";
 import AppBody from "../../components/AppBody";
 import InputCompletNew from "../../components/admin/common/InputCompletNew";
+import imgprofil from "../../assets/images/profil.png";
 
 const Profile = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -217,8 +218,8 @@ const [promotions, setPromotions] = useState([])
                   onMouseLeave={() => setIsHovered(false)}
                 >
                   <img
-                    src={info.file_path}
-                    alt="Profile"
+                    src={info.file_path || imgprofil}
+                    alt=""
                     className="w-32 h-32 rounded-full border-4 border-white shadow-lg"
                   />
                   {isHovered && (
@@ -231,7 +232,7 @@ const [promotions, setPromotions] = useState([])
                   <h1 className="text-3xl font-bold">
                     {info.nom} {info.prenom}
                   </h1>
-                  <p className="text-xl opacity-90">{info.role}</p>
+                  <p className="text-sm opacity-90 uppercase">{info.role}</p>
                   
                 </div>
               </div>

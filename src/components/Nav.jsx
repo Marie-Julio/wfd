@@ -5,6 +5,8 @@ import { Mail, MapPin, Phone, Menu, X, User } from "lucide-react";
 import { useDispatch } from "react-redux";
 import useAuth from "../hooks/useAuth";
 import { jwtDecode } from "jwt-decode";
+import imgmenu from "../assets/images/menu.png";
+import imgclose from "../assets/images/close.png";
 
 const Nav = () => {
   const location = useLocation();
@@ -40,12 +42,10 @@ const Nav = () => {
 
   return (
     <>
-      {/* Header Section */}
       <div className="flex flex-wrap items-center justify-between pt-4 px-6 bg-gray-50">
-  {/* Logo */}
-  <a href="/" className="flex items-center mb-4 md:mb-2">
-    <img src={logo} className="h-12" alt="Logo" />
-  </a>
+      <a href="/" className="flex items-center mb-4 md:mb-2">
+        <img src={logo} className="h-12" alt="Logo" />
+      </a>
 
   {/* Contact Information */}
   <div className="flex space-x-4">
@@ -88,10 +88,10 @@ const Nav = () => {
         <div className="container mx-auto flex justify-between items-center px-4 py-3">
           {/* Hamburger Icon */}
           <button
-            className="md:hidden focus:outline-none"
+            className="md:hidden focus:outline-none bg-transparent"
             onClick={toggleMenu}
           >
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMenuOpen ? <img src={imgmenu} width="40px" /> : <img src={imgmenu} width="40px" />}
           </button>
 
           {/* Drawer Menu */}
@@ -100,10 +100,10 @@ const Nav = () => {
               isMenuOpen ? "translate-x-0" : "-translate-x-full"
             } z-50`}
           >
-            <div className="flex justify-between items-center p-4 border-b border-blue-700">
+            <div className="flex justify-between items-center p-4 border-b border-gray-50">
               <span className="text-lg font-bold">Menu</span>
-              <button onClick={toggleMenu}>
-                <X size={24} />
+              <button onClick={toggleMenu} className="bg-transparent">
+              <img src={imgclose} width="40px" />
               </button>
             </div>
             <ul className="flex flex-col space-y-2 p-4">
@@ -140,10 +140,10 @@ const Nav = () => {
               </>
             ) : (
               <>
-              <li className="py-2 px-4">
+              <li className="py-2 px-4 ">
                 <button
                   onClick={() => navigate('/page-profil')}
-                  className="block w-full py-2 px-4 text-left text-sm bg-blue-500 text-white rounded hover:bg-blue-800"
+                  className=" -ml-4 block w-full py-2 px-4 text-left text-sm bg-blue-500 text-white rounded hover:bg-blue-800"
                 >
                   Profile
                 </button>
@@ -151,7 +151,7 @@ const Nav = () => {
               <li className="py-2 px-4">
                 <button
                   onClick={() => navigate('/page-attestations')}
-                  className="block w-full py-2 px-4 text-left text-sm bg-orange-500 text-white rounded hover:bg-blue-800"
+                  className=" -ml-4 block w-full py-2 px-4 text-left text-sm bg-orange-500 text-white rounded hover:bg-blue-800"
                 >
                   Mes Attestations & Certificats
                 </button>
@@ -159,7 +159,7 @@ const Nav = () => {
               <li className="py-2 px-4">
                 <button
                   onClick={handleLogout}
-                  className="block w-full py-2 px-4 text-left text-sm bg-red-600 text-white rounded hover:bg-red-800"
+                  className=" -ml-4 block w-full py-2 px-4 text-left text-sm bg-red-600 text-white rounded hover:bg-red-800"
                 >
                   Déconnexion
                 </button>
@@ -217,7 +217,7 @@ const Nav = () => {
                     </Link>
                     <button
                       onClick={handleLogout}
-                      className="block w-full bg-red-700 text-left px-4 py-2 hover:bg-red-500"
+                      className="block w-full bg-red-700 text-left px-4 text-white py-2 hover:bg-red-500"
                     >
                       Déconnexion
                     </button>
