@@ -9,7 +9,7 @@ import { postResource } from "../services/api";
 import Select from "../components/admin/common/Select";
 import Button from "../components/admin/common/Button";
 import useAuth from "../hooks/useAuth";
-import { errorMessage } from "../services/Helper";
+import { errorMessage, onServerSuccess } from "../services/Helper";
 import logo from "../assets/wfdguinee.png";
 
 const Register = () => {
