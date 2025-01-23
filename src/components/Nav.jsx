@@ -217,7 +217,7 @@ const Nav = () => {
                     </Link>
                     <button
                       onClick={handleLogout}
-                      className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                      className="block w-full bg-red-700 text-left px-4 py-2 hover:bg-red-500"
                     >
                       Déconnexion
                     </button>
