@@ -12,6 +12,7 @@ import InputCompletNew from "../../components/admin/common/InputCompletNew";
 import Button from "../../components/admin/common/Button";
 import useAuth from "../../hooks/useAuth";
 import imgprofil from "../../assets/images/profil.png";
+import bgmotpasse from "../../assets/motpasse.png";
 
 const Profile = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -22,8 +23,8 @@ const Profile = () => {
   const [testSummary, setTestSummary] = useState({});
   const [isTestCollapseOpen, setIsTestCollapseOpen] = useState(false);
   const [isFormCollapseOpen, setIsFormCollapseOpen] = useState(true);
-  const [galerieCollapse, setGalerieCollapse] = useState(true);
-  const [isFormCollapseOpenPassword, setIsFormCollapseOpenPassword] = useState(true);
+  const [galerieCollapse, setGalerieCollapse] = useState(false);
+  const [isFormCollapseOpenPassword, setIsFormCollapseOpenPassword] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
   const auth = useAuth();
@@ -221,7 +222,7 @@ const [promotions, setPromotions] = useState([])
           {/* Card Profil */}
           <div className="bg-white shadow-xl overflow-hidden">
             {/* Section Header */}
-            <div className="relative bg-gradient-to-r from-blue-600 to-purple-600 p-8">
+            <div className="relative bg-gradient-to-r from-[#1a5fa9] to-purple-600 p-8">
               <div className="absolute inset-0 bg-black opacity-10"></div>
               <div className="relative flex flex-col md:flex-row items-center gap-6">
                 <div
@@ -241,6 +242,7 @@ const [promotions, setPromotions] = useState([])
                   )}
                 </div>
                 <div className="text-center md:text-left text-white">
+                  <p className="text-sm font-semibold text-orange-400 uppercase">{info.matricule}</p>
                   <h1 className="text-3xl font-bold">
                     {info.nom} {info.prenom}
                   </h1>
@@ -281,7 +283,7 @@ const [promotions, setPromotions] = useState([])
                   ))}
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-800 text-white rounded-lg"
+                    className="px-4 py-2 bg-[#1a5fa9] hover:bg-blue-800 text-white rounded-lg"
                   >
                     Sauvegarder
                   </button>
@@ -342,7 +344,7 @@ const [promotions, setPromotions] = useState([])
                     />
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-800 text-white rounded-lg"
+                    className="px-4 py-2 bg-[#1a5fa9] hover:bg-blue-800 text-white rounded-lg"
                   >
                     Sauvegarder
                   </button>
@@ -351,42 +353,49 @@ const [promotions, setPromotions] = useState([])
             </div>
             {/* Form Collapse */}
             <div className="p-6 sm:p-8">
-              <div
-                onClick={() => setIsFormCollapseOpenPassword(!isFormCollapseOpenPassword)}
-                className="flex justify-between items-center cursor-pointer bg-gray-100 p-4 rounded-lg shadow hover:bg-gray-200"
-              >
-                <h2 className="text-lg font-bold">Réinitialisation de mot de passe</h2>
-                {isFormCollapseOpenPassword ? <ChevronUp /> : <ChevronDown />}
-              </div>
-              {isFormCollapseOpenPassword && (
-                <form className="mt-4 space-y-4" onSubmit={formikPassowrd.handleSubmit}>
-                 
-                     <Input
-                      label="Nouvel mot de passe"
-                      name="password"
-                      type="password"
-                      placeholder="***********"
-                      value={formikPassowrd.values.password }
-                      onChange={formikPassowrd.handleChange}
-                      error={formikPassowrd.errors.password}
-                    />
-                     <Input
-                      label="Nouvel mot de passe"
-                      name="password_confirmation"
-                      type="password" 
-                      placeholder="***********"
-                      value={formikPassowrd.values.password_confirmation }
-                      onChange={formikPassowrd.handleChange}
-                      error={formikPassowrd.errors.password_confirmation }
-                    />
-                  <Button
-                    type="submit"
-                    className="w-full"
+                  <div
+                    onClick={() => setIsFormCollapseOpenPassword(!isFormCollapseOpenPassword)}
+                    className="flex justify-between items-center cursor-pointer bg-gray-100 p-4 rounded-lg shadow hover:bg-gray-200"
                   >
-                    Sauvegarder
-                  </Button>
-                </form>
-              )}
+                    <h2 className="text-lg font-bold">Réinitialisation de mot de passe</h2>
+                    {isFormCollapseOpenPassword ? <ChevronUp /> : <ChevronDown />}
+                  </div>
+              <div className="flex">
+                <div className="relative w-2/5 items-center bg-no-repeat bg-contain bg-center mt-10 " style={{ backgroundImage: `url(${bgmotpasse})` }}>
+                  
+                </div>
+                <div className="w-3/5">
+                  {isFormCollapseOpenPassword && (
+                    <form className="mt-4 space-y-4" onSubmit={formikPassowrd.handleSubmit}>
+                    
+                        <Input
+                          label="Nouvel mot de passe"
+                          name="password"
+                          type="password"
+                          placeholder="***********"
+                          value={formikPassowrd.values.password }
+                          onChange={formikPassowrd.handleChange}
+                          error={formikPassowrd.errors.password}
+                        />
+                        <Input
+                          label="Nouvel mot de passe"
+                          name="password_confirmation"
+                          type="password" 
+                          placeholder="***********"
+                          value={formikPassowrd.values.password_confirmation }
+                          onChange={formikPassowrd.handleChange}
+                          error={formikPassowrd.errors.password_confirmation }
+                        />
+                      <Button
+                        type="submit"
+                        className="w-full"
+                      >
+                        Sauvegarder
+                      </Button>
+                    </form>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>

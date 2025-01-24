@@ -1,32 +1,21 @@
 import React from "react";
+import imgprofil2 from "../assets/images/profil.png";
 
 const TeacherProfileCard = ({ teacher }) => {
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
-      {/* Photo de l'enseignant */}
-      <img
-        src={teacher.file_path}
-        alt={`${teacher.name}'s profile`}
-        className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-500"
-      />
-      {/* Nom de l'enseignant */}
-      <h3 className="text-lg font-semibold text-gray-800">{teacher.nom}- {teacher.prenom}</h3>
-      {/* Matière enseignée */}
-      <p className="text-sm text-blue-600 font-medium">{teacher.role}</p>
-      {/* Brève description */}
-      <p className="text-gray-600 text-center mt-3 text-sm">{teacher.telephone}</p>
-      <p className="text-gray-600 text-center mt-3 text-sm">{teacher.email}</p>
-      <p className="text-gray-600 text-center mt-3 text-sm">{teacher.description}</p>
-      {/* Boutons d'action */}
-      <div className="mt-4 flex space-x-4">
-        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-200">
-          Contacter
-        </button>
-        <button className="bg-gray-100 text-gray-800 px-4 py-2 rounded hover:bg-gray-200 transition duration-200">
-          Voir profil
-        </button>
-      </div>
+    
+    <div class=" bg-white group relative overflow-hidden rounded-md shadow dark:shadow-gray-800 hover:shadow-lg dark:hover:shadow-gray-800 duration-500 ease-in-out">
+    <div class="py-10 bg-gradient-to-r to-orange-600/70 from-indigo-600/70"></div>
+    <div class="p-6 pt-0 -mt-10 text-center">
+        <img src={teacher.file_path || imgprofil2}
+        alt={`${teacher.name}'s profile`} class="size-30 p-1 rounded-full bg-white dark:bg-slate-900 shadow-lg dark:shadow-gray-800 mx-auto" />
+
+        <div class="mt-4">
+            <h5 class="text-xl font-semibold mb-3">{teacher.prenom} {teacher.nom}</h5>
+            <p className="text-[#eb6b11] text-center text-sm">{teacher.email}</p><p className="text-gray-600 text-center mt-3 text-sm">{teacher.description}</p>
+        </div>
     </div>
+</div>
   );
 };
 

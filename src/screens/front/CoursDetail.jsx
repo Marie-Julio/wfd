@@ -165,7 +165,7 @@ const unixTimestamp = Math.floor(now / 1000);
                   onClick={markAsRead}
                   disabled={readStatus}
                   className={`flex items-center gap-2 ${
-                    readStatus ? 'bg-green-100 text-green-600' : 'bg-blue-600 text-white'
+                    readStatus ? 'bg-green-100 text-green-600' : 'bg-[#1a5fa9] text-white'
                   }`}
                 >
                   <CheckCircle className="w-4 h-4" />

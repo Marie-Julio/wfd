@@ -30,7 +30,6 @@ const CoursScreen = () => {
         setFilteredCourses(res.data); // Initialiser les cours affichés
       })
       .catch((e) => {
-        errorMessage(e);
       });
   };
 
@@ -94,8 +93,10 @@ const CoursScreen = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    
-    <AppBody banner={true} titleBanner="Cours" >
+    <AppBody>
+    <div className="p-12 bg-[#1a5fa9] flex flex-col md:flex-row justify-between items-center text-white">
+      <h1 className="text-2xl font-bold mb-4 md:mb-0">Cours</h1>
+    </div>
     <section className="flex flex-col items-center justify-center min-h-screen w-full px-4 md:px-8 py-8">
       {/* Header */}
       <div className="max-w-7xl mx-auto text-center">
@@ -131,7 +132,7 @@ const CoursScreen = () => {
                       onClick={() => handleFilter(filter.value)}
                       className={`bg-transparent border-2 w-full flex justify-between items-center p-2 ${
                         selectedFilter === filter.value
-                          ? "bg-blue-500 text-white"
+                          ? "bg-[#1a5fa9] text-white"
                           : "hover:bg-transparent hover:bg-gray-600"
                       } rounded`}
                     >
@@ -174,7 +175,7 @@ const CoursScreen = () => {
                 onClick={() => paginate(number)}
                 className={`px-4 py-2 mx-1 border rounded ${
                   currentPage === number
-                    ? "bg-blue-500 text-white"
+                    ? "bg-[#1a5fa9] text-white"
                     : "bg-white"
                 }`}
               >

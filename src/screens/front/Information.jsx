@@ -25,7 +25,10 @@ const Information = () => {
         }, [])
     
     return ( 
-        <AppBody banner={true} titleBanner="Actualités">
+    <AppBody>
+        <div className="p-12 bg-[#1a5fa9] flex flex-col md:flex-row justify-between items-center text-white">
+          <h1 className="text-2xl font-bold mb-4 md:mb-0">Actualités</h1>
+        </div>
           <section className="flex flex-col items-center justify-center min-h-screen w-full px-4 md:px-8 py-8">
             {/* Header */}
             <div className="max-w-7xl mx-auto text-center">

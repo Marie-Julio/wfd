@@ -6,13 +6,11 @@ import { useDispatch } from "react-redux";
 import useAuth from "../hooks/useAuth";
 import { jwtDecode } from "jwt-decode";
 import imgmenu from "../assets/images/menu.png";
+import imghome from "../assets/images/home.png";
 import imgclose from "../assets/images/close.png";
 
 const Nav = () => {
   const location = useLocation();
-
-  
-  
   const menuItems = [
     { label: "Accueil", href: "/" },
     { label: "Promotions", href: "/page-promotion", requiresAuth: true  },
@@ -47,52 +45,49 @@ const Nav = () => {
         <img src={logo} className="h-12" alt="Logo" />
       </a>
 
-  {/* Contact Information */}
-  <div className="flex space-x-4">
-    {/* Visible on all screen sizes */}
-    <div className="flex items-center space-x-2">
-      <span className="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-[#eb6b11] hover:bg-[#db5b01] border border-[#eb6b11] hover:border-[#db5b01] text-white">
-        <Phone className="w-6 h-6 text-gray-100" /></span>
-      <div>
-        <h1 className="font-bold text-sm text-gray-800">Contact</h1>
-        <p className="text-xs text-gray-500">+224 612 77 77 56</p>
+      {/* Contact Information */}
+      <div className="flex space-x-4">
+        {/* Visible on all screen sizes */}
+        <div className="flex items-center space-x-2 transform transition-all duration-500 hover:scale-105">
+          <span className="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-[#eb6b11] hover:bg-[#db5b01] border border-[#eb6b11] hover:border-[#db5b01] text-white">
+            <Phone className="w-6 h-6 text-gray-100" /></span>
+          <div>
+            <h1 className="font-bold text-sm text-gray-800">Contact</h1>
+            <p className="text-xs text-gray-500">+224 612 77 77 56</p>
+          </div>
+        </div>
+
+        {/* Email */}
+        <div className="flex items-center space-x-2 transform transition-all duration-500 hover:scale-105">
+          <span className="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-[#eb6b11] hover:bg-[#db5b01] border border-[#eb6b11] hover:border-[#db5b01] text-white">
+            <Mail className="w-6 h-6 text-gray-100" /></span>
+          <div>
+            <h1 className="font-bold text-sm text-gray-800">Mail</h1>
+            <p className="text-xs text-gray-500">contact@wfdguinee.org</p>
+          </div>
+        </div>
+
+        {/* Address (hidden on small screens) */}
+        <div className="hidden md:flex items-center space-x-2 transform transition-all duration-500 hover:scale-105">
+          <span className="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-[#eb6b11] hover:bg-[#db5b01] border border-[#eb6b11] hover:border-[#db5b01] text-white">
+            <MapPin className="w-6 h-6 text-gray-100" /></span>
+          <div>
+            <h1 className="font-bold text-sm text-gray-800">Adresse</h1>
+            <p className="text-xs text-gray-500">Conkary, Ratoma, Nongo </p>
+          </div>
+        </div>
       </div>
     </div>
-
-    {/* Email */}
-    <div className="flex items-center space-x-2">
-      <span className="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-[#eb6b11] hover:bg-[#db5b01] border border-[#eb6b11] hover:border-[#db5b01] text-white">
-        <Mail className="w-6 h-6 text-gray-100" /></span>
-      <div>
-        <h1 className="font-bold text-sm text-gray-800">Mail</h1>
-        <p className="text-xs text-gray-500">contact@wfdguinee.org</p>
-      </div>
-    </div>
-
-    {/* Address (hidden on small screens) */}
-    <div className="hidden md:flex items-center space-x-2">
-      <span className="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-[#eb6b11] hover:bg-[#db5b01] border border-[#eb6b11] hover:border-[#db5b01] text-white">
-        <MapPin className="w-6 h-6 text-gray-100" /></span>
-      <div>
-        <h1 className="font-bold text-sm text-gray-800">Adresse</h1>
-        <p className="text-xs text-gray-500">Conkary, Ratoma, Nongo </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
       {/* Navbar Section */}
       <nav className="bg-custom-gradient text-white">
-        <div className="container mx-auto flex justify-between items-center px-4 py-3">
+        <div className=" mx-auto flex justify-between items-center px-4 py-3">
           {/* Hamburger Icon */}
-          <button
-            className="md:hidden focus:outline-none bg-transparent"
-            onClick={toggleMenu}
-          >
-            {isMenuOpen ? <img src={imgmenu} width="40px" /> : <img src={imgmenu} width="40px" />}
-          </button>
+          <div className="">
+            <button className="md:hidden focus:outline-none bg-transparent" onClick={toggleMenu} >
+              {isMenuOpen ? <img src={imgmenu} width="40px" /> : <img src={imgmenu} width="40px" />}
+            </button>
+          </div>
 
           {/* Drawer Menu */}
           <div
@@ -143,7 +138,7 @@ const Nav = () => {
               <li className="py-2 px-4 ">
                 <button
                   onClick={() => navigate('/page-profil')}
-                  className=" -ml-4 block w-full py-2 px-4 text-left text-sm bg-blue-500 text-white rounded hover:bg-blue-800"
+                  className=" -ml-4 block w-full py-2 px-4 text-left text-sm bg-[#1a5fa9] text-white rounded hover:bg-blue-800"
                 >
                   Profile
                 </button>
@@ -171,7 +166,7 @@ const Nav = () => {
           </div>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex md:space-x-2">
+          <ul className="hidden md:flex lg:space-x-2 md:space-x-1">
             {menuItems.filter((item) => !item.requiresAuth || token).map((item) => (
               <li key={item.label}>
                 <Link
@@ -179,7 +174,7 @@ const Nav = () => {
                   className={` whitespace-nowrap py-2 px-4 rounded ${
                     location.pathname === item.href
                       ? "bg-orange-500 text-white"
-                      : "hover:bg-blue-700 hover:text-white"
+                      : "hover:bg-blue-700 hover:text-white "
                   }`}
                 >
                   {item.label}
@@ -198,7 +193,7 @@ const Nav = () => {
                   onClick={toggleProfileMenu}
                 >
                   <User size={20} />
-                  <span>Mon Profil</span>
+                  <span>Profil</span>
                 </button>
                 
                 {isProfileMenuOpen && (
@@ -207,7 +202,7 @@ const Nav = () => {
                       to="/page-profil"
                       className="block px-4 py-2 hover:bg-gray-100"
                     >
-                      Mon Profil
+                      Mon Compte
                     </Link>
                     <Link
                       to="/page-attestations"

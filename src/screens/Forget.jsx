@@ -49,7 +49,7 @@ const ResetPassword = () => {
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-[#1a5fa9] focus:border-[#1a5fa9] sm:text-sm"
                 placeholder="example@domain.com"
                 required
               />
@@ -57,7 +57,7 @@ const ResetPassword = () => {
             <div>
               <button
                 type="submit"
-                className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="w-full py-2 px-4 bg-[#1a5fa9] text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-[#1a5fa9] focus:ring-offset-2"
               >
                 Envoyer le lien de réinitialisation
               </button>
@@ -68,7 +68,7 @@ const ResetPassword = () => {
         <div className="mt-6 text-center">
           <a
             href="/login"
-            className="text-sm text-blue-600 hover:text-blue-500"
+            className="text-sm text-[#1a5fa9] hover:text-[#1a5fa9]"
           >
             Retour à la connexion
           </a>

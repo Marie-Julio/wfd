@@ -5,37 +5,35 @@ import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { Input } from "../components/admin/common/Input";
 import useAuth from "../hooks/useAuth";
-import { errorMessage, onServerSuccess } from "../services/Helper";
+import { errorMessage, onServerError, onServerSuccess } from "../services/Helper";
 import Button from "../components/admin/common/Button";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { jwtDecode } from "jwt-decode";
+import logo2 from "../assets/wfdguinee.png";
 
 const LoginScreen = () => {
     const accessToken = localStorage.getItem("token");
-      const decodedToken = accessToken ? jwtDecode(accessToken) : null;
+    const decodedToken = accessToken ? jwtDecode(accessToken) : null;
     const [loading, setLoading] = useState(false)
     const auth = useAuth()
     const navigate = useNavigate()
 
     const saveData = (data) => {
         setLoading(true)
-        console.log(data)
         postResource("login", data).then((res) => {
             // console.log(res.data)
             auth.login(res.data.access_token)
             const token = res.data.access_token ? jwtDecode(res.data.access_token) : null;
             formik.resetForm();
             setLoading(false)
-            onServerSuccess("Connexion reussie!!!")
+            onServerSuccess("Connexion réussie")
             if (token.role === "participant")
                 setTimeout(() => navigate("/"), 100)
             else setTimeout(() => navigate("/admin/dashboard"), 100)
         }).catch(e => {
             setLoading(false)
-            errorMessage(e)
-            console.log(e)
-            // console.log(e)
+            onServerError("Identifiants fournies sont invalides.")
           })
     }
 
@@ -58,13 +56,13 @@ const LoginScreen = () => {
 
     return ( 
     <div class="h-screen md:flex">
-	<div class="relative overflow-hidden md:flex w-1/2 justify-around items-center hidden bg-no-repeat bg-cover bg-center " style={{ backgroundImage: `url(${background})` }}>
+	<div class="relative overflow-hidden md:flex w-2/5 justify-around items-center hidden bg-no-repeat bg-cover bg-center " style={{ backgroundImage: `url(${background})` }}>
         <div className="pl-10">
-			<a href="/"><h1 class="text-white hover:text-[#1a5fa9] font-bold text-4xl font-sans ">WELT FRIEDENS DIENST e.V</h1></a>
+			<a href="/"><h1 class="text-white hover:text-[#1a5fa9] font-bold text-3xl font-sans ">WELT FRIEDENS DIENST e.V</h1></a>
 			<p class="text-white mt-1">Service mondiale pour la paix</p>
 		</div>
 	</div>
-	<div class="md:flex md:w-1/2 md:justify-center py-10 items-center bg-white">
+	<div class="md:flex md:w-3/5 md:justify-center py-10 items-center bg-white">
         <form className="space-y-4 md:space-y-4" onSubmit={formik.handleSubmit}>
             <div class="md:hidden bg-no-repeat bg-cover bg-center " style={{ backgroundImage: `url(${background})` }}>
                 <div className="px-5 py-14">
@@ -73,9 +71,10 @@ const LoginScreen = () => {
                 </div>
             </div>
             <div className="px-5 md:px-0">
+                <a href="/"><img src={logo2} className="h-12 mt-10 md:mt-0" alt="Logo" /></a><br />
                 <h1 class="pt-5 md:pt-0 text-gray-800 font-bold text-2xl mb-1">Se connecter</h1>
                 <p class="text-sm font-normal text-gray-600 mb-7">Connectez-vous à votre compte</p>
-                <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+                <div class="flex items-center border-2 hover:border-orange-500 py-2 px-3 rounded-2xl mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -84,7 +83,7 @@ const LoginScreen = () => {
                     <input required class="pl-2 outline-none border-none w-full" name="email" type="email" value={formik.values.email}
                         onChange={formik.handleChange} placeholder="E-mail" />
                 </div>
-                <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
+                <div class="flex items-center border-2 hover:border-orange-500 py-2 px-3 rounded-2xl">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
                         fill="currentColor">
                         <path fill-rule="evenodd"
@@ -93,10 +92,10 @@ const LoginScreen = () => {
                     </svg>
                     <input required class="pl-2 outline-none border-none w-full" name="password" type="password" value={formik.values.password} onChange={formik.handleChange} placeholder="Mot de passe" />
                 </div>
-                <div class="pt-0 hover:text-blue-500"><Link to="/reset-password">Mot de passe oublié ?</Link></div>
+                <div class="pt-2 hover:text-[#1a5fa9]"><Link to="/reset-password">Mot de passe oublié ?</Link></div>
                 <Button isLoading={loading} className="block w-full bg-orange-500 mt-4 py-2 rounded-2xl text-white font-semibold mb-2 hover:text-gray-200 hover:bg-orange-700 focus:outline-none transition-all">Se connecter</Button>
                 
-                <div className="text-center pt-5">Vous n’avez pas encore de compte ? <Link to="/register" className=" text-orange-500 ">S'inscrire</Link></div>
+                <div className="text-center pt-5">Vous n’avez pas encore de compte ? <Link to="/register" className=" underline text-indigo-600 hover:text-orange-500">S'inscrire</Link></div>
             </div>
         </form>
 	</div>

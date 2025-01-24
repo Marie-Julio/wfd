@@ -69,7 +69,7 @@ const Comment = () => {
           <Button
             key={i}
             onClick={() => goToPage(i)}
-            className={`mx-1 ${currentPageComment === i ? 'bg-blue-500 text-white' : ''}`}
+            className={`mx-1 ${currentPageComment === i ? 'bg-[#1a5fa9] text-white' : ''}`}
           >
             {i}
           </Button>
@@ -89,7 +89,7 @@ const Comment = () => {
         <Button
           key={1}
           onClick={() => goToPage(1)}
-          className={`mx-1 ${currentPageComment === 1 ? 'bg-blue-500 text-white' : ''}`}
+          className={`mx-1 ${currentPageComment === 1 ? 'bg-[#1a5fa9] text-white' : ''}`}
         >
           1
         </Button>
@@ -108,7 +108,7 @@ const Comment = () => {
           <Button
             key={i}
             onClick={() => goToPage(i)}
-            className={`mx-1 ${currentPageComment === i ? 'bg-blue-500 text-white' : ''}`}
+            className={`mx-1 ${currentPageComment === i ? 'bg-[#1a5fa9] text-white' : ''}`}
           >
             {i}
           </Button>
@@ -124,7 +124,7 @@ const Comment = () => {
         <Button
           key={totalPages}
           onClick={() => goToPage(totalPages)}
-          className={`mx-1 ${currentPageComment === totalPages ? 'bg-blue-500 text-white' : ''}`}
+          className={`mx-1 ${currentPageComment === totalPages ? 'bg-[#1a5fa9] text-white' : ''}`}
         >
           {totalPages}
         </Button>

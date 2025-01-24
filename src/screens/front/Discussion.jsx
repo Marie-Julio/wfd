@@ -101,7 +101,7 @@ const Discussion = () => {
                       <div className="flex justify-between items-center mt-3">
                         <button
                           onClick={() => redirectComment(discussion.id)}
-                          className="flex items-center space-x-1 text-blue-500 hover:text-blue-700"
+                          className="flex items-center space-x-1 text-[#1a5fa9] hover:text-blue-700"
                         >
                             <Icon name="bx-message-rounded-dots" className="w-5 h-5 mr-2" />
                           Commenter
@@ -142,7 +142,7 @@ const Discussion = () => {
                     onClick={() => setCurrentPageDiscussion(number)}
                     className={`px-4 py-2 mx-1 border rounded ${
                       currentPageDiscussion === number
-                        ? 'bg-blue-500 text-white'
+                        ? 'bg-[#1a5fa9] text-white'
                         : 'bg-white hover:bg-gray-100'
                     }`}
                   >

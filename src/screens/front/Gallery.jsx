@@ -37,7 +37,10 @@ const Gallery = () => {
     // }
   
     return ( 
-        <AppBody banner={true} titleBanner="Gallerie">
+    <AppBody>
+      <div className="p-12 bg-[#1a5fa9] flex flex-col md:flex-row justify-between items-center text-white">
+        <h1 className="text-2xl font-bold mb-4 md:mb-0">Galerie</h1>
+      </div>
       <div className="bg-gray-100 py-10">
         <div className="container mx-auto px-4">
           <p className="text-center text-gray-600 mb-10">

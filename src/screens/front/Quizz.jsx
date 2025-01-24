@@ -124,7 +124,7 @@ const QuizInterface = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-gray-600">{quiz.description}</p>
-              <Button size="lg" onClick={() => setHasStarted(true)} className="bg-blue-600 text-white">
+              <Button size="lg" onClick={() => setHasStarted(true)} className="bg-[#1a5fa9] text-white">
                 Démarrer le test
               </Button>
             </CardContent>

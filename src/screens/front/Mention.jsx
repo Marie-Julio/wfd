@@ -12,7 +12,7 @@ const LegalNotice = () => {
           à notre site.
         </p>
 
-        <h2 className="text-xl font-semibold text-blue-600 mt-6 mb-2">
+        <h2 className="text-xl font-semibold text-[#1a5fa9] mt-6 mb-2">
           Éditeur du site
         </h2>
         <p className="text-gray-700 mb-4">
@@ -22,7 +22,7 @@ const LegalNotice = () => {
           Email : notrelogo@gmail.com
         </p>
 
-        <h2 className="text-xl font-semibold text-blue-600 mt-6 mb-2">
+        <h2 className="text-xl font-semibold text-[#1a5fa9] mt-6 mb-2">
           Hébergement
         </h2>
         <p className="text-gray-700 mb-4">
@@ -30,7 +30,7 @@ const LegalNotice = () => {
           situé à [adresse complète].
         </p>
 
-        <h2 className="text-xl font-semibold text-blue-600 mt-6 mb-2">
+        <h2 className="text-xl font-semibold text-[#1a5fa9] mt-6 mb-2">
           Propriété intellectuelle
         </h2>
         <p className="text-gray-700 mb-4">
@@ -39,7 +39,7 @@ const LegalNotice = () => {
           utilisation sans autorisation est strictement interdite.
         </p>
 
-        <h2 className="text-xl font-semibold text-blue-600 mt-6 mb-2">
+        <h2 className="text-xl font-semibold text-[#1a5fa9] mt-6 mb-2">
           Responsabilité
         </h2>
         <p className="text-gray-700 mb-4">

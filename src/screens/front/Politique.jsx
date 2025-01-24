@@ -15,7 +15,7 @@ const PrivacyPolicy = () => {
           utilisons et protégeons vos informations personnelles.
         </p>
 
-        <h2 className="text-xl font-semibold text-blue-600 mt-6 mb-2">
+        <h2 className="text-xl font-semibold text-[#1a5fa9] mt-6 mb-2">
           Collecte des informations
         </h2>
         <p className="text-gray-700 mb-4">
@@ -25,7 +25,7 @@ const PrivacyPolicy = () => {
           information fournie.
         </p>
 
-        <h2 className="text-xl font-semibold text-blue-600 mt-6 mb-2">
+        <h2 className="text-xl font-semibold text-[#1a5fa9] mt-6 mb-2">
           Utilisation des données
         </h2>
         <p className="text-gray-700 mb-4">
@@ -33,7 +33,7 @@ const PrivacyPolicy = () => {
           fournir nos services et répondre à vos besoins spécifiques.
         </p>
 
-        <h2 className="text-xl font-semibold text-blue-600 mt-6 mb-2">
+        <h2 className="text-xl font-semibold text-[#1a5fa9] mt-6 mb-2">
           Protection des données
         </h2>
         <p className="text-gray-700 mb-4">
@@ -41,7 +41,7 @@ const PrivacyPolicy = () => {
           de vos données et éviter tout accès non autorisé.
         </p>
 
-        <h2 className="text-xl font-semibold text-blue-600 mt-6 mb-2">
+        <h2 className="text-xl font-semibold text-[#1a5fa9] mt-6 mb-2">
           Vos droits
         </h2>
         <p className="text-gray-700 mb-4">

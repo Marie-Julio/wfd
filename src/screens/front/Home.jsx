@@ -16,6 +16,8 @@ import teacher from "../../assets/images/teacher.png";
 import knowledge from "../../assets/images/knowledge.png";
 import knowledge1 from "../../assets/images/knowledge (1).png";
 import CourIcon from "../../assets/images/cours.svg";
+import 'tiny-slider/dist/tiny-slider.css';
+import { tns } from 'tiny-slider';
 
 const Home = () => {
   const [projects, setProjects] = useState([]);
@@ -52,21 +54,22 @@ const Home = () => {
     }, [])
 
 
-  useEffect(() => {
-    tns({
-      container: '.tiny-single-item',
-      items: 1,
-      slideBy: 'page',
-      autoplay: true,
-      controls: false,
-      nav: false,
-      navPosition: "bottom",
-      autoplayButtonOutput: false,
-      speed: 400,
-      mouseDrag: true,
-      gutter: 10,
-    });
-  }, []);
+    useEffect(() => {
+        tns({
+          container: '.tiny-single-item',
+          items: 1,
+          slideBy: 'page',
+          autoplay: true,
+          controls: false,
+          nav: false,
+          navPosition: "bottom",
+          autoplayButtonOutput: false,
+          speed: 400,
+          mouseDrag: true,
+          gutter: 10,
+        });
+      }, []);
+      
 
   useEffect(() => {
     feather.replace();
@@ -74,21 +77,23 @@ const Home = () => {
 
     return ( 
         <AppBody >
-        <section className="relative bg-gray-50 dark:bg-slate-800 md:py-24 py-16">
+        <section className="relative bg-gray-50 dark:bg-slate-800 md:py-20 py-12">
             <div className="container relative">
                 <div className="grid md:grid-cols-12 grid-cols-1 items-center gap-[30px]">
                     <div className="lg:col-span-6 md:col-span-6">
                         <div className="grid grid-cols-12 gap-6 items-center">
                             <div className="col-span-6">
                                 <div className="grid grid-cols-1 gap-6">
-                                    <img src="assets/images/coach/about.jpg" className="shadow rounded-md" alt="" />
-                                    <img src="assets/images/coach/group.jpg" className="shadow rounded-md" alt="" />
+                                    <img src="assets/images/coach/s1.jpg" className="shadow rounded-md transform transition-all duration-500 hover:scale-110" alt="" />
+                                    <img src="assets/images/coach/s2.jpg" className="shadow rounded-md transform transition-all duration-500 hover:scale-110" alt="" />
                                 </div>
                             </div>
 
                             <div className="col-span-6">
                                 <div className="grid grid-cols-1 gap-6">
-                                    <img src="assets/images/coach/one-one.jpg" className="shadow rounded-md" alt="" />
+                                    <img src="assets/images/coach/s3.jpg" className="shadow rounded-md transform transition-all duration-500 hover:scale-110" alt="" />
+                                    <img src="assets/images/coach/s4.jpg" className="shadow rounded-md transform transition-all duration-500 hover:scale-110" alt="" />
+                                    <img src="assets/images/coach/s5.jpg" className="shadow rounded-md transform transition-all duration-500 hover:scale-110" alt="" />
                                 </div>
                             </div>
                         </div>
@@ -97,16 +102,16 @@ const Home = () => {
                     <div className="lg:col-span-6 md:col-span-6">
                         <div className="lg:ms-5">
                             <div className="flex mb-4">
-                                <span className="text-[#eb6b11] text-2xl font-bold mb-0"><span className="counter-value text-6xl font-bold" data-target="15">10</span>+</span>
-                                <span className="self-end font-semibold ms-2">Années <br /> d'Expérience</span>
+                                <span className="transform transition-all duration-500 hover:scale-110 text-[#eb6b11] text-2xl font-bold mb-0"><span className="counter-value text-6xl font-bold" data-target="15">10</span>+</span>
+                                <span className="transform transition-all duration-500 hover:scale-110 self-end font-semibold ms-2">Années <br /> d'Expérience</span>
                             </div>
 
-                            <h3 className="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold"> Formation et de sensibilisation</h3>
+                            <h3 className="transform transition-all duration-500 hover:scale-105 mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold w-[115%]"> Formation et de sensibilisation</h3>
 
                             <p className="text-slate-600 max-w-xl">Découvrez des formations inspirantes et des outils pratiques pour devenir un <strong> acteur clé </strong> de la paix et du développement durable.</p>
                         
                             <div className="mt-6">
-                                <a href="/register" className="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-[#eb6b11] hover:bg-indigo-700 border-[#eb6b11] hover:border-indigo-700 text-white rounded-md mt-2"><i className="uil uil-airplay"></i> Commencer</a>
+                                <a href="/register" className="transform transition-all hover:scale-105 py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-[#eb6b11] hover:bg-indigo-700 border-[#eb6b11] hover:border-indigo-700 text-white rounded-md mt-2"><i className="uil uil-airplay"></i> Commencer</a>
                             </div>
                         </div>
                     </div>
@@ -129,45 +134,41 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div className="grid mt-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8">
+                <div className="grid mt-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
                 <Project projects={projects}/>
                 </div>
             </div>
 
 
-            <section class="py-20 md:mt-24 mt-16 w-full table relative bg-center bg-no-repeat bg-cover">
-            <div class="absolute inset-0 bg-[#fbe2ce]"></div>
-                <div className="absolute inset-0 opacity-25 dark:opacity-50 bg-[url('../../assets/images/map.html')] bg-no-repeat bg-center bg-cover"></div>
+            <section class=" md:mt-24 mt-16 w-full table relative bg-center bg-no-repeat bg-cover">
+            <div class=" bg-[#eb6b11] py-10 ">
                 <div className="relative grid grid-cols-1 pb-8 text-center z-1">
                     <h3 className="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold text-black dark:text-white">Approuvé par plus de 1K utilisateurs</h3>
 
-                    <p className="text-slate-600 max-w-xl mx-auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmo</p>
+                    <p className="text-slate-700 max-w-xl mx-auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmo</p>
                 </div>
 
-                <div className="relative grid md:grid-cols-3 grid-cols-1 items-center mt-8 gap-[30px] z-1">
-                    <div className="counter-box  justify-center items-center space-x-4 flex">
-                      <div className="pr-5">
-                        <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-600 dark:text-white"><span className="counter-value" data-target={cours.length}>{cours.length}</span>+</h1>
-                        <h5 className="counter-head text-lg font-medium">Cours</h5>
-                      </div>
-                      <img src={h3} height={70} width={70} alt="Illustration"/>
-                    </div>
-                    
-                    <div className="counter-box  justify-center items-center space-x-4 flex">
-                      <div className="pr-5">
-                        <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-600 dark:text-white"><span className="counter-value" data-target={projects.length}>{projects.length}</span>+</h1>
-                        <h5 className="counter-head text-lg font-medium">Projets</h5>
-                      </div>
-                      <img src={h2} height={70} width={70} alt="Illustration"/>
-                    </div>
-                    
-                    <div className="counter-box  justify-center items-center space-x-4 flex">
-                      <div className="pr-5">
-                        <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-600 dark:text-white"><span className="counter-value" data-target={inscris.length}>{inscris.length}</span>+</h1>
-                        <h5 className="counter-head text-lg font-medium">Inscrits</h5>
-                      </div>
-                      <img src={h1} height={70} width={70} alt="Illustration"/>
-                    </div>
+                <div className="relative grid grid-cols-2 items-center mt-8 gap-[30px] px-10 z-1">
+    <div className="transform transition-all duration-500 hover:scale-105 counter-box justify-center items-center space-x-2 flex pr-5">
+        <div className="pr-1 lg:pr-5">
+            <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-900">
+                <span className="counter-value" data-target={projects.length}>{projects.length}</span>+
+            </h1>
+            <h5 className="counter-head text-lg font-semibold">Projets</h5>
+        </div>
+        <img src={h2} height={70} width={70} alt="Illustration"/>
+    </div>
+    
+    <div className="transform transition-all duration-500 hover:scale-105 counter-box justify-center items-center space-x-2 flex">
+        <div className="pr-1 lg:pr-5">
+            <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-900">
+                <span className="counter-value" data-target={inscris.length}>{inscris.length}</span>+
+            </h1>
+            <h5 className="counter-head text-lg font-semibold">Inscrits</h5>
+        </div>
+        <img src={h1} height={70} width={70} alt="Illustration"/>
+    </div>
+</div>
                 </div>
             </section>
             
@@ -175,7 +176,7 @@ const Home = () => {
                 <div className="grid grid-cols-1 pb-8 text-center">
                     <h3 className="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold text-black dark:text-white">Témoignages</h3>
 
-                    <p className="text-slate-400 max-w-xl mx-auto">Vous aussi, partagez votre expérience avec nous</p>
+                    <p className="text-slate-500 max-w-xl mx-auto">Vous aussi, partagez votre expérience avec nous</p>
                 </div>
 
                 <div className="flex justify-center relative mt-16">
@@ -191,7 +192,7 @@ const Home = () => {
                         <div className="tiny-single-item">
                             <div className="tiny-slide">
                                 <div className="text-center">
-                                    <p className="text-lg text-slate-400 italic"> " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " </p>
+                                    <p className="text-lg text-slate-800 italic"> " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. " </p>
 
                                     <div className="text-center mt-5">
                                         <ul className="text-xl font-medium text-amber-400 list-none mb-2">
@@ -203,7 +204,7 @@ const Home = () => {
                                         </ul>
 
                                         <img src="assets/images/client/01.jpg" className="size-14 rounded-full shadow-md dark:shadow-gray-800 mx-auto" alt="" />
-                                        <h6 className="mt-2 font-semibold">Christa Smith</h6>
+                                        <h6 className="mt-2 font-semibold">Abimodou AHOYO</h6>
                                         <span className="text-slate-400 text-sm">Manager</span>
                                     </div>
                                 </div>
@@ -211,7 +212,7 @@ const Home = () => {
 
                             <div className="tiny-slide">
                                 <div className="text-center">
-                                    <p className="text-lg text-slate-400 italic"> " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " </p>
+                                    <p className="text-lg text-slate-800 italic"> " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. " </p>
 
                                     <div className="text-center mt-5">
                                         <ul className="text-xl font-medium text-amber-400 list-none mb-2">
@@ -223,27 +224,7 @@ const Home = () => {
                                         </ul>
 
                                         <img src="assets/images/client/02.jpg" className="size-14 rounded-full shadow-md dark:shadow-gray-800 mx-auto" alt="" />
-                                        <h6 className="mt-2 font-semibold">Christa Smith</h6>
-                                        <span className="text-slate-400 text-sm">Manager</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="tiny-slide">
-                                <div className="text-center">
-                                    <p className="text-lg text-slate-400 italic"> " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " </p>
-
-                                    <div className="text-center mt-5">
-                                        <ul className="text-xl font-medium text-amber-400 list-none mb-2">
-                                            <li className="inline"><i className="mdi mdi-star"></i></li>
-                                            <li className="inline"><i className="mdi mdi-star"></i></li>
-                                            <li className="inline"><i className="mdi mdi-star"></i></li>
-                                            <li className="inline"><i className="mdi mdi-star"></i></li>
-                                            <li className="inline"><i className="mdi mdi-star"></i></li>
-                                        </ul>
-
-                                        <img src="assets/images/client/04.jpg" className="size-14 rounded-full shadow-md dark:shadow-gray-800 mx-auto" alt="" />
-                                        <h6 className="mt-2 font-semibold">Christa Smith</h6>
+                                        <h6 className="mt-2 font-semibold">Christa GBELANTO</h6>
                                         <span className="text-slate-400 text-sm">Manager</span>
                                     </div>
                                 </div>

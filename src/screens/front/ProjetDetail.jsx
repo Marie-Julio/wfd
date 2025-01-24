@@ -43,15 +43,8 @@ const ProjetDetail = () => {
     <AppBody>
       <div className="bg-white shadow-md w-full">
         {/* Header avec titre et bouton */}
-        <div className="p-6 bg-blue-600 flex flex-col md:flex-row justify-between items-center text-white">
+        <div className="p-12 bg-[#1a5fa9] flex flex-col md:flex-row justify-between items-center text-white">
           <h1 className="text-2xl font-bold mb-4 md:mb-0">{projet.titre}</h1>
-          <button
-            className="bg-blue-800 hover:bg-blue-700 px-4 py-2 rounded-md text-sm flex items-center"
-            onClick={() => window.open(projet.media, '_blank')}
-          >
-            <Download className="w-4 h-4 mr-2" />
-            Télécharger le média
-          </button>
         </div>
 
         {/* Contenu principal */}
@@ -59,7 +52,7 @@ const ProjetDetail = () => {
           {/* Description */}
           <div>
             <h2 className="text-xl font-semibold flex items-center">
-              <BookOpen className="w-5 h-5 mr-2 text-blue-600" />
+              <BookOpen className="w-5 h-5 mr-2 text-[#1a5fa9]" />
               Description
             </h2>
             <p className="text-gray-700">{projet.description || 'Aucune description disponible.'}</p>
@@ -68,7 +61,7 @@ const ProjetDetail = () => {
           {/* Informations */}
           <div>
             <h2 className="text-xl font-semibold flex items-center">
-              <FileText className="w-5 h-5 mr-2 text-blue-600" />
+              <FileText className="w-5 h-5 mr-2 text-[#1a5fa9]" />
               Informations du projet
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -100,7 +93,7 @@ const ProjetDetail = () => {
           {/* Média */}
           <div>
             <h2 className="text-xl font-semibold flex items-center">
-              <Video className="w-5 h-5 mr-2 text-blue-600" />
+              <Video className="w-5 h-5 mr-2 text-[#1a5fa9]" />
               Média associé
             </h2>
             {projet.media ? (

@@ -93,13 +93,21 @@ const Attestation = () => {
 
   return (
     <AppBody>
-      <section className="items-center justify-center min-h-screen w-full md:m-5">
-        <div className="max-w-4xl mx-auto bg-white shadow-xl overflow-hidden">
+    <div className="p-12 bg-[#1a5fa9] flex flex-col md:flex-row justify-between items-center text-white">
+      <h1 className="text-2xl font-bold mb-4 md:mb-0">Mes Attestations & Certificats</h1>
+    </div>
+      <section className="items-center justify-center w-full md:m-5 ">
+        <div className="max-w-7xl mx-auto text-center">
+            <p className="text-base md:text-xl text-gray-600">
+            Mes attestations et certificats que j'ai obtenus au cours de mon parcours académique.
+            </p>
+        </div>
+        <div className="max-w-4xl mx-auto ">
           {/* Résultats des tests */}
           <div className="mt-6">
             <div
               onClick={() => setIsTestCollapseOpen(!isTestCollapseOpen)}
-              className="flex justify-between items-center cursor-pointer bg-gray-100 p-4 rounded-lg shadow hover:bg-gray-200"
+              className="flex justify-between items-center cursor-pointer bg-[#7aa3d1] p-4 rounded-lg shadow hover:bg-[#1a5fa9] hover:text-white"
             >
               <h2 className="text-lg font-bold">Résultats des Tests</h2>
               {isTestCollapseOpen ? <ChevronUp /> : <ChevronDown />}
@@ -117,7 +125,7 @@ const Attestation = () => {
                       key={index}
                       className="p-4 bg-gray-50 rounded-lg shadow hover:bg-gray-100"
                     >
-                      <h3 className="text-lg font-medium text-blue-600">{result.qcm.title}</h3>
+                      <h3 className="text-lg font-medium text-[#1a5fa9]">{result.qcm.title}</h3>
                       <p className="text-sm text-gray-500">{result.qcm.description}</p>
                       <p className="mt-2">
                         <strong>Score :</strong> {result.score} <br />
@@ -142,7 +150,7 @@ const Attestation = () => {
           <div className="mt-6">
             <div
               onClick={() => setIsInscriptionsCollapseOpen(!isInscriptionsCollapseOpen)}
-              className="flex justify-between items-center cursor-pointer bg-gray-100 p-4 rounded-lg shadow hover:bg-gray-200"
+              className="flex justify-between items-center cursor-pointer bg-[#f9a04d] p-4 rounded-lg shadow hover:bg-[#eb6b11]"
             >
               <h2 className="text-lg font-bold">Inscriptions</h2>
               {isInscriptionsCollapseOpen ? <ChevronUp /> : <ChevronDown />}
@@ -155,7 +163,7 @@ const Attestation = () => {
                       key={inscription.id}
                       className="p-4 bg-gray-50 rounded-lg shadow hover:bg-gray-100"
                     >
-                      <h3 className="text-lg font-medium text-blue-600">
+                      <h3 className="text-lg font-medium text-[#1a5fa9]">
                         {inscription.promotion.nom}
                       </h3>
                       <p className="mt-2">
@@ -176,7 +184,7 @@ const Attestation = () => {
                 </div>
               </div>
             )}
-          </div>
+          </div><br />
         </div>
       </section>
     </AppBody>

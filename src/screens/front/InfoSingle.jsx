@@ -59,9 +59,9 @@ const InfoSingle = () => {
                 <div className="bg-white border-b">
                     <div className="container mx-auto px-4 py-3">
                     <div className="flex flex-wrap items-center text-sm text-gray-600">
-                        <a href="#" className="hover:text-blue-600">Accueil</a>
+                        <a href="#" className="hover:text-[#1a5fa9]">Accueil</a>
                         <ChevronRight className="w-4 h-4 mx-2" />
-                        <a href="#" className="hover:text-blue-600">Actualités</a>
+                        <a href="#" className="hover:text-[#1a5fa9]">Actualités</a>
                         <ChevronRight className="w-4 h-4 mx-2" />
                         <span className="text-gray-400 hidden sm:inline">{info.title}</span>
                     </div>
@@ -112,11 +112,11 @@ const InfoSingle = () => {
                             <div className="mt-6 lg:mt-8 pt-6 lg:pt-8 border-t">
                             <div className="flex flex-col sm:flex-row justify-between gap-4 items-start sm:items-center">
                                 <div className="flex flex-wrap items-center gap-4">
-                                <button className="flex items-center gap-2 text-gray-600 hover:text-blue-600">
+                                <button className="flex items-center gap-2 text-gray-600 hover:text-[#1a5fa9]">
                                     <ThumbsUp className="w-5 h-5" />
                                     <span>123 J'aime</span>
                                 </button>
-                                <button className="flex items-center gap-2 text-gray-600 hover:text-blue-600">
+                                <button className="flex items-center gap-2 text-gray-600 hover:text-[#1a5fa9]">
                                     <MessageCircle className="w-5 h-5" />
                                     <span>12 Commentaires</span>
                                 </button>
@@ -124,7 +124,7 @@ const InfoSingle = () => {
                                 <div className="flex items-center gap-4">
                                 <span className="text-sm text-gray-500">Partager :</span>
                                 <div className="flex gap-2">
-                                    <button className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-600 text-white hover:bg-blue-700">
+                                    <button className="w-8 h-8 flex items-center justify-center rounded-full bg-[#1a5fa9] text-white hover:bg-blue-700">
                                     <Facebook className="w-4 h-4" />
                                     </button>
                                     <button className="w-8 h-8 flex items-center justify-center rounded-full bg-sky-500 text-white hover:bg-sky-600">
@@ -155,7 +155,7 @@ const InfoSingle = () => {
                                 className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded"
                                 />
                                 <div>
-                                <h3 className="font-medium group-hover:text-blue-600 line-clamp-2">
+                                <h3 className="font-medium group-hover:text-[#1a5fa9] line-clamp-2">
                                     {i.title}
                                 </h3>
                                 <p className="text-sm text-gray-500 mt-1">
@@ -173,7 +173,7 @@ const InfoSingle = () => {
                         <ul className="space-y-2">
                             {['Formation', 'Événements', 'Actualités', 'Conseils', 'Success Stories'].map((cat) => (
                             <li key={cat}>
-                                <a href="#" className="flex justify-between items-center text-gray-600 hover:text-blue-600 py-1">
+                                <a href="#" className="flex justify-between items-center text-gray-600 hover:text-[#1a5fa9] py-1">
                                 <span>{cat}</span>
                                 <span className="text-sm text-gray-400">(12)</span>
                                 </a>

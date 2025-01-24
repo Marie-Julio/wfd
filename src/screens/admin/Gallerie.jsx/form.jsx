@@ -115,7 +115,7 @@ const FormGalerie = () => {
                     />
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-800 text-white rounded-lg"
+                    className="px-4 py-2 bg-[#1a5fa9] hover:bg-blue-800 text-white rounded-lg"
                   >
                     Sauvegarder
                   </button>

@@ -128,7 +128,10 @@ const Forum = () => {
   
 
   return (
-    <AppBody banner={true} titleBanner="Forum">
+    <AppBody>
+    <div className="p-12 bg-[#1a5fa9] flex flex-col md:flex-row justify-between items-center text-white">
+      <h1 className="text-2xl font-bold mb-4 md:mb-0">Forums</h1>
+    </div>
     <section className="max-w-7xl mx-auto p-4 bg-gray-200">
       {!selectedForum && (
       <div className="w-full gap-6">
@@ -172,7 +175,7 @@ const Forum = () => {
               onClick={() => paginate(number)}
               className={`px-4 py-2 mx-1 border rounded ${
                 currentPageForum === number
-                  ? "bg-blue-500 text-white"
+                  ? "bg-[#1a5fa9] text-white"
                   : "bg-white"
               }`}
             >
