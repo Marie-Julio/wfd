@@ -22,7 +22,7 @@ const Project = ({projects = []}) => {
               </div>
 
               <div class="pt-4">
-                  <h5 class="mb-1 font-semibold text-gray-600 hover:text-[#1a5fa9] duration-500">{project.titre}{project.titre}</h5>
+                  <h5 class="mb-1 font-semibold text-gray-600 hover:text-[#1a5fa9] duration-500">{project.titre}</h5>
                   
                   <div class="flex items-center">
                       <img src="assets/images/client/03.jpg" class="size-11 rounded-full shadow transform transition-all duration-500 hover:scale-105" alt="" />

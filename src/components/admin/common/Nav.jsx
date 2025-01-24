@@ -7,6 +7,7 @@ import Button from "./Button";
 import { Power } from "lucide-react";
 import useAuth from "../../../hooks/useAuth";
 import { useDispatch } from "react-redux";
+import imgprofil from "../../../assets/images/profil.png";
 
 function Nav () {
     const access_token = localStorage.getItem('token');
@@ -33,21 +34,21 @@ function Nav () {
                 <h2 className="font-montserrat-extra-bold-italic bg-custom-gradient bg-clip-text text-transparent text-xl">WFDGuinee</h2>
             </Link>
 
-            <div className="flex w-3/6  rounded-full">
-                <Input full type="search" name="search" placeholder="Rechercher..." onChange={() => console.log("ok")} className="rounded-full w-full"/>
-            </div>
-
                 <div className="flex text-end justify-between items-center">
-                    <Icon name="bxs-user-circle" size="36px" style={{ margin: "2px" }}/>
-                    <Link to="/page-profil" className="flex-wrap items-center">
-                        <p className="text-start text-gray font-montserrat-bold">{tokenNew && `${tokenNew.nom} ${tokenNew.prenom}`}</p>
-                        <span className="text-gray-500">{tokenNew && tokenNew.email}</span>
+                    <img src={tokenNew.file_path || imgprofil} alt="Profile"
+                    className="w-10 h-10 rounded-full border-white shadow-lg" />
+                    <Link to="/page-profil" className="pl-2 flex-wrap items-center">
+                        <p className="text-start text-sm text-gray font-montserrat-bold">{tokenNew && `${tokenNew.nom} ${tokenNew.prenom}`}</p>
+                        <span className="text-gray-500 text-sm">{tokenNew && tokenNew.email}</span>
                     </Link>
                     <div>
-                        <Button onClick={handleLogout} className="w-10 h-10 rounded-full bg-red-900 ml-8"><Power /></Button>
+                        <Button onClick={handleLogout} className="w-10 h-10 rounded-full bg-red-500 hover:bg-red-700 ml-8"><Power /></Button>
                     </div>
                 </div>
         
+            </div>
+            <div className="text-center  w-1/2 mx-auto rounded-full">
+                <Input type="search" name="search" placeholder="Rechercher..."  className=" w-1/2"/>
             </div>
 
             

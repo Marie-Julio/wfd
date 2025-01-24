@@ -88,9 +88,9 @@ const location = useLocation();
               ? "mt-9 text-tertiaire font-roboto-bold text-lg font-extrabold text-2xl uppercase pl-2"
               : "mt-2 gap-x-3 rounded-md hover:text-white font-roboto font-semibold cursor-pointer"
           }
-          ${isActive ? "bg-tertiaire text-white" : isGap ? "hover:bg-[#f4f5fa]" : "hover:bg-tertiaire"}`}
+          ${isActive ? "bg-tertiaire text-white" : isGap ? "hover:bg-[#f4f5fa]" : "hover:bg-[#1a5fa9]"}`}
             >
-              {!Menu.gap && <Link to={Menu.src} className="flex items-center gap-x-4 drop-shadow-xl">
+              {!Menu.gap && <Link to={Menu.src} className=" hover:text-white flex items-center gap-x-4 drop-shadow-xl">
                 <Icon name={`${Menu.icon}`} />
                 <span className={`${open && "hidden"} `}>
                   {Menu.title}

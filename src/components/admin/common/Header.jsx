@@ -45,7 +45,7 @@ function Header() {
     <nav className="bg-white border-gray-200 shadow-md text-gray-500">
       <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-3xl px-4 py-0">
         <Link to="/" className="flex items-center">
-          <img src={LogoDesktop} className="h-14 mr-3 object-contain" alt="UAC Logo" />
+          <img src={LogoDesktop} className="h-14 mr-3 object-contain" alt="WFD" />
         </Link>
 
         {token && <div className="flex items-center">

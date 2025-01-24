@@ -58,7 +58,7 @@ const LoginScreen = () => {
     <div class="h-screen md:flex">
 	<div class="relative overflow-hidden md:flex w-2/5 justify-around items-center hidden bg-no-repeat bg-cover bg-center " style={{ backgroundImage: `url(${background})` }}>
         <div className="pl-10">
-			<a href="/"><h1 class="text-white hover:text-[#1a5fa9] font-bold text-3xl font-sans ">WELT FRIEDENS DIENST e.V</h1></a>
+			<a href="/" className="text-white"><h1 class="hover:text-[#1a5fa9] font-bold text-3xl transform transition-all duration-500 hover:scale-105">WELT FRIEDENS DIENST e.V</h1></a>
 			<p class="text-white mt-1">Service mondiale pour la paix</p>
 		</div>
 	</div>
@@ -66,7 +66,7 @@ const LoginScreen = () => {
         <form className="space-y-4 md:space-y-4" onSubmit={formik.handleSubmit}>
             <div class="md:hidden bg-no-repeat bg-cover bg-center " style={{ backgroundImage: `url(${background})` }}>
                 <div className="px-5 py-14">
-                    <a href="/"><h1 class="text-white hover:text-[#1a5fa9] font-bold text-2xl font-sans">WELT FRIEDENS DIENST e.V</h1></a>
+                    <a href="/" className="text-white"><h1 class="hover:text-[#1a5fa9] font-bold text-2xl transition-all duration-500 hover:scale-105">WELT FRIEDENS DIENST e.V</h1></a>
                     <p class="text-white mt-1">Service mondiale pour la paix</p>
                 </div>
             </div>
@@ -95,7 +95,7 @@ const LoginScreen = () => {
                 <div class="pt-2 hover:text-[#1a5fa9]"><Link to="/reset-password">Mot de passe oublié ?</Link></div>
                 <Button isLoading={loading} className="block w-full bg-orange-500 mt-4 py-2 rounded-2xl text-white font-semibold mb-2 hover:text-gray-200 hover:bg-orange-700 focus:outline-none transition-all">Se connecter</Button>
                 
-                <div className="text-center pt-5">Vous n’avez pas encore de compte ? <Link to="/register" className=" underline text-indigo-600 hover:text-orange-500">S'inscrire</Link></div>
+                <div className="text-center pt-5">Vous n’avez pas encore de compte ? <Link to="/register" className=" underline text-indigo-600 hover:text-orange-500 transform transition-all duration-500 hover:scale-110">S'inscrire</Link></div>
             </div>
         </form>
 	</div>

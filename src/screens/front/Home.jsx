@@ -85,7 +85,7 @@ const Home = () => {
 
     return ( 
         <AppBody >
-        <section className="relative bg-gray-50 dark:bg-slate-800 md:py-20 py-12">
+        <section className="relative bg-[#daeff9] dark:bg-slate-800 md:py-20 py-12">
             <div className="container relative">
                 <div className="grid md:grid-cols-12 grid-cols-1 items-center gap-[30px]">
                     <div className="lg:col-span-6 md:col-span-6">
@@ -157,26 +157,26 @@ const Home = () => {
                 </div>
 
                 <div className="relative grid grid-cols-2 items-center mt-8 gap-[30px] px-10 z-1">
-    <div className="transform transition-all duration-500 hover:scale-105 counter-box justify-center items-center space-x-2 flex pr-5">
-        <div className="pr-1 lg:pr-5">
-            <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-900">
-                <span className="counter-value" data-target={projects.length}>{projects.length}</span>+
-            </h1>
-            <h5 className="counter-head text-lg font-semibold">Projets</h5>
-        </div>
-        <img src={h2} height={70} width={70} alt="Illustration"/>
-    </div>
-    
-    <div className="transform transition-all duration-500 hover:scale-105 counter-box justify-center items-center space-x-2 flex">
-        <div className="pr-1 lg:pr-5">
-            <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-900">
-                <span className="counter-value" data-target={inscris.length}>{inscris.length}</span>+
-            </h1>
-            <h5 className="counter-head text-lg font-semibold">Inscrits</h5>
-        </div>
-        <img src={h1} height={70} width={70} alt="Illustration"/>
-    </div>
-</div>
+                    <div className="transform transition-all duration-500 hover:scale-105 counter-box justify-center items-center space-x-2 flex pr-5">
+                        <div className="pr-1 lg:pr-5">
+                            <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-900">
+                                <span className="counter-value" data-target={projects.length}>{projects.length}</span>+
+                            </h1>
+                            <h5 className="counter-head text-lg font-semibold">Projets</h5>
+                        </div>
+                        <img src={h2} height={70} width={70} alt="Illustration"/>
+                    </div>
+                    
+                    <div className="transform transition-all duration-500 hover:scale-105 counter-box justify-center items-center space-x-2 flex">
+                        <div className="pr-1 lg:pr-5">
+                            <h1 className="lg:text-5xl text-4xl font-semibold mb-2 text-slate-900">
+                                <span className="counter-value" data-target={inscris.length}>{inscris.length}</span>+
+                            </h1>
+                            <h5 className="counter-head text-lg font-semibold">Inscrits</h5>
+                        </div>
+                        <img src={h1} height={70} width={70} alt="Illustration"/>
+                    </div>
+                </div>
                 </div>
             </section>
             

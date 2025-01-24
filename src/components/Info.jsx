@@ -14,7 +14,7 @@ const InfoComponent = ({informations = []}) => {
             </div>
 
           <div className="content p-6">
-              <a href="blog-detail.html" className="font-semibold title h5 text-lg hover:text-[#eb6b11] duration-500 ease-in-out">{info.title}</a>
+              <button onClick={() => navigate(`/pages-infos-single/${info.id}`)} className="font-semibold title h5 text-lg hover:text-[#eb6b11] duration-500 ease-in-out">{info.title}</button>
               <p className="text-slate-400 mt-3 text-sm">
                 <div
                   dangerouslySetInnerHTML={{
@@ -24,8 +24,8 @@ const InfoComponent = ({informations = []}) => {
                 /></p>
               
               <div className="mt-4">
-              <button
-            onClick={() => navigate(`/pages-infos-single/${info.id}`)} className=" font-semibold relative bg-white inline-block tracking-wide align-middle text-[#1a5fa9] text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 hover:text-[#eb6b11] after:bg-[#eb6b11] duration-500 ease-in-out">En savoir plus <i className="uil uil-arrow-right"></i></button>
+              <button onClick={() => navigate(`/pages-infos-single/${info.id}`)} className=" font-semibold relative bg-white inline-block tracking-wide align-middle text-[#1a5fa9] text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 hover:text-[#eb6b11] after:bg-[#eb6b11] duration-500 ease-in-out">
+              En savoir plus <i className="uil uil-arrow-right"></i></button>
               </div>
           </div>
       </div>
