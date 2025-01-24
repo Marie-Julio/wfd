@@ -59,7 +59,7 @@ const [promotions, setPromotions] = useState([])
     if (file) {
       setSelectedImage(URL.createObjectURL(file));
       // Envoyer l'image au backend
-      onImageUpload(file);
+      // onImageUpload(file);
 
       try {
         setLoading(true);
