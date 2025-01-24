@@ -84,7 +84,7 @@ function App() {
       
     <Routes>
       <Route path="/" element={  <Home/>  } />  
-      <Route path="/login" element={  <LoginScreen/>  } />  
+      <Route path="/login/:token?" element={  <LoginScreen/>  } />  
       <Route path="/register" element={  <Register/>  } />  
       <Route path="/page-cours" element={  <CoursScreen/>  } />  
       <Route path="/page-cours-detail/:id" element={  <CoursDetail />  } />  

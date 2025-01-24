@@ -7,8 +7,8 @@ import { Input } from "../components/admin/common/Input";
 import useAuth from "../hooks/useAuth";
 import { errorMessage, onServerError, onServerSuccess } from "../services/Helper";
 import Button from "../components/admin/common/Button";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router";
 import { jwtDecode } from "jwt-decode";
 import logo2 from "../assets/wfdguinee.png";
 
@@ -18,6 +18,7 @@ const LoginScreen = () => {
     const [loading, setLoading] = useState(false)
     const auth = useAuth()
     const navigate = useNavigate()
+    const {token} = useParams()
 
     const saveData = (data) => {
         setLoading(true)
@@ -36,6 +37,20 @@ const LoginScreen = () => {
             onServerError("Identifiants fournies sont invalides.")
           })
     }
+
+
+    const getTokenValidate = (data) => {
+        // setLoading(true)
+        console.log(data)
+        postResource("/active-compte", {token: token}).then((res) => {
+           console.log("ok")
+        // setLoading(false)
+        })
+    }
+
+    useEffect(() => {
+        getTokenValidate()
+    },[token])
 
     const formik = useFormik({
         initialValues: {
