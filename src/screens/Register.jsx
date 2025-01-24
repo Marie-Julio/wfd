@@ -23,7 +23,7 @@ const Register = () => {
         formik.resetForm();
         setIsLoading(false);
         onServerSuccess("Bienvenue ! Votre compte est créé. Vérifiez votre email pour l'activer et démarrer.");
-        setTimeout(() => navigate("/login"), 100);
+        setTimeout(() => useNavigate()("/login"), 100);
       })
       .catch((e) => {
         onServerError("Problème survenue lors de l'inscription");

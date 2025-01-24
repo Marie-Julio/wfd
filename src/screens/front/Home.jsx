@@ -21,14 +21,19 @@ import { tns } from 'tiny-slider';
 
 const Home = () => {
   const [projects, setProjects] = useState([]);
+  const [projectsTotal, setProjectsTotal] = useState([]);
   const [cours, setCours] = useState([]);
+  const [coursTotal, setCoursTotal] = useState([]);
   const [infos, setInfos] = useState([]);
+  const [infosTotal, setInfosTotal] = useState([]);
   const [inscris, setInscris] = useState([]);
+  const [inscrisTotal, setInscrisTotal] = useState([]);
   
       const _init_ = () => {
         getResource("/projets").then((res) => {
             console.log(res.data)
             setProjects(res.data.slice(0, 3))
+            setProjectsTotal(res.data)
         }).catch(e => {
             errorMessage(e)
           })
@@ -36,16 +41,19 @@ const Home = () => {
           getResource("/announcements").then((res) => {
             console.log(res.data);
             setInfos(res.data.slice(0, 3));
+            setInfosTotal(res.data);
         })
 
           getResource("/course-modules").then((res) => {
             console.log(res.data)
             setCours(res.data.slice(0, 8))
+            setCoursTotal(res.data)
         })
 
         getResource("/inscriptions").then((res) => {
           console.log(res.data)
           setInscris(res.data.slice(0, 6))
+          setInscrisTotal(res.data)
       })
     }
 

@@ -29,8 +29,9 @@ const CoursScreen = () => {
         setCourses(res.data);
         setFilteredCourses(res.data); // Initialiser les cours affichés
       })
-      .catch((e) => {
-      });
+      // .catch((e) => {
+      //   errorMessage(e);
+      // });
   };
 
   useEffect(() => {
