@@ -48,7 +48,7 @@ const Gallery = () => {
           <p className="text-center text-gray-600 mb-10">
             Découvrez notre gallerie.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
               <GallerieComponent galleries={projets} />
           </div>
         </div>

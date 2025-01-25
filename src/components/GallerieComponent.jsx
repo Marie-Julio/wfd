@@ -1,8 +1,8 @@
 const GallerieComponent = ({galleries = []}) => {
     const apiUrl = import.meta.env.VITE_API_URI_BASE;
     return ( 
-        <div class="flex min-h-screen w-full flex-wrap content-center justify-center p-5">
-        <div class="grid grid-cols-2 gap-3">
+        <>
+        {/* <div class="grid grid-cols-2 gap-3"> */}
            {galleries.map((x) => ( <div class="w-80 bg-white p-3 shadow-xl">
             <img class="h-52 w-full object-cover" src={`${apiUrl}/storage/${x.image}`} />
             <ul class="mt-3 ">
@@ -35,8 +35,8 @@ const GallerieComponent = ({galleries = []}) => {
             </ul>
             </div>))}
 
-        </div>
-        </div>
+        {/* </div> */}
+        </>
      );
 }
  
