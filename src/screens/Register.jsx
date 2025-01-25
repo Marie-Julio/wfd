@@ -18,20 +18,22 @@ const Register = () => {
   const saveData = (data) => {
     postResource("register", data)
       .then((res) => {
-        if(res.data.succes){
+        // if(res.data){
           formik.resetForm();
           setIsLoading(false);
           onServerSuccess("Bienvenue ! Votre compte est créé. Vérifiez votre email pour l'activer et démarrer.");
-          setTimeout(() => navigate()("/login"), 100);
-        } else{
-            onServerError(res.data.message)
-        }
+          navigate("/login");
+        // } else{
+        //     onServerError(res.data.message)
+        // }
       })
       .catch((e) => {
         onServerError("Erreur. Contactez-nous");
         setIsLoading(false);
       });
   };
+
+      
 
   const formik = useFormik({
     initialValues: {

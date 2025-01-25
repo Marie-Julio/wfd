@@ -56,8 +56,14 @@ const Activate = () => {
     }
 
     useEffect(() => {
-        getTokenValidate()
-    },[token])
+    //   if (!token) {
+    //       onServerError("Lien invalide ou expiré.");
+    //       navigate("/"); // Redirige vers la page d'accueil
+    //   } else {
+          getTokenValidate();
+    //   }
+    console.log(token)
+  }, [token]);
 
     const formik = useFormik({
         initialValues: {
