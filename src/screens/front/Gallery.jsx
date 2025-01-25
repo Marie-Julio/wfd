@@ -3,6 +3,7 @@ import AppBody from "../../components/AppBody";
 import GallerieComponent from "../../components/GallerieComponent";
 import { useEffect, useState } from "react";
 import { Loader } from "lucide-react";
+import { getResource } from "../../services/api";
 
 const Gallery = () => {
     const [projets, setProjets] = useState([]); // Initialisez avec `null`
@@ -12,6 +13,7 @@ const Gallery = () => {
     const fetchCourseData = async () => {
       try {
         const response = await getResource(`/galleries`);
+        console.log(response)
         setProjets(response.data);
       } catch (error) {
         console.error('Erreur lors de la récupération des données du projet :', error);

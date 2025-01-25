@@ -40,23 +40,29 @@ const Activate = () => {
     }
 
 
-    const getTokenValidate = () => {
-        postResource("active-compte", {token: token}).then((res) => {
-           if(res.data.sucess){
-            setMessages(res.data.messages);
-            setError2(0);
-           }
-           setMessages(res.data.messages);
-           setLoading2(false);
-        }).catch(e => {
-           setLoading2(false);
-           setMessages('Une erreur est survenue lors de l\'activation');
-        })
-    }
+    const getTokenValidate = async () => {
+        try {
+            setLoading(true);
+            const response = await postResource("/active-compte", { token });
+            console.log("Compte activé:", response.data);
+            onServerSuccess("Compte activé avec succès !");
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            onServerError("Échec de l'activation du compte. Le lien est peut-être invalide ou expiré.");
+            // navigate("/logn"); // Redirige vers l'inscription en cas d'échec
+        }
+    };
 
     useEffect(() => {
-        getTokenValidate()
-    },[token])
+    //   if (!token) {
+    //       onServerError("Lien invalide ou expiré.");
+    //       navigate("/"); // Redirige vers la page d'accueil
+    //   } else {
+          getTokenValidate();
+    //   }
+    console.log(token)
+  }, [token]);
 
     const formik = useFormik({
         initialValues: {
