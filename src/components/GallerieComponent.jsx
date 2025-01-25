@@ -48,7 +48,7 @@ const GallerieComponent = ({galleries = []}) => {
     const apiUrl = import.meta.env.VITE_API_URI_BASE;
 
     return (
-        <section class="relative md:py-6 py-5">
+        <div class="relative md:py-6 py-5">
             <div class="container relative">
 
                 <div id="grid" class="md:flex justify-center mx-auto mt-4">
@@ -67,7 +67,7 @@ const GallerieComponent = ({galleries = []}) => {
                     ))}
                 </div>
             </div>
-        </section>
+        </div>
      );
 }
  
