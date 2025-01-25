@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router";
 import { errorMessage, onServerSuccess } from "../../services/Helper";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Select from "../../components/admin/common/Select";
 import { Input } from "../../components/admin/common/Input";
 import AppBody from "../../components/AppBody";
 import InputCompletNew from "../../components/admin/common/InputCompletNew";
@@ -79,7 +80,6 @@ const [promotions, setPromotions] = useState([])
     try {
       const response = await getResource(`/me?id=${decodedToken.id}`);
       const userData = response.data;
-      console.log(userData)
       setInfo(userData);
       formik.setValues({
         email: userData.email,
@@ -103,8 +103,8 @@ const [promotions, setPromotions] = useState([])
       console.log(formik.values)
       await patchResource(`/modifier_utilisateur`, decodedToken.id, formik.values);
       onServerSuccess("Mise à jour réussie !");
-      setEditIndex(null); // Désactiver le mode édition
-      fetchData(); // Actualiser les données
+      setEditIndex(null);
+      fetchData();
     } catch (error) {
       errorMessage(error);
     } finally {
@@ -117,7 +117,8 @@ const [promotions, setPromotions] = useState([])
     try {
       setLoading(true);
       
-      const newData = {...values, promotion_id: values.promotion_id.id}
+      const newData = {...values, user_id: info.id}
+      console.log("newData")
       console.log(newData)
       await postFile(`/galleries`, newData);
       onServerSuccess("Image sauvegarder !");
@@ -184,7 +185,7 @@ const [promotions, setPromotions] = useState([])
     initialValues: {
       title: "",
       description: "",
-      promotion_id: "",
+      promotion_id: null,
       image: "",
     },
     validationSchema: Yup.object({
@@ -357,27 +358,22 @@ const [promotions, setPromotions] = useState([])
                       onChange={formikGalerie.handleChange}
                       error={formikGalerie.errors.description }
                     />
-                    <Input
-                      label="Image"
-                      name="image"
-                      type="file" 
-                      onChange={(event) => {
-                        formikGalerie.setFieldValue("image", event.target.files[0]); // Enregistre le fichier dans Formik
-                      }}
-                      error={formikGalerie.errors.image }
-                    />
-                    <InputCompletNew
-                label="La promotion"
-                    suggestions={promotions}
-                    name="promotion_id"
-                    labelKey="nom"
-                    subLabelKey="niveau"
-                    valueKey="id"
-                    onSelect={(promotion) => formikGalerie.setFieldValue(
-                        "promotion_id", promotion
-                    )}
-                    defaultValue={formikGalerie.values.promotion_id}
-                    />
+                    <div className="w-full mb-2 flex flex-col">
+                      <label className="mb-2 text-gray-600">Image</label>
+                      <input id="file-upload" name="image" type="file" 
+                        onChange={(event) => {
+                          formikGalerie.setFieldValue("image", event.target.files[0]);
+                        }}/>
+                    </div>
+                    <Select name="promotion_id" label="Promotion" value={formikGalerie.values.promotion_id} 
+                    onChange={formikGalerie.handleChange} disabled={false} className="w-1/2">
+                      <option>Choisir la promotion</option>
+                      {promotions.map((x) => (
+                        <option value={x.id} key={x.id}>
+                          {x.nom}
+                        </option>
+                      ))}
+                    </Select>
                   <Button
                     type="submit"
                     className="px-4 py-2 bg-[#1a5fa9] hover:bg-blue-800 text-white rounded-lg"

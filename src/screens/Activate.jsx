@@ -24,7 +24,6 @@ const Activate = () => {
     const saveData = (data) => {
         setLoading(true)
         postResource("login", data).then((res) => {
-            // console.log(res.data)
             auth.login(res.data.access_token)
             const token = res.data.access_token ? jwtDecode(res.data.access_token) : null;
             formik.resetForm();
@@ -42,11 +41,11 @@ const Activate = () => {
 
     const getTokenValidate = () => {
         postResource("active-compte", {token: token}).then((res) => {
-           if(res.data.sucess){
-            setMessages(res.data.messages);
+           if(res.data.success){
             setError2(0);
+            setMessages(res.data.message);
            }
-           setMessages(res.data.messages);
+           setMessages(res.data.message);
            setLoading2(false);
         }).catch(e => {
            setLoading2(false);
@@ -107,12 +106,12 @@ const Activate = () => {
                     <p>Chargement...</p>
                 ) : error2 === 1 ? (
                     <div
-                    className="border border-red-800 p-4 mt-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
+                    className="border-2 font-semibold border-red-800 p-4 mt-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
                     role="alert"
                 >{messages}</div>
                 ) : (
                     <div
-                    className="border border-green-800 p-4 mt-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50"
+                    className="border-2 font-semibold border-green-800 p-4 mt-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50"
                     role="alert"
                 >{messages}</div>
                 )}

@@ -1,42 +1,73 @@
-const GallerieComponent = ({galleries = []}) => {
-    const apiUrl = import.meta.env.VITE_API_URI_BASE;
-    return ( 
-        <div class="flex min-h-screen w-full flex-wrap content-center justify-center p-5">
-        <div class="grid grid-cols-2 gap-3">
-           {galleries.map((x) => ( <div class="w-80 bg-white p-3 shadow-xl">
-            <img class="h-52 w-full object-cover" src={`${apiUrl}/storage/${x.image}`} />
-            <ul class="mt-3 ">
-                <li class="mr-auto">
-                <h1 class="flex font-bold text-black text-xl hover:text-gray-600">
-                   {x.title}
-                </h1>
-                </li>
-                <li class="mr-2">
-                <p class="flex text-gray-400 text-md hover:text-gray-600">
-                    {x.description}
-                </p>
-                </li>
-                {/* <li class="mr-2">
-                <a href="#" class="flex text-gray-400 hover:text-gray-600">
-                    <svg class="mr-0.5" style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9Z" />
-                    </svg>
-                    3
-                </a>
-                </li> */}
-                {/* <li>
-                <a href="#" class="flex text-gray-400 hover:text-gray-600">
-                    <svg class="mr-0.5" style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
-                    </svg>
-                    3
-                </a>
-                </li> */}
-            </ul>
-            </div>))}
+import React, { useEffect } from 'react';
+import Shuffle from 'shufflejs'; 
 
-        </div>
-        </div>
+const GallerieComponent = ({galleries = []}) => {
+    useEffect(() => {
+      const gridElement = document.getElementById('grid');
+      
+      if (gridElement) {
+        const shuffle = new Shuffle(gridElement, {
+          itemSelector: '.picture-item',
+          sizer: gridElement.querySelector('.my-sizer-element'),
+        });
+  
+        const filterButtons = document.querySelectorAll('.filter-options button');
+        
+        const handleFilterClick = (evt) => {
+          const btn = evt.currentTarget;
+          const isActive = btn.classList.contains('active');
+          const btnGroup = btn.getAttribute('data-group');
+  
+          // Retire la classe active des autres boutons
+          filterButtons.forEach(button => button.classList.remove('active'));
+  
+          let filterGroup;
+          if (isActive) {
+            filterGroup = Shuffle.ALL_ITEMS;
+          } else {
+            btn.classList.add('active');
+            filterGroup = btnGroup;
+          }
+  
+          shuffle.filter(filterGroup);
+        };
+  
+        filterButtons.forEach(button => {
+          button.addEventListener('click', handleFilterClick);
+        });
+  
+        // Nettoyage
+        return () => {
+          filterButtons.forEach(button => {
+            button.removeEventListener('click', handleFilterClick);
+          });
+          shuffle.destroy();
+        };
+      }
+    }, []);
+    const apiUrl = import.meta.env.VITE_API_URI_BASE;
+
+    return (
+        <section class="relative md:py-6 py-5">
+            <div class="container relative">
+
+                <div id="grid" class="md:flex justify-center mx-auto mt-4">
+                    {galleries.map((x) => (
+                    <div class="lg:w-1/3 md:w-1/3 p-1 picture-item" data-groups={`["${x.promotion_id}"]`}>
+                        <div class="group relative block overflow-hidden rounded-md duration-500">
+                            <div class="lightbox duration-500 group-hover:scale-105" title="">
+                                <img src={`${apiUrl}/storage/${x.image}`} class="" alt="work-image" />
+                            </div>
+                            <div class="absolute -bottom-52 group-hover:bottom-2 start-2 end-2 duration-500 bg-white dark:bg-slate-900 p-4 rounded shadow dark:shadow-gray-800">
+                                <span class="hover:text-indigo-600 text-lg duration-500 font-medium">{x.title}</span>
+                                <h6 class="text-slate-400">{x.description}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    ))}
+                </div>
+            </div>
+        </section>
      );
 }
  
