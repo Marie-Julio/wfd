@@ -37,7 +37,7 @@ function Nav () {
                 <div className="flex text-end justify-between items-center">
                     <img src={tokenNew.file_path || imgprofil} alt="Profile"
                     className="w-10 h-10 rounded-full border-white shadow-lg" />
-                    <Link to="/page-profil" className="pl-2 flex-wrap items-center">
+                    <Link to="/profil" className="pl-2 flex-wrap items-center">
                         <p className="text-start text-sm text-gray font-montserrat-bold">{tokenNew && `${tokenNew.nom} ${tokenNew.prenom}`}</p>
                         <span className="text-gray-500 text-sm">{tokenNew && tokenNew.email}</span>
                     </Link>

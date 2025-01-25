@@ -50,7 +50,8 @@ const Activate = () => {
            setLoading2(false);
         }).catch(e => {
            setLoading2(false);
-           setMessages('Une erreur est survenue lors de l\'activation');
+           console.error(e);
+           setMessages(e.message);
         })
     }
 

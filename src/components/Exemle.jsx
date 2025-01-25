@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 const CourseCard = ({ course }) => {
     const navigate = useNavigate()
     const handleDetail = () => {
-        navigate(`/page-cours-detail/${course.id}`)
+        navigate(`/cours-detail/${course.id}`)
     }
   return (
     <div className="bg-white shadow-lg rounded-lg border p-1 hover:shadow-orange-500/90 w-70 transition-transform duration-300 hover:scale-105 hover:shadow-2xl">

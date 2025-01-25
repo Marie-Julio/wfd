@@ -13,13 +13,13 @@ const Nav = () => {
   const location = useLocation();
   const menuItems = [
     { label: "Accueil", href: "/" },
-    { label: "Promotions", href: "/page-promotion"  },
-    { label: "Cours", href: "/page-cours", requiresAuth: true  },
+    { label: "Promotions", href: "/promotion"  },
+    { label: "Cours", href: "/cours", requiresAuth: true  },
     { label: "Informations", href: "/pages-infos" },
     { label: "Forum", href: "/pages-forum", requiresAuth: true  },
     { label: "Nos Projets", href: "/pages-projet" },
-    { label: "Enseignants", href: "/page-members" },
-    { label: "Galerie", href: "/page-galeries" },
+    { label: "Enseignants", href: "/members" },
+    { label: "Galerie", href: "/galeries" },
   ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -141,7 +141,7 @@ const Nav = () => {
               <>
               <li className="py-2 px-4 ">
                 <button
-                  onClick={() => navigate('/page-profil')}
+                  onClick={() => navigate('/profil')}
                   className=" -ml-4 block w-full py-2 px-4 text-left text-sm bg-[#1a5fa9] text-white rounded hover:bg-blue-800"
                 >
                   Profile
@@ -149,7 +149,7 @@ const Nav = () => {
               </li>
               <li className="py-2 px-4">
                 <button
-                  onClick={() => navigate('/page-attestations')}
+                  onClick={() => navigate('/attestations')}
                   className=" -ml-4 block w-full py-2 px-4 text-left text-sm bg-[#eb6b11] text-white rounded hover:bg-blue-800"
                 >
                   Mes Attestations & Certificats
@@ -203,13 +203,13 @@ const Nav = () => {
                 {isProfileMenuOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded shadow-md z-10">
                     <Link
-                      to="/page-profil"
+                      to="/profil"
                       className="block px-4 py-2 hover:bg-gray-100"
                     >
                       Mon Compte
                     </Link>
                     <Link
-                      to="/page-attestations"
+                      to="/attestations"
                       className="block px-4 py-2 hover:bg-gray-100"
                     >
                       Mes Attestations & Certificats

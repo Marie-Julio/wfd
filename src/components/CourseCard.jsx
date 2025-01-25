@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router';
 const CourseCard = ({ course }) => {
     const navigate = useNavigate()
     const handleDetail = () => {
-        navigate(`/page-cours-detail/${course.id}`)
+        navigate(`/cours-detail/${course.id}`)
     }
   return (
     <div className="group relative rounded-md shadow hover:shadow-lg dark:shadow-gray-800 duration-500 ease-in-out overflow-hidden">

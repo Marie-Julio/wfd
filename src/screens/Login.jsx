@@ -21,21 +21,17 @@ const LoginScreen = () => {
         setLoading(true)
         postResource("login", data).then((res) => {
             // console.log(res.data)
-            if(res.data.succes){
-                auth.login(res.data.access_token)
-                const token = res.data.access_token ? jwtDecode(res.data.access_token) : null;
-                formik.resetForm();
-                setLoading(false)
-                onServerSuccess("Connexion réussie")
-                if (token.role === "participant")
-                    setTimeout(() => navigate("/"), 100)
-                else setTimeout(() => navigate("/admin/dashboard"), 100)
-            } else{
-                onServerError(res.data.error)
-            }
+            auth.login(res.data.access_token)
+            const token = res.data.access_token ? jwtDecode(res.data.access_token) : null;
+            formik.resetForm();
+            setLoading(false)
+            onServerSuccess("Connexion réussie")
+            if (token.role === "participant")
+                setTimeout(() => navigate("/"), 100)
+            else setTimeout(() => navigate("/admin/dashboard"), 100)
         }).catch(e => {
             setLoading(false)
-            onServerError("Erreur")
+            onServerError("Identifiants fournies sont invalides.")
         })
     }
 

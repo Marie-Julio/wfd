@@ -133,7 +133,7 @@ const Home = () => {
                 <div class="grid md:grid-cols-12 grid-cols-1 pb-8 items-end">
                     <div class="lg:col-span-8 md:col-span-6 md:text-start text-center">
                         <h3 class="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold"><span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative">Projets</span></h3>
-                        <p class="text-slate-400 max-w-xl">Prenez le temps de découvrir ces réalisations, qui sont autant de témoignages de notre capacité à créer de la valeur et à transformer des idées en solutions concrètes et inspirantes.</p>
+                        <p class="text-slate-400 max-w-xl">À travers des projets participatifs, co-conçus avec les bénéficiaires en fonction des besoins réels identifiés, nous affirmons notre engagement à être des acteurs de notre propre développement. Dans cette dynamique, nous restons constamment à l'écoute de notre communauté, envers laquelle nous sommes résolument déterminés à offrir notre service, guidés par un profond souci d'humanité, de solidarité.</p>
                     </div>
 
                     <div class="lg:col-span-4 md:col-span-6 md:text-end hidden md:block">

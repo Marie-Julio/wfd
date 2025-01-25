@@ -14,7 +14,7 @@ const AppBody = ({home, bannerCour, banner, course, titleBanner,className, image
     produits: false
   });
 
-  const menusItems = [{label: 'Mentions légales', href : "/page-mention"}, {label: 'Politique de confidentialité', href : "/page-politique"}, {label : 'Contactez-nous', href : 'https://wfdguinee.org/contact/'}]
+  const menusItems = [{label: 'Mentions légales', href : "/mention"}, {label: 'Politique de confidentialité', href : "/politique"}, {label : 'Contactez-nous', href : 'https://wfdguinee.org/contact/'}]
 
   const toggleMobileMenu = () => {
     setIsMenuOpen(!isMenuOpen);

@@ -8,6 +8,7 @@ import Home from './screens/front/Home'
 import LoginScreen from './screens/Login'
 import Activate from './screens/Activate'
 import CoursScreen from './screens/front/CoursScreen'
+import InfoInsc from './screens/front/InfoInsc'
 import { AdminHome } from './screens/admin'
 import Cours from './screens/admin/cours'
 import CoursDetail from './screens/front/CoursDetail'
@@ -88,11 +89,12 @@ function App() {
       <Route path="/login" element={  <LoginScreen/>  } />  
       <Route path="/activate/:token" element={  <Activate/>  } />  
       <Route path="/register" element={  <Register/>  } />  
-      <Route path="/page-cours" element={  <CoursScreen/>  } />  
-      <Route path="/page-cours-detail/:id" element={  <CoursDetail />  } />  
-      <Route path="/page-quizz/:id" element={  <QuizInterface />  } />  
-      <Route path="/page-promotion" element={  <Promotion />  } />  
-      <Route path="/page-profil" element={ <Profile />  } />  
+      <Route path="/cours" element={  <CoursScreen/>  } />  
+      <Route path="/insc" element={  <InfoInsc/>  } />  
+      <Route path="/cours-detail/:id" element={  <CoursDetail />  } />  
+      <Route path="/quizz/:id" element={  <QuizInterface />  } />  
+      <Route path="/promotion" element={  <Promotion />  } />  
+      <Route path="/profil" element={ <Profile />  } />  
       <Route path="/pages-infos" element={ <Information />  } />  
       <Route path="/pages-infos-single/:id" element={ <InfoSingle />  } />  
       <Route path="/pages-forum" element={ <ForumScreen />  } />  
@@ -101,11 +103,11 @@ function App() {
       <Route path="/discussions/:id" element={ <Discussion />  } />  
       <Route path="/comments/:id" element={ <Comment />  } />  
       <Route path="/reset-password" element={ <ResetPassword />  } />  
-      <Route path="/page-politique" element={ <PrivacyPolicy />  } />  
-      <Route path="/page-mention" element={ <LegalNotice />  } />  
-      <Route path="/page-members" element={ <TeacherProfiles />  } />  
-      <Route path="/page-galeries" element={ <Gallery />  } />  
-      <Route path="/page-attestations" element={ <Attestation />  } />  
+      <Route path="/politique" element={ <PrivacyPolicy />  } />  
+      <Route path="/mention" element={ <LegalNotice />  } />  
+      <Route path="/members" element={ <TeacherProfiles />  } />  
+      <Route path="/galeries" element={ <Gallery />  } />  
+      <Route path="/attestations" element={ <Attestation />  } />  
      
 
        {/* Screen admin  */}

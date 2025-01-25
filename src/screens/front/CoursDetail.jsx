@@ -151,7 +151,7 @@ const unixTimestamp = Math.floor(now / 1000);
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => navigate(`/page-quizz/${course.qcm.id}`)}
+                      onClick={() => navigate(`/quizz/${course.qcm.id}`)}
                       className="flex items-center gap-2"
                     >
                       <BookOpen className="w-4 h-4" />
