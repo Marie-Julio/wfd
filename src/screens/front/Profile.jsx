@@ -14,11 +14,13 @@ import Button from "../../components/admin/common/Button";
 import useAuth from "../../hooks/useAuth";
 import imgprofil from "../../assets/images/profil.png";
 import bgmotpasse from "../../assets/motpasse.png";
+import GalleryTable from "../../components/GalerieTable";
 
 const Profile = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [info, setInfo] = useState({});
+  const [galeries, setGaleries] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
   const [loading, setLoading] = useState(true);
   const [testResults, setTestResults] = useState([]);
@@ -26,6 +28,7 @@ const Profile = () => {
   const [isTestCollapseOpen, setIsTestCollapseOpen] = useState(false);
   const [isFormCollapseOpen, setIsFormCollapseOpen] = useState(true);
   const [galerieCollapse, setGalerieCollapse] = useState(false);
+  const [listgalerieCollapse, setListGalerieCollapse] = useState(false);
   const [isFormCollapseOpenPassword, setIsFormCollapseOpenPassword] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -229,6 +232,17 @@ const [promotions, setPromotions] = useState([])
     }).catch((e) => errorMessage(e))
   };
 
+  const _init_ = () => {
+    getResource(`/galleries?user_id=${decodedToken.id}`).then((res) => {
+        console.log(res.data)
+        setGaleries(res.data)
+    })
+  }
+
+  useEffect(() => {
+    _init_()
+  }, [])
+
   useEffect(() => {
     fetchData();
     fetchTestResults();
@@ -428,6 +442,20 @@ const [promotions, setPromotions] = useState([])
                   )}
                 </div>
               </div>
+            </div>
+
+            {/* Form Collapse Liste gallerie */}
+            <div className="p-6 sm:p-8">
+              <div
+                onClick={() => setListGalerieCollapse(!listgalerieCollapse)}
+                className="flex justify-between items-center cursor-pointer bg-gray-100 p-4 rounded-lg shadow hover:bg-gray-200"
+              >
+                <h2 className="text-lg font-bold">Ma Galerie</h2>
+                {listgalerieCollapse ? <ChevronUp /> : <ChevronDown />}
+              </div>
+              {listgalerieCollapse && (
+                <GalleryTable galleries={galeries}/>
+              )}
             </div>
           </div>
         </div>
