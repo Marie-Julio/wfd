@@ -6,6 +6,7 @@ import AppBody from './components/AppBody'
 import { redirect, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Home from './screens/front/Home'
 import LoginScreen from './screens/Login'
+import Activate from './screens/Activate'
 import CoursScreen from './screens/front/CoursScreen'
 import { AdminHome } from './screens/admin'
 import Cours from './screens/admin/cours'
@@ -84,7 +85,8 @@ function App() {
       
     <Routes>
       <Route path="/" element={  <Home/>  } />  
-      <Route path="/login/:token?" element={  <LoginScreen/>  } />  
+      <Route path="/login" element={  <LoginScreen/>  } />  
+      <Route path="/activate/:token" element={  <Activate/>  } />  
       <Route path="/register" element={  <Register/>  } />  
       <Route path="/page-cours" element={  <CoursScreen/>  } />  
       <Route path="/page-cours-detail/:id" element={  <CoursDetail />  } />  

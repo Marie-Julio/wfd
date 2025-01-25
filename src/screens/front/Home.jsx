@@ -11,11 +11,8 @@ import InfoComponent from "../../components/Info";
 import CourseCard from "../../components/CourseCard";
 import h1 from "../../assets/images/h1.png";
 import h2 from "../../assets/images/h2.png";
-import h3 from "../../assets/images/h3.png";
-import teacher from "../../assets/images/teacher.png";
-import knowledge from "../../assets/images/knowledge.png";
-import knowledge1 from "../../assets/images/knowledge (1).png";
 import CourIcon from "../../assets/images/cours.svg";
+import background2 from "../../assets/images/home2.png";;
 import 'tiny-slider/dist/tiny-slider.css';
 import { tns } from 'tiny-slider';
 
@@ -85,10 +82,13 @@ const Home = () => {
 
     return ( 
         <AppBody >
-        <section className="relative bg-[#daeff9] dark:bg-slate-800 md:py-20 py-12">
+        <section className="relative bg-[#daeff9] dark:bg-slate-800 md:py-10 py-6">
+            <div className=" hidden md:block absolute top-5 right-20 w-40 h-40 bg-[#eb6b11] rounded-full ">
+                <div className="bg-no-repeat bg-cover bg-center w-40 h-40 rounded-full transform transition-all duration-500 hover:scale-110" style={{ backgroundImage: `url(${background2})` }}></div>
+            </div>
             <div className="container relative">
                 <div className="grid md:grid-cols-12 grid-cols-1 items-center gap-[30px]">
-                    <div className="lg:col-span-6 md:col-span-6">
+                    <div className="lg:col-span-5 md:col-span-5">
                         <div className="grid grid-cols-12 gap-6 items-center">
                             <div className="col-span-6">
                                 <div className="grid grid-cols-1 gap-6">
@@ -107,14 +107,14 @@ const Home = () => {
                         </div>
                     </div>
 
-                    <div className="lg:col-span-6 md:col-span-6">
+                    <div className="lg:col-span-7 md:col-span-7">
                         <div className="lg:ms-5">
                             <div className="flex mb-4">
                                 <span className="transform transition-all duration-500 hover:scale-110 text-[#eb6b11] text-2xl font-bold mb-0"><span className="counter-value text-6xl font-bold" data-target="15">10</span>+</span>
                                 <span className="transform transition-all duration-500 hover:scale-110 self-end font-semibold ms-2">Années <br /> d'Expérience</span>
                             </div>
 
-                            <h3 className="transform transition-all duration-500 hover:scale-105 mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold w-[115%]"> Formation et de sensibilisation</h3>
+                            <h3 className="transform transition-all duration-500 hover:scale-105 mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold"> Formation et de sensibilisation à la PAIX !</h3>
 
                             <p className="text-slate-600 max-w-xl">Découvrez des formations inspirantes et des outils pratiques pour devenir un <strong> acteur clé </strong> de la paix et du développement durable.</p>
                         
@@ -132,7 +132,7 @@ const Home = () => {
             <div class="container relative">
                 <div class="grid md:grid-cols-12 grid-cols-1 pb-8 items-end">
                     <div class="lg:col-span-8 md:col-span-6 md:text-start text-center">
-                        <h3 class="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold">Projets</h3>
+                        <h3 class="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold"><span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative">Projets</span></h3>
                         <p class="text-slate-400 max-w-xl">Prenez le temps de découvrir ces réalisations, qui sont autant de témoignages de notre capacité à créer de la valeur et à transformer des idées en solutions concrètes et inspirantes.</p>
                     </div>
 
@@ -182,7 +182,7 @@ const Home = () => {
             
             <div className="container relative md:mt-24 mt-16">
                 <div className="grid grid-cols-1 pb-8 text-center">
-                    <h3 className="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold text-black dark:text-white">Témoignages</h3>
+                <h3 class="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold"><span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative">Témoignages</span></h3>
 
                     <p className="text-slate-500 max-w-xl mx-auto">Vous aussi, partagez votre expérience avec nous</p>
                 </div>
@@ -245,7 +245,7 @@ const Home = () => {
             
             <div className="container relative md:mt-24 mt-16">
                 <div className="grid grid-cols-1 pb-8 text-center">
-                    <h3 className="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">Découvrez nos dernières actualités !</h3>
+                <h3 class="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold"><span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative">Découvrez nos dernières actualités !</span></h3>
 
                     <p className="text-slate-400 max-w-xl mx-auto">Découvrez les événements récents qui façonnent notre avenir.</p>
                 </div>

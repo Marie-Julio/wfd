@@ -129,36 +129,64 @@ const Forum = () => {
 
   return (
     <AppBody>
-    <div className="p-12 bg-[#1a5fa9] flex flex-col md:flex-row justify-between items-center text-white">
-      <h1 className="text-2xl font-bold mb-4 md:mb-0">Forums</h1>
-    </div>
-    <section className="max-w-7xl mx-auto p-4 bg-gray-200">
+    <div className=" bg-white">
+      <div class="bg-[#1a5fa9] md:pt-16 pt-10 text-white grid grid-cols-1 text-center">
+          <h3 class="font-bold uppercase leading-normal text-3xl mb-5">Forum</h3>
+
+          <div class="subcribe-form mt-6 pb-10">
+              <form class="relative max-w-xl mx-auto">
+                  <input type="text" id="SearchForumKeyword" name="text" class="pt-4 pe-14 pb-4 ps-6 w-full h-[50px] outline-none text-black dark:text-white rounded-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-800" placeholder="Rechercher ..." />
+                  <button type="submit" class="inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center absolute top-[2px] end-[3px] size-[46px] bg-orange-600 hover:bg-orange-700 border-orange-600 hover:border-orange-700 text-white rounded-full"><i class="uil uil-search"></i></button>
+              </form>
+          </div>
+      </div>
+      <div class="container relative md:mt-16 mt-10">
       {!selectedForum && (
       <div className="w-full gap-6">
-      <div className="relative">
-          <h1 className="text-3xl font-bold mb-6">Forums</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-30">
-            {currentForum.map((forum) => (
-              <Card
-                key={forum.id}
-                className="cursor-pointer transform transition-all hover:scale-105 bg-white"
-                onClick={() => handleSelectForum(forum)}
-              >
-                <CardHeader>
-                  <CardTitle className="flex justify-between items-center">
-                    {forum.title}
-                    <ChevronRight />
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">{forum.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-       </div>
-            
-                {/* Pagination */}
-      <div className="absolute bottom-0 mt-20  left-0 w-full flex justify-center bg-white py-4 shadow-md">
+        <div className="relative">
+            <div class="relative overflow-x-auto block w-full bg-white dark:bg-slate-900 rounded-md border border-gray-100 dark:border-slate-800">
+              <table class="w-full text-start">
+                  <thead class="text-lg border-b border-gray-100 dark:border-slate-800">
+                      <tr>
+                          <th class="py-6 px-4 font-semibold min-w-[300px] text-start">Forum</th>
+                          <th class="text-center py-6 px-4 font-semibold min-w-[40px]">Sujets</th>
+                          <th class="text-center py-6 px-4 font-semibold min-w-[40px]">Commentaires</th>
+                          <th class="py-6 px-4 font-semibold min-w-[220px] text-end">Créer par</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  {currentForum.map((forum) => (
+                      <tr key={forum.id} class="border-b border-gray-100 dark:border-slate-800">
+                          <th class="p-4">
+                              <div class="flex text-start">
+                                  <i class="uil uil-comment text-indigo-600 text-2xl"></i>
+
+                                  <div class="ms-2">
+                                      <a href="forums-topic.html" class="hover:text-indigo-600 text-lg">{forum.title}</a>
+                                      <p class="text-slate-400 font-normal">{forum.description}</p>
+                                  </div>
+                              </div>
+                          </th>
+                          <td class="text-center p-4">5</td>
+                          <td class="text-center p-4">10</td>
+                          <td class="p-4">
+                              <div class="flex justify-end">
+                                  <img src="assets/images/client/01.jpg" class="h-10 rounded-full shadow dark:shadow-slate-800" alt="" />
+
+                                  <div class="ms-2">
+                                      <a href="#" class="hover:text-indigo-600 font-semibold">Calvin Carlo</a>
+                                      <p class="text-slate-400 text-sm font-normal"><i class="uil uil-clock"></i> May 2022</p>
+                                  </div>
+                              </div>
+                          </td>
+                      </tr>
+                    ))}
+
+                  </tbody>
+              </table>
+          </div>
+          
+      <div className=" w-full flex justify-center bg-white py-4">
         <nav className="inline-flex">
           <button
             onClick={() => paginate(currentPageForum - 1)}
@@ -204,7 +232,7 @@ const Forum = () => {
       <div className="w-[2px] bg-gray-300 mx-4"></div>
 
         {/* Section Créer un forum */}
-        <div className="flex-1">
+        <div className="flex-1 pt-10">
             <h2 className="text-xl font-bold mb-4">Créer un forum</h2>
             <input
               type="text"
@@ -261,7 +289,7 @@ const Forum = () => {
             <Button onClick={createDiscussion}>Créer</Button>
           </div>
         </div>
-      )}
+      )}<br /><br />
 
       {/* Commentaires */}
       {selectedDiscussion && (
@@ -290,7 +318,8 @@ const Forum = () => {
           </div>
         </div>
       )}
-    </section>
+      </div>
+    </div>
     </AppBody>
   );
 };

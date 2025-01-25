@@ -12,32 +12,51 @@ import { Link, useNavigate, useParams } from "react-router";
 import { jwtDecode } from "jwt-decode";
 import logo2 from "../assets/wfdguinee.png";
 
-const LoginScreen = () => {
-    const [loading, setLoading] = useState(false)
+const Activate = () => {
     const auth = useAuth()
     const navigate = useNavigate()
+    const [error2, setError2] = useState(1);
+    const [messages, setMessages] = useState(null);
+    const [loading, setLoading] = useState(false)
+    const [loading2, setLoading2] = useState(true);
+    const {token} = useParams()
 
     const saveData = (data) => {
         setLoading(true)
         postResource("login", data).then((res) => {
             // console.log(res.data)
-            if(res.data.succes){
-                auth.login(res.data.access_token)
-                const token = res.data.access_token ? jwtDecode(res.data.access_token) : null;
-                formik.resetForm();
-                setLoading(false)
-                onServerSuccess("Connexion réussie")
-                if (token.role === "participant")
-                    setTimeout(() => navigate("/"), 100)
-                else setTimeout(() => navigate("/admin/dashboard"), 100)
-            } else{
-                onServerError(res.data.error)
-            }
+            auth.login(res.data.access_token)
+            const token = res.data.access_token ? jwtDecode(res.data.access_token) : null;
+            formik.resetForm();
+            setLoading(false)
+            onServerSuccess("Connexion réussie")
+            if (token.role === "participant")
+                setTimeout(() => navigate("/"), 100)
+            else setTimeout(() => navigate("/admin/dashboard"), 100)
         }).catch(e => {
             setLoading(false)
-            onServerError("Erreur")
+            onServerError("Identifiants fournies sont invalides.")
         })
     }
+
+
+    const getTokenValidate = () => {
+        postResource("active-compte", {token: token}).then((res) => {
+           if(res.data.sucess){
+            setMessages(res.data.messages);
+            setError2(0);
+           }
+           setMessages(res.data.messages);
+           setLoading2(false);
+        }).catch(e => {
+           setLoading2(false);
+           setMessages('Une erreur est survenue lors de l\'activation');
+        })
+    }
+
+    useEffect(() => {
+        getTokenValidate()
+    },[token])
 
     const formik = useFormik({
         initialValues: {
@@ -76,6 +95,21 @@ const LoginScreen = () => {
                 <a href="/"><img src={logo2} className="h-12 mt-10 md:mt-0" alt="Logo" /></a><br />
                 <h1 class="pt-5 md:pt-0 text-gray-800 font-bold text-2xl mb-1">Se connecter</h1>
                 <p class="text-sm font-normal text-gray-600 mb-7">Connectez-vous à votre compte</p>
+                
+                {loading2 ? (
+                    <p>Chargement...</p>
+                ) : error2 === 1 ? (
+                    <div
+                    className="border border-red-800 p-4 mt-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
+                    role="alert"
+                >{messages}</div>
+                ) : (
+                    <div
+                    className="border border-green-800 p-4 mt-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50"
+                    role="alert"
+                >{messages}</div>
+                )}
+
                 <div class="flex items-center border-2 hover:border-orange-500 py-2 px-3 rounded-2xl mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
@@ -105,4 +139,4 @@ const LoginScreen = () => {
      );
 }
  
-export default LoginScreen;
+export default Activate;

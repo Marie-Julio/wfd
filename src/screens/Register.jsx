@@ -8,25 +8,27 @@ import { countries } from "../Data/data";
 import { postResource } from "../services/api";
 import Select from "../components/admin/common/Select";
 import Button from "../components/admin/common/Button";
-import useAuth from "../hooks/useAuth";
 import { errorMessage, onServerError, onServerSuccess } from "../services/Helper";
 import logo2 from "../assets/wfdguinee.png";
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const auth = useAuth();
   const navigate = useNavigate()
 
   const saveData = (data) => {
     postResource("register", data)
       .then((res) => {
-        formik.resetForm();
-        setIsLoading(false);
-        onServerSuccess("Bienvenue ! Votre compte est créé. Vérifiez votre email pour l'activer et démarrer.");
-        setTimeout(() => useNavigate()("/login"), 100);
+        if(res.data.succes){
+          formik.resetForm();
+          setIsLoading(false);
+          onServerSuccess("Bienvenue ! Votre compte est créé. Vérifiez votre email pour l'activer et démarrer.");
+          setTimeout(() => navigate()("/login"), 100);
+        } else{
+            onServerError(res.data.message)
+        }
       })
       .catch((e) => {
-        onServerError("Problème survenue lors de l'inscription");
+        onServerError("Erreur. Contactez-nous");
         setIsLoading(false);
       });
   };
