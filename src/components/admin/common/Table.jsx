@@ -3,7 +3,7 @@ import axios from 'axios';
 import Icon from './Icon';
 import Select from './Select';
 import { Input } from './Input';
-import { removeResource } from '../../../services/api';
+import { patchResource, removeResource } from '../../../services/api';
 import { errorMessage, onServerSuccess } from '../../../services/Helper';
 import Modal from './Modal';
 import Button from './Button';
@@ -11,7 +11,7 @@ import danger from '../../../assets/icons/danger.svg'
 
 
 
-const Table  = ({ data, reloadFonction, columns = [],open, actions = true, primaryKey = "id",  title, children, label, editFunction, addFunction,  deleteUrl, setOpenSidebar, filter, setFilter}) => {
+const Table  = ({ data, reloadFonction, columns = [],open, actions = true, primaryKey = "id",  title, children, label, editFunction, addFunction,  deleteUrl, setOpenSidebar, filter, fiches, setFilter}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -23,6 +23,7 @@ const Table  = ({ data, reloadFonction, columns = [],open, actions = true, prima
   const [delModal, setDelModal] = useState(false);
   const [page, setPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(5);
+    const [valueFiche, setValueFiche] = useState(null)
   // const [filter , setFilter] = useState(false)
 
   const getNestedValue = (obj, accessor) => {
@@ -99,6 +100,21 @@ setItems(currentData.slice(offset, offset + itemsPerPage));
       console.log('Importing data...');
     }
   };
+
+  
+
+  const handleSelectChange = (e, item) => {
+    e.stopPropagation();
+    const selectedValue = e.target.value;
+    setValueFiche(selectedValue)
+     patchResource("/modifier_utilisateur", item, {role: selectedValue}).then((res) => {
+                // console.log(res)
+                onServerSuccess(res.data.message)
+            }).catch(e => {
+                errorMessage(e)
+            })
+    
+}
 
   const handleDelete = () => {
     // Logique pour supprimer les lignes sélectionnées
@@ -200,6 +216,9 @@ setItems(currentData.slice(offset, offset + itemsPerPage));
               </th>
             ))}
             {
+                fiches && <th className="border border-slate-300 p-2">Fiches</th>
+            }
+            {
                 actions && <th className="border border-neutral-200 p-1">ACTIONS</th>
             }
           </tr>
@@ -215,6 +234,19 @@ setItems(currentData.slice(offset, offset + itemsPerPage));
                   {getNestedValue(row, column.accessor)}
                 </td>
               ))}
+              {fiches && (
+                                        <td className="border border-slate-300 p-2">
+                                            <Select name="valueFiche" value={valueFiche} onChange={(e) => handleSelectChange(e, row.id)}>
+                                                <option value="">Choisir une fiche</option>
+                                                {fiches.map((fiche) => (
+                                                    <option key={fiche} value={fiche}>
+                                                        {fiche}
+                                                    </option>
+                                                ))}
+                                            </Select>
+                                        </td>
+                                    )}
+              
               { actions &&
                 <td className="border border-neutral-200 p-0 w-full h-full flex flex-wrap items-center justify-around">
                    

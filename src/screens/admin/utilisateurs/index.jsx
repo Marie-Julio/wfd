@@ -13,15 +13,18 @@ const Utilisateur = () => {
 
     const [cours, setCours] = useState([]);
     const [data, setData] = useState();
+    const roles = ["participant", "admin", "formateur"];
+    const [fiches, setFiches] = useState(roles)
 
     const columns = [
         { accessor: 'nom', Header: "Nom " },
         { accessor: 'prenom', Header: "Prenom" },
         { accessor: 'email', Header: "Email" },
-        { accessor: 'date_naissance', Header: "Date de naissance" },
         { accessor: 'nationalite', Header: "Nationalite" },
         { accessor: 'role', Header: "Role" },
       ];
+
+     
 
       const _init_ = () => {
         getResource('/afficher_liste_utilisateur').then((res) => {
@@ -57,6 +60,7 @@ const Utilisateur = () => {
             setFilter={setFilter}
             setOpenSidebar={setIsOpen}
             open={isOpen}
+            fiches={fiches}
             addFunction={create}
             editFunction={updateFunction}
             reloadFonction={_init_}
@@ -66,15 +70,7 @@ const Utilisateur = () => {
             // editFunction={} 
             // deleteUrl={}    
             >
-                <ViewMore title="Nom">
-                {/* <Searchable
-                    data={data}
-                    label="Rechercher par Libelle"
-                    searchColumns={["code"]}
-                    bodyColumns={["code", "libelle"]}
-                    headColumns={["code", "libelle"]}
-                    showData={updateData}/> */}
-                </ViewMore>
+               
             </Table>
         </Body>
      );
