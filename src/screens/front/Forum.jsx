@@ -19,16 +19,8 @@ const Forum = () => {
   const [comments, setComments] = useState([]);
   const navigate = useNavigate()
 
-
-  const accessToken = localStorage.getItem("token");
-  const decodedToken = accessToken ? jwtDecode(accessToken) : null;
-
-  if (!accessToken) {
-    navigate("/login");
-  }
-
   const [currentPageForum, setCurrentPageForum] = useState(1); // Page actuelle
-  const forumPerPage = 3; // Nombre de cours par page
+  const forumPerPage = 5; // Nombre de cours par page
 
   const [currentPageDiscussion, setCurrentPageDiscussion] = useState(1); // Page actuelle
   const discussionPerPage = 9; // Nombre de cours par page
@@ -140,35 +132,33 @@ const Forum = () => {
               </form>
           </div>
       </div>
-      <div class="container relative md:mt-16 mt-10">
+      <div class="container relative md:mt-16 mt-10 pb-10">
       {!selectedForum && (
       <div className="w-full gap-6">
         <div className="relative">
-            <div class="relative overflow-x-auto block w-full bg-white dark:bg-slate-900 rounded-md border border-gray-100 dark:border-slate-800">
+            <div class="relative overflow-x-auto block w-full bg-white dark:bg-slate-900 rounded-md border border-gray-200 dark:border-slate-800">
               <table class="w-full text-start">
-                  <thead class="text-lg border-b border-gray-100 dark:border-slate-800">
+                  <thead class=" bg-orange-600 text-white text-lg border-b border-gray-200 dark:border-slate-800">
                       <tr>
                           <th class="py-6 px-4 font-semibold min-w-[300px] text-start">Forum</th>
                           <th class="text-center py-6 px-4 font-semibold min-w-[40px]">Sujets</th>
-                          <th class="text-center py-6 px-4 font-semibold min-w-[40px]">Commentaires</th>
                           <th class="py-6 px-4 font-semibold min-w-[220px] text-end">Créer par</th>
                       </tr>
                   </thead>
                   <tbody>
                   {currentForum.map((forum) => (
-                      <tr key={forum.id} class="border-b border-gray-100 dark:border-slate-800">
+                      <tr key={forum.id} class="border-b border-gray-200 dark:border-slate-800">
                           <th class="p-4">
                               <div class="flex text-start">
                                   <i class="uil uil-comment text-indigo-600 text-2xl"></i>
 
                                   <div class="ms-2">
-                                      <a href="forums-topic.html" class="hover:text-indigo-600 text-lg">{forum.title}</a>
+                                      <button onClick={() => handleSelectForum(forum)} class="bg-transparent hover:text-indigo-600 text-lg">{forum.title}</button>
                                       <p class="text-slate-400 font-normal">{forum.description}</p>
                                   </div>
                               </div>
                           </th>
                           <td class="text-center p-4">5</td>
-                          <td class="text-center p-4">10</td>
                           <td class="p-4">
                               <div class="flex justify-end">
                                   <img src="assets/images/client/01.jpg" class="h-10 rounded-full shadow dark:shadow-slate-800" alt="" />
@@ -203,7 +193,7 @@ const Forum = () => {
               onClick={() => paginate(number)}
               className={`px-4 py-2 mx-1 border rounded ${
                 currentPageForum === number
-                  ? "bg-[#1a5fa9] text-white"
+                  ? "bg-orange-600 text-white"
                   : "bg-white"
               }`}
             >
@@ -228,94 +218,7 @@ const Forum = () => {
         </nav>
       </div>
     </div>
-          {/* Trait vertical */}
-      <div className="w-[2px] bg-gray-300 mx-4"></div>
-
-        {/* Section Créer un forum */}
-        <div className="flex-1 pt-10">
-            <h2 className="text-xl font-bold mb-4">Créer un forum</h2>
-            <input
-              type="text"
-              placeholder="Titre du forum"
-              value={newForum.title}
-              onChange={(e) => setNewForum({ ...newForum, title: e.target.value })}
-              className="w-full mb-2 p-2 border rounded bg-gray-200"
-            />
-            <textarea
-              placeholder="Description du forum"
-              value={newForum.description}
-              onChange={(e) => setNewForum({ ...newForum, description: e.target.value })}
-              className="w-full mb-4 p-2 border rounded bg-gray-200"
-            />
-            <Button onClick={createForum}>Créer</Button>
-            </div>
-        </div>
-      )}
-
-      {/* Discussions */}
-      {selectedForum && !selectedDiscussion && (
-        <div>
-          <Button onClick={() => setSelectedForum(null)}>← Retour</Button>
-          <h1 className="text-3xl font-bold my-6">{selectedForum.title}</h1>
-          <div>
-            {discussions.map((discussion) => (
-              <Card
-                key={discussion.id}
-                className="cursor-pointer transform transition-all hover:scale-105"
-                onClick={() => setSelectedDiscussion(discussion)}
-              >
-                <CardContent>
-                  <h3 className="text-lg font-semibold">{discussion.title}</h3>
-                  <p>{discussion.content}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          <div className="mt-6">
-            <h2 className="text-xl font-bold mb-4">Nouvelle discussion</h2>
-            {/* <input
-              type="text"
-              placeholder="Titre de la discussion"
-              value={newDiscussion.title}
-              onChange={(e) => setNewDiscussion({ ...newDiscussion, title: e.target.value })}
-              className="w-full mb-2 p-2 border rounded"
-            /> */}
-            <textarea
-              placeholder="Contenu"
-              value={newDiscussion.content}
-              onChange={(e) => setNewDiscussion({ ...newDiscussion, content: e.target.value })}
-              className="w-full mb-4 p-2 border rounded"
-            />
-            <Button onClick={createDiscussion}>Créer</Button>
-          </div>
-        </div>
-      )}<br /><br />
-
-      {/* Commentaires */}
-      {selectedDiscussion && (
-        <div>
-          <Button onClick={() => setSelectedDiscussion(null)}>← Retour</Button>
-          <h1 className="text-3xl font-bold my-6">{selectedDiscussion.title}</h1>
-          <p>{selectedDiscussion.content}</p>
-          <div>
-            {comments.map((comment) => (
-              <div key={comment.id} className="border-x-gray-500 rounded-md items-center  justify-center p-2 text-gray-800 bg-blue-200  mt-4">
-                {/* <CardContent> */}
-                  <p>{comment.content}</p>
-                {/* </CardContent> */}
-              </div>
-            ))}
-          </div>
-          <div className="mt-6">
-            <h2 className="text-xl font-bold mb-4">Ajouter un commentaire</h2>
-            <textarea
-              placeholder="Votre commentaire..."
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              className="w-full mb-4 p-2 border rounded"
-            />
-            <Button onClick={addComment}>Envoyer</Button>
-          </div>
+      
         </div>
       )}
       </div>

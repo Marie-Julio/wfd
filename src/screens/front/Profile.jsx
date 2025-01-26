@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { UserCircle, Mail, Phone, MapPin, Building, Calendar, Edit2, Save, User, Download, ChevronDown, ChevronUp, Loader } from "lucide-react";
 import {jwtDecode} from "jwt-decode";
-import { getResource, patchResource, postFile, postResource } from "../../services/api";
+import { getResource, patchResource, postFile, patchFile, postResource } from "../../services/api";
 import { useNavigate, useParams } from "react-router";
-import { errorMessage, onServerSuccess } from "../../services/Helper";
+import { errorMessage, onServerError, onServerSuccess } from "../../services/Helper";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "../../components/admin/common/Select";
@@ -14,6 +14,7 @@ import Button from "../../components/admin/common/Button";
 import useAuth from "../../hooks/useAuth";
 import imgprofil from "../../assets/images/profil.png";
 import bgmotpasse from "../../assets/motpasse.png";
+import bgforum from "../../assets/forum.png";
 
 const Profile = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -26,15 +27,17 @@ const Profile = () => {
   const [isTestCollapseOpen, setIsTestCollapseOpen] = useState(false);
   const [isFormCollapseOpen, setIsFormCollapseOpen] = useState(true);
   const [galerieCollapse, setGalerieCollapse] = useState(false);
+  const [forumCollapse, setForumCollapse] = useState(false);
   const [isFormCollapseOpenPassword, setIsFormCollapseOpenPassword] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
   const auth = useAuth();
+  const [newForum, setNewForum] = useState({ title: '', description: '' });
 
   const [defaultPromotion , setDefaultPromotion] = useState({})
-const [promotions, setPromotions] = useState([])
+  const [promotions, setPromotions] = useState([])
 
- useEffect(() => {
+  useEffect(() => {
         getResource(`/promotions`).then((res) => {
             console.log(res.data)
             setPromotions(res.data)
@@ -43,6 +46,18 @@ const [promotions, setPromotions] = useState([])
 
   const accessToken = localStorage.getItem("token");
   const decodedToken = accessToken ? jwtDecode(accessToken) : null;
+
+  // Créer un forum
+  const createForum = async () => {
+    const response = await postResource('/forums', newForum);
+    if (response.ok) {
+      const forum = await response.data;
+      setNewForum({ title: '', description: '' });
+      onServerSuccess("Forum créer !");
+    }else {
+      onServerError("Erreur. Contactez-nous !");
+    }
+  };
 
   if (!accessToken) {
     navigate("/login");
@@ -59,15 +74,15 @@ const [promotions, setPromotions] = useState([])
     const file = event.target.files[0];
     if (file) {
       setSelectedImage(URL.createObjectURL(file));
-      // Envoyer l'image au backend
-      // onImageUpload(file);
-
       try {
         setLoading(true);
-        await postFile(`/profil-user`, {file: file});
+        console.log("file");
+        console.log(file);
+        await patchFile(`/profil-user/${decodedToken.id}`, {image: file});
         onServerSuccess("Image sauvegarder !");
       } catch (error) {
         errorMessage(error);
+        onServerError(error.message);
       } finally {
         setLoading(false);
       }
@@ -117,9 +132,7 @@ const [promotions, setPromotions] = useState([])
     try {
       setLoading(true);
       
-      const newData = {...values, user_id: info.id}
-      console.log("newData")
-      console.log(newData)
+      const newData = {...values, user_id: decodedToken.id}
       await postFile(`/galleries`, newData);
       onServerSuccess("Image sauvegarder !");
       formikGalerie.resetForm();
@@ -135,7 +148,6 @@ const [promotions, setPromotions] = useState([])
     try {
       setLoading(true);
       const newData = {...data, email : formik.values.email, id: decodedToken.id}
-      console.log(newData)
       await postResource(`/reset`, newData),
       onServerSuccess("Mise à jour réussie !");
       setEditIndex(null); // Désactiver le mode édition
@@ -383,6 +395,42 @@ const [promotions, setPromotions] = useState([])
                 </form>
               )}
             </div>
+
+            {/* Form Collapse Insertion gallerie */}
+            {info.role === "participant" ? 
+             <div className="p-6 sm:p-8">
+              <div
+                onClick={() => setForumCollapse(!forumCollapse)}
+                className="flex justify-between items-center cursor-pointer bg-gray-100 p-4 rounded-lg shadow hover:bg-gray-200"
+              >
+                <h2 className="text-lg font-bold">Ajouter un forum</h2>
+                {forumCollapse ? <ChevronUp /> : <ChevronDown />}
+              </div>
+              {forumCollapse && (
+              <div className="flex">
+                <div className="w-3/5 md:pr-10">
+                  <div className="flex-1 pt-10">
+                    <input
+                      type="text"
+                      placeholder="Titre du forum"
+                      value={newForum.title}
+                      onChange={(e) => setNewForum({ ...newForum, title: e.target.value })}
+                      className="w-full mb-2 p-2 border rounded bg--100"
+                    />
+                    <textarea
+                      placeholder="Description du forum"
+                      value={newForum.description}
+                      onChange={(e) => setNewForum({ ...newForum, description: e.target.value })}
+                      className="w-full mb-4 p-2 border rounded bg--100"
+                    />
+                    <Button onClick={createForum}>Créer</Button>
+                  </div>
+                </div>
+                <div className="relative w-2/5 items-center bg-no-repeat bg-contain bg-center mt-10 " style={{ backgroundImage: `url(${bgforum})` }}>
+                </div>
+              </div>
+              )}
+            </div> : null }
             {/* Form Collapse */}
             <div className="p-6 sm:p-8">
                   <div
@@ -394,7 +442,6 @@ const [promotions, setPromotions] = useState([])
                   </div>
               <div className="flex">
                 <div className="relative w-2/5 items-center bg-no-repeat bg-contain bg-center mt-10 " style={{ backgroundImage: `url(${bgmotpasse})` }}>
-                  
                 </div>
                 <div className="w-3/5">
                   {isFormCollapseOpenPassword && (
@@ -420,7 +467,7 @@ const [promotions, setPromotions] = useState([])
                         />
                       <Button
                         type="submit"
-                        className="w-full"
+                        className=""
                       >
                         Sauvegarder
                       </Button>

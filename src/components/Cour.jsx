@@ -2,6 +2,7 @@ import { Book, ChevronDown, ChevronUp, Clock, Star, User } from "lucide-react";
 import { useState } from "react";
 import { dateToFR, dateToFr, dateToInput, errorMessage, onServerError, onServerSuccess, truncateStringAdvanced } from "../services/Helper";
 import { Button } from "./Button";
+import { useNavigate } from 'react-router';
 import Modal from "./admin/common/Modal";
 import { postResource } from "../services/api";
 import { jwtDecode } from "jwt-decode";
@@ -14,22 +15,27 @@ const Cour = ({courses = []}) => {
     const tokenNew = access_token ? jwtDecode(access_token) : null;
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0];
+    const navigate = useNavigate();
+
     const saveData = (data) => {
-           console.log(data)
-            postResource("/inscriptions", {
-              user_id: tokenNew.id,
-              promotion_id: data,
-              annee: 2025,
-              statut: "en_attente"
-            }).then((res) => {
-                onServerSuccess("Votre inscription a été bien reçue")
-                // formik.resetForm();
-                setDelModal(false)
-            }).catch((e) => {
-                errorMessage(e);
-                onServerError("Un problème est survenu. Contactez-nous")
-              })
+        if (!access_token) {
+          navigate("/login");
         }
+        postResource("/inscriptions", {
+          user_id: tokenNew.id,
+          promotion_id: data,
+          annee: 2025,
+          statut: "en_attente"
+        }).then((res) => {
+            onServerSuccess("Votre inscription a été bien reçue")
+            // formik.resetForm();
+            setDelModal(false)
+        }).catch((e) => {
+            errorMessage(e);
+            onServerError("Un problème est survenu. Contactez-nous")
+        })
+    }
+
     return ( 
         <div >
         {courses.map((course) => {
@@ -47,9 +53,9 @@ const Cour = ({courses = []}) => {
                     <div class="grid lg:grid-cols-12 grid-cols-1">
                         <div class="lg:col-span-4 order-1 lg:order-2 bg-indigo-600 hover:bg-orange-600 transform transition-all duration-500 hover:scale-110">
                             <div class="p-[30px] lg:text-start text-center">
-                                <span className="text-1xl font-medium">A partir du</span>
+                                <span className="text-1xl font-medium text-gray-200">A partir du</span>
                                 <h4 class="text-2xl font-semibold text-gray-200 pb-5"> {dateToFr(course.date_debut)}</h4>
-                                <div className="flex items-center space-x-4">  
+                                <div className="flex items-center space-x-4 text-gray-200">  
                                   <div className=" whitespace-nowrap flex items-center">
                                     <Clock className="mr-1" />
                                     {course.duree}

@@ -21,7 +21,6 @@ const LoginScreen = () => {
 
     const saveData = (data) => {
         postResource("login", data).then((res) => {
-            // console.log(res.data)
             auth.login(res.data.access_token)
             const token = res.data.access_token ? jwtDecode(res.data.access_token) : null;
             formik.resetForm();

@@ -16,7 +16,7 @@ const Nav = () => {
     { label: "Promotions", href: "/promotion"  },
     { label: "Cours", href: "/cours", requiresAuth: true  },
     { label: "Informations", href: "/pages-infos" },
-    { label: "Forum", href: "/pages-forum", requiresAuth: true  },
+    { label: "Forum", href: "/pages-forum"  },
     { label: "Nos Projets", href: "/pages-projet" },
     { label: "Enseignants", href: "/members" },
     { label: "Galerie", href: "/galeries" },

@@ -17,6 +17,8 @@ const Discussion = () => {
   const [currentPageDiscussion, setCurrentPageDiscussion] = useState(1);
   const discussionPerPage = 6;
 
+  const accessToken = localStorage.getItem("token");
+  
   useEffect(() => {
     const fetchForumAndDiscussions = async () => {
       try {
@@ -29,7 +31,10 @@ const Discussion = () => {
       }
     };
     fetchForumAndDiscussions();
-  }, [id]);
+    if (!accessToken) {
+      navigate("/login");
+    }
+  }, [id, accessToken]);
 
   const createDiscussion = async () => {
     const discussionData = { ...newDiscussion, forum_id: id, user_id: 3, title: 'Super' };

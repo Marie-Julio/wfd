@@ -7,7 +7,6 @@ import {  decryptToken, getData } from "./Helper";
 
 const apiUrl = import.meta.env.VITE_API_URI_BASE;
 axios.defaults.baseURL = apiUrl + "/api";
-console.log(apiUrl)
 axios.interceptors.request.use(
   async function (config) {
     /** Intercepter du token utilisateur et l'utiliser tant que disponible */
@@ -78,6 +77,15 @@ export const postResource = (resource_url, data) => {
 
 export const postFile = (resource_url, data) => {
   return axios.post(resource_url, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Accept: "application/json",
+    },
+  });
+};
+
+export const patchFile = (resource_url, data) => {
+  return axios.patch(resource_url, data, {
     headers: {
       "Content-Type": "multipart/form-data",
       Accept: "application/json",
