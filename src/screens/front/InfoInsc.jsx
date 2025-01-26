@@ -31,8 +31,10 @@ const Promotion = () => {
     
           <div class="p-10 bg-white dark:bg-slate-900 shadow dark:shadow-gray-800 rounded-md">
       <section className="mb-12">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">
-        <span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative font-semibold ">Nos projets : Engagement pour un développement communautaire durable</span>
+        <h1 className=" uppercase transform transition-all duration-500 hover:scale-110 text-3xl font-bold text-center text-gray-800 mb-6">
+        <span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md
+         after:bg-[#1a5fa9]/30 relative font-semibold">Nos projets</span>
+         : Engagement pour un développement communautaire durable
         </h1>
         <p className="text-lg text-gray-700 leading-relaxed mb-4">
           Dans un monde en constante évolution, il est essentiel de repenser la manière dont le développement est conçu et mis en œuvre. Trop souvent, les projets sont imposés de l'extérieur, sans tenir compte des réalités locales ou des aspirations des communautés concernées. C'est pourquoi nous avons fait le choix de privilégier une approche participative, où les bénéficiaires sont au cœur de chaque initiative.

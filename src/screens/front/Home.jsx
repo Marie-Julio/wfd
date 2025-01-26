@@ -142,7 +142,7 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div className="grid mt-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+                <div className="grid mt-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <Project projects={projects}/>
                 </div>
             </div>

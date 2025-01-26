@@ -100,20 +100,20 @@ const Cour = ({courses = []}) => {
     
     <Modal isOpen={delModal} onClose={() => setDelModal(false)}>
       <div className="flex flex-col items-center">
-        <p className="text-black text-xl font-bold">
-          Êtes-vous sûr de vouloir vous inscrire dans cette promotion ? {selectedCourseId}
+        <p className="text-black text-xl font-bold whitespace-nowrap">
+        Souhaitez-vous lancer la demande d'inscription ?
         </p>
         <div className="flex mt-5 space-x-10">
           <button 
-            className="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md" 
+            className="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-500 hover:bg-indigo-700 border-indigo-500 hover:border-indigo-700 text-white rounded-md" 
             onClick={() => {
               saveData(selectedCourseId);
               setDelModal(false);
-            }}>Oui
+            }}><i class="text-lg uil uil-check"/> Oui, lancer
           </button>
           <button 
-            className="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white rounded-md" 
-            onClick={() => setDelModal(false)}>Non
+            className="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 text-white rounded-md" 
+            onClick={() => setDelModal(false)}><i class="text-lg uil uil-times"/> Non, annuler
           </button>
         </div>
       </div>
