@@ -38,7 +38,7 @@ const FormGalerie = () => {
        const newData = {...data, promotion_id: data.promotion_id.id}
         console.log(newData)
         postFile("/galleries", data).then((res) => {
-            onServerSuccess("Cree avec Succes")
+            onServerSuccess("Création effectuée avec succès.")
             setDatas({content: ""})
             formik.resetForm()
         }).catch((e) => errorMessage(e))

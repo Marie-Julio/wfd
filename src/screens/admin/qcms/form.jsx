@@ -18,6 +18,7 @@ const FormQcm = () => {
     const [loading, setLoading] = useState(false)
     const [defaultPromotion , setDefaultPromotion] = useState({})
     const [promotions, setPromotions] = useState([])
+    const [cours, setCours] = useState([])
     const [datas, setDatas] = useState({
         content: ""
     })
@@ -28,7 +29,11 @@ const FormQcm = () => {
         getResource(`/promotions`).then((res) => {
             console.log(res.data)
             setPromotions(res.data)
-        }).catch((e) => errorMessage(e))
+        })
+        getResource(`/course-modules`).then((res) => {
+            console.log(res.data)
+            setCours(res.data)
+        })
       }, [])
 
     useEffect(() => {
@@ -37,7 +42,8 @@ const FormQcm = () => {
 
             formik.setValues({
                 title : res.data.title,
-                promotion_id: res.data.promotion
+                promotion_id: res.data.promotion,
+                cours_id: res.data.cours && res.data.cours.title
             })
             setDefaultPromotion(res.data.promotion)
             setDatas({content: res.data.description})
@@ -48,11 +54,11 @@ const FormQcm = () => {
 
 
     const updateData = (values) => {
-        const newData = { ...values, description: datas.content, promotion_id: values.promotion_id.id};
+        const newData = { ...values, description: datas.content, promotion_id: values.promotion_id.id, cours_id: values.cours_id.id};
         console.log(newData)
         patchResource("/qcms", id, newData).then((res) => {
             // console.log(res)
-            onServerSuccess("Modifie avec succes")
+            onServerSuccess("Mise à jour effectuée avec succès.")
             formik.resetForm()
             setDatas({content: ""})
             setTimeout(() => navigate(`/admin/qcms`), 50)
@@ -63,10 +69,10 @@ const FormQcm = () => {
 
     const saveData = (data) => {
        
-        const newData = { ...data, description: datas.content, promotion_id: data.promotion_id.id };
+        const newData = { ...data, description: datas.content, promotion_id: data.promotion_id.id, cours_id: data.cours_id.id };
         console.log(newData)
         postResource("/qcms", newData).then((res) => {
-            onServerSuccess("Cree avec Succes")
+            onServerSuccess("Création effectuée avec succès.")
             setDatas({content: ""})
             formik.resetForm()
         }).catch((e) => errorMessage(e))
@@ -81,6 +87,7 @@ const FormQcm = () => {
         initialValues: {
             title : '',
             promotion_id : defaultPromotion ,
+            cours_id: ''
         },
         validationSchema: Yup.object({
             title: Yup.string().required('Champ requis'),
@@ -111,7 +118,19 @@ const FormQcm = () => {
                         "promotion_id", promotion
                     )}
                     defaultValue={formik.values.promotion_id}
-                    />
+                />
+                <InputCompletNew
+                    label="Le cours"
+                    suggestions={cours}
+                    name="cours_id"
+                    labelKey="title"
+                    // subLabelKey="niveau"
+                    valueKey="id"
+                    onSelect={(promotion) => formik.setFieldValue(
+                        "cours_id", promotion
+                    )}
+                    defaultValue={formik.values.promotion_id}
+                />
                 <TextArea label="Details" 
                 val={datas.content}
                 handleChange={(e) => setDatas({...datas, content : e})}

@@ -14,6 +14,7 @@ const CoursDetail = () => {
   const [verified, setVerified] = useState({});
   const [readStatus, setReadStatus] = useState(false);
   const {id} = useParams()
+  const apiUrl = import.meta.env.VITE_API_URI_BASE;
   const navigate = useNavigate()
 
    const accessToken = localStorage.getItem("token");
@@ -99,7 +100,7 @@ const unixTimestamp = Math.floor(now / 1000);
         return (
           <div className="aspect-w-16 aspect-h-9">
             <video controls className="w-full h-full rounded-md">
-              <source src={course.file_path} type="video/mp4" />
+              <source src={`${apiUrl}/storage/${course.file_path}`} type="video/mp4" />
               Votre navigateur ne supporte pas la lecture vidéo.
             </video>
           </div>

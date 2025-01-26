@@ -17,7 +17,7 @@ const InformationAdmin = () => {
     const navigate = useNavigate()
 
     const columns = [
-        { accessor: 'title', Header: 'Code' },
+        { accessor: 'title', Header: 'Titre' },
         { accessor: 'visibility', Header: 'Visibilite' },
         { accessor: 'user.nom', Header: 'Utilisateur' },
       ];

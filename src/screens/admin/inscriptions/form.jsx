@@ -34,8 +34,8 @@ const FormInscription = () => {
             setDatas({content: ""})
 
             formik.setValues({
-                user_id : res.data.user,
-                promotion_id: res.data.promotion,
+                user_id : res.data.user && res.data.user.nom,
+                promotion_id: res.data.promotion && res.data.promotion.nom,
                 statut : res.data.statut,
             })
         })
@@ -43,10 +43,11 @@ const FormInscription = () => {
 
 
     const updateData = (values) => {
-        console.log(values)
-        patchResource("/inscriptions", id, values).then((res) => {
+        const newData = {...values, user_id: values.user_id.id, promotion_id: values.promotion_id.id}
+        console.log(newData)
+        patchResource("/inscriptions", id, newData).then((res) => {
             // console.log(res)
-            onServerSuccess(res.data.message)
+            onServerSuccess("Mise à jour effectuée avec succès.")
             formik.resetForm()
             setTimeout(() => navigate(`/admin/inscription`), 50)
         }).catch(e => {
@@ -76,7 +77,7 @@ const FormInscription = () => {
         const newData = {...data, user_id: data.user_id.id, promotion_id: data.promotion_id.id}
        console.log(newData)
         postResource("/inscriptions", newData).then((res) => {
-            onServerSuccess("Cree avec succes")
+            onServerSuccess("Création effectuée avec succès.")
             formik.resetForm();
         }).catch((e) => errorMessage(e))
     }

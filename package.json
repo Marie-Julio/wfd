@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fancyapps/fancybox": "^3.5.7",
     "@fancyapps/ui": "^5.0.36",
     "@fontsource/merriweather": "^5.1.0",
     "@fontsource/montserrat": "^5.1.1",

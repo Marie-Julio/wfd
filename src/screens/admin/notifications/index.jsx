@@ -17,7 +17,7 @@ const NotificationAdmin = () => {
     const [data, setData] = useState();
 
     const columns = [
-        { accessor: 'user.nom', Header: 'Utilisateur' },
+        { accessor: 'user.nom', Header: 'Nom' },
         { accessor: 'user.prenom', Header: 'Prenom' },
         { accessor: 'message', Header: 'Message' },
       ];

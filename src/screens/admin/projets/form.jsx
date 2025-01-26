@@ -76,7 +76,7 @@ const FormProjet = () => {
         console.log(newData)
         patchResource("/projets", id, newData).then((res) => {
             // console.log(res)
-            onServerSuccess(res.data.message)
+            onServerSuccess("Mise à jour effectuée avec succès.")
             formik.resetForm()
             setDatas({content: ""})
             setTimeout(() => navigate(`/admin/projets`), 50)
@@ -90,7 +90,7 @@ const FormProjet = () => {
         const newData = { ...data, description: datas.content, inscription_id: data.inscription_id.id, user_id: data.user_id.id };
         console.log(newData)
         postFile("/projets", newData).then((res) => {
-            onServerSuccess(res.data.message)
+            onServerSuccess("Création effectuée avec succès.")
             setDatas({content: ""})
         }).catch((e) => errorMessage(e))
     }

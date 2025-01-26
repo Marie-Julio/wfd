@@ -76,16 +76,16 @@ const Profile = () => {
     if (file) {
       setSelectedImage(URL.createObjectURL(file));
       try {
-        setLoading(true);
+        // setLoading(true);
         console.log("file");
         console.log(file);
-        await patchFile(`/profil-user/${decodedToken.id}`, {image: file});
+        await patchFile(`/profil-user`, decodedToken.id, {image: file});
         onServerSuccess("Image sauvegarder !");
       } catch (error) {
         errorMessage(error);
-        onServerError(error.message);
+        // onServerError(error.message);
       } finally {
-        setLoading(false);
+        // setLoading(false);
       }
     }
   };

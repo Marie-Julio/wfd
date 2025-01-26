@@ -46,7 +46,7 @@ const FormInfo = () => {
         console.log(newData)
         patchResource("/announcements", id, newData).then((res) => {
             // console.log(res)
-            onServerSuccess(res.data.message)
+            onServerSuccess("Mise à jour effectuée avec succès.")
             formik.resetForm()
             setDatas({content: ""})
             setTimeout(() => navigate(`/admin/informations`), 50)
@@ -60,7 +60,7 @@ const FormInfo = () => {
         const newData = { ...data, content: datas.content };
         console.log(newData)
         postResource("/announcements", newData).then((res) => {
-            onServerSuccess(res.data.message)
+            onServerSuccess("Création effectuée avec succès.")
             setDatas({content: ""})
         }).catch((e) => errorMessage(e))
     }
