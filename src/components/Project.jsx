@@ -1,6 +1,7 @@
 import { ChevronRight } from "lucide-react";
 import img from "../assets/slide-2.jpg"
 import { useNavigate } from "react-router";
+import { dateToFr } from "../services/Helper";
 
 
 const Project = ({projects = []}) => {
@@ -28,8 +29,8 @@ const Project = ({projects = []}) => {
                       <img src="assets/images/client/03.jpg" class="size-11 rounded-full shadow transform transition-all duration-500 hover:scale-105" alt="" />
 
                       <div class="ms-3 flex-1">
-                          <a href="#" class="text-sm font-semibold hover:text-indigo-600 duration-500">Calvin Carlo</a>
-                          <p class="text-sm text-slate-400">12 Janv 2025</p>
+                          <a href="#" class="text-sm font-semibold hover:text-indigo-600 duration-500">{project.user && `${project.user.nom} ${project.user.prenom}`}</a>
+                          <p class="text-sm text-slate-400">{dateToFr(project.created_at)}</p>
                       </div>
                   </div>
                 </div> 

@@ -129,5 +129,5 @@ export const putResourceByUrl = (resource_url, data, headers) => {
  */
 export const removeResource = (resource_url, id) => {
   //return axios.delete(resource_url + "/" + id);
-  return axios.delete(resource_url, { data: { ids: id } });
+  return axios.delete(resource_url, { data: { id: id } });
 };
