@@ -35,30 +35,28 @@ const Profile = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const auth = useAuth();
-  const [newForum, setNewForum] = useState({ title: '', description: '' });
+
+  const accessToken = localStorage.getItem("token");
+  const decodedToken = accessToken ? jwtDecode(accessToken) : null;
+  const [newForum, setNewForum] = useState({ title: '', description: '', user_id: decodedToken.id});
 
   const [defaultPromotion , setDefaultPromotion] = useState({})
   const [promotions, setPromotions] = useState([])
 
   useEffect(() => {
         getResource(`/promotions`).then((res) => {
-            console.log(res.data)
             setPromotions(res.data)
         }).catch((e) => errorMessage(e))
       }, [])
 
-  const accessToken = localStorage.getItem("token");
-  const decodedToken = accessToken ? jwtDecode(accessToken) : null;
-
   // Créer un forum
   const createForum = async () => {
-    const response = await postResource('/forums', newForum);
-    if (response.ok) {
-      const forum = await response.data;
+    try {
+      await postResource('/forums', newForum);
       setNewForum({ title: '', description: '' });
       onServerSuccess("Forum créer !");
-    }else {
-      onServerError("Erreur. Contactez-nous !");
+    } catch (error) {
+      onServerError("Erreur. Contactez-nous !2");
     }
   };
 
@@ -94,7 +92,6 @@ const Profile = () => {
 
   // Fonction d'initialisation
   const fetchData = async () => {
-    console.log(decodedToken)
     try {
       const response = await getResource(`/me?id=${decodedToken.id}`);
       const userData = response.data;
@@ -118,7 +115,6 @@ const Profile = () => {
   const handleSave = async () => {
     try {
       setLoading(true);
-      console.log(formik.values)
       await patchResource(`/modifier_utilisateur`, decodedToken.id, formik.values);
       onServerSuccess("Mise à jour réussie !");
       setEditIndex(null);
@@ -354,6 +350,21 @@ const Profile = () => {
               )}
             </div>
 
+
+            {/* Form Collapse Liste gallerie */}
+            <div className="p-6 sm:p-8">
+              <div
+                onClick={() => setListGalerieCollapse(!listgalerieCollapse)}
+                className="flex justify-between items-center cursor-pointer bg-gray-100 p-4 rounded-lg shadow hover:bg-gray-200"
+              >
+                <h2 className="text-lg font-bold">Ma Galerie</h2>
+                {listgalerieCollapse ? <ChevronUp /> : <ChevronDown />}
+              </div>
+              {listgalerieCollapse && (
+                <GalleryTable galleries={galeries}/>
+              )}
+            </div>
+
              {/* Form Collapse Insertion gallerie */}
              <div className="p-6 sm:p-8">
               <div
@@ -411,7 +422,7 @@ const Profile = () => {
             </div>
 
             {/* Form Collapse Insertion gallerie */}
-            {info.role === "participant" ? 
+            {info.role !== "participant" ? 
              <div className="p-6 sm:p-8">
               <div
                 onClick={() => setForumCollapse(!forumCollapse)}
@@ -489,20 +500,6 @@ const Profile = () => {
                   )}
                 </div>
               </div>
-            </div>
-
-            {/* Form Collapse Liste gallerie */}
-            <div className="p-6 sm:p-8">
-              <div
-                onClick={() => setListGalerieCollapse(!listgalerieCollapse)}
-                className="flex justify-between items-center cursor-pointer bg-gray-100 p-4 rounded-lg shadow hover:bg-gray-200"
-              >
-                <h2 className="text-lg font-bold">Ma Galerie</h2>
-                {listgalerieCollapse ? <ChevronUp /> : <ChevronDown />}
-              </div>
-              {listgalerieCollapse && (
-                <GalleryTable galleries={galeries}/>
-              )}
             </div>
           </div>
         </div>

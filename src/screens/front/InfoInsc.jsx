@@ -1,93 +1,89 @@
 import { useEffect, useState } from "react";
 import AppBody from "../../components/AppBody";
-import Cour from "../../components/Cour";
-import Info from "../../components/Info";
-import {  courses, information } from "../../Data/data";
 import { getResource } from "../../services/api";
-import Modal from "../../components/admin/common/Modal";
+import Project from "../../components/Project";
 
 const Promotion = () => {
-    const [infos, setInfos] = useState([]);
-          const [loading, setLoading] = useState(true)
-          
-              const _init_ = () => {
-        
-                  getResource("/promotions").then((res) => {
-                    console.log(res.data);
-                    setInfos(res.data);
-                }).catch(e => {
-                    errorMessage(e)
-                  })
-            }
-        
-            useEffect(() => {
-                _init_()
-                setTimeout(() => setLoading(false), 1500)
-            }, [])
+    
+    const [projects, setProjects] = useState([]);
+      
+    const _init_ = () => {
+      getResource("/projets").then((res) => {
+          console.log(res.data)
+          setProjects(res.data)
+      }).catch(e => {
+          errorMessage(e)
+        })
+
+  }
+
+  useEffect(() => {
+      _init_()
+  }, [])
+
     return ( 
     <AppBody>
       <div className=" bg-[#daeff9] flex flex-col md:flex-row justify-between items-center">
-        <div class="container relative md:mt-16 mt-10">
-            <div class="grid md:grid-cols-12 grid-cols-1 items-center gap-[30px]">
-                <div class="md:col-span-7">
-                    <div class="lg:ms-4">
-                        <h4 class="font-bold lg:leading-normal leading-normal text-3xl lg:text-4xl mb-5 text-black dark:text-white">Lancer votre inscription <br /> dans une promotion</h4>
-                        <p class="text-slate-900 dark:text-white/75 text-lg max-w-xl">Vous êtes sur le point de commencer le processus d'inscription au réseau <span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative font-semibold text-lg">"FRUITS DE WFD Guinée"</span>, la plateforme des jeunes engagés pour la promotion de la Paix et du Développement Durable</p>
-                    </div>
-                </div>
-              </div>
-          </div>
+        
         <div className="container mx-auto px-4 pt-10 md:pt-0">
           <div className="max-w-7xl mx-auto mb-12 md:m-10">
-          <section class="relative md:py-24 py-16">
-            <div class="container relative">
-                <div class="md:flex justify-center">
-                    <div class="md:w-3/4">
-                        <div class="p-6 bg-white dark:bg-slate-900 shadow dark:shadow-gray-800 rounded-md">
-                            <h5 class="text-xl font-semibold mb-4">Introduction :</h5>
-                            <p class="text-slate-400">It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. One may speculate that over the course of time certain letters were added or deleted at various positions within the text.</p>
+          
+    
+          <div class="p-10 bg-white dark:bg-slate-900 shadow dark:shadow-gray-800 rounded-md">
+      <section className="mb-12">
+        <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">
+        <span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative font-semibold ">Nos projets : Engagement pour un développement communautaire durable</span>
+        </h1>
+        <p className="text-lg text-gray-700 leading-relaxed mb-4">
+          Dans un monde en constante évolution, il est essentiel de repenser la manière dont le développement est conçu et mis en œuvre. Trop souvent, les projets sont imposés de l'extérieur, sans tenir compte des réalités locales ou des aspirations des communautés concernées. C'est pourquoi nous avons fait le choix de privilégier une approche participative, où les bénéficiaires sont au cœur de chaque initiative.
+        </p>
+        <p className="text-lg text-gray-700 leading-relaxed mb-4">
+          Nos projets participatifs sont conçus avec les bénéficiaires, en suivant de près les besoins réels identifiés par ceux qui en feront directement l'expérience. Ce processus inclusif garantit que chaque projet répond véritablement aux attentes de la communauté, en prenant en compte ses particularités, ses défis, mais aussi ses ressources et ses capacités.
+        </p>
+        <p className="text-lg text-gray-700 leading-relaxed mb-4">
+          Être acteur de son propre développement, c'est avant tout une question d'autonomisation. Nous croyons fermement que la clé de tout changement durable réside dans la capacité de chaque individu à participer activement à l'élaboration des solutions qui le concernent. Cela permet de renforcer les liens sociaux et de favoriser un climat de solidarité, propice à la prospérité collective.
+        </p>
+      </section>
 
-                            <h5 class="text-xl font-semibold mb-4 mt-8">User Agreements :</h5>
-                            <p class="text-slate-400">The most well-known dummy text is the 'Lorem Ipsum', which is said to have <b class="text-red-600">originated</b> in the 16th century. Lorem Ipsum is <b class="text-red-600">composed</b> in a pseudo-Latin language which more or less <b class="text-red-600">corresponds</b> to 'proper' Latin. It contains a series of real Latin words. This ancient dummy text is also <b class="text-red-600">incomprehensible</b>, but it imitates the rhythm of most European languages in Latin script. The <b class="text-red-600">advantage</b> of its Latin origin and the relative <b class="text-red-600">meaninglessness</b> of Lorum Ipsum is that the text does not attract attention to itself or distract the viewer's <b class="text-red-600">attention</b> from the layout.</p>
-                            <p class="text-slate-400 mt-3">There is now an <b class="text-red-600">abundance</b> of readable dummy texts. These are usually used when a text is <b class="text-red-600">required purely</b> to fill a space. These alternatives to the classic Lorem Ipsum texts are often amusing and tell short, funny or <b class="text-red-600">nonsensical</b> stories.</p>
-                            <p class="text-slate-400 mt-3">It seems that only <b class="text-red-600">fragments</b> of the original text remain in the Lorem Ipsum texts used today. One may speculate that over the course of time certain letters were added or deleted at various positions within the text.</p>
-                            
-                            <h5 class="text-xl font-semibold mb-4 mt-8">Restrictions :</h5>
-                            <p class="text-slate-400">You are specifically restricted from all of the following :</p>
-                            <ul class="list-none text-slate-400 mt-3">
-                                <li class="flex mt-2"><i class="uil uil-arrow-right text-indigo-600 text-lg align-middle me-2"></i>Digital Marketing Solutions for Tomorrow</li>
-                                <li class="flex mt-2"><i class="uil uil-arrow-right text-indigo-600 text-lg align-middle me-2"></i>Our Talented & Experienced Marketing Agency</li>
-                                <li class="flex mt-2"><i class="uil uil-arrow-right text-indigo-600 text-lg align-middle me-2"></i>Create your own skin to match your brand</li>
-                                <li class="flex mt-2"><i class="uil uil-arrow-right text-indigo-600 text-lg align-middle me-2"></i>Digital Marketing Solutions for Tomorrow</li>
-                                <li class="flex mt-2"><i class="uil uil-arrow-right text-indigo-600 text-lg align-middle me-2"></i>Our Talented & Experienced Marketing Agency</li>
-                                <li class="flex mt-2"><i class="uil uil-arrow-right text-indigo-600 text-lg align-middle me-2"></i>Create your own skin to match your brand</li>
-                            </ul>
+      <section className="mb-12">
+        <h2 className="text-3xl font-semibold text-gray-800 mb-4"><span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative font-semibold">Nos valeurs fondamentales</span></h2>
+        <p className="text-lg text-gray-700 leading-relaxed mb-4">
+          Notre engagement ne s'arrête pas simplement à la mise en place de projets. Nous restons constamment à l'écoute de notre communauté, dans un souci de compréhension et d'adaptation continue. C'est ainsi que nous nous prévoyons que nos actions sont en phase avec les besoins évolutifs des populations et que chaque bénéficiaire se sent véritablement impliqué.
+        </p>
+        <ul className="list-disc pl-8 space-y-2 text-lg text-gray-700 mb-4">
+          <li>L'humanité : Agir dans le respect de la dignité de chaque personne.</li>
+          <li>La solidarité : Travailler ensemble pour construire un avenir commun.</li>
+          <li>La justice sociale : Promouvoir l'égalité des chances sans discrimination.</li>
+          <li>La cohésion sociale : Favoriser l'unité et la paix au sein des communautés.</li>
+        </ul>
+      </section>
 
-                            <h5 class="text-xl font-semibold mt-8">Users Question & Answer :</h5>
+      <section>
+        <h2 className="text-3xl font-semibold text-gray-800 mb-4">
+        <span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative font-semibold">Un développement inclusif, équitable et durable</span>
+        </h2>
+        <p className="text-lg text-gray-700 leading-relaxed mb-4">
+          Nos projets ne sont pas de simples interventions ponctuelles. Ils sont le reflet d'un engagement profond, celui de contribuer à un développement inclusif, équitable et durable. En tant qu'acteurs du changement, nous ne nous contentons pas de fournir des solutions ; nous visons à transformer les mentalités, à redonner aux communautés les clés de leur propre avenir, dans le respect des valeurs humaines et sociales.
+        </p>
+        <p className="text-lg text-gray-700 leading-relaxed mb-4">
+          Ainsi, grâce à nos projets participatifs, nous affirmons notre conviction : le développement durable qui ne peut commencer que par l'implication de chacun, dans un environnement d'écoute, de solidarité, de justice sociale et de cohésion sociale.
+        </p>
+      </section>
 
-                            <div id="accordion-collapse" data-accordion="collapse" class="mt-6">
-                                <div class="relative shadow dark:shadow-gray-800 rounded-md overflow-hidden mt-4">
-                                    <h2 class="text-base font-semibold" id="accordion-collapse-heading-1">
-                                        <button type="button" class="flex justify-between items-center p-5 w-full font-medium text-start" data-accordion-target="#accordion-collapse-body-1" aria-expanded="true" aria-controls="accordion-collapse-body-1">
-                                            <span>How does it work ?</span>
-                                            <svg data-accordion-icon class="size-4 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                            </svg>
-                                        </button>
-                                    </h2>
-                                    <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
-                                        <div class="p-5">
-                                            <p class="text-slate-400 dark:text-gray-400">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <section className="mt-12">
+        <h2 className="text-3xl font-semibold text-gray-800 text-center mb-4">
+        <span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative font-semibold">Découvrez chacun de nos projets</span>
+        </h2>
+        <p className="text-lg text-gray-700 text-center">
+          Découvrez ici les projets qui illustrent notre engagement envers un développement durable et communautaire.
+        </p>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+        <Project projects={projects}/>
+        </div>
+      </section>
             </div>
-        </section>
-          </div>
+        </div>
       </div>
     </div>
     </AppBody>

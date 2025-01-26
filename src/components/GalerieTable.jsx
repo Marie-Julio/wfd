@@ -13,6 +13,18 @@ const GalleryTable = ({ galleries = []}) => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentItems = galleries.slice(startIndex, startIndex + itemsPerPage);
 
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const getVisiblePages = () => {
+    const pages = [];
+    for (let i = 1; i <= totalPages; i++) {
+      if (i <= 5) {
+        pages.push(i);
+      }
+    }
+    return pages;
+  };
+  
+  const visiblePages = getVisiblePages();
 
   const handleDelete = async (id) => {
     setLoading(true);
@@ -32,30 +44,27 @@ const GalleryTable = ({ galleries = []}) => {
 
   return (
     <div className="p-5">
-      <h2 className="text-2xl font-bold mb-4">Mes Galeries</h2>
-      <div className="overflow-x-auto">
-      <table className="min-w-full bg-white shadow-md rounded-md">
+      <div className="relative overflow-x-auto block w-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-800 rounded-md">
+      <table className=" bg-slate-100 w-full text-start">
         <thead>
           <tr>
-            <th className="px-4 py-2 border">Image</th>
-            <th className="px-4 py-2 border">Titre</th>
-            <th className="px-4 py-2 border">Description</th>
-            <th className="px-4 py-2 border">Actions</th>
+            <th className="px-4 py-5 text-start">Image</th>
+            <th className="px-4 py-5 text-start">Information</th>
+            <th className="px-4 py-5 text-end">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {galleries.map((gallery) => (
-            <tr key={gallery.id} className="border-t">
-              <td className="px-4 py-2">
+          {currentItems.map((gallery) => (
+            <tr key={gallery.id} className="border-t-2 border-white dark:border-gray-700">
+              <td className="p-4">
                 <img
                   src={`${apiUrl}/storage/${gallery.image}`}
                   alt={gallery.title}
-                  className="w-20 h-20 object-cover rounded-md"
+                  className="h-15 object-cover rounded-md"
                 />
               </td>
-              <td className="px-4 py-2">{gallery.title}</td>
-              <td className="px-4 py-2">{gallery.description}</td>
-              <td className="px-4 py-2">
+              <td className="p-4 text-start text-md"><span className=" font-semibold text-[#1a5fa9]">{gallery.title}</span><br />{gallery.description}</td>
+              <td className="p-4 text-end">
                 <button
                   className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700 transition"
                   onClick={() => handleDelete(gallery.id)}
@@ -69,21 +78,46 @@ const GalleryTable = ({ galleries = []}) => {
         </tbody>
       </table>
       </div>
-      {/* Pagination Controls */}
-      <div className="flex justify-center mt-4 space-x-2">
-        {Array.from({ length: totalPages }, (_, index) => (
+      <div className=" w-full flex justify-center bg-white py-4">
+        <nav className="inline-flex">
           <button
-            key={index}
-            onClick={() => handlePageChange(index + 1)}
-            className={`px-3 py-1 rounded-md ${
-              currentPage === index + 1
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200 hover:bg-gray-300"
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={`px-4 py-2 mx-1 border rounded ${
+              currentPage === 1 ? "bg-gray-200 text-gray-500" : "bg-white"
             }`}
           >
-            {index + 1}
+            Précédent
           </button>
-        ))}
+          {visiblePages.map((number) => (
+            <button
+              key={number}
+              onClick={() => paginate(number)}
+              className={`px-4 py-2 mx-1 border rounded ${
+                currentPage === number
+                  ? "bg-[#1a5fa9] text-white"
+                  : "bg-white"
+              }`}
+            >
+              {number}
+            </button>
+          ))}
+
+        {totalPages > 3 && (
+                <span className="px-2 text-gray-600">...</span>
+              )}
+          <button
+            onClick={() => paginate(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={`px-4 py-2 mx-1 border rounded ${
+              currentPage === totalPages
+                ? "bg-gray-200 text-gray-500"
+                : "bg-white"
+            }`}
+          >
+            Suivant
+          </button>
+        </nav>
       </div>
     </div>
   );

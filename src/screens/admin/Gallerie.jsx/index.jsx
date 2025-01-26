@@ -17,7 +17,8 @@ const GalerieAdmin = () => {
     const columns = [
         { accessor: 'title', Header: 'Titre' },
         { accessor: 'description', Header: 'Description' },
-        { accessor: 'promotion.nom', Header: 'Promotion' },
+        { accessor: 'promotion_id', Header: 'Promotion' },
+        { accessor: 'user_id', Header: 'ID User' },
       ];
 
       const _init_ = () => {
@@ -46,7 +47,7 @@ const GalerieAdmin = () => {
     return ( 
         <Body isOpen={isOpen} setIsOpen={setIsOpen}>
             <Table
-            title="Liste des Choix des Qcms"
+            title="Liste des images de la galerie"
             data={choix}
             columns={columns}
             filter={filter}

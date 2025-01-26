@@ -67,28 +67,10 @@ const Forum = () => {
     getDiscussion(forum.id); // Charger les discussions de ce forum
   };
 
-  
-
-  // Créer une discussion
-  const createDiscussion = async () => {
-    const discussionData = { ...newDiscussion, forum_id: selectedForum.id, user_id: 3, title: "Super" }; // user_id est un exemple
-    const response = await postResource('/discussions', discussionData );
-    if (response.data) {
-      setSelectedForum({ ...selectedForum, discussions: [...(selectedForum.discussions || []), discussionData] });
-      setNewDiscussion({ title: '', content: '' });
-      getDiscussion(selectedForum.id)
-    }
-  };
-
-  // Ajouter un commentaire
-  const addComment = async () => {
-    const commentData = { content: newComment, discussion_id: selectedDiscussion.id, user_id: 3 }; // user_id est un exemple
-    const response = await postResource('/comments', commentData);
-    if (response.status == 201) {
-      const comment = await response.data;
-      setComments([...comments, comment]);
-      setNewComment('');
-    }
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const months = ['Janv', 'Fév', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'];
+    return `${months[date.getMonth()]} ${date.getFullYear()}`;
   };
 
   // Pagination logic pour Forum 
@@ -105,7 +87,7 @@ const Forum = () => {
     const getVisiblePages = () => {
       const pages = [];
       for (let i = 1; i <= totalPages; i++) {
-        if (i <= 3) {
+        if (i <= 5) {
           pages.push(i);
         }
       }
@@ -142,7 +124,7 @@ const Forum = () => {
                       <tr>
                           <th class="py-6 px-4 font-semibold min-w-[300px] text-start">Forum</th>
                           <th class="text-center py-6 px-4 font-semibold min-w-[40px]">Sujets</th>
-                          <th class="py-6 px-4 font-semibold min-w-[220px] text-end">Créer par</th>
+                          <th class="py-6 px-4 font-semibold min-w-[220px] text-start">Créer par</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -158,14 +140,14 @@ const Forum = () => {
                                   </div>
                               </div>
                           </th>
-                          <td class="text-center p-4">5</td>
+                          <td class="text-center p-4">{forum.discussions_count}</td>
                           <td class="p-4">
-                              <div class="flex justify-end">
+                              <div class="flex">
                                   <img src="assets/images/client/01.jpg" class="h-10 rounded-full shadow dark:shadow-slate-800" alt="" />
 
                                   <div class="ms-2">
-                                      <a href="#" class="hover:text-indigo-600 font-semibold">Calvin Carlo</a>
-                                      <p class="text-slate-400 text-sm font-normal"><i class="uil uil-clock"></i> May 2022</p>
+                                      <a href="#" class=" hover:text-indigo-600 font-semibold text-normal whitespace-nowrap">{forum.user_prenom.split(' ')[0]} {forum.user_nom.split(' ')[0]}</a>
+                                      <p class="text-slate-400 text-sm font-normal whitespace-nowrap"><i class="uil uil-clock"></i> {formatDate(forum.created_at)}</p>
                                   </div>
                               </div>
                           </td>

@@ -64,7 +64,7 @@ const GallerieComponent = ({galleries = []}) => {
             <div class="container relative">
 
                 <div id="grid" class="md:flex justify-center mx-auto mt-4">
-                    {galleries.map((x) => (
+                {galleries.map((x) => (
                     <div class="lg:w-1/3 md:w-1/3 p-1 picture-item" key={x.id} data-groups={`["${x.promotion_id}"]`}>
                         <div class="group relative block overflow-hidden rounded-md duration-500">
                             <div class="lightbox duration-500 group-hover:scale-105" title="">
