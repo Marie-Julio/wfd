@@ -51,7 +51,7 @@ const FormChoix = () => {
         console.log(newData)
         patchResource("/qcm-choices", id, newData).then((res) => {
             // console.log(res)
-            onServerSuccess("Modifie avec succes")
+            onServerSuccess("Mise à jour effectuée avec succès.")
             formik.resetForm()
             setTimeout(() => navigate(`/admin/qcms-choix`), 50)
         }).catch(e => {
@@ -64,7 +64,7 @@ const FormChoix = () => {
         const newData = { ...data, question_id: data.question_id.id };
         console.log(newData)
         postResource("/qcm-choices", newData).then((res) => {
-            onServerSuccess("Cree avec Succes")
+            onServerSuccess("Création effectuée avec succès.")
             setDatas({content: ""})
             formik.resetForm()
         }).catch((e) => errorMessage(e))

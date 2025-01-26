@@ -11,6 +11,7 @@ export const Input  = ({ label, type, name, value, placeholder, onChange, error,
             <input
                 name={name}
                 type={show ? "text" : type}
+                accept="video/*"
                 placeholder={placeholder}
                 onChange={onChange}
                 value={value !== undefined ? value : ''}

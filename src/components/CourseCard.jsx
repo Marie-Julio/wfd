@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 
 const CourseCard = ({ course }) => {
     const navigate = useNavigate()
+    const apiUrl = import.meta.env.VITE_API_URI_BASE;
     const handleDetail = () => {
         navigate(`/cours-detail/${course.id}`)
     }

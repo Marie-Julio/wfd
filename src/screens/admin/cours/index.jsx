@@ -46,7 +46,7 @@ const Cours = () => {
     return ( 
         <Body isOpen={isOpen} setIsOpen={setIsOpen}>
             <Table
-            title="Liste des Courss"
+            title="Liste des Cours"
             data={cours}
             columns={columns}
             filter={filter}
@@ -60,15 +60,7 @@ const Cours = () => {
             label="Filtrage"
             actions={true}    
             >
-                <ViewMore title="Code">
-                {/* <Searchable
-                    data={data}
-                    label="Rechercher par Libelle"
-                    searchColumns={["code"]}
-                    bodyColumns={["code", "libelle"]}
-                    headColumns={["code", "libelle"]}
-                    showData={updateData}/> */}
-                </ViewMore>
+             
             </Table>
         </Body>
      );

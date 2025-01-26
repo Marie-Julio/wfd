@@ -84,8 +84,8 @@ export const postFile = (resource_url, data) => {
   });
 };
 
-export const patchFile = (resource_url, data) => {
-  return axios.patch(resource_url, data, {
+export const patchFile = (resource_url, id, data) => {
+  return axios.patch(resource_url + "/" + id, data, {
     headers: {
       "Content-Type": "multipart/form-data",
       Accept: "application/json",
@@ -128,6 +128,6 @@ export const putResourceByUrl = (resource_url, data, headers) => {
  * @param {number} id
  */
 export const removeResource = (resource_url, id) => {
-  //return axios.delete(resource_url + "/" + id);
-  return axios.delete(resource_url, { data: { id: id } });
+  return axios.delete(resource_url + `/${id}`, { data: { ids: id } });
+  // return axios.delete(resource_url, { data: { id: id } });
 };

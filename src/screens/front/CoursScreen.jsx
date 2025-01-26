@@ -26,6 +26,7 @@ const CoursScreen = () => {
   const _init_ = () => {
     getResource("/course-modules")
       .then((res) => {
+        console.log(res.data)
         setCourses(res.data);
         setFilteredCourses(res.data); // Initialiser les cours affichés
       })

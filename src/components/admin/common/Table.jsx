@@ -8,6 +8,7 @@ import { errorMessage, onServerSuccess } from '../../../services/Helper';
 import Modal from './Modal';
 import Button from './Button';
 import danger from '../../../assets/icons/danger.svg'
+import { search } from '../../../utils/utils';
 
 
 
@@ -60,6 +61,7 @@ const updateItemsSelected = (item) => {
     removeResource(deleteUrl , arrayId).then((res) => {
         onServerSuccess(res.data.message)
         reloadFonction()
+        setDelModal(false)
     }).catch(e => {
         errorMessage(e)
     }).finally(() => reloadFonction())
@@ -100,6 +102,20 @@ setItems(currentData.slice(offset, offset + itemsPerPage));
       console.log('Importing data...');
     }
   };
+
+
+  // Fonction de filtrage
+  const searchText = (e) => {
+    const texte = e.target.value.toLowerCase()
+    setSearchTerm(texte)
+    data.filter((row) =>
+      columns.some((column) =>
+        getNestedValue(row, column.accessor)?.toString().toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
+    // setCurrentData(() => search(data, columns, texte))
+    setPage(1)
+}
 
   
 
@@ -146,10 +162,10 @@ setItems(currentData.slice(offset, offset + itemsPerPage));
       <div className="flex justify-between items-center mb-4">
         <Input
           type="text"
-          placeholder="Search..."
+          placeholder="Rechercher..."
           className="p-2 rounded"
           value={searchTerm}
-          // onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={searchText}
         />
         <div className="flex space-x-2">
         <div  className="w-32 mx-3">

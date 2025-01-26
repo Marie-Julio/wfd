@@ -11,6 +11,7 @@ import TextArea from "../../../components/admin/common/TextArea";
 import { useNavigate, useParams } from "react-router";
 import InputCheck from "../../../components/admin/common/InputCheck";
 import InputComplet from "../../../components/admin/common/InputComplet";
+import InputCompletNew from "../../../components/admin/common/InputCompletNew";
 
 const FormNotification = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +29,7 @@ const FormNotification = () => {
             console.log(res.data)
 
             formik.setValues({
-                user_id : res.data.user.nom,
+                user_id : res.data.user && res.data.user.nom,
                 read : res.data.read,
             })
             setDatas({content: res.data.message})
@@ -49,11 +50,11 @@ const FormNotification = () => {
 
 
     const updateData = (values) => {
-        const newData = { ...values, message: datas.content };
+        const newData = { ...values, message: datas.content, user_id: values.user_id.id, read: values.read[0] };
         console.log(newData)
         patchResource("/notifications", id, newData).then((res) => {
             // console.log(res)
-            onServerSuccess("Mise a jour reussie.")
+            onServerSuccess("Mise à jour effectuée avec succès.")
             formik.resetForm()
             setDatas({content: ""})
             setTimeout(() => navigate(`/admin/notification`), 50)
@@ -97,10 +98,10 @@ const handleSelect = (selectedValue) => {
 
     const saveData = (data) => {
        
-        const newData = { ...data, message: datas.content };
+        const newData = { ...data, message: datas.content, user_id: data.user_id.id, read: data.read[0] };
         console.log(newData)
         postResource("/notifications", newData).then((res) => {
-            onServerSuccess(res.data.message)
+            onServerSuccess("Création effectuée avec succès.")
             setDatas({content: ""})
         }).catch((e) => errorMessage(e))
     }
@@ -111,7 +112,7 @@ const handleSelect = (selectedValue) => {
             
         },
         validationSchema: Yup.object({
-            user_id: Yup.string().required('Champ requis'),
+            // user_id: Yup.string().required('Champ requis'),
             // content: Yup.string().required('Champ requis'),
 
         }),
@@ -127,17 +128,18 @@ const handleSelect = (selectedValue) => {
         <Body isOpen={isOpen} setIsOpen={setIsOpen}>
             <FormBody title={id ? "Mise a jour de notification" : "Creation de notification"}>
             <form className="flex flex-col w-full items-center" onSubmit={formik.handleSubmit}>
-                <InputComplet
+                
+                <InputCompletNew
                     label="Le destinataire"
+                    suggestions={users}
                     name="user_id"
-                    type="text"
-                    value={formik.values.user_id}
-                    onChange={formik.handleChange}
-                    fetchSuggestions={fetchSuggestions}
-                    onSelect={handleSelect}
-                    minChars={2} // Important : permet d'afficher les suggestions dès le début
-                    placeholder="Commencez à taper..."
-                    disabled={loading}
+                    labelKey="nom"
+                    subLabelKey="prenom"
+                    valueKey="id"
+                    onSelect={(value) => formik.setFieldValue(
+                        "user_id", value
+                    )}
+                    defaultValue={formik.values.user_id}
                 />
                 <TextArea label="Message" 
                 val={datas.content}

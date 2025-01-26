@@ -35,8 +35,8 @@ const location = useLocation();
       { title: "Utitlisateur", src: "/admin/users", icon: "bx-group"  },
       { title: "Galerie", src: "/admin/gallerie", icon: "bx-key"  },
 
-      { title: "Parametrages", src: "Notifications", gap: true },
-      { title: "Parametres", src: "Settings", icon: "bx-cog"  }
+      // { title: "Parametrages", src: "Notifications", gap: true },
+      // { title: "Parametres", src: "Settings", icon: "bx-cog"  }
     ];
   return (
         <section className="flex scrollbar-none  font-montserrat-light text-black drop-shadow-xl bg-[#f4f5fa] overflow-scroll h-screen">
