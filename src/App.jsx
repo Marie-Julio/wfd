@@ -3,7 +3,7 @@ import reactLogo from './assets/wfdguinee.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import AppBody from './components/AppBody'
-import { redirect, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Navigate, redirect, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Home from './screens/front/Home'
 import LoginScreen from './screens/Login'
 import Activate from './screens/Activate'
@@ -51,6 +51,8 @@ import FormChoix from './screens/admin/choix/form'
 import Attestation from './screens/front/Attestation'
 import GalerieAdmin from './screens/admin/Gallerie.jsx'
 import FormGalerie from './screens/admin/Gallerie.jsx/form'
+import PrivateRoute from './PrivateRoute.jsx'
+import NotFound from './NotFound.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -85,8 +87,10 @@ function App() {
     <Router>
       
     <Routes>
+    <Route path="/login" element={  <LoginScreen/>  } />
+    <Route element={<PrivateRoute />}>
       <Route path="/" element={  <Home/>  } />  
-      <Route path="/login" element={  <LoginScreen/>  } />  
+        
       <Route path="/activate/:token" element={  <Activate/>  } />  
       <Route path="/register" element={  <Register/>  } />  
       <Route path="/cours" element={  <CoursScreen/>  } />  
@@ -142,6 +146,10 @@ function App() {
       <Route path="/admin/users" element={     <Utilisateur />  } /> 
       <Route path="/admin/gallerie" element={     <GalerieAdmin />  } /> 
       <Route path="/admin/gallerie-create" element={     <FormGalerie />  } /> 
+      </Route>
+      {/* Route par défaut */}
+      {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
     </Router>
     <ToastContainer autoClose={8000} icon={true} transition={Flip}/>

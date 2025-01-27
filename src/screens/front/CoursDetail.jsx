@@ -8,6 +8,7 @@ import { getResource, postResource } from '../../services/api';
 import { useNavigate, useParams } from 'react-router';
 import moment from 'moment';
 import { jwtDecode } from 'jwt-decode';
+import useAuth from '../../hooks/useAuth';
 
 const CoursDetail = () => {
   const [course, setCourse] = useState(null);
@@ -16,6 +17,8 @@ const CoursDetail = () => {
   const {id} = useParams()
   const apiUrl = import.meta.env.VITE_API_URI_BASE;
   const navigate = useNavigate()
+
+  useAuth()
 
    const accessToken = localStorage.getItem("token");
       const decodedToken = accessToken ? jwtDecode(accessToken) : null;

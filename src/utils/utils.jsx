@@ -16,6 +16,22 @@ export const exportExcel = (data, fileName) => {
     saveAs(blob, fileName);
 };
 
+// utils/auth.ts
+export const isTokenValid = () => {
+    const token = localStorage.getItem('token'); // Récupérer le token (ou autre méthode)
+    
+    if (!token) return false;
+  
+    try {
+      // Exemple simple de vérification de l'expiration (JWT)
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.exp * 1000 > Date.now(); // Comparer l'expiration avec l'heure actuelle
+    } catch (error) {
+      return false; // Si le token est invalide
+    }
+  };
+  
+
 export const search = (items, columns, text) => {
     const searchInObject = (obj, keys, text) => {
         if (keys.length === 0) {
