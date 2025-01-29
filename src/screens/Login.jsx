@@ -8,7 +8,7 @@ import useAuth from "../hooks/useAuth";
 import { errorMessage, onServerError, onServerSuccess } from "../services/Helper";
 import Button from "../components/admin/common/Button";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router";
+import { Link, redirect, useNavigate, useParams } from "react-router";
 import { jwtDecode } from "jwt-decode";
 import logo2 from "../assets/wfdguinee.png";
 
@@ -18,6 +18,14 @@ const LoginScreen = () => {
     const auth = useAuth()
     const navigate = useNavigate()
     const {token} = useParams()
+    const accessToken = localStorage.getItem("token");
+    useEffect(() => {
+        if (accessToken) {
+            navigate("/");
+          }
+    }, [])
+        
+         
 
     const saveData = (data) => {
         postResource("login", data).then((res) => {
