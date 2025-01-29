@@ -86,7 +86,8 @@ const FormCours = () => {
         initialValues: {
           title: "",
           type: "",
-          min_score: "",
+          duree: 0,
+          min_score: 0,
           promotion_id: 0,
           required_qcm_id: 0,
           media: [], // Initialisé comme un tableau vide
@@ -101,6 +102,8 @@ const FormCours = () => {
           formData.append("title", values.title);
           formData.append("type", values.type);
           formData.append("min_score", values.min_score);
+          formData.append("duree", values.duree);
+          formData.append("description", datas.content);
           formData.append("promotion_id", values.promotion_id.id);
           formData.append("required_qcm_id", values.required_qcm_id.id);
       
@@ -134,8 +137,8 @@ const FormCours = () => {
             <FormBody title="Creation de Cours">
             <form className="flex flex-col w-full items-center" onSubmit={formik.handleSubmit}>
                 <Input type="text" name="title" value={formik.values.title} label="Entrez le title" onChange={formik.handleChange}/>
-                <Input type="text" name="min_score" value={formik.values.min_score}  label="La moyenne" onChange={formik.handleChange}/>
-                <Input type="text" name="duree" value={formik.values.duree} label="La duree" onChange={formik.handleChange}/>
+                <Input type="number" name="min_score" value={formik.values.min_score}  label="La moyenne" onChange={formik.handleChange}/>
+                <Input type="number" name="duree" value={formik.values.duree} label="La duree" onChange={formik.handleChange}/>
                 
                 <Select name="type" label="Le type" value={formik.values.type} onChange={formik.handleChange} disabled={false}>
                     <option>Choisir le statut</option>

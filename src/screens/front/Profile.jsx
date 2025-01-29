@@ -77,13 +77,13 @@ const Profile = () => {
     if (file) {
       setSelectedImage(URL.createObjectURL(file));
       try {
-        const formData2 = new FormData(); // Utiliser FormData pour inclure les fichiers
-        formData2.append("image", file);// Utiliser FormData pour inclure les fichiers
+        const formData = new FormData(); // Utiliser FormData pour inclure les fichiers
+        formData.append("image", file);// Utiliser FormData pour inclure les fichiers
+        formData.append('_method', 'PATCH'); // Simule une requête PATCH avec multipart/form-data
         // setLoading(true);
-        console.log(formData2.image);
         console.log(file);
-        const img = await patchFile(`/profil-user`, decodedToken.id, formData2);
-        console.log(img)
+        const res = await postFile(`/profil-user/${decodedToken.id}`, formData);
+        console.log(res)
         onServerSuccess("Image sauvegarder !");
       } catch (error) {
         errorMessage(error);
