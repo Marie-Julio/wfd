@@ -7,6 +7,7 @@ import { errorMessage } from '../../services/Helper';
 import AppBody from '../../components/AppBody';
 import { useNavigate } from 'react-router';
 import { jwtDecode } from 'jwt-decode';
+import img from "../../assets/images/profil.png";
 
 const Forum = () => {
   const [forums, setForums] = useState([]);
@@ -143,7 +144,7 @@ const Forum = () => {
                           <td class="text-center p-4">{forum.discussions_count}</td>
                           <td class="p-4">
                               <div class="flex">
-                                  <img src="assets/images/client/01.jpg" class="h-10 rounded-full shadow dark:shadow-slate-800" alt="" />
+                                  <img src={forum.user_file_path || img} class="h-10 rounded-full shadow dark:shadow-slate-800" alt="" />
 
                                   <div class="ms-2">
                                       <a href="#" class=" hover:text-indigo-600 font-semibold text-normal whitespace-nowrap">{forum.user_prenom.split(' ')[0]} {forum.user_nom.split(' ')[0]}</a>
