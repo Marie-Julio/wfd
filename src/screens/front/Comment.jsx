@@ -158,6 +158,47 @@ const Comment = () => {
                   <span class="text-lg font-semibold">Date</span>
               </div>
 
+                        <div class="p-6 rounded-md shadow dark:shadow-gray-800 mt-8">
+                            <h5 class="text-lg font-semibold">Comments:</h5>
+
+                            <div class="mt-8">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <img src="assets/images/client/01.jpg" class="size-11 rounded-full shadow" alt="" />
+    
+                                        <div class="ms-3 flex-1">
+                                            <a href="#" class="text-lg font-semibold hover:text-indigo-600 duration-500">Calvin Carlo</a>
+                                            <p class="text-sm text-slate-400">6th May 2022 at 01:25 pm</p>
+                                        </div>
+                                    </div>
+
+                                    <a href="#" class="text-slate-400 hover:text-indigo-600 duration-500 ms-5"><i class="mdi mdi-reply"></i> Reply</a>
+                                </div>
+                                <div class="p-4 bg-gray-50 dark:bg-slate-800 rounded-md shadow dark:shadow-gray-800 mt-6">
+                                    <p class="text-slate-400 italic">" There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour "</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 rounded-md shadow dark:shadow-gray-800 mt-8">
+                            <h5 class="text-lg font-semibold">Leave A Comment:</h5>
+
+                            <form class="mt-8">
+                                <div class="grid grid-cols-1">
+                                    <div class="mb-5">
+                                        <div class="text-start">
+                                            <label for="comments" class="font-semibold">Your Comment:</label>
+                                            <div class="form-icon relative mt-2">
+                                                <i data-feather="message-circle" class="size-4 absolute top-3 start-4"></i>
+                                                <textarea name="comments" id="comments" class="form-input ps-11 w-full py-2 px-3 h-28 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0" placeholder="Message :"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" id="submit" name="send" class="py-2 px-5 inline-block tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md w-full">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
               {currentComments.map((comment) => (
                 <div key={comment.id} class=" bg-white p-6 border-b border-gray-100 dark:border-gray-800">
                   <div class="sm:flex items-center justify-between">
@@ -176,8 +217,6 @@ const Comment = () => {
               </div>))}
 
           </div>
-        </div>
-
         <div className="flex justify-center items-center mt-4 space-x-2">
           {renderPagination()}
         </div>
