@@ -12,6 +12,7 @@ import useAuth from '../../hooks/useAuth';
 
 const CoursDetail = () => {
   const [course, setCourse] = useState(null);
+  const [documents, setDocuments] = useState(null);
   const [verified, setVerified] = useState({});
   const [readStatus, setReadStatus] = useState(false);
   const {id} = useParams()
@@ -30,7 +31,10 @@ const CoursDetail = () => {
 
   const fetchCourseData = async () => {
     try {
-      const response = await getResource(`/course-modules/${id}`); // Remplacez `3` par l'ID dynamique si nécessaire
+      const response = await getResource(`/course-modules/${id}`);
+      const docs = await getResource(`/documents?cours_id=${id}`);
+      console.log("Documents : ",docs.data)
+      setDocuments(docs.data) // Remplacez `3` par l'ID dynamique si nécessaire
       setCourse(response.data);
       const res = await getResource(`/user-course-progress?course_module_id=${id}`); // Remplacez `3` par l'ID dynamique si nécessaire
         console.log(res.data[0])

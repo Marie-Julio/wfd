@@ -33,6 +33,9 @@ function Nav () {
                 <img src={logo} className="h-8 mr-3 object-contain  m-4 flex items-center" alt="Pharma Logo" />
                 <h2 className="font-montserrat-extra-bold-italic bg-custom-gradient bg-clip-text text-transparent text-xl">WFDGuinee</h2>
             </Link>
+            <div className="text-center  w-1/2 mx-auto rounded-full">
+                <Input type="search" name="search" placeholder="Rechercher..."  className=" w-1/2"/>
+            </div>
 
                 <div className="flex text-end justify-between items-center">
                     <img src={tokenNew.file_path || imgprofil} alt="Profile"
@@ -47,9 +50,7 @@ function Nav () {
                 </div>
         
             </div>
-            <div className="text-center  w-1/2 mx-auto rounded-full">
-                <Input type="search" name="search" placeholder="Rechercher..."  className=" w-1/2"/>
-            </div>
+            
 
             
         </nav>

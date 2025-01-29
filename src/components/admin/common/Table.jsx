@@ -169,7 +169,7 @@ setItems(currentData.slice(offset, offset + itemsPerPage));
         />
         <div className="flex space-x-2">
         <div  className="w-32 mx-3">
-            <Select onChange={(e) => {setItemsPerPage(parseInt(e.target.value)), 
+            <Select vlaue={itemsSelected} onChange={(e) => {setItemsPerPage(parseInt(e.target.value)), 
             setPage(1)}}>
                 {
                     [5,10,20,30,50,100].map((item, index) => (

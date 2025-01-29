@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import Icon from "./Icon";
 
 
-export const Input  = ({ label, type, name, value, placeholder, onChange, error, className, disabled, full, darkMode }) => {
+export const Input  = ({ label, type, name, value, multiple, placeholder, onChange, error, className, disabled, full, darkMode }) => {
     const [show, setShow] = useState(false)
     return ( 
         <div className={`w-full mb-2 flex flex-col  ${className}`}>
@@ -12,6 +12,7 @@ export const Input  = ({ label, type, name, value, placeholder, onChange, error,
                 name={name}
                 type={show ? "text" : type}
                 accept="video/*"
+                multiple={multiple}
                 placeholder={placeholder}
                 onChange={onChange}
                 value={value !== undefined ? value : ''}
