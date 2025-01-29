@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { removeResource } from "../services/api";
 import Icon from "./admin/common/Icon";
 
-const GalleryTable = ({ galleries = []}) => {
+const GalleryTable = ({ galleries = [], reloadFunction}) => {
   const [loading, setLoading] = useState(false);
   const apiUrl = import.meta.env.VITE_API_URI_BASE;
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,10 +28,13 @@ const GalleryTable = ({ galleries = []}) => {
 
   const handleDelete = async (id) => {
     setLoading(true);
+    
     const arrayId = [id]
+    console.log(arrayId)
     try {
       await removeResource("galleries" , arrayId); // Appelle une fonction passée en prop pour supprimer
       setLoading(false);
+      reloadFunction()
     } catch (error) {
       console.error("Erreur lors de la suppression :", error);
       setLoading(false);

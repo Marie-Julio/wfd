@@ -53,9 +53,11 @@ import GalerieAdmin from './screens/admin/Gallerie.jsx'
 import FormGalerie from './screens/admin/Gallerie.jsx/form'
 import PrivateRoute from './PrivateRoute.jsx'
 import NotFound from './NotFound.jsx'
+import { useDispatch } from 'react-redux'
 
 function App() {
   const [count, setCount] = useState(0)
+  const dispatch = useDispatch();
 
   const access_token = localStorage.getItem('token');
       const decodedToken = access_token ? jwtDecode(access_token) : null;
@@ -65,7 +67,7 @@ function App() {
     // Définir un intervalle de 10 minutes
     const intervalId = setInterval(() => {
       if (access_token) {
-        const tokenNew = jwtDecode(access_token);
+        const tokenNew = access_token ? jwtDecode(access_token) : null;;
         const now = Math.floor(Date.now() / 1000);
   
         if (tokenNew.exp < now) {
@@ -88,7 +90,7 @@ function App() {
       
     <Routes>
     <Route path="/login" element={  <LoginScreen/>  } />
-    <Route element={<PrivateRoute />}>
+    
       <Route path="/" element={  <Home/>  } />  
         
       <Route path="/activate/:token" element={  <Activate/>  } />  
@@ -115,6 +117,7 @@ function App() {
      
 
        {/* Screen admin  */}
+       <Route element={<PrivateRoute />}>
        <Route path="/admin/dashboard" element={     <AdminHome/>  } /> 
       <Route path="/admin/qcms-questions" element={     <Question/>  } /> 
       <Route path="/admin/qcms-questions-create" element={     <FormQuestion/>  } /> 

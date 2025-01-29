@@ -18,7 +18,7 @@ const Project = ({projects = []}) => {
               <button className="bg-transparent text-left p-0" onClick={() => redirectPage(project.id)}>
               <div class="relative">
                   <div class="transform transition-all duration-500 hover:scale-105 shadow dark:shadow-gray-800 p-5 pb-0 rounded-md bg-[#d5ddf2] dark:bg-[#1a5fa9]/30 hover:bg-orange-300">
-                      <img src={`${apiUrl}/storage/${project.media}`} alt={project.title} class="rounded-t-md shadow" />
+                      <img src={`${apiUrl}/storage/${project.media}`} alt={project.title} className="rounded-t-md shadow" />
                   </div>
               </div>
 

@@ -73,13 +73,17 @@ const Profile = () => {
 
   const handleImageChange = async(event) => {
     const file = event.target.files[0];
+    
     if (file) {
       setSelectedImage(URL.createObjectURL(file));
       try {
+        const formData2 = new FormData(); // Utiliser FormData pour inclure les fichiers
+        formData2.append("image", file);// Utiliser FormData pour inclure les fichiers
         // setLoading(true);
-        console.log("file");
+        console.log(formData2.image);
         console.log(file);
-        await patchFile(`/profil-user`, decodedToken.id, {image: file});
+        const img = await patchFile(`/profil-user`, decodedToken.id, formData2);
+        console.log(img)
         onServerSuccess("Image sauvegarder !");
       } catch (error) {
         errorMessage(error);
@@ -135,6 +139,7 @@ const Profile = () => {
       await postFile(`/galleries`, newData);
       onServerSuccess("Image sauvegarder !");
       formikGalerie.resetForm();
+      _init_()
     } catch (error) {
       errorMessage(error);
     } finally {
@@ -245,16 +250,14 @@ const Profile = () => {
         console.log(res.data)
         setGaleries(res.data)
     })
+    fetchData();
+    fetchTestResults();
   }
 
   useEffect(() => {
     _init_()
   }, [])
 
-  useEffect(() => {
-    fetchData();
-    fetchTestResults();
-  }, []);
 
   if (loading) {
     return  <div className="flex items-center justify-center h-screen">
@@ -361,7 +364,7 @@ const Profile = () => {
                 {listgalerieCollapse ? <ChevronUp /> : <ChevronDown />}
               </div>
               {listgalerieCollapse && (
-                <GalleryTable galleries={galeries}/>
+                <GalleryTable galleries={galeries} reloadFunction={_init_}/>
               )}
             </div>
 

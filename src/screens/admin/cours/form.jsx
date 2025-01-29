@@ -36,7 +36,7 @@ const FormCours = () => {
                         min_score : res.data.min_score,
                         promotion_id : res.data.promotion.nom,
                         required_qcm_id : res.data.title,
-                        file_path : res.data.title,
+                        media : res.data.title,
                     });
                 } catch (error) {
                     console.error('Erreur lors de la récupération de l\'annonce:', error);
@@ -64,9 +64,9 @@ const FormCours = () => {
           }, [])
 
     const updateData = (values) => {
-        const newData = { ...values, description: datas.content, promotion_id: values.promotion_id.id, required_qcm_id: values.id };
-        console.log(newData)
-        patchFile("/course-modules", id, newData).then((res) => {
+        // const newData = { ...values, description: datas.content, promotion_id: values.promotion_id.id, required_qcm_id: values.id };
+        console.log(values)
+        patchFile("/course-modules", id, values).then((res) => {
             onServerSuccess("Mise à jour effectuée avec succès.")
             setDatas({content: ""})
         }).catch((e) => errorMessage(e))
@@ -74,9 +74,9 @@ const FormCours = () => {
 
     const saveData = (data) => {
         setLoading(true) 
-        const newData = { ...data, description: datas.content, promotion_id: data.promotion_id.id, required_qcm_id: data.required_qcm_id.id };
-        console.log(newData)
-        postFile("/course-modules", newData).then((res) => {
+        // const newData = { ...data, description: datas.content, promotion_id: data.promotion_id.id, required_qcm_id: data.required_qcm_id.id };
+        console.log(data)
+        postFile("/course-modules", data).then((res) => {
             onServerSuccess("Création effectuée avec succès.")
             formik.resetForm()
             setDatas({content: ""})
@@ -84,25 +84,50 @@ const FormCours = () => {
     }
     const formik = useFormik({
         initialValues: {
-            title : '',
-            type : '',
-            min_score : '',
-            promotion_id : 0,
-            required_qcm_id : 0,
-            file_path : '',
+          title: "",
+          type: "",
+          min_score: "",
+          promotion_id: 0,
+          required_qcm_id: 0,
+          media: [], // Initialisé comme un tableau vide
         },
         validationSchema: Yup.object({
-            title: Yup.string().required('Champ requis'),
-            // content: Yup.string().required('Champ requis'),
-
+          title: Yup.string().required("Champ requis"),
         }),
         onSubmit: async (values) => {
-            setLoading(true) 
-            if(id) updateData(values)
-            else saveData(values) 
-            setLoading(false)
+          setLoading(true);
+      
+          const formData = new FormData(); // Utiliser FormData pour inclure les fichiers
+          formData.append("title", values.title);
+          formData.append("type", values.type);
+          formData.append("min_score", values.min_score);
+          formData.append("promotion_id", values.promotion_id.id);
+          formData.append("required_qcm_id", values.required_qcm_id.id);
+      
+          // Ajouter les fichiers au formulaire
+        //   values.media.forEach((file, index) => {
+        //     formData.append(`media[${index}]`, file);
+        //   });
+
+         // Ajouter les fichiers sous forme de tableau media: [(binaire), (binaire)]
+            values.media.forEach((file) => {
+                formData.append("media[]", file); // Utilisation de media[] pour transmettre sous forme de tableau
+            });
+      
+          try {
+            if (id) {
+               updateData(formData); // Fonction d'édition
+            } else {
+               saveData(formData); // Fonction de création
+            }
+            setLoading(false);
+          } catch (error) {
+            console.error(error);
+            setLoading(false);
+          }
         },
-    });
+      });
+      
 
     return ( 
         <Body isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -120,10 +145,11 @@ const FormCours = () => {
                         ))
                     }
                 </Select>
-                <Input type="file" name="file_path"  label="Joindre le fichier" onChange={(event) => {
-                        formik.setFieldValue("file_path", event.target.files[0]); // Enregistre le fichier dans Formik
-                      }}/>
-                {/* {formik.values.type === "pdf" && <Input type="file" name="file_path" value={formik.values.file_path} label="Le fichier pdf" onChange={formik.handleChange}/>} */}
+                <Input type="file" name="media"  label="Joindre le fichier"  onChange={(event) => {
+                    const filesArray = Array.from(event.target.files);
+                    formik.setFieldValue("media", filesArray);
+                }} multiple/>
+                {/* {formik.values.type === "pdf" && <Input type="file" name="media" value={formik.values.media} label="Le fichier pdf" onChange={formik.handleChange}/>} */}
                 <InputCompletNew
                     label="La promotion"
                     suggestions={promos}
