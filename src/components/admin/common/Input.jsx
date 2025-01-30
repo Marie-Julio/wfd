@@ -11,7 +11,7 @@ export const Input  = ({ label, type, name, value, multiple, placeholder, onChan
             <input
                 name={name}
                 type={show ? "text" : type}
-                accept="video/*"
+                accept={type == "file" && "video/*, image/png, image/jpeg, image/jpg, application/pdf"}
                 multiple={multiple}
                 placeholder={placeholder}
                 onChange={onChange}
