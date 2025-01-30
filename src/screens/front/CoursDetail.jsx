@@ -82,11 +82,13 @@ const unixTimestamp = Math.floor(now / 1000);
     switch (course.type) {
       case 'pdf':
         return (
+          documents.map((x) => (
           <div className="flex flex-col items-start gap-3">
+            <h1 className='text-xl font-semibold text-black'>{x.title}</h1>
             <Button
               variant="outline"
               size="sm"
-              onClick={() => window.open(course.file_path, '_blank')}
+              onClick={() => window.open(x.file_path, '_blank')}
               className="flex items-center gap-2 text-white"
             >
               <FileText className="w-4 h-4" />
@@ -95,22 +97,23 @@ const unixTimestamp = Math.floor(now / 1000);
             <Button
               variant="outline"
               size="sm"
-              onClick={() => window.open(course.file_path, '_blank')}
+              onClick={() => window.open(x.file_path, '_blank')}
               className="flex items-center gap-2  text-white"
             >
               <Download className="w-4 h-4" />
               Télécharger le PDF
             </Button>
-          </div>
-        );
+          </div>)
+        ));
       case 'video':
         return (
+          documents.map((x) => (  
           <div className="aspect-w-16 aspect-h-9">
             <video controls className="w-full h-full rounded-md">
-              <source src={`${apiUrl}/storage/${course.file_path}`} type="video/mp4" />
+              <source src={`${apiUrl}/storage/${x.file_path}`} type="video/mp4" />
               Votre navigateur ne supporte pas la lecture vidéo.
             </video>
-          </div>
+          </div>))
         );
       case 'text':
         return (

@@ -79,7 +79,7 @@ export const postFile = (resource_url, data) => {
   return axios.post(resource_url, data, {
     headers: {
       "Content-Type": "multipart/form-data",
-      Accept: "application/json",
+      // Accept: "application/json",
     },
   });
 };
@@ -88,7 +88,7 @@ export const patchFile = (resource_url, id, data) => {
   return axios.patch(resource_url + "/" + id, data, {
     headers: {
       "Content-Type": "multipart/form-data",
-      Accept: "application/json",
+      // Accept: "application/json",
     },
   });
 };
