@@ -35,8 +35,7 @@ const FormCours = () => {
                         type : res.data.type,
                         min_score : res.data.min_score,
                         promotion_id : res.data.promotion.nom,
-                        required_qcm_id : res.data.title,
-                        media : res.data.title,
+                        required_qcm_id : res.data.qcm.title,
                     });
                 } catch (error) {
                     console.error('Erreur lors de la récupération de l\'annonce:', error);
@@ -79,6 +78,14 @@ const FormCours = () => {
         postFile("/course-modules", data).then((res) => {
             onServerSuccess("Création effectuée avec succès.")
             formik.resetForm()
+            formik.setValues({
+                title : '',
+                type : '',
+                min_score : 0,
+                promotion_id : 0,
+                required_qcm_id : 0,
+                media : [],
+            });
             setDatas({content: ""})
         }).catch((e) => errorMessage(e)).finally(() => setLoading(false) )
     }
@@ -106,15 +113,10 @@ const FormCours = () => {
           formData.append("description", datas.content);
           formData.append("promotion_id", values.promotion_id.id);
           formData.append("required_qcm_id", values.required_qcm_id.id);
-      
-          // Ajouter les fichiers au formulaire
-        //   values.media.forEach((file, index) => {
-        //     formData.append(`media[${index}]`, file);
-        //   });
 
          // Ajouter les fichiers sous forme de tableau media: [(binaire), (binaire)]
             values.media.forEach((file) => {
-                formData.append("media[]", file); // Utilisation de media[] pour transmettre sous forme de tableau
+                formData.append("file_path[]", file); // Utilisation de media[] pour transmettre sous forme de tableau
             });
       
           try {

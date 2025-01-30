@@ -35,6 +35,8 @@ const Profile = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const auth = useAuth();
+  const apiUrl = import.meta.env.VITE_API_URI_BASE
+
 
   const accessToken = localStorage.getItem("token");
   const decodedToken = accessToken ? jwtDecode(accessToken) : null;
@@ -78,7 +80,7 @@ const Profile = () => {
       setSelectedImage(URL.createObjectURL(file));
       try {
         const formData = new FormData(); // Utiliser FormData pour inclure les fichiers
-        formData.append("image", file);// Utiliser FormData pour inclure les fichiers
+        formData.append("file_path", file);// Utiliser FormData pour inclure les fichiers
         formData.append('_method', 'PATCH'); // Simule une requête PATCH avec multipart/form-data
         // setLoading(true);
         console.log(file);
@@ -281,7 +283,7 @@ const Profile = () => {
                   onMouseLeave={() => setIsHovered(false)}
                 >
                  <img
-                    src={selectedImage || info.file_path || imgprofil}
+                    src={selectedImage || `${apiUrl}/storage/${info.file_path}` || imgprofil}
                     alt="Profile"
                     className="w-32 h-32 rounded-full border-4 border-white shadow-lg"
                   />

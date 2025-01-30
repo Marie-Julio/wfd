@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Download, BookOpen, CheckCircle, FileText, Video, File } from 'lucide-react';
+import { Download, BookOpen, CheckCircle, FileText, Video, File, Loader } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/CardComponents';
 import { Progress } from '../../components/Progress';
 import { Button } from '../../components/Button';
@@ -76,19 +76,27 @@ const unixTimestamp = Math.floor(now / 1000);
     fetchCourseData();
   }, []);
 
-  if (!course) return <p>Chargement...</p>;
+  // if (!course) return <p>Chargement...</p>;
+
+  if (!course) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader className="w-16 h-16 text-orange-600 animate-spin" /> {/* Spinner orange */}
+      </div>
+    );
+  }
 
   const renderContent = () => {
     switch (course.type) {
       case 'pdf':
         return (
-          documents.map((x) => (
+          documents.map((x, index) => (
           <div className="flex flex-col items-start gap-3">
-            <h1 className='text-xl font-semibold text-black'>{x.title}</h1>
+            <h1 className='text-xl font-semibold text-black'>Document : {index + 1}</h1>
             <Button
               variant="outline"
               size="sm"
-              onClick={() => window.open(x.file_path, '_blank')}
+              onClick={() => window.open(`${apiUrl}/storage/${x.file_path}`, '_blank')}
               className="flex items-center gap-2 text-white"
             >
               <FileText className="w-4 h-4" />
@@ -97,14 +105,14 @@ const unixTimestamp = Math.floor(now / 1000);
             <Button
               variant="outline"
               size="sm"
-              onClick={() => window.open(x.file_path, '_blank')}
+              onClick={() => window.open(`${apiUrl}/storage/${x.file_path}`, '_blank')}
               className="flex items-center gap-2  text-white"
             >
               <Download className="w-4 h-4" />
               Télécharger le PDF
             </Button>
-          </div>)
-        ));
+          </div>
+        )));
       case 'video':
         return (
           documents.map((x) => (  
