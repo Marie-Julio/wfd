@@ -29,10 +29,10 @@ const Promotion = () => {
           <div className="max-w-7xl mx-auto mb-12 md:m-10">
           
     
-          <div class="p-10 bg-white dark:bg-slate-900 shadow dark:shadow-gray-800 rounded-md">
+          <div className="p-10 bg-white dark:bg-slate-900 shadow dark:shadow-gray-800 rounded-md">
       <section className="mb-12">
         <h1 className=" uppercase transform transition-all duration-500 hover:scale-110 text-3xl font-bold text-center text-gray-800 mb-6">
-        <span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md
+        <span className="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md
          after:bg-[#1a5fa9]/30 relative font-semibold">Nos projets</span>
          : Engagement pour un développement communautaire durable
         </h1>
@@ -48,7 +48,7 @@ const Promotion = () => {
       </section>
 
       <section className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-800 mb-4"><span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative font-semibold">Nos valeurs fondamentales</span></h2>
+        <h2 className="text-3xl font-semibold text-gray-800 mb-4"><span className="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative font-semibold">Nos valeurs fondamentales</span></h2>
         <p className="text-lg text-gray-700 leading-relaxed mb-4">
           Notre engagement ne s'arrête pas simplement à la mise en place de projets. Nous restons constamment à l'écoute de notre communauté, dans un souci de compréhension et d'adaptation continue. C'est ainsi que nous nous prévoyons que nos actions sont en phase avec les besoins évolutifs des populations et que chaque bénéficiaire se sent véritablement impliqué.
         </p>
@@ -62,7 +62,7 @@ const Promotion = () => {
 
       <section>
         <h2 className="text-3xl font-semibold text-gray-800 mb-4">
-        <span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative font-semibold">Un développement inclusif, équitable et durable</span>
+        <span className="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative font-semibold">Un développement inclusif, équitable et durable</span>
         </h2>
         <p className="text-lg text-gray-700 leading-relaxed mb-4">
           Nos projets ne sont pas de simples interventions ponctuelles. Ils sont le reflet d'un engagement profond, celui de contribuer à un développement inclusif, équitable et durable. En tant qu'acteurs du changement, nous ne nous contentons pas de fournir des solutions ; nous visons à transformer les mentalités, à redonner aux communautés les clés de leur propre avenir, dans le respect des valeurs humaines et sociales.
@@ -74,7 +74,7 @@ const Promotion = () => {
 
       <section className="mt-12">
         <h2 className="text-3xl font-semibold text-gray-800 text-center mb-4">
-        <span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative font-semibold">Découvrez chacun de nos projets</span>
+        <span className="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative font-semibold">Découvrez chacun de nos projets</span>
         </h2>
         <p className="text-lg text-gray-700 text-center">
           Découvrez ici les projets qui illustrent notre engagement envers un développement durable et communautaire.

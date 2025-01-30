@@ -107,19 +107,19 @@ const CoursScreen = () => {
           </p>
       </div><br /><br />
       
-      <div class="">
-        <div class="grid md:grid-cols-12 grid-cols-1">
-          <div class="lg:col-span-3 md:col-span-4">
+      <div className="">
+        <div className="grid md:grid-cols-12 grid-cols-1">
+          <div className="lg:col-span-3 md:col-span-4">
             
-            <div class="shadow dark:shadow-gray-800 p-6 rounded-md bg-[#eb6b11] dark:bg-slate-900 sticky top-20">
+            <div className="shadow dark:shadow-gray-800 p-6 rounded-md bg-[#eb6b11] dark:bg-slate-900 sticky top-20">
               
-                  <div class="grid grid-cols-1 gap-3">
+                  <div className="grid grid-cols-1 gap-3">
                       <div>
-                          <label for="searchname" class="hidden font-semibold"></label>
-                          <div class="relative">
-                              <i data-feather="search" class="size-4  absolute top-3 start-3"></i>
+                          <label for="searchname" className="hidden font-semibold"></label>
+                          <div className="relative">
+                              <i data-feather="search" className="size-4  absolute top-3 start-3"></i>
                           
-                              <input value={searchTerm} onChange={handleSearch} type="text" class="form-input w-full py-2 px-3 h-10 ps-9 bg-white
+                              <input value={searchTerm} onChange={handleSearch} type="text" className="form-input w-full py-2 px-3 h-10 ps-9 bg-white
                                dark:bg-slate-50 dark:text-slate-50 rounded outline-none border border-gray-50 focus:border-gray-50 dark:border-gray-50 dark:focus:border-gray-50 
                                focus:ring-0" placeholder="Rechercher" />
                           </div>
@@ -149,7 +149,7 @@ const CoursScreen = () => {
           </div>
           </div>
           
-          <div class="lg:col-span-9 md:col-span-8">
+          <div className="lg:col-span-9 md:col-span-8">
           <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-5">
             {currentCourses.map((course) => (
               <CourseCard key={course.id} course={course} />

@@ -83,10 +83,10 @@ const Nav = () => {
       <nav className="bg-custom-gradient text-white">
           <div className="container items-end text-right md:block">
             <button className="md:hidden focus:outline-none bg-transparent mt-5" onClick={toggleMenu} >
-              {isMenuOpen ? <div class="flex align-middle justify-center items-center size-10 mt-1  text-2xl bg-[#eb6b11] duration-500">
-                <i class="uil uil-bars"></i>
-              </div> : <div class="flex align-middle justify-center items-center size-10 mt-1  text-2xl bg-[#eb6b11] duration-500">
-                <i class="uil uil-bars"></i>
+              {isMenuOpen ? <div className="flex align-middle justify-center items-center size-10 mt-1  text-2xl bg-[#eb6b11] duration-500">
+                <i className="uil uil-bars"></i>
+              </div> : <div className="flex align-middle justify-center items-center size-10 mt-1  text-2xl bg-[#eb6b11] duration-500">
+                <i className="uil uil-bars"></i>
               </div>}
             </button>
           </div>
@@ -227,7 +227,7 @@ const Nav = () => {
               <>
                 <Link
                   to="/login"
-                  class=" font-semibold px-5 py-3 rounded-xl text-sm border-2 text-gray-50 bg-transparent hover:text-gray-200 focus:outline-none transition-all"
+                  className=" font-semibold px-5 py-3 rounded-xl text-sm border-2 text-gray-50 bg-transparent hover:text-gray-200 focus:outline-none transition-all"
                 >
                   Connexion
                 </Link>

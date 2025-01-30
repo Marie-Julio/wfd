@@ -28,28 +28,24 @@ const Home = () => {
   
       const _init_ = () => {
         getResource("/projets").then((res) => {
-            console.log(res.data)
             setProjects(res.data.slice(0, 3))
             setProjectsTotal(res.data)
         }).catch(e => {
             errorMessage(e)
           })
 
-          getResource("/announcements").then((res) => {
-            console.log(res.data);
+          getResource("/announcements").then((res) => {;
             setInfos(res.data.slice(0, 3));
             setInfosTotal(res.data);
         })
 
           getResource("/course-modules").then((res) => {
-            console.log(res.data)
-            setCours(res.data.slice(0, 8))
+            setCours(res.data)
             setCoursTotal(res.data)
         })
 
         getResource("/inscriptions").then((res) => {
-          console.log(res.data)
-          setInscris(res.data.slice(0, 6))
+          setInscris(res.data)
           setInscrisTotal(res.data)
       })
     }
@@ -130,16 +126,16 @@ const Home = () => {
         
         <section className="relative md:py-24 py-16">
 
-            <div class="container relative">
-                <div class="grid md:grid-cols-12 grid-cols-1 pb-8 items-end">
-                    <div class="lg:col-span-8 md:col-span-6 md:text-start text-center">
-                        <h3 class="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold"><span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative">Projets</span></h3>
-                        <p class="text-slate-400 max-w-xl">À travers des projets participatifs, co-conçus avec les bénéficiaires en fonction des besoins réels identifiés, nous affirmons notre engagement à être des acteurs de notre propre développement. Dans cette dynamique, nous restons constamment à l'écoute de notre communauté, envers laquelle nous sommes résolument déterminés à offrir notre service, guidés par un profond souci d'humanité, de solidarité.</p>
+            <div className="container relative">
+                <div className="grid md:grid-cols-12 grid-cols-1 pb-8 items-end">
+                    <div className="lg:col-span-8 md:col-span-6 md:text-start text-center">
+                        <h3 className="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold"><span className="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative">Projets</span></h3>
+                        <p className="text-slate-400 max-w-xl">À travers des projets participatifs, co-conçus avec les bénéficiaires en fonction des besoins réels identifiés, nous affirmons notre engagement à être des acteurs de notre propre développement. Dans cette dynamique, nous restons constamment à l'écoute de notre communauté, envers laquelle nous sommes résolument déterminés à offrir notre service, guidés par un profond souci d'humanité, de solidarité.</p>
                     </div>
 
-                    <div class="lg:col-span-4 md:col-span-6 md:text-end hidden md:block">
-                        <a href="/pages-projet" class="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 text-[#1a5fa9] hover:text-[#1a5fa9] after:bg-[#1a5fa9] duration-500 ease-in-out">
-                            Voir plus <i class="uil uil-arrow-right align-middle"></i></a>
+                    <div className="lg:col-span-4 md:col-span-6 md:text-end hidden md:block">
+                        <a href="/pages-projet" className="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 text-[#1a5fa9] hover:text-[#1a5fa9] after:bg-[#1a5fa9] duration-500 ease-in-out">
+                            Voir plus <i className="uil uil-arrow-right align-middle"></i></a>
                     </div>
                 </div>
 
@@ -149,8 +145,8 @@ const Home = () => {
             </div>
 
 
-            <section class=" md:mt-24 mt-16 w-full table relative bg-center bg-no-repeat bg-cover">
-            <div class=" bg-[#eb6b11] py-10 ">
+            <section className=" md:mt-24 mt-16 w-full table relative bg-center bg-no-repeat bg-cover">
+            <div className=" bg-[#eb6b11] py-10 ">
                 <div className="relative grid grid-cols-1 pb-8 text-center z-1">
                     <h3 className="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold text-black dark:text-white">Approuvé par plus de 1K utilisateurs</h3>
 
@@ -183,7 +179,7 @@ const Home = () => {
             
             <div className="container relative md:mt-24 mt-16">
                 <div className="grid grid-cols-1 pb-8 text-center">
-                <h3 class="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold"><span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative">Témoignages</span></h3>
+                <h3 className="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold"><span className="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative">Témoignages</span></h3>
 
                     <p className="text-slate-500 max-w-xl mx-auto">Vous aussi, partagez votre expérience avec nous</p>
                 </div>
@@ -246,7 +242,7 @@ const Home = () => {
             
             <div className="container relative md:mt-24 mt-16">
                 <div className="grid grid-cols-1 pb-8 text-center">
-                <h3 class="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold"><span class="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative">Découvrez nos dernières actualités !</span></h3>
+                <h3 className="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold"><span className="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative">Découvrez nos dernières actualités !</span></h3>
 
                     <p className="text-slate-400 max-w-xl mx-auto">Découvrez les événements récents qui façonnent notre avenir.</p>
                 </div>

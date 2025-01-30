@@ -105,50 +105,50 @@ const Forum = () => {
   return (
     <AppBody>
     <div className=" bg-white">
-      <div class="bg-[#1a5fa9] md:pt-16 pt-10 text-white grid grid-cols-1 text-center">
-          <h3 class="font-bold uppercase leading-normal text-3xl mb-5">Forum</h3>
+      <div className="bg-[#1a5fa9] md:pt-16 pt-10 text-white grid grid-cols-1 text-center">
+          <h3 className="font-bold uppercase leading-normal text-3xl mb-5">Forum</h3>
 
-          <div class="subcribe-form mt-6 pb-10">
-              <form class="relative max-w-xl mx-auto">
-                  <input type="text" id="SearchForumKeyword" name="text" class="pt-4 pe-14 pb-4 ps-6 w-full h-[50px] outline-none text-black dark:text-white rounded-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-800" placeholder="Rechercher ..." />
-                  <button type="submit" class="inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center absolute top-[2px] end-[3px] size-[46px] bg-orange-600 hover:bg-orange-700 border-orange-600 hover:border-orange-700 text-white rounded-full"><i class="uil uil-search"></i></button>
+          <div className="subcribe-form mt-6 pb-10">
+              <form className="relative max-w-xl mx-auto">
+                  <input type="text" id="SearchForumKeyword" name="text" className="pt-4 pe-14 pb-4 ps-6 w-full h-[50px] outline-none text-black dark:text-white rounded-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-800" placeholder="Rechercher ..." />
+                  <button type="submit" className="inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center absolute top-[2px] end-[3px] size-[46px] bg-orange-600 hover:bg-orange-700 border-orange-600 hover:border-orange-700 text-white rounded-full"><i className="uil uil-search"></i></button>
               </form>
           </div>
       </div>
-      <div class="container relative md:mt-16 mt-10 pb-10">
+      <div className="container relative md:mt-16 mt-10 pb-10">
       {!selectedForum && (
       <div className="w-full gap-6">
         <div className="relative">
-            <div class="relative overflow-x-auto block w-full bg-white dark:bg-slate-900 rounded-md border border-gray-200 dark:border-slate-800">
-              <table class="w-full text-start">
-                  <thead class=" bg-orange-600 text-white text-lg border-b border-gray-200 dark:border-slate-800">
+            <div className="relative overflow-x-auto block w-full bg-white dark:bg-slate-900 rounded-md border border-gray-200 dark:border-slate-800">
+              <table className="w-full text-start">
+                  <thead className=" bg-orange-600 text-white text-lg border-b border-gray-200 dark:border-slate-800">
                       <tr>
-                          <th class="py-6 px-4 font-semibold min-w-[300px] text-start">Forum</th>
-                          <th class="text-center py-6 px-4 font-semibold min-w-[40px]">Sujets</th>
-                          <th class="py-6 px-4 font-semibold min-w-[220px] text-start">Créer par</th>
+                          <th className="py-6 px-4 font-semibold min-w-[300px] text-start">Forum</th>
+                          <th className="text-center py-6 px-4 font-semibold min-w-[40px]">Sujets</th>
+                          <th className="py-6 px-4 font-semibold min-w-[220px] text-start">Créer par</th>
                       </tr>
                   </thead>
                   <tbody>
                   {currentForum.map((forum) => (
-                      <tr key={forum.id} class="border-b border-gray-200 dark:border-slate-800">
-                          <th class="p-4">
-                              <div class="flex text-start">
-                                  <i class="uil uil-comment text-indigo-600 text-2xl"></i>
+                      <tr key={forum.id} className="border-b border-gray-200 dark:border-slate-800">
+                          <th className="p-4">
+                              <div className="flex text-start">
+                                  <i className="uil uil-comment text-indigo-600 text-2xl"></i>
 
-                                  <div class="ms-2">
-                                      <button onClick={() => handleSelectForum(forum)} class="bg-transparent hover:text-indigo-600 text-lg">{forum.title}</button>
-                                      <p class="text-slate-400 font-normal">{forum.description}</p>
+                                  <div className="ms-2">
+                                      <button onClick={() => handleSelectForum(forum)} className="bg-transparent hover:text-indigo-600 text-lg">{forum.title}</button>
+                                      <p className="text-slate-400 font-normal">{forum.description}</p>
                                   </div>
                               </div>
                           </th>
-                          <td class="text-center p-4">{forum.discussions_count}</td>
-                          <td class="p-4">
-                              <div class="flex">
-                                  <img src={forum.user_file_path || img} class="h-10 rounded-full shadow dark:shadow-slate-800" alt="" />
+                          <td className="text-center p-4">{forum.discussions_count}</td>
+                          <td className="p-4">
+                              <div className="flex">
+                                  <img src={forum.user_file_path || img} className="h-10 rounded-full shadow dark:shadow-slate-800" alt="" />
 
-                                  <div class="ms-2">
-                                      <a href="#" class=" hover:text-indigo-600 font-semibold text-normal whitespace-nowrap">{forum.user_prenom.split(' ')[0]} {forum.user_nom.split(' ')[0]}</a>
-                                      <p class="text-slate-400 text-sm font-normal whitespace-nowrap"><i class="uil uil-clock"></i> {formatDate(forum.created_at)}</p>
+                                  <div className="ms-2">
+                                      <a href="#" className=" hover:text-indigo-600 font-semibold text-normal whitespace-nowrap">{forum.user_prenom.split(' ')[0]} {forum.user_nom.split(' ')[0]}</a>
+                                      <p className="text-slate-400 text-sm font-normal whitespace-nowrap"><i className="uil uil-clock"></i> {formatDate(forum.created_at)}</p>
                                   </div>
                               </div>
                           </td>

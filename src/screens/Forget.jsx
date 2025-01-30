@@ -13,14 +13,14 @@ const ResetPassword = () => {
 
   return (
     <AppBody>
-        <div class="h-screen md:flex">
-      <div class="relative overflow-hidden md:flex w-2/5 justify-around items-center hidden bg-no-repeat bg-cover bg-center " style={{ backgroundImage: `url(${background})` }}>
+        <div className="h-screen md:flex">
+      <div className="relative overflow-hidden md:flex w-2/5 justify-around items-center hidden bg-no-repeat bg-cover bg-center " style={{ backgroundImage: `url(${background})` }}>
             <div className="pl-10">
-          <h1 class="text-white font-bold text-4xl font-sans">WELT FRIEDENS DIENST e.V</h1>
-          <p class="text-white mt-1">Service mondiale pour la paix</p>
+          <h1 className="text-white font-bold text-4xl font-sans">WELT FRIEDENS DIENST e.V</h1>
+          <p className="text-white mt-1">Service mondiale pour la paix</p>
         </div>
       </div>
-      <div class="flex md:w-3/5 justify-center py-10 items-center bg-white">
+      <div className="flex md:w-3/5 justify-center py-10 items-center bg-white">
         <h1 className="text-2xl font-bold text-gray-700 text-center">
           Réinitialisation de mot de passe
         </h1>

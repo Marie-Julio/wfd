@@ -49,7 +49,7 @@ const Attestation = () => {
 
   const fetchInscriptions = async () => {
     try {
-      const response = await getResource(`/inscriptions?user_id=${decodedToken.id}`);
+      const response = await getResource(`/inscription/${decodedToken.id}`);
       setInscriptions(response.data);
     } catch (error) {
       errorMessage(error);
@@ -57,7 +57,7 @@ const Attestation = () => {
   };
 
   const downloadAttestationQCM = (qcmId) => {
-    const url = `/attestation?id=${2}`;
+    const url = `/attestation?id=${qcmId}`;
     getResource(url, { responseType: "blob" })
       .then((response) => {
         const url = window.URL.createObjectURL(new Blob([response.data], { type: "application/pdf" }));

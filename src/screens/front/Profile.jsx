@@ -35,7 +35,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const auth = useAuth();
-  const apiUrl = import.meta.env.VITE_API_URI_BASE
+  const apiUrl = import.meta.env.VITE_API_URI_BASE;
 
 
   const accessToken = localStorage.getItem("token");
@@ -58,7 +58,7 @@ const Profile = () => {
       setNewForum({ title: '', description: '' });
       onServerSuccess("Forum créer !");
     } catch (error) {
-      onServerError("Erreur. Contactez-nous !2");
+      onServerError("Erreur. Contactez-nous !");
     }
   };
 
@@ -283,7 +283,7 @@ const Profile = () => {
                   onMouseLeave={() => setIsHovered(false)}
                 >
                  <img
-                    src={selectedImage || `${apiUrl}/storage/${info.file_path}` || imgprofil}
+                    src={selectedImage || info.file_path ? `${apiUrl}/storage/${info.file_path}` : imgprofil}
                     alt="Profile"
                     className="w-32 h-32 rounded-full border-4 border-white shadow-lg"
                   />

@@ -9,6 +9,7 @@ import { useNavigate, useParams } from 'react-router';
 import moment from 'moment';
 import { jwtDecode } from 'jwt-decode';
 import useAuth from '../../hooks/useAuth';
+import DOMPurify from 'dompurify';
 
 const CoursDetail = () => {
   const [course, setCourse] = useState(null);
@@ -142,12 +143,11 @@ const unixTimestamp = Math.floor(now / 1000);
   return (
     <AppBody bannerCour={true} course={course}>
       <div className="max-w-6xl mx-auto p-4">
-        <h1 className="text-2xl font-bold mb-6">{course.title}</h1>
         <div className="grid lg:grid-cols-2 gap-6">
           <Card>
             <CardHeader>
-              <CardTitle className="text-xl">{course.title}</CardTitle>
-              <p className="text-sm text-gray-500">{course.description}</p>
+              <CardTitle className="text-xl">Description</CardTitle>
+              <p className="text-sm text-gray-500"><div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(course.description) }} /></p>
             </CardHeader>
             <CardContent>{renderContent()}</CardContent>
           </Card>
@@ -160,9 +160,6 @@ const unixTimestamp = Math.floor(now / 1000);
               <div className="space-y-4">
                 <p>
                   <strong>Durée :</strong> {course.promotion?.duree}
-                </p>
-                <p>
-                  <strong>Niveau :</strong> {course.promotion?.niveau}
                 </p>
                 {course.qcm && (
                   <div className="flex flex-col gap-3">

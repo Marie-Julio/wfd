@@ -8,6 +8,18 @@ import img from "../../assets/images/profil.png";
 import {jwtDecode} from "jwt-decode";
 import DOMPurify from 'dompurify';
 import Icon from '../../components/Icon';
+import { format } from 'date-fns';
+import { fr } from 'date-fns/locale';
+import '../../assets/css/style.css';
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+
+  // Formatage de la date en français avec l'heure en format 24h
+  const formattedDate = format(date, 'd MMMM yyyy \'à\' HH:mm', { locale: fr });
+
+  return formattedDate;
+};
 
 const Discussion = () => {
   const [discussions, setDiscussions] = useState([]);
@@ -18,6 +30,7 @@ const Discussion = () => {
   const [forum, setForum] = useState({});
   const [currentPageDiscussion, setCurrentPageDiscussion] = useState(1);
   const discussionPerPage = 6;
+  const apiUrl = import.meta.env.VITE_API_URI_BASE;
 
   const [editorInstance, setEditorInstance] = useState(null); // Store the editor instance
 
@@ -121,37 +134,46 @@ const Discussion = () => {
   return (
     <AppBody>
     <div className=" bg-white">
-      <div class="bg-[#1a5fa9] md:pt-16 pt-10 text-white grid grid-cols-1 text-center">
-          <h3 class="font-bold uppercase leading-normal text-3xl mb-5">{forum.title}</h3>
+      <div className="bg-[#1a5fa9] md:pt-16 pt-10 text-white grid grid-cols-1 text-center">
+          <h3 className="font-bold uppercase leading-normal text-3xl mb-5">{forum.title}</h3>
           
-          <div class="subcribe-form mt-6 pb-10 px-5">
-              <form class="relative max-w-xl mx-auto">
-                  <input type="text" id="SearchForumKeyword" name="text" class="pt-4 pe-14 pb-4 ps-6 w-full h-[50px] outline-none text-black dark:text-white rounded-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-800" placeholder="Rechercher ..." />
-                  <button type="submit" class="inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center absolute top-[2px] end-[3px] size-[46px] bg-orange-600 hover:bg-orange-700 border-orange-600 hover:border-orange-700 text-white rounded-full"><i class="uil uil-search"></i></button>
+          <div className="subcribe-form mt-6 pb-10 px-5">
+              <form className="relative max-w-xl mx-auto">
+                  <input type="text" id="SearchForumKeyword" name="text" className="pt-4 pe-14 pb-4 ps-6 w-full h-[50px] outline-none text-black dark:text-white rounded-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-800" placeholder="Rechercher ..." />
+                  <button type="submit" className="inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center absolute top-[2px] end-[3px] size-[46px] bg-orange-600 hover:bg-orange-700 border-orange-600 hover:border-orange-700 text-white rounded-full"><i className="uil uil-search"></i></button>
               </form>
           </div>
       </div>
-      <div class="container relative md:mt-16 mt-10 pb-10">
+      <div className="container relative md:mt-16 mt-10 pb-10">
         <div className="w-full gap-6">
           <div className="relative">
-              <div class="relative block w-full bg-white dark:bg-slate-900 rounded-md ">
+              <div className="relative block w-full bg-white dark:bg-slate-900 rounded-md ">
                     {currentDiscussion.map((discussion) => (
                       <div key={discussion.id}
                         className="shadow dark:shadow-gray-800 p-6 mt-5">
-                        <div class="flex pb-6 border-b border-gray-100 dark:border-gray-800">
+                        <div className="flex pb-6 border-b border-gray-100 dark:border-gray-800">
     
-                          <div class="w-1/6 md:w-1/12  block justify-center items-start"> 
-                              <img src={discussion.user.file_path || img} class="w-14 h-14 rounded-full shadow dark:shadow-gray-800" alt="utilisateur" />
+                          <div className="example-1 w-1/6 md:w-1/12  block justify-center items-start"> 
+                                <div className="flex items-center text-center mx-auto">
+                                  <img src={discussion.user.file_path ? `${apiUrl}/storage/${discussion.user.file_path}` : img} className="w-14 h-14 rounded-full shadow dark:shadow-gray-800" alt="utilisateur" />
+                                </div>
+                                <div className="date mt-5">
+                                    <span className="day">{formatDate(discussion.created_at).split(' ')[0]}</span>
+                                    <span className="month">{formatDate(discussion.created_at).split(' ')[1]}</span>
+                                    <span className="year">{formatDate(discussion.created_at).split(' ')[2]}</span>
+                                    <span className="mt-2 text-sm font-semibold year">{formatDate(discussion.created_at).split(' ')[4]}</span>
+                                </div>
                           </div>
-                          <div class="w-5/6 md:w-11/12  pl-4"> 
-                              <a href="#" class="text-lg hover:text-indigo-600 duration-500 ease-in-out">{discussion.user.prenom} {discussion.user.nom}</a>
-                              <p class="text-slate-400 uppercase pb-2">{discussion.user.role}</p>
-                              <p class="text-indigo-600 font-semibold">{discussion.title}</p>
-                              <p class="text-slate-500"><div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(discussion.content) }} /></p>
+                          <div className="w-5/6 md:w-11/12  pl-4"> 
+                              <a href="#" className="text-lg hover:text-indigo-600 duration-500 ease-in-out">{discussion.user.prenom} {discussion.user.nom}</a>
+                              
+                              <p className="text-slate-400 uppercase pb-2">{discussion.user.role}</p>
+                              <p className="text-indigo-600 font-semibold">{discussion.title}</p>
+                              <p className="text-slate-500"><div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(discussion.content) }} /></p>
                           </div>
                       </div>
 
-                            <div class="mt-6">
+                            <div className="mt-6">
 
                             <div className="flex justify-between items-center mt-3">
                         <button

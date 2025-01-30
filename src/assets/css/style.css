@@ -1,0 +1,28 @@
+
+.example-1 .date {
+    background-color: green;
+    color: #fff;
+    padding: 0.8em;
+  }
+  .separa{
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+  }
+  .example-1 .date span {
+    display: block;
+    text-align: center;
+  }
+  
+  .example-1 .date .day {
+    font-weight: 700;
+    font-size: 24px;
+    text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.18);
+  }
+  
+  .example-1 .date .month {
+    text-transform: uppercase;
+  }
+  
+  .example-1 .date .month, .example-1 .date .year {
+    font-size: 12px;
+  }

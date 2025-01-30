@@ -77,17 +77,17 @@ const Register = () => {
       <div className="h-screen md:flex">
     <div className="relative overflow-hidden md:flex w-2/5 justify-around items-center hidden bg-no-repeat bg-cover bg-center " style={{ backgroundImage: `url(${background})` }}>
       <div className="pl-10">
-        <a href="/" className="text-white"><h1 class="hover:text-[#1a5fa9] font-bold text-3xl transition-all duration-500 hover:scale-105">WELT FRIEDENS DIENST e.V</h1></a>
+        <a href="/" className="text-white"><h1 className="hover:text-[#1a5fa9] font-bold text-3xl transition-all duration-500 hover:scale-105">WELT FRIEDENS DIENST e.V</h1></a>
         <p className="text-white mt-1">Service mondiale pour la paix</p>
       </div>
     </div>
     <div className="md:overflow-y-auto mx-auto md:flex md:w-3/5 md:px-5 md:p-0 justify-center py-10 items-center bg-white">
       <form className="space-y-4 m-auto " onSubmit={formik.handleSubmit}>
         
-        <div class="md:hidden bg-no-repeat bg-cover bg-center " style={{ backgroundImage: `url(${background})` }}>
+        <div className="md:hidden bg-no-repeat bg-cover bg-center " style={{ backgroundImage: `url(${background})` }}>
             <div className="px-5 py-14">
-                <a href="/" className="text-white"><h1 class="hover:text-[#1a5fa9] font-bold text-2xl transition-all duration-500 hover:scale-105">WELT FRIEDENS DIENST e.V</h1></a>
-                <p class="text-white mt-1">Service mondiale pour la paix</p>
+                <a href="/" className="text-white"><h1 className="hover:text-[#1a5fa9] font-bold text-2xl transition-all duration-500 hover:scale-105">WELT FRIEDENS DIENST e.V</h1></a>
+                <p className="text-white mt-1">Service mondiale pour la paix</p>
             </div>
         </div>
         <div className="px-5 md:px-0">

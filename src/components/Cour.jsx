@@ -47,42 +47,42 @@ const Cour = ({courses = []}) => {
             const isExpired = course.date_fin > formattedToday;
           return (
             
-            <div key={course.id} class="justify-center">
-            <div class="relative z-2 duration-500 ">
-                <div class="relative bg-white dark:bg-slate-900 shadow dark:shadow-gray-800 rounded-md overflow-hidden">
-                    <div class="grid lg:grid-cols-12 grid-cols-1">
-                        <div class="lg:col-span-4 order-1 lg:order-2 bg-indigo-600 hover:bg-orange-600 transform transition-all duration-500 hover:scale-110">
-                            <div class="p-[30px] lg:text-start text-center">
+            <div key={course.id} className="justify-center">
+            <div className="relative z-2 duration-500 ">
+                <div className="relative bg-white dark:bg-slate-900 shadow dark:shadow-gray-800 rounded-md overflow-hidden">
+                    <div className="grid lg:grid-cols-12 grid-cols-1">
+                        <div className="lg:col-span-4 order-1 lg:order-2 bg-indigo-600 hover:bg-orange-600 transform transition-all duration-500 hover:scale-110">
+                            <div className="p-[30px] lg:text-start text-center">
                                 <span className="text-1xl font-medium text-gray-200">A partir du</span>
-                                <h4 class="text-2xl font-semibold text-gray-200 pb-5"> {dateToFr(course.date_debut)}</h4>
+                                <h4 className="text-2xl font-semibold text-gray-200 pb-5"> {dateToFr(course.date_debut)}</h4>
                                 <div className="flex items-center space-x-4 text-gray-200">  
                                   <div className=" whitespace-nowrap flex items-center">
                                     <Clock className="mr-1" />
                                     {course.duree}
                                   </div>
                                   <div className=" whitespace-nowrap flex items-center">
-                                  <i class="text-lg uil uil-book-open pr-2"></i>
+                                  <i className="text-lg uil uil-book-open pr-2"></i>
                                   {course.course_modules} Cours
                                   </div>
                                 </div>
-                                <div class="mt-6">
+                                <div className="mt-6">
                                 {course.statut == "active" &&  isExpired && 
-                                  <button onClick={() => {setSelectedCourseId(course.id); setDelModal(true);}} class="py-2 px-5 inline-block tracking-wide border align-middle duration-500 text-base text-center bg-green-400 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md">
+                                  <button onClick={() => {setSelectedCourseId(course.id); setDelModal(true);}} className="py-2 px-5 inline-block tracking-wide border align-middle duration-500 text-base text-center bg-green-400 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md">
                                   Inscription
                                   </button>}
                                 </div>
                             </div>
                         </div>
 
-                        <div class="lg:col-span-8 order-2 lg:order-1">
-                            <div class="grid grid-cols-1 p-[30px]">
-                                <div class="group flex duration-500">
-                                    <div class="transform transition-all duration-500 hover:scale-110 flex align-middle justify-center items-center size-10 mt-1 bg-indigo-600/5 group-hover:bg-indigo-600 group-hover:text-white text-indigo-600 rounded-full text-2xl shadow-sm dark:shadow-gray-800">
-                                        <i class="uil uil-award"></i>
+                        <div className="lg:col-span-8 order-2 lg:order-1">
+                            <div className="grid grid-cols-1 p-[30px]">
+                                <div className="group flex duration-500">
+                                    <div className="transform transition-all duration-500 hover:scale-110 flex align-middle justify-center items-center size-10 mt-1 bg-indigo-600/5 group-hover:bg-indigo-600 group-hover:text-white text-indigo-600 rounded-full text-2xl shadow-sm dark:shadow-gray-800">
+                                        <i className="uil uil-award"></i>
                                     </div>
-                                    <div class="flex-1 ms-4">
-                                        <h4 class="text-indigo-600 mb-0 text-2xl font-semibold">{course.nom}</h4>
-                                        <p class="text-slate-400  mt-3"><div dangerouslySetInnerHTML={{
+                                    <div className="flex-1 ms-4">
+                                        <h4 className="text-indigo-600 mb-0 text-2xl font-semibold">{course.nom}</h4>
+                                        <p className="text-slate-400  mt-3"><div dangerouslySetInnerHTML={{
                                           __html: truncateStringAdvanced(course.description, 200),
                                         }}
                                         className="article-content"
@@ -109,11 +109,11 @@ const Cour = ({courses = []}) => {
             onClick={() => {
               saveData(selectedCourseId);
               setDelModal(false);
-            }}><i class="text-lg uil uil-check"/> Oui, lancer
+            }}><i className="text-lg uil uil-check"/> Oui, lancer
           </button>
           <button 
             className="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 text-white rounded-md" 
-            onClick={() => setDelModal(false)}><i class="text-lg uil uil-times"/> Non, annuler
+            onClick={() => setDelModal(false)}><i className="text-lg uil uil-times"/> Non, annuler
           </button>
         </div>
       </div>
