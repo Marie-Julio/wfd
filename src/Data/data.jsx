@@ -190,7 +190,7 @@ export  const information = [
     { code: "BY", libelle: "Belarus" },
     { code: "BE", libelle: "Belgium" },
     { code: "BZ", libelle: "Belize" },
-    { code: "BJ", libelle: "Benin" },
+    { code: "BJ", libelle: "Bénin" },
     { code: "BM", libelle: "Bermuda" },
     { code: "BT", libelle: "Bhutan" },
     { code: "BO", libelle: "Bolivia" },

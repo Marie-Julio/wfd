@@ -18,7 +18,9 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
+         <AuthProvider>
           <App />
+        </AuthProvider>
       </PersistGate>
     </Provider>
   </StrictMode>,

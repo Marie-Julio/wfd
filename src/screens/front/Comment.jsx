@@ -142,96 +142,72 @@ const Comment = () => {
     return paginationButtons;
   };
 
+  useEffect(() => {
+    feather.replace();
+  }, []);
+
   return (
-    <AppBody className="bg-gray-200">
-      <section className="max-w-7xl mx-auto p-4 bg-gray-200">
-        <Button onClick={() => navigate(-1)}>← Retour</Button>
-        <h1 className="text-3xl font-bold my-6">{newDiscussion.title}</h1>
-        <p>{newDiscussion.content}</p>
+    <AppBody>
+      <div className=" bg-white">
+        <div class="bg-[#1a5fa9] md:pt-16 pt-10 text-white grid grid-cols-1 text-center">
+            <h3 class="font-bold uppercase leading-normal text-3xl mb-5">Commentaire</h3>
+            
+            <div class="subcribe-form mt-6 pb-10 px-5">
+                <form class="relative max-w-xl mx-auto">
+                    <input type="text" id="SearchForumKeyword" name="text" class="pt-4 pe-14 pb-4 ps-6 w-full h-[50px] outline-none text-black dark:text-white rounded-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-800" placeholder="Rechercher ..." />
+                    <button type="submit" class="inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center absolute top-[2px] end-[3px] size-[46px] bg-orange-600 hover:bg-orange-700 border-orange-600 hover:border-orange-700 text-white rounded-full"><i class="uil uil-search"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="container relative md:mt-16 mt-10 pb-10">
+          <div className="mt-6">
+              <div class="p-6 rounded-md shadow dark:shadow-gray-800 mt-8">
+                  <h5 class="text-lg font-semibold">Commentaires :</h5>
 
-        <div className="mt-6">
-          <h2 className="text-2xl font-bold mb-4">Commentaires</h2>
-          
-          <div class="rounded shadow dark:shadow-slate-800">
-              <div class="p-6 bg-[#eb6b11] text-white dark:bg-slate-50 flex items-center justify-between">
-                  <span class="text-lg font-semibold">Auteur</span>
-                  <span class="text-lg font-semibold">Date</span>
-              </div>
+                  {currentComments.map((comment) => (
+                  <div key={comment.id} class="mt-8">
+                      <div class="flex items-center justify-between">
+                          <div class="flex items-center">
+                              <img src="assets/images/client/01.jpg" class="size-11 rounded-full shadow" alt="" />
 
-                        <div class="p-6 rounded-md shadow dark:shadow-gray-800 mt-8">
-                            <h5 class="text-lg font-semibold">Comments:</h5>
+                              <div class="ms-3 flex-1">
+                                  <a href="#" class="text-lg font-semibold hover:text-indigo-600 duration-500">{comment.user.prenom} {comment.user.nom}</a>
+                                  <p class="text-sm text-slate-400">6th May 2022 at 01:25 pm</p>
+                              </div>
+                          </div>
 
-                            <div class="mt-8">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center">
-                                        <img src="assets/images/client/01.jpg" class="size-11 rounded-full shadow" alt="" />
-    
-                                        <div class="ms-3 flex-1">
-                                            <a href="#" class="text-lg font-semibold hover:text-indigo-600 duration-500">Calvin Carlo</a>
-                                            <p class="text-sm text-slate-400">6th May 2022 at 01:25 pm</p>
-                                        </div>
+                          <a href="#" class="text-slate-400 hover:text-indigo-600 duration-500 ms-5"><i class="mdi mdi-reply"></i> Reply</a>
+                      </div>
+                      <div class="p-4 bg-gray-50 dark:bg-slate-800 rounded-md shadow dark:shadow-gray-800 mt-6">
+                          <p class="text-slate-400 italic"><div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(comment.content) }} /></p>
+                      </div>
+                  </div>))}
+                  <div className="flex justify-center items-center mt-4 space-x-2">
+                    {renderPagination()}
+                  </div>
+
+                  </div>
+                  <div class="p-6 rounded-md shadow dark:shadow-gray-800 mt-8">
+                    <h5 class="text-lg font-semibold">Laisser un commentaire :</h5>
+
+                    <form class="mt-8">
+                        <div class="grid grid-cols-1">
+                            <div class="mb-5">
+                                <div class="text-start">
+                                    <label for="comments" class="font-semibold text-gray-500">Votre commentaire :</label>
+                                    <div class="form-icon relative mt-2">
+                                        <i data-feather="message-circle" class="size-4 absolute top-3 start-4"></i>
+                                        <textarea name="comments" id="comments" value={newComment} onChange={(e) => setNewComment(e.target.value)} class="form-input ps-11 w-full py-2 px-3 h-28 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0" placeholder="Message :"></textarea>
                                     </div>
-
-                                    <a href="#" class="text-slate-400 hover:text-indigo-600 duration-500 ms-5"><i class="mdi mdi-reply"></i> Reply</a>
-                                </div>
-                                <div class="p-4 bg-gray-50 dark:bg-slate-800 rounded-md shadow dark:shadow-gray-800 mt-6">
-                                    <p class="text-slate-400 italic">" There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour "</p>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="p-6 rounded-md shadow dark:shadow-gray-800 mt-8">
-                            <h5 class="text-lg font-semibold">Leave A Comment:</h5>
-
-                            <form class="mt-8">
-                                <div class="grid grid-cols-1">
-                                    <div class="mb-5">
-                                        <div class="text-start">
-                                            <label for="comments" class="font-semibold">Your Comment:</label>
-                                            <div class="form-icon relative mt-2">
-                                                <i data-feather="message-circle" class="size-4 absolute top-3 start-4"></i>
-                                                <textarea name="comments" id="comments" class="form-input ps-11 w-full py-2 px-3 h-28 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0" placeholder="Message :"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" id="submit" name="send" class="py-2 px-5 inline-block tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md w-full">Send Message</button>
-                            </form>
-                        </div>
-                    </div>
-              {currentComments.map((comment) => (
-                <div key={comment.id} class=" bg-white p-6 border-b border-gray-100 dark:border-gray-800">
-                  <div class="sm:flex items-center justify-between">
-                      <div class="flex items-center">
-                          <img src={comment.user.file_path} class="h-10 rounded-full shadow dark:shadow-slate-800" alt="" />
-
-                          <div class="ms-3">
-                              <a href="#" class="hover:text-indigo-600 font-semibold">{`${comment.user.prenom} ${comment.user.nom}`}</a>
-                              <p class="text-slate-400 text-sm font-normal"><i class="uil uil-user"></i> Auteur</p>
-                          </div>
-                      </div>
-                      <p class="text-slate-400 text-sm font-normal mt-3 sm:mt-0"><i class="uil uil-clock"></i> {comment.created_at}</p>
-                  </div>
-
-                  <p class="text-slate-400 mt-4">{comment.content}</p>
-              </div>))}
-
+                        <button type="submit" onClick={addComment} id="submit" name="send" class="py-2 px-5 inline-block tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md w-full">Envoyer le message</button>
+                    </form>
+                </div>
+              </div>
           </div>
-        <div className="flex justify-center items-center mt-4 space-x-2">
-          {renderPagination()}
         </div>
-
-        <div className="mt-6">
-          <h2 className="text-xl font-bold mb-4">Ajouter un commentaire</h2>
-          <textarea
-            placeholder="Votre commentaire..."
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            className="w-full mb-4 p-2 border rounded"
-          />
-          <Button onClick={addComment}>Envoyer</Button>
-        </div>
-      </section>
     </AppBody>
   );
 };
