@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Link, redirect, useNavigate } from "react-router";
+import React, { useEffect, useState } from "react";
+import { Link, redirect, useNavigate, useParams } from "react-router";
+import { jwtDecode } from "jwt-decode";
 import background from "../assets/slide-5.jpg";
 import { Input } from "../components/admin/common/Input";
 import { useFormik } from "formik";
@@ -13,13 +14,13 @@ import logo2 from "../assets/wfdguinee.png";
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const accessToken = localStorage.getItem("token");
       useEffect(() => {
           if (accessToken) {
               navigate("/");
             }
-      }, [])
+      }, [accessToken])
 
   const saveData = (data) => {
     postResource("register", data)

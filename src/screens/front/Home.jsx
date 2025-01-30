@@ -119,7 +119,8 @@ const Home = () => {
                             <p className="text-slate-600 max-w-xl">Découvrez des formations inspirantes et des outils pratiques pour devenir un <strong> acteur clé </strong> de la paix et du développement durable.</p>
                         
                             <div className="mt-6">
-                                <a href="/register" className="transform transition-all hover:scale-105 py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-[#eb6b11] hover:bg-indigo-700 border-[#eb6b11] hover:border-indigo-700 text-white rounded-md mt-2"><i className="uil uil-airplay"></i> Commencer</a>
+                                <a href="/login" className="transform transition-all hover:scale-105 py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-[#eb6b11] hover:bg-indigo-700 border-[#eb6b11] hover:border-indigo-700 text-white rounded-md mt-2">
+                                <i className="uil uil-airplay"></i> Commencer</a>
                             </div>
                         </div>
                     </div>
