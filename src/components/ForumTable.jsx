@@ -1,17 +1,28 @@
 import React, { useState } from "react";
 import { removeResource } from "../services/api";
 import Icon from "./admin/common/Icon";
+import { format } from 'date-fns';
+import { fr } from 'date-fns/locale';
 
-const GalleryTable = ({ galleries = [], reloadFunction}) => {
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+
+  // Formatage de la date en français avec l'heure en format 24h
+  const formattedDate = format(date, 'd MMMM yyyy \'à\' HH:mm', { locale: fr });
+
+  return formattedDate;
+};
+
+const ForumTable = ({ forums = [], reloadFunction}) => {
   const [loading, setLoading] = useState(false);
   const apiUrl = import.meta.env.VITE_API_URI_BASE;
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
   // Pagination logic
-  const totalPages = Math.ceil(galleries.length / itemsPerPage);
+  const totalPages = Math.ceil(forums.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = galleries.slice(startIndex, startIndex + itemsPerPage);
+  const currentItems = forums.slice(startIndex, startIndex + itemsPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const getVisiblePages = () => {
@@ -31,7 +42,7 @@ const GalleryTable = ({ galleries = [], reloadFunction}) => {
     
     const arrayId = [id]
     try {
-      await removeResource("galleries" , arrayId); // Appelle une fonction passée en prop pour supprimer
+      await removeResource("forums" , arrayId); // Appelle une fonction passée en prop pour supprimer
       setLoading(false);
       reloadFunction()
     } catch (error) {
@@ -50,26 +61,18 @@ const GalleryTable = ({ galleries = [], reloadFunction}) => {
       <table className=" bg-slate-100 w-full text-start">
         <thead>
           <tr>
-            <th className="px-4 py-5 text-start">Image</th>
-            <th className="px-4 py-5 text-start">Information</th>
+            <th className="px-4 py-5 text-start">Titre</th>
             <th className="px-4 py-5 text-end">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {currentItems.map((gallery) => (
-            <tr key={gallery.id} className="border-t-2 border-white dark:border-gray-700">
-              <td className="p-4">
-                <img
-                  src={`${apiUrl}/storage/${gallery.image}`}
-                  alt={gallery.title}
-                  className="h-15 object-cover rounded-md"
-                />
-              </td>
-              <td className="p-4 text-start text-md"><span className=" font-semibold text-[#1a5fa9]">{gallery.title}</span><br />{gallery.description}</td>
+          {currentItems.map((forum) => (
+            <tr key={forum.id} className="border-t-2 border-white dark:border-gray-700">
+              <td className="p-4 text-start text-md"><span className=" font-semibold text-[#1a5fa9]">{forum.title}</span><br />Créer le {formatDate(forum.created_at)}</td>
               <td className="p-4 text-end">
                 <button
                   className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700 transition"
-                  onClick={() => handleDelete(gallery.id)}
+                  onClick={() => handleDelete(forum.id)}
                   disabled={loading}
                 >
                   {loading ? "Suppression..." : <Icon name="bx-trash" />}
@@ -125,4 +128,4 @@ const GalleryTable = ({ galleries = [], reloadFunction}) => {
   );
 };
 
-export default GalleryTable;
+export default ForumTable;

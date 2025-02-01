@@ -36,7 +36,7 @@ const LoginScreen = () => {
             onServerSuccess("Connexion réussie")
             if (token.role === "participant")
                 setTimeout(() => navigate("/"), 100)
-            else setTimeout(() => navigate("/admin/dashboard"), 100)
+            else setTimeout(() => navigate("/profil"), 100)
         }).catch(e => {
             setLoading(false)
             onServerError("Identifiants fournies sont invalides.")

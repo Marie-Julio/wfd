@@ -15,7 +15,7 @@ const Nav = () => {
     { label: "Accueil", href: "/" },
     { label: "Promotions", href: "/promotion"  },
     { label: "Cours", href: "/cours", requiresAuth: true  },
-    { label: "Informations", href: "/pages-infos" },
+    /*{ label: "Informations", href: "/pages-infos" },*/
     { label: "Forum", href: "/pages-forum"  },
     { label: "Nos Projets", href: "/pages-projet" },
     { label: "Enseignants", href: "/members" },

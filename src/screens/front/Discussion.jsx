@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { getResource, postResource } from '../../services/api';
-import { errorMessage } from '../../services/Helper';
 import { Button } from '../../components/Button';
 import AppBody from '../../components/AppBody';
 import img from "../../assets/images/profil.png";
+import { errorMessage, onServerError, onServerSuccess, onServerWarning } from "../../services/Helper";
 import {jwtDecode} from "jwt-decode";
 import DOMPurify from 'dompurify';
 import Icon from '../../components/Icon';
@@ -88,11 +88,18 @@ const Discussion = () => {
 
   const createDiscussion = async () => {
     const discussionData = { content: newDiscussion.content , forum_id: id, user_id: decodedToken.id, title: newDiscussion.title };
-    console.log(discussionData);
+    
+    try {
     const response = await postResource('/discussions', discussionData);
     if (response.data) {
-      setDiscussions([response.data, ...discussions]);
-      setNewDiscussion({ content: '' });
+      const discussionsResponse = await getResource(`/discussions?forum_id=${id}`);
+      setDiscussions(discussionsResponse.data);
+      setNewDiscussion({ content: '', title: ''});
+      onServerSuccess("Posté avec succès !");
+    } else{
+      onServerWarning("Veuillez remplir tous les champs !");
+    }} catch (err) {
+      onServerWarning("Veuillez remplir tous les champs !");
     }
   };
 
@@ -259,9 +266,10 @@ const Discussion = () => {
                 onChange={(e) => setNewDiscussion({ ...newDiscussion, title: e.target.value })}
                 className="w-full mb-4 p-2 border rounded"
               />
-              <label className=" font-semibold mb-5">Contenu</label>
-              <textarea id="editor" name="content" className="w-full p-2 border border-gray-300 rounded" rows="3"></textarea>
-              <button onClick={createDiscussion} className="block w-full bg-orange-500 mt-4 py-2 text-white font-semibold mb-2 hover:text-gray-200 hover:bg-orange-700 focus:outline-none transition-all">Poster</button>
+              <label className=" font-semibold mb-5">Contenu <span className="text-red-500">*</span></label>
+              <textarea required id="editor" name="content" className="w-full p-2 border border-gray-300 rounded" rows="3"></textarea>
+              <button onClick={createDiscussion} className="block w-full bg-orange-500 mt-4 py-2 text-white font-semibold mb-2 
+              hover:text-gray-200 hover:bg-orange-700 focus:outline-none transition-all">Poster</button>
             </div>
             </div>
           </div>

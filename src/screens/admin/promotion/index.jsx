@@ -16,7 +16,10 @@ const PromotionAdmin = () => {
     const [data, setData] = useState();
 
     const columns = [
-        { accessor: 'nom', Header: 'Nom de promotion' },
+      { accessor: 'nom', Header: 'Nom de promotion' },
+      { accessor: 'date_debut', Header: 'Date début' },
+      { accessor: 'date_fin', Header: 'Date fin' },
+      { accessor: 'duree', Header: 'Durée' },
       ];
 
       const _init_ = () => {

@@ -6,7 +6,7 @@ import FormBody from "../../../components/admin/common/FormBody";
 import { Input } from "../../../components/admin/common/Input";
 import Button from "../../../components/admin/common/Button";
 import { getResource, patchResource, postFile, postResource } from "../../../services/api";
-import { errorMessage, onServerSuccess } from "../../../services/Helper";
+import { errorMessage, onServerWarning, onServerSuccess } from "../../../services/Helper";
 import TextArea from "../../../components/admin/common/TextArea";
 import { useNavigate, useParams } from "react-router";
 import Select from "../../../components/admin/common/Select";
@@ -64,7 +64,6 @@ const FormProjet = () => {
                 activite_en_cours: res.data.activite_en_cours,
                 date_demarrage: res.data.date_demarrage,
                 cout: res.data.cout,
-                auteur: res.data.auteur,
                 media: res.data.media
             })
         })
@@ -75,13 +74,12 @@ const FormProjet = () => {
         const newData = { ...values, description: datas.content, inscription_id: values.inscription_id.id, user_id: values.user_id.id  };
         console.log(newData)
         patchResource("/projets", id, newData).then((res) => {
-            // console.log(res)
             onServerSuccess("Mise à jour effectuée avec succès.")
             formik.resetForm()
             setDatas({content: ""})
             setTimeout(() => navigate(`/admin/projets`), 50)
         }).catch(e => {
-            errorMessage(e)
+            onServerWarning("Tous les champs doivent être remplir");
         })
     }
 
@@ -92,7 +90,7 @@ const FormProjet = () => {
         postFile("/projets", newData).then((res) => {
             onServerSuccess("Création effectuée avec succès.")
             setDatas({content: ""})
-        }).catch((e) => errorMessage(e))
+        }).catch((e) => onServerWarning("Tous les champs doivent être remplir"))
     }
 
 
@@ -109,8 +107,7 @@ const FormProjet = () => {
             date_demarrage: "",
             cout: 0,
             file: "",
-            media: "",
-            auteur: ""
+            media: ""
         },
         validationSchema: Yup.object({
             // inscription_id: Yup.string().required('Champ requis'),
@@ -140,13 +137,15 @@ const FormProjet = () => {
             <form className="flex flex-col w-full items-center" onSubmit={formik.handleSubmit}>
                 <Input type="text" name="titre" value={formik.values.titre} label="Entrez le titre" onChange={formik.handleChange}/>
                 <Input type="text" name="structure" value={formik.values.structure} label="La structure" onChange={formik.handleChange}/>
-                <Input type="text" name="auteur" value={formik.values.auteur} label="Le nom de l'auteur" onChange={formik.handleChange}/>
                 <Input type="text" name="secteur" value={formik.values.secteur} label="Le secteur" onChange={formik.handleChange}/>
                 <Input type="date" name="date_demarrage" value={formik.values.date_demarrage} label="La date de demarrage" onChange={formik.handleChange}/>
                 <Input type="number" name="cout" value={formik.values.cout} label="Le cout" onChange={formik.handleChange}/>
-                <Input type="file" name="media" label="L'image" onChange={(event) => {
+                
+                <div className="w-full mb-2 flex flex-col">
+                      <label className="mb-2 text-gray-600">L'image *</label>
+                      <input  type="file" name="media" onChange={(event) => {
             formik.setFieldValue("media", event.target.files[0]); // Enregistre le fichier dans Formik
-          }}/>
+          }}/></div>
                 <Select name="activite_en_cours" label="Projet en cours" value={formik.values.activite_en_cours} onChange={formik.handleChange} disabled={false}>
                     <option>Choisir l'activite en cours</option>
                     {

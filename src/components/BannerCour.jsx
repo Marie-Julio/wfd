@@ -11,46 +11,52 @@ const BannerCour = ({course}) => {
           <h1 className="mt-6 text-3xl font-bold">{course.title}</h1>
           {course.certifield === 1 ? 
           <div className="items-center pt-5">
-            <span className="bg-red-500 text-white py-1 px-3 rounded-full text-lg">Certifié</span>
+            <span className="bg-red-600 text-white py-1 px-3 rounded-full text-lg">Certifié</span> par<span className="pt-2 font-semibold"> {course.user.prenom} {course.user.nom}</span>
           </div>
-           : null }
-          </div>
-
-          <div className="flex mb-10 space-x-16 justify-center items-start">
-            {/* Colonne 1 */}
-            <div className="flex flex-col items-center space-y-2">
-                <Landmark color="#ffffff" strokeWidth={3} size={24} />
-                <span className="whitespace-nowrap text-white text-center">
-                Promotion: {course.promotion && course.promotion.nom}
-                </span>
-            </div>
-
-            {/* Colonne 2 */}
-            <div className="flex flex-col items-center space-y-2">
-                <Clock3 color="#ffffff" strokeWidth={3} size={24} />
-                <span className="whitespace-nowrap text-white text-center">
-                Moyenne minimum: {course.min_score}
-                </span>
-            </div>
-
-            {/* Colonne 3 */}
-            <div className="flex flex-col items-center space-y-2">
-                <Languages color="#ffffff" strokeWidth={3} size={24} />
-                <span className="whitespace-nowrap text-white text-center">
-                Duree: {course.promotion.duree}
-                </span>
-            </div>
-
-            {/* Colonne 4 */}
-            <div className="flex flex-col items-center space-y-2">
-                <Languages color="#ffffff" strokeWidth={3} size={24} />
-                <span className="whitespace-nowrap text-white text-center">
-                Langue: Français
-                </span>
-            </div>
+           : <div className="items-center pt-5">
+           par<span className="pt-2 font-semibold"> {course.user.prenom} {course.user.nom}</span>
+         </div> }
+           
         </div>
+        <div className="container relative ">
+        <div className="">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-start">
+              
+              <div className="flex flex-col items-center space-y-2 pb-10">
+                  <Landmark color="red" strokeWidth={3} size={24} />
+                  <span className="whitespace-nowrap text-white text-center">
+                  {course.promotion && course.promotion.nom}
+                  </span>
+              </div>
 
-      </div>
+              {/* Colonne 2 */}
+              <div className="flex flex-col items-center space-y-2 pb-10">
+                  <Clock3 color="#ffffff" strokeWidth={3} size={24} />
+                  <span className="whitespace-nowrap text-white text-center">
+                  Score min : {course.min_score}%
+                  </span>
+              </div>
+
+              {/* Colonne 3 */}
+              <div className="flex flex-col items-center space-y-2 pb-10">
+                  <Clock3 color="#ffffff" strokeWidth={3} size={24} />
+                  <span className="whitespace-nowrap text-white text-center">
+                  Durée : {course.duree} heure(s)
+                  </span>
+              </div>
+
+              {/* Colonne 4 */}
+              <div className="flex flex-col items-center space-y-2 pb-10">
+                  <Languages color="#ffffff" strokeWidth={3} size={24} />
+                  <span className="whitespace-nowrap text-white text-center">
+                  Langue : Français
+                  </span>
+              </div>
+          </div>
+        </div>
+          
+        </div>
+    </div>
   );
 };
 

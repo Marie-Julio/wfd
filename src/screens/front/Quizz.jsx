@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router';
 import { getResource, postResource } from '../../services/api';
 import {jwtDecode} from 'jwt-decode';
 import AppBody from '../../components/AppBody';
+import bgquizz from "../../assets/quizz.png";
 
 const QuizInterface = () => {
   const [quiz, setQuiz] = useState(null);
@@ -116,19 +117,38 @@ const QuizInterface = () => {
 
   return (
     <AppBody>
-      <div className="max-w-9xl mx-auto p-4">
+      <div className="max-w-9xl mx-auto ">
         {!hasStarted ? (
-          <Card className="text-center">
-            <CardHeader>
-              <CardTitle>{quiz.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-gray-600">{quiz.description}</p>
-              <Button size="lg" onClick={() => setHasStarted(true)} className="bg-[#1a5fa9] text-white">
-                Démarrer le test
-              </Button>
-            </CardContent>
-          </Card>
+          <section class="relative table w-full py-16 lg:py-20 
+        
+          before:content-[''] before:absolute  xl:before:start-[50rem] lg:before:start-[30rem] md:before:start-[15rem] before:start-[0rem] lg:before:bottom-[10rem] md:before:bottom-[12rem] before:bottom-[14rem] before:w-[60rem] before:h-[30rem] before:rounded-[18rem] ltr:before:rotate-[135deg] rtl:before:rotate-[45deg] before:bg-green-600/5 dark:before:bg-green-600/10 overflow-hidden">
+              <div class="absolute inset-0 bg-green-600 opacity-5"></div>
+              <div class="container relative">
+                  <div class="grid md:grid-cols-12 grid-cols-1 items-center mt-10 gap-[30px]">
+                      <div class="md:col-span-7">
+                          <div class="md:me-6">
+                              <h4 class="font-bold lg:leading-normal leading-normal text-3xl lg:text-3xl mb-5">Préparez-vous à 
+                                  <br /> <span class="text-green-600">commencer votre test !</span></h4>
+                              <p class="text-slate-400 text-lg max-w-xl">Vous êtes sur le point de commencer un test. Assurez-vous que vous êtes prêt à répondre aux questions et que vous disposez de tout le temps nécessaire pour compléter le test. Une fois que vous commencez, vous ne pourrez plus revenir en arrière.</p>
+  
+                              <div class="mt-6">
+                                  <button onClick={() => setHasStarted(true)} class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-green-600 hover:bg-green-700
+                                   border-green-600 hover:border-green-700 text-white rounded-md">Démarrer le test</button>
+                              </div>
+                          </div>
+                      </div>
+  
+                      <div class="md:col-span-5">
+                          <div class="relative">
+  
+                          <div className=" w-[300px] text-center mx-auto">
+                <img src={bgquizz} alt='quizz'/>
+              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
         ) : !showResults ? (
           <>
             <Card className="mb-6">

@@ -1,3 +1,4 @@
+import { Book, Clock} from "lucide-react";
 import React, { useEffect, useState } from "react";
 import {
   UserCircle,
@@ -18,6 +19,7 @@ import { getResource } from "../../services/api";
 import { useNavigate, useParams } from "react-router";
 import { errorMessage, onServerSuccess } from "../../services/Helper";
 import AppBody from "../../components/AppBody";
+import { dateToFR, dateToFr, truncateStringAdvanced} from "../../services/Helper";
 
 const Attestation = () => {
   const [isTestCollapseOpen, setIsTestCollapseOpen] = useState(false);
@@ -156,30 +158,61 @@ const Attestation = () => {
               {isInscriptionsCollapseOpen ? <ChevronUp /> : <ChevronDown />}
             </div>
             {isInscriptionsCollapseOpen && (
-              <div className="mt-4 bg-white shadow rounded-lg p-6">
+              <div className="mt-4 bg-gray-300 shadow rounded-lg p-6">
                 <div className="space-y-4">
                   {inscriptions.map((inscription) => (
-                    <div
-                      key={inscription.id}
-                      className="p-4 bg-gray-50 rounded-lg shadow hover:bg-gray-100"
-                    >
-                      <h3 className="text-lg font-medium text-[#1a5fa9]">
-                        {inscription.promotion.nom}
-                      </h3>
-                      <p className="mt-2">
-                        <strong>Année :</strong> {inscription.annee} <br />
-                        <strong>Status :</strong> {inscription.statut} <br />
-                        <strong>Date :</strong>{" "}
-                        {new Date(inscription.created_at).toLocaleDateString()}
-                      </p>
-                      <button
-                        onClick={() => downloadCertificateInscription(inscription.id)}
-                        className="mt-4 px-4 py-2 bg-orange-600 hover:bg-orange-800 text-white rounded-lg flex items-center gap-2"
-                      >
-                        <Download className="w-5 h-5" />
-                        Télécharger Certificat
-                      </button>
+                    <div key={inscription.id} 
+                    className="relative z-2 duration-500 ">
+                    <div className="relative bg-white dark:bg-slate-900 shadow dark:shadow-gray-800 rounded-md overflow-hidden">
+                        <div className="grid lg:grid-cols-12 grid-cols-1">
+                            <div className="lg:col-span-4 order-1 lg:order-2 bg-indigo-600 hover:bg-orange-600 transform transition-all duration-500 hover:scale-110">
+                                <div className="p-[30px] lg:text-start text-center">
+                                    <span className="text-1xl font-medium text-gray-200">Débuté le</span>
+                                    <h4 className="text-2xl font-semibold text-gray-200 pb-5"> {dateToFr(inscription.promotion.date_debut)}</h4>
+                                    <div className="flex items-center space-x-4 text-gray-200">  
+                                      <div className=" whitespace-nowrap flex items-center">
+                                        <Clock className="mr-1" />
+                                        {inscription.promotion.duree}
+                                      </div>
+                                      <div className=" whitespace-nowrap flex items-center">
+                                      <i className="text-lg uil uil-book-open pr-2"></i>
+                                      {inscription.promotion.course_modules} Cours
+                                      </div>
+                                    </div>
+                                    <div className="mt-6">
+                                    {inscription.valider === "Oui" && 
+                                    <button
+                                      onClick={() => downloadCertificateInscription(inscription.id)}
+                                      className="mt-4 px-4 py-2 bg-orange-600 hover:bg-orange-800 hover:border-2 border-white text-white rounded-lg flex items-center gap-2"
+                                    >
+                                      <Download className="w-5 h-5" />
+                                      Télécharger Certificat
+                                    </button>}
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div className="lg:col-span-8 order-2 lg:order-1">
+                                <div className="grid grid-cols-1 p-[30px]">
+                                    <div className="group flex duration-500">
+                                        <div className="transform transition-all duration-500 hover:scale-110 flex align-middle justify-center items-center size-10 mt-1 bg-indigo-600/5 group-hover:bg-indigo-600 group-hover:text-white text-indigo-600 rounded-full text-2xl shadow-sm dark:shadow-gray-800">
+                                            <i className="uil uil-award"></i>
+                                        </div>
+                                        <div className="flex-1 ms-4">
+                                            <h4 className="text-indigo-600 mb-0 text-2xl font-semibold">{inscription.promotion.nom}</h4>
+                                            <p className="text-slate-400  mt-3"><div dangerouslySetInnerHTML={{
+                                              __html: truncateStringAdvanced(inscription.promotion.description, 200),
+                                            }}
+                                            className="article-content"
+                                          /></p>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
                   ))}
                 </div>
               </div>

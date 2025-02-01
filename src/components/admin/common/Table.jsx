@@ -12,7 +12,7 @@ import { search } from '../../../utils/utils';
 
 
 
-const Table  = ({ data, reloadFonction, columns = [],open, actions = true, primaryKey = "id",  title, children, label, editFunction, addFunction,  deleteUrl, setOpenSidebar, filter, fiches, setFilter}) => {
+const Table  = ({ data, reloadFonction, columns = [],open, actions = true, primaryKey = "id",  title, children, label, editFunction, addFunction,  deleteUrl, setOpenSidebar, filter, fiches, valides, setFilter}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -23,9 +23,9 @@ const Table  = ({ data, reloadFonction, columns = [],open, actions = true, prima
   const [itemsSelected, setItemsSelected] = useState([]);
   const [delModal, setDelModal] = useState(false);
   const [page, setPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(5);
-    const [valueFiche, setValueFiche] = useState(null)
-  // const [filter , setFilter] = useState(false)
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [valueFiche, setValueFiche] = useState(null);
+  const [valueValide, setValueValide] = useState(null);
 
   const getNestedValue = (obj, accessor) => {
     return accessor.split('.').reduce((value, key) => {
@@ -128,9 +128,20 @@ setItems(currentData.slice(offset, offset + itemsPerPage));
                 onServerSuccess(res.data.message)
             }).catch(e => {
                 errorMessage(e)
-            })
-    
-}
+            })   
+  }
+
+  const handleSelectChange2 = (e, item) => {
+    e.stopPropagation();
+    const selectedValue = e.target.value;
+    setValueFiche(selectedValue)
+     patchResource("/modifier_valide", item, {valider: selectedValue}).then((res) => {
+                // console.log(res)
+                onServerSuccess(res.data.message)
+            }).catch(e => {
+                errorMessage(e)
+            })   
+  }
 
   const handleDelete = () => {
     // Logique pour supprimer les lignes sélectionnées
@@ -232,7 +243,10 @@ setItems(currentData.slice(offset, offset + itemsPerPage));
               </th>
             ))}
             {
-                fiches && <th className="border border-slate-300 p-2">Fiches</th>
+                fiches && <th className="border border-slate-300 p-2">MODIFIER ROLE</th>
+            }
+            {
+                valides && <th className="border border-slate-300 p-2">MODIFIER ETAT</th>
             }
             {
                 actions && <th className="border border-neutral-200 p-1">ACTIONS</th>
@@ -251,17 +265,30 @@ setItems(currentData.slice(offset, offset + itemsPerPage));
                 </td>
               ))}
               {fiches && (
-                                        <td className="border border-slate-300 p-2">
-                                            <Select name="valueFiche" value={valueFiche} onChange={(e) => handleSelectChange(e, row.id)}>
-                                                <option value="">Choisir une fiche</option>
-                                                {fiches.map((fiche) => (
-                                                    <option key={fiche} value={fiche}>
-                                                        {fiche}
-                                                    </option>
-                                                ))}
-                                            </Select>
-                                        </td>
-                                    )}
+                <td className="border border-slate-300 p-2">
+                    <Select name="valueFiche" value={valueFiche} onChange={(e) => handleSelectChange(e, row.id)}>
+                        <option value=""  className=" text-black">Choisir</option>
+                        {fiches.map((fiche) => (
+                            <option key={fiche} value={fiche} className=" text-black">
+                                {fiche}
+                            </option>
+                        ))}
+                    </Select>
+                </td>
+              )}
+              
+              {valides && (
+                <td className="border border-slate-300 p-2">
+                    <Select name="valueValide" value={valueValide} onChange={(e) => handleSelectChange2(e, row.id)}>
+                        <option value=""  className=" text-black">Choisir</option>
+                        {validess.map((valide) => (
+                            <option key={valide} value={valide} className=" text-black">
+                                {valide}
+                            </option>
+                        ))}
+                    </Select>
+                </td>
+              )}
               
               { actions &&
                 <td className="border border-neutral-200 p-0 w-full h-full flex flex-wrap items-center justify-around">

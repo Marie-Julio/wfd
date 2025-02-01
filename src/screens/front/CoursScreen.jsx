@@ -8,7 +8,8 @@ import { useNavigate } from "react-router";
 import {jwtDecode} from "jwt-decode";
 
 const CoursScreen = () => {
-  const [courses, setCourses] = useState([]); // Tous les cours
+  const [courses, setCourses] = useState([]);
+  const [promotion, setPromotion] = useState([]); // Tous les cours
   const [filteredCourses, setFilteredCourses] = useState([]); // Cours filtrés
   const [searchTerm, setSearchTerm] = useState(""); // Texte de recherche
   const [selectedFilter, setSelectedFilter] = useState(""); // Filtre actif
@@ -23,21 +24,23 @@ const CoursScreen = () => {
     navigate("/login");
   }
 
-  const _init_ = () => {
-    getResource("/course-modules")
+  useEffect(() => {
+    getResource("/lastpromotion")
       .then((res) => {
-        console.log(res.data)
-        setCourses(res.data);
-        setFilteredCourses(res.data); // Initialiser les cours affichés
-      })
-      // .catch((e) => {
-      //   errorMessage(e);
-      // });
-  };
+        setPromotion(res.data);
+        console.log("--------------");
+    })
+  }, []);
 
   useEffect(() => {
-    _init_();
-  }, []);
+    getResource("/course-modules?promotion_id="+promotion.id)
+    .then((res) => {
+      console.log("--------------2");
+      console.log(promotion);
+      setCourses(res.data);
+      setFilteredCourses(res.data); // Initialiser les cours affichés
+    })
+  }, [promotion]);
 
   useEffect(() => {
     feather.replace();
@@ -97,7 +100,10 @@ const CoursScreen = () => {
   return (
     <AppBody>
     <div className="p-12 bg-[#1a5fa9] flex flex-col md:flex-row justify-between items-center text-white">
-      <h1 className="text-2xl font-bold mb-4 md:mb-0">Cours</h1>
+      <h1 className="text-2xl font-bold mb-4 md:mb-0">Les cours</h1>
+      <div className="items-center pt-5">
+      De la Promotion en cours : <span className="bg-[#eb6b11] text-white py-1 px-3 rounded-full text-lg">{promotion.nom}</span>
+      </div>
     </div>
     <section className="flex flex-col items-center justify-center min-h-screen w-full px-4 md:px-8 py-8">
       {/* Header */}
@@ -149,7 +155,7 @@ const CoursScreen = () => {
           </div>
           </div>
           
-          <div className="lg:col-span-9 md:col-span-8">
+          <div className=" pt-10 md:pt-0 lg:col-span-9 md:col-span-8">
           <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-5">
             {currentCourses.map((course) => (
               <CourseCard key={course.id} course={course} />

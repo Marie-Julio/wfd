@@ -6,13 +6,16 @@ import FormBody from "../../../components/admin/common/FormBody";
 import { Input } from "../../../components/admin/common/Input";
 import Button from "../../../components/admin/common/Button";
 import { getResource, patchFile, patchResource, postFile, postResource } from "../../../services/api";
-import { errorMessage, onServerSuccess } from "../../../services/Helper";
+import { errorMessage, onServerSuccess, onServerWarning } from "../../../services/Helper";
 import TextArea from "../../../components/admin/common/TextArea";
 import Select from "../../../components/admin/common/Select";
 import InputCompletNew from "../../../components/admin/common/InputCompletNew";
 import { useParams } from "react-router";
+import {jwtDecode} from "jwt-decode";
 
 const FormCours = () => {
+  const accessToken = localStorage.getItem("token");
+  const decodedToken = accessToken ? jwtDecode(accessToken) : null;
     const [isOpen, setIsOpen] = useState(false);
     const [filter, setFilter] = useState(false);
     const [promos, setPromos]  = useState([])
@@ -22,13 +25,12 @@ const FormCours = () => {
     const [datas, setDatas] = useState({
         content: ""
     })
-    const statuts = [{id: 1, libelle: "video"}, {id: 2, libelle: "pdf"}, {id: 3, libelle: "video"}];
+    const statuts = [{id: 1, libelle: "video"}, {id: 2, libelle: "pdf"}, {id: 3, libelle: "video & pdf"}];
 
     useEffect(() => {
             const fetchData = async() => {
                 try {
                     const res = await getResource(`/course-modules/${id}`);
-                    console.log(res.data);
                     setDatas({ content: res.data.content });
                     formik.setValues({
                         title : res.data.title,
@@ -48,12 +50,10 @@ const FormCours = () => {
 
     const _init_ = () => {
             getResource('/promotions').then((res) => {
-                console.log(res.data)
                 setPromos(res.data)
             })
 
             getResource('/qcms').then((res) => {
-                console.log(res.data)
                 setQcms(res.data)
             })
           }
@@ -63,8 +63,7 @@ const FormCours = () => {
           }, [])
 
     const updateData = (values) => {
-        // const newData = { ...values, description: datas.content, promotion_id: values.promotion_id.id, required_qcm_id: values.id };
-        console.log(values)
+        // const newData = { ...values, description: datas.content, promotion_id: values.promotion_id, required_qcm_id: values.id };
         patchFile("/course-modules", id, values).then((res) => {
             onServerSuccess("Mise à jour effectuée avec succès.")
             setDatas({content: ""})
@@ -73,17 +72,16 @@ const FormCours = () => {
 
     const saveData = (data) => {
         setLoading(true) 
-        // const newData = { ...data, description: datas.content, promotion_id: data.promotion_id.id, required_qcm_id: data.required_qcm_id.id };
-        console.log(data)
+        // const newData = { ...data, description: datas.content, promotion_id: data.promotion_id, required_qcm_id: data.required_qcm_id.id };
         postFile("/course-modules", data).then((res) => {
             onServerSuccess("Création effectuée avec succès.")
             formik.resetForm()
             formik.setValues({
                 title : '',
                 type : '',
+                duree: 0,
                 min_score : 0,
                 promotion_id : 0,
-                required_qcm_id : 0,
                 media : [],
             });
             setDatas({content: ""})
@@ -96,7 +94,6 @@ const FormCours = () => {
           duree: 0,
           min_score: 0,
           promotion_id: 0,
-          required_qcm_id: 0,
           media: [], // Initialisé comme un tableau vide
         },
         validationSchema: Yup.object({
@@ -104,26 +101,37 @@ const FormCours = () => {
         }),
         onSubmit: async (values) => {
           setLoading(true);
-      
+          if (!values.type) {
+            return onServerWarning('Le champ type est obligatoire');
+          }
+          if (!values.promotion_id) {
+            return onServerWarning('Le champ promotion est obligatoire');
+          }
+          if (!values.media) {
+            return onServerWarning('Le champ fichier est obligatoire');
+          }
+          if (!datas.content) {
+            return onServerWarning('Le champ description est obligatoire');
+          }
+                        
           const formData = new FormData(); // Utiliser FormData pour inclure les fichiers
           formData.append("title", values.title);
           formData.append("type", values.type);
           formData.append("min_score", values.min_score);
           formData.append("duree", values.duree);
+          formData.append("user_id", decodedToken.id);
           formData.append("description", datas.content);
-          formData.append("promotion_id", values.promotion_id.id);
-          formData.append("required_qcm_id", values.required_qcm_id.id);
+          formData.append("promotion_id", values.promotion_id);
 
-         // Ajouter les fichiers sous forme de tableau media: [(binaire), (binaire)]
-            values.media.forEach((file) => {
-                formData.append("file_path[]", file); // Utilisation de media[] pour transmettre sous forme de tableau
-            });
+          values.media.forEach((file) => {
+            formData.append("file_path[]", file);
+          });
       
           try {
             if (id) {
-               updateData(formData); // Fonction d'édition
+               updateData(formData);
             } else {
-               saveData(formData); // Fonction de création
+               saveData(formData);
             }
             setLoading(false);
           } catch (error) {
@@ -137,53 +145,55 @@ const FormCours = () => {
     return ( 
         <Body isOpen={isOpen} setIsOpen={setIsOpen}>
             <FormBody title="Creation de Cours">
-            <form className="flex flex-col w-full items-center" onSubmit={formik.handleSubmit}>
-                <Input type="text" name="title" value={formik.values.title} label="Entrez le title" onChange={formik.handleChange}/>
-                <Input type="number" name="min_score" value={formik.values.min_score}  label="La moyenne" onChange={formik.handleChange}/>
-                <Input type="number" name="duree" value={formik.values.duree} label="La duree" onChange={formik.handleChange}/>
-                
-                <Select name="type" label="Le type" value={formik.values.type} onChange={formik.handleChange} disabled={false}>
-                    <option>Choisir le statut</option>
-                    {
-                        statuts.map((x) => (
-                            <option value={x.libelle}>{x.libelle}</option>
-                        ))
-                    }
-                </Select>
-                <Input type="file" name="media"  label="Joindre le fichier"  onChange={(event) => {
-                    const filesArray = Array.from(event.target.files);
-                    formik.setFieldValue("media", filesArray);
-                }} multiple/>
-                {/* {formik.values.type === "pdf" && <Input type="file" name="media" value={formik.values.media} label="Le fichier pdf" onChange={formik.handleChange}/>} */}
-                <InputCompletNew
-                    label="La promotion"
-                    suggestions={promos}
-                    name="promotion_id"
-                    labelKey="nom"
-                    subLabelKey="niveau"
-                    valueKey="id"
-                    onSelect={(promotion) => formik.setFieldValue(
-                        "promotion_id", promotion
-                    )}
-                    defaultValue={formik.values.promotion_id}
-                    />
+            <form className="flex flex-col w-full items-center" onSubmit={formik.handleSubmit}><br />
+                      <div className="w-full mb-2 flex flex-col">
+                            <label className=" font-semibold mb-2 text-gray-800">Nom du cours  <span className="text-red-500">*</span></label>
+                      <input type="text" required name="title" value={formik.values.title} placeholder="Entrez le title" className=" w-full rounded-md" onChange={formik.handleChange}/>
+                      </div>
+                      <div className="w-full mb-2 flex flex-col">
+                            <label className=" font-semibold mb-2 text-gray-800">Score minimun pour valider en %  <span className="text-red-500">*</span></label>
+                      <input type="number" required name="min_score" value={formik.values.min_score}  placeholder="La moyenne" className=" w-full rounded-md" onChange={formik.handleChange}/>
+                      </div>
+                      <div className="w-full mb-2 flex flex-col">
+                            <label className=" font-semibold mb-2 text-gray-800">Durée estimé en heure  <span className="text-red-500">*</span></label>
+                      <input type="number" required name="duree" value={formik.values.duree} placeholder="La duree en heure" className=" w-full rounded-md" onChange={formik.handleChange}/>
+                      </div>
 
-                <InputCompletNew
-                    label="Le test associé"
-                    suggestions={qcms}
-                    name="required_qcm_id"
-                    labelKey="title"
-                    subLabelKey="promotion_id"
-                    valueKey="id"
-                    onSelect={(qcm) => formik.setFieldValue(
-                        "required_qcm_id", qcm
-                    )}
-                    defaultValue={formik.values.required_qcm_id}
-                    />
-                <TextArea label="Description" 
-                val={datas.content}
-                handleChange={(e) => setDatas({...datas, content : e})}
-                />
+                      <div className="w-full mb-2 flex flex-col">
+                        <label className=" font-semibold mb-2 text-gray-800">Le(s) type(s) de document  <span className="text-red-500">*</span></label>
+                        <select required name="type" className=" w-full rounded-md" value={formik.values.type} onChange={formik.handleChange}>
+                            <option>Sélectionner</option>
+                            {
+                                statuts.map((x) => (
+                                    <option value={x.libelle}>{x.libelle}</option>
+                                ))
+                            }
+                        </select>
+                      </div>
+                      <div className="w-full mb-2 flex flex-col">
+                            <label className=" font-semibold mb-2 text-gray-800">Joindre un ou plusieurs fichiers  <span className="text-red-500">*</span></label>
+                            <input type="file" name="media" required onChange={(event) => {
+                          const filesArray = Array.from(event.target.files);
+                          formik.setFieldValue("media", filesArray);
+                      }} multiple/>
+                      </div>
+                      
+                      <div className="w-full mb-2 flex flex-col">
+                        <label className=" font-semibold mb-2 text-gray-800">La promotion  <span className="text-red-500">*</span></label>
+                        <select required name="promotion_id"  className=" w-full rounded-md" value={formik.values.promotion_id} onChange={formik.handleChange} >
+                            <option>Sélectionner</option>
+                            {
+                                promos.map((x) => (
+                                    <option value={x.id}>{x.nom}</option>
+                                ))
+                            }
+                        </select>
+                      </div>
+                      <div className="w-full mb-2 flex flex-col">
+                        <label className="mb-2 text-gray-800 font-semibold">Description <span className="text-red-500">*</span></label>
+                      <TextArea val={datas.content} handleChange={(e) => setDatas({...datas, content : e})}
+                      />
+                      </div>
                 <Button isLoading={loading} className="w-full mt-5" >Enregistrer</Button>
             </form>
             </FormBody>

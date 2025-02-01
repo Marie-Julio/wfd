@@ -14,11 +14,15 @@ const InscriptionAdmin = () => {
     const navigate = useNavigate();
     const [cours, setCours] = useState([]);
     const [data, setData] = useState();
+    const options = ["Oui", "Non"];
+    const [fiches, setFiches] = useState(options)
 
     const columns = [
         { accessor: 'user.nom', Header: 'Nom participant' },
+        { accessor: 'user.email', Header: 'Email' },
         { accessor: 'promotion.nom', Header: 'Nom de promotion' },
         { accessor: 'annee', Header: 'Annee' },
+        { accessor: 'valider', Header: 'Valider' },
         { accessor: 'statut', Header: 'Statut' },
       ];
 
@@ -56,10 +60,11 @@ const InscriptionAdmin = () => {
             reloadFonction={_init_}
             setFilter={setFilter}
             setOpenSidebar={setIsOpen}
+            open={isOpen}
+            fiches={fiches}
             addFunction={create}
             editFunction={updateFunction}
             deleteUrl="/inscriptions"
-            open={isOpen}
             label="Filtrage"
             actions={true} 
             // editFunction={} 

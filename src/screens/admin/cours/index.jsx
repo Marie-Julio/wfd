@@ -19,7 +19,8 @@ const Cours = () => {
         { accessor: 'title', Header: 'Titre' },
         { accessor: 'promotion.nom', Header: 'Promotion' },
         { accessor: 'type', Header: 'Type' },
-        { accessor: 'min_score', Header: 'Score minimun' },
+        { accessor: 'min_score', Header: 'Score min' },
+        { accessor: 'duree', Header: 'Durée(h)' },
       ];
 
       const _init_ = () => {

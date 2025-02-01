@@ -22,7 +22,6 @@ const location = useLocation();
       { title: "Gestion des Cours ", src: "", gap: true },
       { title: "Gestion des Cours", src: "/admin/cours", icon: "bx-book-bookmark"},
       { title: "Promotions ", src: "/admin/promotion", icon: "bx-braille"  },
-      { title: "Informations", src: "/admin/informations", icon: "bx-info-circle"  },
       { title: "Notifications", src: "/admin/notification", icon: "bx-bell"  },
       { title: "Inscriptions", src: "/admin/inscription", icon: "bx-label"  },
       { title: "Projets", src: "/admin/projets", icon: "bxs-offer"  },

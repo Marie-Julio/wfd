@@ -238,21 +238,6 @@ const Home = () => {
                       </div>
                 </div>
             </div>
-
-            
-            <div className="container relative md:mt-24 mt-16">
-                <div className="grid grid-cols-1 pb-8 text-center">
-                <h3 className="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold"><span className="after:absolute after:end-0  after:start-0  after:bottom-1 after:lg:h-3 after:h-2 after:w-auto after:rounded-md after:bg-[#1a5fa9]/30 relative">Découvrez nos dernières actualités !</span></h3>
-
-                    <p className="text-slate-400 max-w-xl mx-auto">Découvrez les événements récents qui façonnent notre avenir.</p>
-                </div>
-
-                <InfoComponent informations={infos}/>
-                
-                <div className="lg:col-span-4 md:col-span-6 text-center hidden md:block pt-10">
-                    <a href="/pages-infos" className="btn relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 text-[#eb6b11] hover:text-[#eb6b11] after:bg-[#eb6b11] duration-500 ease-in-out">Voir plus <i className="uil uil-arrow-right align-middle"></i></a>
-                </div>
-            </div>
         </section>
 
         </AppBody>
