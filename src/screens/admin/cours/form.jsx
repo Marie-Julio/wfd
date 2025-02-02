@@ -10,7 +10,7 @@ import { errorMessage, onServerSuccess, onServerWarning } from "../../../service
 import TextArea from "../../../components/admin/common/TextArea";
 import Select from "../../../components/admin/common/Select";
 import InputCompletNew from "../../../components/admin/common/InputCompletNew";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import {jwtDecode} from "jwt-decode";
 
 const FormCours = () => {
@@ -25,20 +25,23 @@ const FormCours = () => {
     const [datas, setDatas] = useState({
         content: ""
     })
+
+    const navigate = useNavigate() 
+    
     const statuts = [{id: 1, libelle: "video"}, {id: 2, libelle: "pdf"}, {id: 3, libelle: "video & pdf"}];
 
     useEffect(() => {
             const fetchData = async() => {
                 try {
                     const res = await getResource(`/course-modules/${id}`);
-                    setDatas({ content: res.data.content });
+                    setDatas({ content: res.data.description });
                     formik.setValues({
                         title : res.data.title,
                         type : res.data.type,
                         min_score : res.data.min_score,
                         duree : res.data.duree,
-                        promotion_id : res.data.promotion.nom,
-                        required_qcm_id : res.data.qcm.required_qcm_id.title,
+                        promotion_id : res.data.promotion.id,
+                        required_qcm_id : res.data.qcm.title,
                     });
                 } catch (error) {
                     console.error('Erreur lors de la récupération de l\'annonce:', error);
@@ -64,10 +67,13 @@ const FormCours = () => {
           }, [])
 
     const updateData = (values) => {
+      console.log(values)
         // const newData = { ...values, description: datas.content, promotion_id: values.promotion_id, required_qcm_id: values.id };
-        patchFile("/course-modules", id, values).then((res) => {
+        postFile(`/course-modules/${id}`, values).then((res) => {
             onServerSuccess("Mise à jour effectuée avec succès.")
+            formik.resetForm();
             setDatas({content: ""})
+            setTimeout(() => navigate(`/admin/cours`), 50)
         }).catch((e) => errorMessage(e))
     }
 
@@ -113,8 +119,8 @@ const FormCours = () => {
           if (!values.required_qcm_id) {
             return onServerWarning('Le champ promotion est obligatoire.. Veuillez remplir Test associé');
           }
-          if (!values.media) {
-            return onServerWarning('Le champ fichier est obligatoire.. Veuillez remplir media');
+          if (!values.media && !id) {
+            return onServerWarning('Le champ fichier est obligatoire');
           }
           if (!datas.content) {
             return onServerWarning('Le champ description est obligatoire.. Veuillez remplir content');
@@ -133,6 +139,9 @@ const FormCours = () => {
           values.media.forEach((file) => {
             formData.append("file_path[]", file);
           });
+          if(id) {
+            formData.append('_method', 'PATCH');
+          }
       
           try {
             if (id) {
@@ -179,7 +188,7 @@ const FormCours = () => {
                       </div>
                       <div className="w-full mb-2 flex flex-col">
                             <label className=" font-semibold mb-2 text-gray-800">Joindre un ou plusieurs fichiers  <span className="text-red-500">*</span></label>
-                            <input type="file" name="media" required onChange={(event) => {
+                            <input type="file" name="media" required={id ? false : true}  onChange={(event) => {
                           const filesArray = Array.from(event.target.files);
                           formik.setFieldValue("media", filesArray);
                       }} multiple/>

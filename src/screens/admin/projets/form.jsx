@@ -56,7 +56,7 @@ const FormProjet = () => {
             setDatas({content: res.data.description})
 
             formik.setValues({
-                inscription_id: res.data.inscription.nom,
+                inscription_id: res.data.inscription.annee,
                 user_id: res.data.user.nom,
                 titre: res.data.titre,
                 structure: res.data.structure,
@@ -73,7 +73,20 @@ const FormProjet = () => {
     const updateData = (values) => {
         const newData = { ...values, description: datas.content, inscription_id: values.inscription_id.id, user_id: values.user_id.id  };
         console.log(newData)
-        patchResource("/projets", id, newData).then((res) => {
+        const formData = new FormData(); // Utiliser FormData pour inclure les fichiers
+        formData.append("inscription_id", values.inscription_id.id);
+        formData.append("user_id", values.user_id.id);
+        formData.append("titre", values.titre);
+        formData.append("description", datas.content);
+        formData.append("structure", values.structure);
+        formData.append("secteur", values.secteur);
+        formData.append("activite_en_cours", values.activite_en_cours);
+        formData.append("date_demarrage", values.date_demarrage);
+        formData.append("cout", values.cout);
+        formData.append("file", values.file);
+        formData.append("media", values.media);
+        formData.append('_method', 'PATCH');
+        postFile(`/projets/${id}`, formData).then((res) => {
             onServerSuccess("Mise à jour effectuée avec succès.")
             formik.resetForm()
             setDatas({content: ""})
