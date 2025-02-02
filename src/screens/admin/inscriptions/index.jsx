@@ -61,7 +61,7 @@ const InscriptionAdmin = () => {
             setFilter={setFilter}
             setOpenSidebar={setIsOpen}
             open={isOpen}
-            fiches={fiches}
+            valides={fiches}
             addFunction={create}
             editFunction={updateFunction}
             deleteUrl="/inscriptions"

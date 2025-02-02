@@ -128,19 +128,23 @@ const Attestation = () => {
                       className="p-4 bg-gray-50 rounded-lg shadow hover:bg-gray-100"
                     >
                       <h3 className="text-lg font-medium text-[#1a5fa9]">{result.qcm.title}</h3>
-                      <p className="text-sm text-gray-500">{result.qcm.description}</p>
+                      <p className="text-sm text-gray-500">
+                      <div
+                        className="prose max-w-none"
+                        dangerouslySetInnerHTML={{ __html: result.qcm.description }}
+                      /></p>
                       <p className="mt-2">
                         <strong>Score :</strong> {result.score} <br />
-                        <strong>Status :</strong> {result.status} <br />
+                        <strong>Statut :</strong> {result.status === "failed" && <span className=" font-semibold text-red-700"> Echoué </span>} {result.status === "passed" && <span className=" font-semibold text-green-700"> Réussi </span>} <br />
                         <strong>Date :</strong> {new Date(result.created_at).toLocaleDateString()}
                       </p>
-                      <button
+                      {result.status === "passed" && <button
                         onClick={() => downloadAttestationQCM(result.cours.id)}
                         className="mt-4 px-4 py-2 bg-orange-600 hover:bg-orange-800 text-white rounded-lg flex items-center gap-2"
                       >
                         <Download className="w-5 h-5" />
                         Télécharger Attestation
-                      </button>
+                      </button>}
                     </div>
                   ))}
                 </div>
@@ -169,6 +173,8 @@ const Attestation = () => {
                                 <div className="p-[30px] lg:text-start text-center">
                                     <span className="text-1xl font-medium text-gray-200">Débuté le</span>
                                     <h4 className="text-2xl font-semibold text-gray-200 pb-5"> {dateToFr(inscription.promotion.date_debut)}</h4>
+                                    <span className="text-1xl font-medium text-red-500">Cloturé le</span>
+                                    <h4 className="text-2xl font-semibold pb-5 text-red-500"> {dateToFr(inscription.promotion.date_fin)}</h4>
                                     <div className="flex items-center space-x-4 text-gray-200">  
                                       <div className=" whitespace-nowrap flex items-center">
                                         <Clock className="mr-1" />
@@ -180,14 +186,6 @@ const Attestation = () => {
                                       </div>
                                     </div>
                                     <div className="mt-6">
-                                    {inscription.valider === "Oui" && 
-                                    <button
-                                      onClick={() => downloadCertificateInscription(inscription.id)}
-                                      className="mt-4 px-4 py-2 bg-orange-600 hover:bg-orange-800 hover:border-2 border-white text-white rounded-lg flex items-center gap-2"
-                                    >
-                                      <Download className="w-5 h-5" />
-                                      Télécharger Certificat
-                                    </button>}
                                     </div>
                                 </div>
                             </div>
@@ -205,6 +203,14 @@ const Attestation = () => {
                                             }}
                                             className="article-content"
                                           /></p>
+                                          {inscription.valider == "Oui" && 
+                                          <button
+                                            onClick={() => downloadCertificateInscription(inscription.id)}
+                                            className="mt-4 px-4 py-2 bg-orange-600 hover:bg-orange-800 text-white rounded-lg flex items-center gap-2"
+                                          >
+                                            <Download className="w-5 h-5" />
+                                            Télécharger Certificat
+                                          </button>}
                                         </div>
                                     </div>
                                     

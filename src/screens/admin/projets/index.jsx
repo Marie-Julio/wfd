@@ -17,8 +17,9 @@ const ProjetAdmin = () => {
 
     const columns = [
         { accessor: 'titre', Header: 'Titre' },
-        { accessor: 'section', Header: 'Secteur' },
-        { accessor: 'user.nom', Header: 'Nom participant' },
+        { accessor: 'secteur', Header: 'Secteur' },
+        { accessor: 'date_demarrage', Header: 'Date de début' },
+        { accessor: 'user.nom', Header: 'Nom auteur' },
         { accessor: 'user.prenom', Header: 'Prenom' },
         { accessor: 'inscription.annee', Header: 'Inscription' },
       ];

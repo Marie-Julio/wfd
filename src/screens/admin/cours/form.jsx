@@ -36,8 +36,9 @@ const FormCours = () => {
                         title : res.data.title,
                         type : res.data.type,
                         min_score : res.data.min_score,
+                        duree : res.data.duree,
                         promotion_id : res.data.promotion.nom,
-                        required_qcm_id : res.data.qcm.title,
+                        required_qcm_id : res.data.qcm.required_qcm_id.title,
                     });
                 } catch (error) {
                     console.error('Erreur lors de la récupération de l\'annonce:', error);
@@ -82,6 +83,7 @@ const FormCours = () => {
                 duree: 0,
                 min_score : 0,
                 promotion_id : 0,
+                required_qcm_id : 0,
                 media : [],
             });
             setDatas({content: ""})
@@ -94,6 +96,7 @@ const FormCours = () => {
           duree: 0,
           min_score: 0,
           promotion_id: 0,
+          required_qcm_id: 0,
           media: [], // Initialisé comme un tableau vide
         },
         validationSchema: Yup.object({
@@ -102,16 +105,19 @@ const FormCours = () => {
         onSubmit: async (values) => {
           setLoading(true);
           if (!values.type) {
-            return onServerWarning('Le champ type est obligatoire');
+            return onServerWarning('Le champ type est obligatoire. Veuillez remplir type ');
           }
           if (!values.promotion_id) {
-            return onServerWarning('Le champ promotion est obligatoire');
+            return onServerWarning('Le champ promotion est obligatoire.. Veuillez remplir promotion');
+          }
+          if (!values.required_qcm_id) {
+            return onServerWarning('Le champ promotion est obligatoire.. Veuillez remplir Test associé');
           }
           if (!values.media) {
-            return onServerWarning('Le champ fichier est obligatoire');
+            return onServerWarning('Le champ fichier est obligatoire.. Veuillez remplir media');
           }
           if (!datas.content) {
-            return onServerWarning('Le champ description est obligatoire');
+            return onServerWarning('Le champ description est obligatoire.. Veuillez remplir content');
           }
                         
           const formData = new FormData(); // Utiliser FormData pour inclure les fichiers
@@ -122,6 +128,7 @@ const FormCours = () => {
           formData.append("user_id", decodedToken.id);
           formData.append("description", datas.content);
           formData.append("promotion_id", values.promotion_id);
+          formData.append("required_qcm_id", values.required_qcm_id.id);
 
           values.media.forEach((file) => {
             formData.append("file_path[]", file);
@@ -188,6 +195,22 @@ const FormCours = () => {
                                 ))
                             }
                         </select>
+                      </div>
+                      <div className="w-full mb-2 flex flex-col">
+                        <label className=" font-semibold mb-2 text-gray-800">Le test associé  <span className="text-red-500">*</span></label>
+                              
+                            <InputCompletNew
+                          suggestions={qcms}
+                          name="required_qcm_id"
+                          labelKey="title"
+                          subLabelKey="promotion_id"
+                          valueKey="id"
+                          onSelect={(qcm) => {formik.setFieldValue(
+                              "required_qcm_id", qcm
+                          )
+                          console.log(qcm)}}
+                          defaultValue={formik.values.required_qcm_id}
+                          />
                       </div>
                       <div className="w-full mb-2 flex flex-col">
                         <label className="mb-2 text-gray-800 font-semibold">Description <span className="text-red-500">*</span></label>

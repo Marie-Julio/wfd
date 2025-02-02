@@ -12,7 +12,6 @@ const ProjetScreen = () => {
       
           const _init_ = () => {
             getResource("/projets").then((res) => {
-                console.log(res.data)
                 setProjects(res.data)
             }).catch(e => {
                 errorMessage(e)

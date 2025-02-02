@@ -58,9 +58,8 @@ const AppBody = ({home, bannerCour, banner, course, titleBanner,className, image
                                 <div>
                                     <a href="mailto:contact@example.com" className="relative inline-block font-semibold tracking-wide align-middle text-center border-none after:content-['']
                                      after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 text-2xl text-white dark:text-white
-                                     dark:hover:text-white hover:text-[#eb6b11] after:bg-[#eb6b11] dark:after:bg-white duration-500 ease-in-out">WELT FRIEDENS DIENST e.V</a>
+                                     dark:hover:text-white hover:text-[#eb6b11] after:bg-[#eb6b11] dark:after:bg-white duration-500 ease-in-out">SERVICE MONDIAL POUR LA PAIX GUINÉE</a>
                                 </div>
-                                <p className="mt-6 max-w-2xl">SERVICE MONDIAL POUR LA PAIX Guinée</p>
                                 <ul className="list-none mt-6 space-x-5">
                                     <li className="inline"><a href="" target="_blank" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center text-gray-400 hover:text-white border border-gray-100 dark:border-gray-800 rounded-md hover:border-[#eb6b11] dark:hover:border-[#eb6b11] hover:bg-[#eb6b11] dark:hover:bg-[#eb6b11]"><i className="uil uil-linkedin" title="Linkedin"></i></a></li>
                                     <li className="inline"><a href="" target="_blank" className="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center text-gray-400 hover:text-white border border-gray-100 dark:border-gray-800 rounded-md hover:border-[#eb6b11] dark:hover:border-[#eb6b11] hover:bg-[#eb6b11] dark:hover:bg-[#eb6b11]"><i className="uil uil-facebook-f align-middle" title="facebook"></i></a></li>

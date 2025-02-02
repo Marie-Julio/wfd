@@ -78,7 +78,7 @@ const Home = () => {
 
     return ( 
         <AppBody >
-        <section className="relative bg-[#daeff9] dark:bg-slate-800 md:py-10 py-6">
+        <section className="relative bg-indigo-600/5 dark:bg-slate-800 md:py-10 py-6">
             <div className=" hidden md:block absolute top-5 right-20 w-40 h-40 bg-[#eb6b11] rounded-full ">
                 <div className="bg-no-repeat bg-cover bg-center w-40 h-40 rounded-full transform transition-all duration-500 hover:scale-110" style={{ backgroundImage: `url(${background2})` }}></div>
             </div>
@@ -239,7 +239,63 @@ const Home = () => {
                 </div>
             </div>
         </section>
+        <section class="relative table w-full bg-indigo-600/5 overflow-hidden">
+            <div class="container relative">
+                <div class="grid md:grid-cols-12 grid-cols-1 items-center mt-10 gap-[30px] relative">
+                    <div class="md:col-span-7">
+                        <h4 class="font-bold lg:leading-normal leading-normal text-4xl lg:text-5xl mb-5 text-black dark:text-white">Apprenez avec des
+                         <span class="text-indigo-600"> Experts</span></h4>
+                        <p class="text-orange-600 text-2xl max-w-xl">À tout moment et en tout lieu</p>
+                        <p class="text-slate-400 text-lg max-w-xl">Launch your campaign and benefit from our expertise on designing and managing conversion centered Tailwind CSS v3.x html page.</p>
+                        <div class="mt-6">
+                            <a href="#"><img src="assets/images/app/app.png" class="inline-block m-1" alt="" /></a>
+                            <a href="#"><img src="assets/images/app/playstore.png" class="inline-block m-1" alt="" /></a>
+                        </div>
+                    </div>
 
+                    <div class="md:col-span-5">
+                        <div class="relative">
+                            <img src="assets/images/course/hero.png" alt="" />
+
+                            <div class="absolute bottom-2/4 translate-y-2/4 start-0 end-0 text-center">
+                                <a href="#!" data-type="youtube" data-id="S_CGed6E610"
+                                    class="lightbox size-20 rounded-full shadow-lg dark:shadow-gray-800 inline-flex items-center justify-center bg-white dark:bg-slate-900 text-indigo-600 dark:text-white">
+                                    <i class="mdi mdi-play inline-flex items-center justify-center text-2xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="overflow-hidden after:content-[''] after:absolute after:h-32 after:w-32 after:bg-red-600/5 after:top-10 after:start-0 after:-z-1 after:rounded-3xl after:animate-[spin_10s_linear_infinite]"></div>
+                    <div class="overflow-hidden after:content-[''] after:absolute after:size-[512px] after:bg-indigo-600/5 after:top-0 after:-end-5 after:-z-1 after:rounded-full"></div>
+                </div>
+            </div>
+        </section>
+        
+
+        
+        <section class="py-6 border-b border-gray-100 dark:border-gray-800">
+            <div class="container relative">
+                <div class="grid md:grid-cols-4 grid-cols-2 justify-center gap-[20px]">
+                    <div class="mx-auto py-4">
+                        <img src="assets/images/client/amazon.svg" class="h-12" alt="" />
+                    </div>
+
+                    <div class="mx-auto py-4">
+                        <img src="assets/images/client/google.svg" class="h-12" alt="" />
+                    </div>
+                    
+                    <div class="mx-auto py-4">
+                        <img src="assets/images/client/lenovo.svg" class="h-12" alt="" />
+                    </div>
+                    
+                    <div class="mx-auto py-4">
+                        <img src="assets/images/client/paypal.svg" class="h-12" alt="" />
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
         </AppBody>
      );
 }

@@ -233,20 +233,24 @@ setItems(currentData.slice(offset, offset + itemsPerPage));
           </button>
         </div>
       </div>
+      <div className="overflow-auto mx-auto container p-0">
       <table className="border-collapse text-center w-full h-full boder bg-white drop-shadow-xl">
         <thead className="bg-tertiaire  text-white">
           <tr>
             
+              <th className="border border-neutral-200 px-5">
+                #
+              </th>
             {columns.map((column) => (
-              <th key={column.accessor} className="border border-neutral-200 p-2">
+              <th key={column.accessor} className="border whitespace-nowrap border-neutral-200 p-2">
                 {column.Header.toUpperCase()}
               </th>
             ))}
             {
-                fiches && <th className="border border-slate-300 p-2">MODIFIER ROLE</th>
+                fiches && <th className="border border-slate-300 whitespace-nowrap p-2">MODIFIER ROLE</th>
             }
             {
-                valides && <th className="border border-slate-300 p-2">MODIFIER ETAT</th>
+                valides && <th className="border border-slate-300 whitespace-nowrap p-2">MODIFIER ETAT</th>
             }
             {
                 actions && <th className="border border-neutral-200 p-1">ACTIONS</th>
@@ -254,13 +258,15 @@ setItems(currentData.slice(offset, offset + itemsPerPage));
           </tr>
         </thead>
         <tbody className='text-black font-medium'>
-          {paginatedData.length > 0 ? paginatedData.map((row) => (
+          {paginatedData.length > 0 ? paginatedData.map((row, rowIndex) => (
             <tr key={row.id}
             onClick={() => updateItemsSelected(row)}
             className={`hover:cursor-pointer ${itemsSelected.includes(row) ? "bg-orange-500 text-white" : ""}`} >
-              
+              <td className="border border-neutral-200">
+              {rowIndex + 1}
+              </td>
               {columns.map((column) => (
-                <td key={column.accessor} className="border border-neutral-200 ">
+                <td key={column.accessor} className="border border-neutral-200 px-5">
                   {getNestedValue(row, column.accessor)}
                 </td>
               ))}
@@ -281,7 +287,8 @@ setItems(currentData.slice(offset, offset + itemsPerPage));
                 <td className="border border-slate-300 p-2">
                     <Select name="valueValide" value={valueValide} onChange={(e) => handleSelectChange2(e, row.id)}>
                         <option value=""  className=" text-black">Choisir</option>
-                        {validess.map((valide) => (
+                        {valides
+                        .map((valide) => (
                             <option key={valide} value={valide} className=" text-black">
                                 {valide}
                             </option>
@@ -291,7 +298,7 @@ setItems(currentData.slice(offset, offset + itemsPerPage));
               )}
               
               { actions &&
-                <td className="border border-neutral-200 p-0 w-full h-full flex flex-wrap items-center justify-around">
+                <td className="border whitespace-nowrap border-neutral-200 p-0 w-full h-full flex flex-wrap items-center justify-around">
                    
                         <span onClick={() => editFunction(row)} className="bg-warning text-white py-2 px-3 rounded-md flex flex-row items-center justify-center z-999">
                             <Icon name="bx-edit-alt" />
@@ -311,12 +318,13 @@ setItems(currentData.slice(offset, offset + itemsPerPage));
             </tr>
           )) :
           <tr>
-              <td colSpan={columns.length + 1} className="text-xl font-bold">Aucun resultat trouvé</td>
+              <td colSpan={columns.length + 1} className="text-xl p-5 ">Aucun resultat trouvé</td>
           </tr>
       }
           
         </tbody>
       </table>
+      </div>
       <div className="flex justify-between items-center mt-4">
         <div className='flex space-x-2'>
           <button

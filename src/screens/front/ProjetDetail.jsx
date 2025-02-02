@@ -4,8 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../components/CardC
 import { Button } from '../../components/Button';
 import AppBody from '../../components/AppBody';
 import { getResource } from '../../services/api';
+import imgprofil from "../../assets/images/profil.png";
 import { useNavigate, useParams } from 'react-router';
 import DOMPurify from 'dompurify';
+import { dateToFr } from "../../services/Helper";
 
 const ProjetDetail = () => {
   const apiUrl = import.meta.env.VITE_API_URI_BASE
@@ -14,6 +16,7 @@ const ProjetDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const accessToken = localStorage.getItem("token");
   const fetchCourseData = async () => {
     try {
       const response = await getResource(`/projets/${id}`);
@@ -27,7 +30,10 @@ const ProjetDetail = () => {
 
   useEffect(() => {
     fetchCourseData();
-  }, []);
+    if (!accessToken) {
+      navigate("/login");
+    }
+  }, [id, accessToken]);
 
   if (loading) {
     return (
@@ -58,11 +64,19 @@ const ProjetDetail = () => {
             {projet.media ? (
               <img
                 src={`${apiUrl}/storage/${projet.media}`} alt={projet.title} 
-                className="rounded-lg w-full h-48 object-cover"
+                className="rounded-lg w-full h-90 object-cover"
               />
             ) : (
               <p className="text-gray-700">Aucun média disponible.</p>
             )}
+          </div>
+          <div className="flex items-center">
+              <img src={projet.user.file_path || imgprofil} className="size-11 rounded-full shadow transform transition-all duration-500 hover:scale-105" alt="" />
+
+              <div className="ms-3 flex-1">
+                  <a href="#" className="text-sm font-semibold hover:text-indigo-600 duration-500">{projet.user && `${projet.user.nom} ${projet.user.prenom}`}</a>
+                  <p className="text-sm text-slate-400">{dateToFr(projet.created_at)}</p>
+              </div>
           </div>
           <div>
             <h2 className="text-xl font-semibold flex items-center">
@@ -73,7 +87,7 @@ const ProjetDetail = () => {
           </div>
 
           {/* Informations */}
-          <div>
+        <div className="p-6 bg-gray-100 rounded-b-lg">
             <h2 className="text-xl font-semibold flex items-center">
               <FileText className="w-5 h-5 mr-2 text-[#1a5fa9]" />
               Informations du projet
@@ -103,31 +117,8 @@ const ProjetDetail = () => {
               </div>
             </div>
           </div>
-
-          {/* Média */}
         </div>
 
-        {/* Footer */}
-        <div className="p-6 bg-gray-100 rounded-b-lg">
-          <h2 className="text-lg font-semibold flex items-center">
-            <CheckCircle className="w-5 h-5 mr-2 text-green-600" />
-            Détails de l'inscription
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-            <div>
-              <p className="text-gray-500">Statut :</p>
-              <p className="text-gray-700">{projet.inscription?.statut || 'Non spécifié'}</p>
-            </div>
-            <div>
-              <p className="text-gray-500">Année :</p>
-              <p className="text-gray-700">{projet.inscription?.annee || 'Non spécifiée'}</p>
-            </div>
-            <div>
-              <p className="text-gray-500">Commentaire :</p>
-              <p className="text-gray-700">{projet.inscription?.commentaire || 'Aucun commentaire'}</p>
-            </div>
-          </div>
-        </div>
         </div>
       </div>
     </AppBody>

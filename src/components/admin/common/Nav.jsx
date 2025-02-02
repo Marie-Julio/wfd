@@ -33,21 +33,18 @@ function Nav () {
                 <img src={logo} className="h-8 mr-3 object-contain  m-4 flex items-center" alt="Pharma Logo" />
                 <h2 className="font-montserrat-extra-bold-italic bg-custom-gradient bg-clip-text text-transparent text-xl">WFDGuinee</h2>
             </Link>
-            <div className="text-center  w-1/2 mx-auto rounded-full">
-                <Input type="search" name="search" placeholder="Rechercher..."  className=" w-1/2"/>
-            </div>
 
-                <div className="flex text-end justify-between items-center">
-                    <img src={tokenNew.file_path || imgprofil} alt="Profile"
-                    className="w-10 h-10 rounded-full border-white shadow-lg" />
-                    <Link to="/profil" className="pl-2 flex-wrap items-center">
-                        <p className="text-start text-sm text-gray font-montserrat-bold">{tokenNew && `${tokenNew.nom} ${tokenNew.prenom}`}</p>
-                        <span className="text-gray-500 text-sm">{tokenNew && tokenNew.email}</span>
-                    </Link>
-                    <div>
-                        <Button onClick={handleLogout} className="w-10 h-10 rounded-full bg-red-500 hover:bg-red-700 ml-8"><Power /></Button>
-                    </div>
+            <div className="flex text-end justify-between items-center">
+                <img src={tokenNew.file_path || imgprofil} alt="Profile"
+                className="w-10 h-10 rounded-full border-white shadow-lg" />
+                <Link to="/profil" className="pl-2 flex-wrap items-center">
+                    <p className="text-start text-sm text-gray font-montserrat-bold">{tokenNew && `${tokenNew.nom} ${tokenNew.prenom}`}</p>
+                    <span className="text-gray-500 text-sm">{tokenNew && tokenNew.email}</span>
+                </Link>
+                <div>
+                    <Button onClick={handleLogout} className="w-10 h-10 rounded-full bg-red-500 hover:bg-red-700 ml-8"><Power /></Button>
                 </div>
+            </div>
         
             </div>
             

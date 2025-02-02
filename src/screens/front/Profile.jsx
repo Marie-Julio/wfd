@@ -48,6 +48,11 @@ const Profile = () => {
   const apiUrl = import.meta.env.VITE_API_URI_BASE;
 
   const accessToken = localStorage.getItem("token");
+  useEffect(() => {
+    if (!accessToken) {
+      navigate("/login");
+    }
+  }, [accessToken]);
   const decodedToken = accessToken ? jwtDecode(accessToken) : null;
   const [newForum, setNewForum] = useState({ title: null, description: null, user_id: decodedToken.id});
 
@@ -74,11 +79,6 @@ const Profile = () => {
     }
   };
 
-  if (!accessToken) {
-    navigate("/login");
-  }
-
-  
  const handleLogout = () => {
     localStorage.removeItem("token");
     auth.logout();
