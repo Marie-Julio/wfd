@@ -245,8 +245,8 @@ const Home = () => {
                     <div class="md:col-span-7">
                         <h4 class="font-bold lg:leading-normal leading-normal text-4xl lg:text-5xl mb-5 text-black dark:text-white">Apprenez avec des
                          <span class="text-indigo-600"> Experts</span></h4>
-                        <p class="text-orange-600 text-2xl max-w-xl">À tout moment et en tout lieu</p>
-                        <p class="text-slate-400 text-lg max-w-xl">Launch your campaign and benefit from our expertise on designing and managing conversion centered Tailwind CSS v3.x html page.</p>
+                        <p class="text-slate-400 text-lg max-w-xl">Apprenez les principes 
+                            fondamentaux de la résolution de conflits, de la communication pacifique et de la gestion des différences, tout en intégrant des techniques pratiques et efficaces.</p>
                         <div class="mt-6">
                             <a href="#"><img src="assets/images/app/app.png" class="inline-block m-1" alt="" /></a>
                             <a href="#"><img src="assets/images/app/playstore.png" class="inline-block m-1" alt="" /></a>

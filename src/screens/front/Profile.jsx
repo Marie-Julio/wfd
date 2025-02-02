@@ -522,7 +522,7 @@ const Profile = () => {
              <div className="p-6 sm:p-8">
               <div
                 onClick={() => setForumCollapse(!forumCollapse)}
-                className="flex justify-between text-white items-center cursor-pointer bg-yellow-400 p-4 rounded-lg shadow hover:bg-yellow-600"
+                className="flex justify-between text-white items-center cursor-pointer bg-gray-600 p-4 rounded-lg shadow hover:bg-gray-800"
               >
                 <h2 className="text-lg font-bold">Ajouter un forum</h2>
                 {forumCollapse ? <ChevronUp /> : <ChevronDown />}
@@ -551,7 +551,7 @@ const Profile = () => {
                       className="w-full mb-4 p-2 border rounded bg--100"
                     />
                     </div>
-                    <Button onClick={createForum} className=" bg-yellow-400 hover:bg-yellow-600">Créer</Button>
+                    <Button onClick={createForum} className=" bg-gray-600 hover:bg-gray-800">Créer</Button>
                   </div>
                   </form>
                 </div>

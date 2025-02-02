@@ -88,32 +88,32 @@ const ProjetDetail = () => {
 
           {/* Informations */}
         <div className="p-6 bg-gray-100 rounded-b-lg">
-            <h2 className="text-xl font-semibold flex items-center">
-              <FileText className="w-5 h-5 mr-2 text-[#1a5fa9]" />
+            <h2 className="text-xl font-semibold flex items-center text-orange-600">
+              <FileText className="w-5 h-5 mr-2" />
               Informations du projet
             </h2><br />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <p className="text-gray-500">Structure :</p>
+                <p className="text-indigo-600 font-semibold">Structure :</p>
                 <p className="text-gray-700">{projet.structure || 'Non spécifiée'}</p>
               </div>
               <div>
-                <p className="text-gray-500">Secteur :</p>
+                <p className="text-indigo-600 font-semibold">Secteur :</p>
                 <p className="text-gray-700">{projet.secteur || 'Non spécifié'}</p>
               </div>
               <div>
-                <p className="text-gray-500">Activité en cours :</p>
+                <p className="text-indigo-600 font-semibold">Activité en cours :</p>
                 <p className="text-gray-700">{projet.activite_en_cours || 'Aucune activité'}</p>
               </div>
               <div>
-                <p className="text-gray-500">Date de démarrage :</p>
+                <p className="text-indigo-600 font-semibold">Date de démarrage :</p>
                 <p className="text-gray-700">
                   {projet.date_demarrage === '0000-00-00' ? 'Non définie' : projet.date_demarrage}
                 </p>
               </div>
               <div>
-                <p className="text-gray-500">Coût :</p>
-                <p className="text-gray-700">{projet.cout > 0 ? `${projet.cout} €` : 'Non spécifié'}</p>
+                <p className="text-indigo-600 font-semibold">Coût :</p>
+                <p className="text-gray-700">{projet.cout > 0 ? `${projet.cout} USD` : 'Non spécifié'}</p>
               </div>
             </div>
           </div>

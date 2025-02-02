@@ -59,13 +59,13 @@ const Attestation = () => {
   };
 
   const downloadAttestationQCM = (qcmId) => {
-    const url = `/attestation?id=${qcmId}`;
+    const url = `/attestation?id=4`;
     getResource(url, { responseType: "blob" })
       .then((response) => {
         const url = window.URL.createObjectURL(new Blob([response.data], { type: "application/pdf" }));
         const link = document.createElement("a");
         link.href = url;
-        link.setAttribute("download", `Attestation_QCM_${qcmId}.pdf`);
+        link.setAttribute("download", `Attestation_QCM_4.pdf`);
         document.body.appendChild(link);
         link.click();
         link.parentNode.removeChild(link);
@@ -139,7 +139,7 @@ const Attestation = () => {
                         <strong>Date :</strong> {new Date(result.created_at).toLocaleDateString()}
                       </p>
                       {result.status === "passed" && <button
-                        onClick={() => downloadAttestationQCM(result.cours.id)}
+                        onClick={() => downloadAttestationQCM(result.id)}
                         className="mt-4 px-4 py-2 bg-orange-600 hover:bg-orange-800 text-white rounded-lg flex items-center gap-2"
                       >
                         <Download className="w-5 h-5" />

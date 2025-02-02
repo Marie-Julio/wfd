@@ -22,6 +22,11 @@ const QuizInterface = () => {
   const navigate = useNavigate();
   const accessToken = localStorage.getItem('token');
   const decodedToken = accessToken ? jwtDecode(accessToken) : null;
+  const [activeButton, setActiveButton] = useState(null);
+
+  const handleClick = (id) => {
+    setActiveButton(id); // Met à jour l'état du bouton actif
+  };
 
   useEffect(() => {
     const fetchQuizData = async () => {
@@ -132,7 +137,8 @@ const QuizInterface = () => {
                               <p class="text-slate-400 text-lg max-w-xl">Vous êtes sur le point de commencer un test. Assurez-vous que vous êtes prêt à répondre aux questions et que vous disposez de tout le temps nécessaire pour compléter le test. Une fois que vous commencez, vous ne pourrez plus revenir en arrière.</p>
   
                               <div class="mt-6">
-                                  <button onClick={() => setHasStarted(true)} class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-green-600 hover:bg-green-700
+                                  <button onClick={() => setHasStarted(true)} class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center
+                                   bg-green-600 hover:bg-green-700
                                    border-green-600 hover:border-green-700 text-white rounded-md">Démarrer le test</button>
                               </div>
                           </div>
@@ -151,13 +157,18 @@ const QuizInterface = () => {
           </section>
         ) : !showResults ? (
           <>
+          <section class="relative table w-full py-16 lg:py-20 
+        
+          before:content-[''] before:absolute  xl:before:start-[50rem] lg:before:start-[30rem] md:before:start-[15rem] before:start-[0rem] lg:before:bottom-[10rem] md:before:bottom-[12rem] before:bottom-[14rem] before:w-[60rem] before:h-[30rem] before:rounded-[18rem] ltr:before:rotate-[135deg] rtl:before:rotate-[45deg] before:bg-green-600/5 dark:before:bg-green-600/10 overflow-hidden">
+              <div class="absolute inset-0 bg-green-600 opacity-5"></div>
+              <div class="container relative">
             <Card className="mb-6">
               <CardHeader>
                 <div className="flex justify-between items-center w-full">
                   <CardTitle>{quiz.title}</CardTitle>
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <Timer className="w-5 h-5" />
-                    <span>{formatTime(timeLeft)}</span>
+                  <div className="flex items-center gap-2 font-semibold text-red-600">
+                    <Timer className="w-6 h-6" />
+                    <span className=" text-lg">{formatTime(timeLeft)}</span>
                   </div>
                 </div>
                 <Progress
@@ -170,30 +181,34 @@ const QuizInterface = () => {
             <Card>
               <CardContent className="pt-6">
                 <div className="space-y-6">
-                  <div className="text-lg font-medium">
+                  <div className="text-lg px-5 py-2 font-medium bg-gray-900 text-white w-max">
                     Question {currentQuestion + 1} / {questions.length}
                   </div>
 
-                  <div className="text-xl mb-4">
+                  <div className="text-lg font-semibold">
                     {questions[currentQuestion]?.question_text}
                   </div>
 
-                  <div className="space-y-3">
+                  <div className="grid grid-cols-1">
                     {choices.map((choice) => (
-                      <Button
+                      <button
                         key={choice.id}
                         variant={
                           selectedAnswers[questions[currentQuestion]?.id] === choice.choice_text
                             ? 'default'
                             : 'outline'
                         }
-                        className="w-full justify-start text-left h-auto py-4 px-6"
-                        onClick={() =>
-                          handleAnswerSelect(questions[currentQuestion]?.id, choice.choice_text)
+                        className={`border-2 rounded-lg border-gray-400 mb-5 w-max text-left h-auto py-2 px-2 ${
+                          activeButton === choice.id
+                            ? 'bg-green-600 text-white' // Active button has red background
+                            : 'hover:bg-gray-200 hover:text-black'
+                        }`}
+                        onClick={() => {handleClick(choice.id);
+                          handleAnswerSelect(questions[currentQuestion]?.id, choice.choice_text)}
                         }
                       >
                         {choice.choice_text}
-                      </Button>
+                      </button>
                     ))}
                   </div>
 
@@ -224,6 +239,8 @@ const QuizInterface = () => {
                 </div>
               </CardContent>
             </Card>
+              </div>
+          </section>
           </>
         ) : (
           <Card>
