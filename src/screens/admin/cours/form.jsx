@@ -139,6 +139,7 @@ const FormCours = () => {
           values.media.forEach((file) => {
             formData.append("file_path[]", file);
           });
+          
           if(id) {
             formData.append('_method', 'PATCH');
           }

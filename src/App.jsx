@@ -94,26 +94,32 @@ function App() {
       <Route path="/" element={  <Home/>  } />  
         
       <Route path="/activate/:token" element={  <Activate/>  } />  
-      <Route path="/register" element={  <Register/>  } />  
-      <Route path="/cours" element={  <CoursScreen/>  } />  
+      <Route path="/register" element={  <Register/>  } />
+
+      <Route element={<PrivateRoute />}>
+        <Route path="/cours" element={  <CoursScreen/>  } /> 
+        <Route path="/cours-detail/:id" element={  <CoursDetail />  } /> 
+        <Route path="/quizz/:id" element={  <QuizInterface />  } />
+        <Route path="/pages-projet" element={ <ProjetScreen />  } />  
+        <Route path="/projet/:id" element={ <ProjetDetail />  } /> 
+        <Route path="/pages-forum" element={ <ForumScreen />  } />  
+        <Route path="/discussions/:id" element={ <Discussion />  } />  
+        <Route path="/comments/:id" element={ <Comment />  } /> 
+        <Route path="/profil" element={ <Profile />  } /> 
+        <Route path="/attestations" element={ <Attestation />  } />   
+      </Route>  
+       
       <Route path="/insc" element={  <InfoInsc/>  } />  
-      <Route path="/cours-detail/:id" element={  <CoursDetail />  } />  
-      <Route path="/quizz/:id" element={  <QuizInterface />  } />  
-      <Route path="/promotion" element={  <Promotion />  } />  
-      <Route path="/profil" element={ <Profile />  } />  
+       
+      <Route path="/promotion" element={  <Promotion />  } />    
       <Route path="/pages-infos" element={ <Information />  } />  
       <Route path="/pages-infos-single/:id" element={ <InfoSingle />  } />  
-      <Route path="/pages-forum" element={ <ForumScreen />  } />  
-      <Route path="/pages-projet" element={ <ProjetScreen />  } />  
-      <Route path="/projet/:id" element={ <ProjetDetail />  } />  
-      <Route path="/discussions/:id" element={ <Discussion />  } />  
-      <Route path="/comments/:id" element={ <Comment />  } />  
       <Route path="/reset-password" element={ <ResetPassword />  } />  
       <Route path="/politique" element={ <PrivacyPolicy />  } />  
       <Route path="/mention" element={ <LegalNotice />  } />  
       <Route path="/members" element={ <TeacherProfiles />  } />  
       <Route path="/galeries" element={ <Gallery />  } />  
-      <Route path="/attestations" element={ <Attestation />  } />  
+      
      
 
        {/* Screen admin  */}

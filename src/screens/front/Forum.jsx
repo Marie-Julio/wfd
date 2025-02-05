@@ -19,6 +19,8 @@ const Forum = () => {
   const [newComment, setNewComment] = useState('');
   const [comments, setComments] = useState([]);
   const navigate = useNavigate()
+  const [filteredForums, setFilteredForums] = useState([]); // Cours filtrés
+  const [searchTerm, setSearchTerm] = useState(""); // Texte de recherche
 
   const [currentPageForum, setCurrentPageForum] = useState(1); // Page actuelle
   const forumPerPage = 5; // Nombre de cours par page
@@ -37,6 +39,7 @@ const Forum = () => {
       const response = await getResource('/forums');
       const data = await response.data;
       setForums(data);
+      setFilteredForums(data);
     };
     fetchForums();
     getDiscussion();
@@ -49,6 +52,34 @@ const Forum = () => {
         errorMessage(e)
     })
   } 
+
+  // Gestion de la recherche
+  const handleSearch = (event) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+    applyFilters(value);
+  };
+
+
+  // Appliquer les filtres combinés (recherche + type)
+  const applyFilters = (search) => {
+    let filtered = forums;
+
+    // Filtrer par recherche
+    if (search) {
+      filtered = filtered.filter((forum) =>
+        forum.title.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    // // Filtrer par type
+    // if (filter) {
+    //   filtered = filtered.filter((forum) => forum.type === filter);
+    // }
+
+    setFilteredForums(filtered);
+    setCurrentPage(1); // Réinitialiser à la première page
+  };
 
 
   // Créer un forum
@@ -77,9 +108,9 @@ const Forum = () => {
   // Pagination logic pour Forum 
   const indexOfLastCourse = currentPageForum * forumPerPage;
   const indexOfFirstCourse = indexOfLastCourse - forumPerPage;
-  const currentForum = forums.slice(indexOfFirstCourse, indexOfLastCourse);
+  const currentForum = filteredForums.slice(indexOfFirstCourse, indexOfLastCourse);
 
-  const totalPages = Math.ceil(forums.length / forumPerPage);
+  const totalPages = Math.ceil(filteredForums.length / forumPerPage);
 
   const paginate = (pageNumber) => setCurrentPageForum(pageNumber);
 
@@ -109,10 +140,10 @@ const Forum = () => {
           <h3 className="font-bold uppercase leading-normal text-3xl mb-5">Forum</h3>
 
           <div className="subcribe-form mt-6 pb-10">
-              <form className="relative max-w-xl mx-auto">
-                  <input type="text" id="SearchForumKeyword" name="text" className="pt-4 pe-14 pb-4 ps-6 w-full h-[50px] outline-none text-black dark:text-white rounded-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-800" placeholder="Rechercher ..." />
+              <div className="relative max-w-xl mx-auto">
+                  <input type="text" value={searchTerm} onChange={handleSearch} id="SearchForumKeyword" className="pt-4 pe-14 pb-4 ps-6 w-full h-[50px] outline-none text-black dark:text-white rounded-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-800" placeholder="Rechercher ..." />
                   <button type="submit" className="inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center absolute top-[2px] end-[3px] size-[46px] bg-orange-600 hover:bg-orange-700 border-orange-600 hover:border-orange-700 text-white rounded-full"><i className="uil uil-search"></i></button>
-              </form>
+              </div>
           </div>
       </div>
       <div className="container relative md:mt-16 mt-10 pb-10">
