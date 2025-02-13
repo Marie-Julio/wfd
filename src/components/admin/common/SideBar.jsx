@@ -19,15 +19,26 @@ const location = useLocation();
     const Menus = [
       { title: "Accueil", src: "/admin/dashboard", icon: "bx-home" },
 
-      { title: "Gestion des Cours ", src: "", gap: true },
-      { title: "Gestion des Cours", src: "/admin/cours", icon: "bx-book-bookmark"},
+
+      { title: "Gestion Cours ", src: "", gap: true },
+      { title: "Module", src: "/admin/cours", icon: "bx-book-bookmark"},
+      { title: "Sequences", src: "/admin/sequences", icon: "bx-book-bookmark"},
+
+      { title: "Gestion  Examens", src: "", gap: true },
+      { title: "QCMs", src: "/admin/qcms", icon: "bxs-palette"  },
+      { title: "QCMs questions", src: "/admin/sqcms-questions", icon: "bx-conversation"  },
+      { title: "QCMs Choix", src: "/admin/sqcms-choix", icon: "bx-conversation"  },
+
+      { title: "Gestion  Examens par Sequence", src: "", gap: true },
+      { title: "Test Sequence", src: "/admin/sqcms", icon: "bxs-palette"  },
+      { title: "Quetion des tests", src: "/admin/sqcms-questions", icon: "bx-conversation"  },
+      { title: "Choix du Test", src: "/admin/sqcms-choix", icon: "bx-conversation"  },
+
+      { title: "Gestion Inscriptions", src: "", gap: true },
       { title: "Promotions ", src: "/admin/promotion", icon: "bx-braille"  },
-      { title: "Notifications", src: "/admin/notification", icon: "bx-bell"  },
+      { title: "Notifications", src: "/admin/notification", icon: "bx-bell"  }, 
       { title: "Inscriptions", src: "/admin/inscription", icon: "bx-label"  },
       { title: "Projets", src: "/admin/projets", icon: "bxs-offer"  },
-      { title: "QCMs", src: "/admin/qcms", icon: "bxs-palette"  },
-      { title: "QCMs questions", src: "/admin/qcms-questions", icon: "bx-conversation"  },
-      { title: "QCMs Choix", src: "/admin/qcms-choix", icon: "bx-conversation"  },
 
 
       { title: "Gestion des utilisateurs ", src: "#", gap: true },
@@ -81,11 +92,11 @@ const location = useLocation();
           return (
             <li
               key={index}
-              className={`flex  p-2 text-black text-sm items-center  
+              className={`flex  p-2  text-sm items-center  
               ${
             isGap
               ? "mt-9 text-tertiaire font-roboto-bold text-lg font-extrabold text-2xl uppercase pl-2"
-              : "mt-2 gap-x-3 rounded-md hover:text-white font-roboto font-semibold cursor-pointer"
+              : "mt-2 gap-x-3 rounded-md hover:text-white font-roboto text-black font-semibold cursor-pointer"
           }
           ${isActive ? "bg-tertiaire text-white" : isGap ? "hover:bg-[#f4f5fa]" : "hover:bg-[#1a5fa9]"}`}
             >

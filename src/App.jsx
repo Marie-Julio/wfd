@@ -54,6 +54,10 @@ import FormGalerie from './screens/admin/Gallerie.jsx/form'
 import PrivateRoute from './PrivateRoute.jsx'
 import NotFound from './NotFound.jsx'
 import { useDispatch } from 'react-redux'
+import Sequences from './screens/admin/sequences/index.jsx'
+import FormSequence from './screens/admin/sequences/form.jsx'
+import FormSQcm from './screens/admin/sqcms/form.jsx'
+import SQcmAdmin from './screens/admin/sqcms/index.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -133,7 +137,15 @@ function App() {
       <Route path="/admin/qcms-choix-update/:id" element={     <FormChoix/>  } />  
       <Route path="/admin/qcms" element={     <QcmAdmin/>  } /> 
       <Route path="/admin/qcms-create" element={     <FormQcm/>  } /> 
-      <Route path="/admin/qcms-update/:id" element={     <FormQcm/>  } /> 
+      <Route path="/admin/qcms-update/:id" element={     <FormQcm/>  } />
+
+      <Route path="/admin/sqcms" element={     <SQcmAdmin/>  } /> 
+      <Route path="/admin/sqcms-create" element={     <FormSQcm/>  } /> 
+      <Route path="/admin/sqcms-update/:id" element={     <FormSQcm/>  } />
+
+      <Route path="/admin/sequences" element={     <Sequences/>  } /> 
+      <Route path="/admin/sequences-create" element={     <FormSequence/>  } />
+      <Route path="/admin/sequences-update/:id" element={     <FormSequence/>  } />
       <Route path="/admin/cours" element={     <Cours/>  } /> 
       <Route path="/admin/cours-create" element={     <FormCours/>  } /> 
       <Route path="/admin/cours-update/:id" element={     <FormCours/>  } /> 

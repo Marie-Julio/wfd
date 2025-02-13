@@ -178,7 +178,7 @@ const Nav = () => {
                   className={` whitespace-nowrap py-2 px-4 rounded ${
                     location.pathname === item.href
                       ? "bg-[#eb6b11] text-white"
-                      : "hover:bg-blue-700 hover:text-white "
+                      : "hover:bg-blue-700 hover:text-white"
                   }`}
                 >
                   {item.label}

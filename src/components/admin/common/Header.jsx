@@ -17,6 +17,7 @@ function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  
   useEffect(() => {
     if(token) {
       const tokenDecode = jwtDecode(token)
