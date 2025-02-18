@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, Plus, Send, User, Eye, ThumbsUp } from 'lucide-react';
-import { getResource, postResource } from '../../services/api';
+import { getResource, patchResource, postResource, removeResource } from '../../services/api';
 import { Button } from '../../components/Button';
 import AppBody from '../../components/AppBody';
 import DOMPurify from 'dompurify';
@@ -10,9 +10,12 @@ import {jwtDecode} from "jwt-decode";
 import imgprofil from "../../assets/images/profil.png";
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
+import Icon from '../../components/admin/common/Icon';
+import Modal from '../../components/admin/common/Modal';
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
+ 
 
   // Formatage de la date en français avec l'heure en format 24h
   const formattedDate = format(date, 'd MMMM yyyy \'à\' HH:mm', { locale: fr });
@@ -23,7 +26,10 @@ const formatDate = (dateString) => {
 const Comment = () => {
   const [newDiscussion, setNewDiscussion] = useState({});
   const [newComment, setNewComment] = useState('');
+  const [updateComment, setUpdateComment] = useState('');
+  const [editComment, setEditComment] = useState(null)
   const [comments, setComments] = useState([]);
+  const [delModal, setDelModal] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
   const apiUrl = import.meta.env.VITE_API_URI_BASE;
@@ -60,6 +66,17 @@ const Comment = () => {
     }else{
       onServerError("Erreur. Contactez-nous !2");
     }
+  };
+
+  const updateFunctionComment = async (edit) => {
+    const commentData = { content: updateComment, discussion_id: id, user_id: decodedToken.id }; 
+    const response = await patchResource('/comments', edit, commentData);
+      setUpdateComment('');
+      setEditComment(null);
+      fetchForums();
+      setDelModal(false)
+      onServerSuccess("Commentaire mise a jour !");
+    
   };
 
   // Pagination logic
@@ -167,6 +184,21 @@ const Comment = () => {
     feather.replace();
   }, []);
 
+  const deleteComment = async (id) => {
+        // setLoading(true);
+        
+        const arrayId = [id]
+        try {
+          await removeResource("/comments" , arrayId); // Appelle une fonction passée en prop pour supprimer
+          // setLoading(false);
+          onServerSuccess("Suppression effectuee!")
+          fetchForums()
+        } catch (error) {
+          console.error("Erreur lors de la suppression :", error);
+          // setLoading(false);
+        }
+      };
+
   return (
     <AppBody>
       <div className=" bg-white">
@@ -195,6 +227,29 @@ const Comment = () => {
                                   <a href="#" className="text-lg font-semibold hover:text-indigo-600 duration-500">{comment.user.prenom} {comment.user.nom}</a>
                                   <p className="text-sm text-slate-400">{formatDate(comment.created_at)}</p>
                               </div>
+                                {/* Boutons Modifier et Supprimer */}
+                                <div className="flex space-x-2">
+                                  <button
+                                    className="text-yellow-500 hover:text-yellow-700 flex items-center space-x-1"
+                                    onClick={() => {
+                                      setUpdateComment('')
+                                      setEditComment(null)
+                                      setDelModal(true)
+                                      setEditComment(comment.id)
+                                      setUpdateComment(comment.content)
+                                    }}
+                                  >
+                                    <Icon name="bx-edit-alt" className="w-5 h-5" />
+                                    {/* <span>Modifier</span> */}
+                                  </button>
+                                  <button
+                                    className="text-red-500 hover:text-red-700 flex items-center space-x-5 ml-10"
+                                    onClick={() => deleteComment(comment.id)}
+                                  >
+                                    <Icon name="bx-trash" className="w-5 h-5" />
+                                    {/* <span>Supprimer</span> */}
+                                  </button>
+                                </div>
                           </div>
                       </div>
                       <div className="p-4 bg-gray-50 dark:bg-slate-800 rounded-md shadow dark:shadow-gray-800 mt-6">
@@ -226,6 +281,26 @@ const Comment = () => {
               </div>
           </div>
         </div>
+
+        <Modal isOpen={delModal} onClose={() => setDelModal(false)}>
+        <div className="p-6 rounded-md shadow dark:shadow-gray-800 mt-8">
+                    <h5 className="text-lg font-semibold">Laisser un commentaire :</h5>
+
+                        <div className="mt-8 grid grid-cols-1">
+                            <div className="mb-5">
+                                <div className="text-start">
+                                    <label for="comments" className="font-semibold text-gray-500">Votre commentaire :</label>
+                                    <div className="form-icon relative mt-2">
+                                        <i data-feather="message-circle" className="size-4 absolute top-3 start-4"></i>
+                                        <textarea name="comments" id="comments" value={updateComment} onChange={(e) => setUpdateComment(e.target.value)} className="form-input ps-11 w-full py-2 px-3 h-28 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0" placeholder="Message :"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" onClick={() => updateFunctionComment(editComment)} id="submit" name="send" className="py-2 px-5 inline-block tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md w-full">Envoyer le message</button>
+                    
+                </div>        
+        </Modal>
     </AppBody>
   );
 };

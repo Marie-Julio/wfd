@@ -53,6 +53,32 @@ const Profile = () => {
       navigate("/login");
     }
   }, [accessToken]);
+
+  const access_token = localStorage.getItem('token');
+
+  useEffect(() => {
+
+    // Définir un intervalle de 10 minutes
+    const intervalId = setInterval(() => {
+      if (access_token) {
+        const tokenNew = access_token ? jwtDecode(access_token) : null;;
+        const now = Math.floor(Date.now() / 1000);
+  
+        if (tokenNew.exp < now) {
+          dispatch({ type: 'LOGOUT' });
+          redirect('/login'); // Redirection en cas d'expiration du token
+        }
+      }
+      console.log("Exécution après 10 minutes");
+      // Placez ici la logique que vous voulez exécuter
+    }, 2 * 60 * 1000); // 2 minutes en millisecondes
+
+    // Nettoyer l'intervalle lorsqu'on quitte le composant
+    return () => clearInterval(intervalId);
+    
+  }, [])
+
+
   const decodedToken = accessToken ? jwtDecode(accessToken) : null;
   const [newForum, setNewForum] = useState({ title: null, description: null, user_id: decodedToken.id});
 

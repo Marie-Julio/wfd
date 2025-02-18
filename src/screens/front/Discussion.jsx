@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { getResource, postResource } from '../../services/api';
+import { getResource, patchResource, postResource, removeResource } from '../../services/api';
 import { Button } from '../../components/Button';
 import AppBody from '../../components/AppBody';
 import img from "../../assets/images/profil.png";
@@ -11,6 +11,7 @@ import Icon from '../../components/Icon';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import '../../assets/css/style.css';
+import Modal from '../../components/admin/common/Modal';
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -24,6 +25,8 @@ const formatDate = (dateString) => {
 const Discussion = () => {
   const [discussions, setDiscussions] = useState([]);
   const [newDiscussion, setNewDiscussion] = useState({ content: '', title: '' });
+  const [updateDiscussion, setUpdateDiscussion] = useState({ content: '', title: '' });
+  const [dataDiscussion, setDataDiscussion] = useState({});
   const [editorLoaded, setEditorLoaded] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -31,8 +34,36 @@ const Discussion = () => {
   const [currentPageDiscussion, setCurrentPageDiscussion] = useState(1);
   const discussionPerPage = 6;
   const apiUrl = import.meta.env.VITE_API_URI_BASE;
+  const [delModal, setDelModal] = useState(false);
 
   const [editorInstance, setEditorInstance] = useState(null); // Store the editor instance
+
+
+  const fetchForumAndDiscussions = async () => {
+    try {
+      const forumResponse = await getResource(`/forums/${id}`);
+      setForum(forumResponse.data);
+      const discussionsResponse = await getResource(`/discussions?forum_id=${id}`);
+      setDiscussions(discussionsResponse.data);
+    } catch (e) {
+      errorMessage(e);
+    }
+  };
+
+  const handleDelete = async (id) => {
+      // setLoading(true);
+      
+      const arrayId = [id]
+      try {
+        await removeResource("/discussions" , arrayId); // Appelle une fonction passée en prop pour supprimer
+        // setLoading(false);
+        onServerSuccess("Suppression effectuee!")
+        fetchForumAndDiscussions()
+      } catch (error) {
+        console.error("Erreur lors de la suppression :", error);
+        // setLoading(false);
+      }
+    };
 
   // Initialize CKEditor after loading
   useEffect(() => {
@@ -96,10 +127,30 @@ const Discussion = () => {
       setDiscussions(discussionsResponse.data);
       setNewDiscussion({ content: '', title: ''});
       onServerSuccess("Posté avec succès !");
+      fetchForumAndDiscussions()
     } else{
       onServerWarning("Veuillez remplir tous les champs !");
     }} catch (err) {
       onServerWarning("Veuillez remplir tous les champs !");
+    }
+  };
+
+
+  const updateFunctionDiscussion = async (idDiscussion) => {
+    console.log(idDiscussion)
+    const discussionData = { content: updateDiscussion.content , forum_id: id, user_id: decodedToken.id, title: updateDiscussion.title };
+    
+    try {
+    const response = await patchResource('/discussions', idDiscussion, discussionData);
+    
+      const discussionsResponse = await getResource(`/discussions?forum_id=${id}`);
+      setDiscussions(discussionsResponse.data);
+      setUpdateDiscussion({ content: '', title: ''});
+      setDataDiscussion({})
+      setDelModal(false)
+      onServerSuccess("Mise a jour avec succès !");
+    } catch (err) {
+      onServerWarning(err);
     }
   };
 
@@ -177,6 +228,26 @@ const Discussion = () => {
                               <p className="text-slate-400 uppercase pb-2">{discussion.user.role}</p>
                               <p className="text-indigo-600 font-semibold">{discussion.title}</p>
                               <p className="text-slate-500"><div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(discussion.content) }} /></p>
+                              {/* Icônes Modifier et Supprimer */}
+                              <div className="flex space-x-4 mt-15">
+                                <button
+                                  className="text-yellow-500 hover:text-yellow-700 flex items-center space-x-1"
+                                  onClick={() => {setDataDiscussion({})
+                                    setUpdateDiscussion({title: discussion.title, content: discussion.content})
+                                    setDataDiscussion(discussion)
+                                    setDelModal(true);}}
+                                >
+                                  <Icon name="bx-edit-alt" className="w-5 h-5 mr-1" />
+                                  <span>Modifier</span>
+                                </button>
+                                <button
+                                  className="text-red-500 hover:text-red-700 flex items-center space-x-1"
+                                  onClick={() => handleDelete(discussion.id)}
+                                >
+                                  <Icon name="bx-trash" className="w-5 h-5 mr-1" />
+                                  <span>Supprimer</span>
+                                </button>
+                              </div>
                           </div>
                       </div>
 
@@ -274,6 +345,34 @@ const Discussion = () => {
             </div>
           </div>
     </div>
+    <Modal isOpen={delModal} onClose={() => setDelModal(false)}>
+    <div className="flex-1">
+          <br /><br />
+            <h2 className="text-xl font-bold mb-4">Mise a jour discussion</h2>
+            <div className=" px-10 py-5 bg-indigo-200">
+              <label className=" font-semibold mb-5">Titre (facultatif)</label>
+              <textarea
+                placeholder="Titre (non obligatoire)"
+                value={updateDiscussion.title}
+                onChange={(e) => setUpdateDiscussion({ ...updateDiscussion, title: e.target.value })}
+                className="w-full mb-4 p-2 border rounded"
+              />
+              <label className=" font-semibold mb-5">Contenu <span className="text-red-500">*</span></label>
+              <textarea
+              required
+              id="editor"
+              name="content"
+              className="w-full p-2 border border-gray-300 rounded"
+              rows="3"
+              value={updateDiscussion.content} // Utilisation de `value` pour afficher la valeur dans le textarea
+              onChange={(e) => setUpdateDiscussion({content: e.target.value})} // Mise à jour de l'état lorsqu'on modifie le contenu
+            />
+              {/* <textarea required id="editor" name="content" className="w-full p-2 border border-gray-300 rounded" rows="3">{updateDiscussion.content}</textarea> */}
+              <button onClick={() => updateFunctionDiscussion(dataDiscussion.id)} className="block w-full bg-orange-500 mt-4 py-2 text-white font-semibold mb-2 
+              hover:text-gray-200 hover:bg-orange-700 focus:outline-none transition-all">Mettre a jour</button>
+            </div>
+            </div>
+    </Modal>
     </AppBody>
   );
 };
